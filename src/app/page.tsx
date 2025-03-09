@@ -1,6 +1,7 @@
 "use client";
 
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, Suspense } from "react";
+import dynamic from "next/dynamic";
 import Script from "next/script";
 import { Github, Linkedin, Instagram, Mail } from "lucide-react";
 import { motion } from "framer-motion";
@@ -12,16 +13,64 @@ import Navigation from "@/components/layout/Navigation";
 import MobileMenu from "@/components/layout/MobileMenu";
 import SocialIcon from "@/components/ui/SocialIcon";
 import ScrollToTopButton from "@/components/ui/ScrollToTopButton";
-
-// Sections
+import KeyboardIndicator from "@/components/ui/KeyboardIndicator";
 import AboutSection from "@/components/sections/AboutSection";
-import ExperienceSection from "@/components/sections/ExperienceSection";
-import EducationSection from "@/components/sections/EducationSection";
-import SkillsSection from "@/components/sections/SkillsSection";
-import CertificationsSection from "@/components/sections/CertificationsSection";
+
+// Dynamically import non-critical sections for performance
+const ExperienceSection = dynamic(
+  () => import("@/components/sections/ExperienceSection"),
+  {
+    loading: () => (
+      <div className="py-16 md:py-24 scroll-mt-24 animate-pulse bg-neutral-100 h-96 rounded-lg"></div>
+    ),
+    ssr: true,
+  },
+);
+
+const EducationSection = dynamic(
+  () => import("@/components/sections/EducationSection"),
+  {
+    loading: () => (
+      <div className="py-16 md:py-24 scroll-mt-24 animate-pulse bg-neutral-100 h-96 rounded-lg"></div>
+    ),
+    ssr: true,
+  },
+);
+
+const SkillsSection = dynamic(
+  () => import("@/components/sections/SkillsSection"),
+  {
+    loading: () => (
+      <div className="py-16 md:py-24 scroll-mt-24 animate-pulse bg-neutral-100 h-96 rounded-lg"></div>
+    ),
+    ssr: true,
+  },
+);
+
+const CertificationsSection = dynamic(
+  () => import("@/components/sections/CertificationsSection"),
+  {
+    loading: () => (
+      <div className="py-16 md:py-24 scroll-mt-24 animate-pulse bg-neutral-100 h-96 rounded-lg"></div>
+    ),
+    ssr: true,
+  },
+);
+
+// Contact form loaded dynamically as it's new and not critical for initial load
+const ContactSection = dynamic(
+  () => import("@/components/sections/ContactSection"),
+  {
+    loading: () => (
+      <div className="py-16 md:py-24 scroll-mt-24 animate-pulse bg-neutral-100 h-96 rounded-lg"></div>
+    ),
+    ssr: true,
+  },
+);
 
 // Hooks and Utils
 import useSectionObserver from "@/hooks/useSectionObserver";
+import useKeyboardNavigation from "@/hooks/useKeyboardNavigation";
 import { scrollToSection } from "@/utils/scrollUtils";
 
 export default function Home() {
@@ -35,17 +84,12 @@ export default function Home() {
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
 
   // Refs for sections
-  const aboutRef = useRef<HTMLElement>(null) as React.RefObject<HTMLElement>;
-  const experienceRef = useRef<HTMLElement>(
-    null,
-  ) as React.RefObject<HTMLElement>;
-  const educationRef = useRef<HTMLElement>(
-    null,
-  ) as React.RefObject<HTMLElement>;
-  const skillsRef = useRef<HTMLElement>(null) as React.RefObject<HTMLElement>;
-  const certificationsRef = useRef<HTMLElement>(
-    null,
-  ) as React.RefObject<HTMLElement>;
+  const aboutRef = useRef<HTMLElement>(null);
+  const experienceRef = useRef<HTMLElement>(null);
+  const educationRef = useRef<HTMLElement>(null);
+  const skillsRef = useRef<HTMLElement>(null);
+  const certificationsRef = useRef<HTMLElement>(null);
+  const contactRef = useRef<HTMLElement>(null);
   const mainContentRef = useRef<HTMLElement>(null);
 
   // Initialize device detection and preferences
@@ -71,6 +115,7 @@ export default function Home() {
       education: educationRef,
       skills: skillsRef,
       certifications: certificationsRef,
+      contact: contactRef,
     },
     setActiveSection,
   });
@@ -84,6 +129,20 @@ export default function Home() {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  // Setup keyboard navigation
+  const sectionIds = [
+    "about",
+    "experience",
+    "education",
+    "skills",
+    "certifications",
+    "contact",
+  ];
+  useKeyboardNavigation({
+    sectionIds,
+    activeSection,
+  });
 
   // Schema.org structured data
   const structuredData = {
@@ -228,10 +287,47 @@ export default function Home() {
             ref={aboutRef}
             prefersReducedMotion={prefersReducedMotion}
           />
-          <ExperienceSection ref={experienceRef} />
-          <EducationSection ref={educationRef} />
-          <SkillsSection ref={skillsRef} />
-          <CertificationsSection ref={certificationsRef} />
+
+          {/* Dynamically loaded sections */}
+          <Suspense
+            fallback={
+              <div className="py-16 md:py-24 animate-pulse bg-neutral-100/50 h-96 rounded-lg"></div>
+            }
+          >
+            <ExperienceSection ref={experienceRef} />
+          </Suspense>
+
+          <Suspense
+            fallback={
+              <div className="py-16 md:py-24 animate-pulse bg-neutral-100/50 h-96 rounded-lg"></div>
+            }
+          >
+            <EducationSection ref={educationRef} />
+          </Suspense>
+
+          <Suspense
+            fallback={
+              <div className="py-16 md:py-24 animate-pulse bg-neutral-100/50 h-96 rounded-lg"></div>
+            }
+          >
+            <SkillsSection ref={skillsRef} />
+          </Suspense>
+
+          <Suspense
+            fallback={
+              <div className="py-16 md:py-24 animate-pulse bg-neutral-100/50 h-96 rounded-lg"></div>
+            }
+          >
+            <CertificationsSection ref={certificationsRef} />
+          </Suspense>
+
+          <Suspense
+            fallback={
+              <div className="py-16 md:py-24 animate-pulse bg-neutral-100/50 h-96 rounded-lg"></div>
+            }
+          >
+            <ContactSection ref={contactRef} />
+          </Suspense>
         </main>
 
         {/* Footer */}
@@ -239,6 +335,9 @@ export default function Home() {
 
         {/* Scroll to top button */}
         <ScrollToTopButton visible={showScrollButton} />
+
+        {/* Keyboard navigation indicator */}
+        <KeyboardIndicator prefersReducedMotion={prefersReducedMotion} />
       </div>
     </>
   );
