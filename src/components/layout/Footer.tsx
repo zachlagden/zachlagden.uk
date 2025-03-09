@@ -90,7 +90,7 @@ const Footer: React.FC = () => {
                 zachlagden.uk
               </a>
             </div>
-            
+
             <div className="flex justify-center md:justify-end mt-2">
               <a
                 href="https://github.com/zachlagden/cv.zachlagden.uk"
@@ -105,10 +105,10 @@ const Footer: React.FC = () => {
             </div>
           </div>
         </div>
-        
+
         <div className="flex flex-col items-center justify-center mt-10 space-y-2">
           <p className="text-xs text-neutral-400 flex items-center">
-            Made with <span className="text-red-500 mx-1">❤️</span> 
+            Made with <span className="text-red-500 mx-1">❤️</span>
           </p>
         </div>
       </div>

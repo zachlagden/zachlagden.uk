@@ -50,7 +50,9 @@ const TimelineItem: React.FC<TimelineItemProps> = ({
           <p className="text-neutral-500 text-sm">
             <time dateTime={date.split(" - ")[0]}>{date}</time>
           </p>
-          {location && <p className="text-neutral-400 text-xs block">{location}</p>}
+          {location && (
+            <p className="text-neutral-400 text-xs block">{location}</p>
+          )}
         </div>
       </div>
 
