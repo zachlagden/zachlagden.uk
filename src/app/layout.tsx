@@ -3,9 +3,13 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { GoogleAnalytics } from "@next/third-parties/google";
 
+// Optimize font loading
 const inter = Inter({
   subsets: ["latin"],
   display: "swap",
+  preload: true,
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-inter",
 });
 
 export const metadata: Metadata = {
@@ -98,9 +102,22 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" dir="ltr">
+    <html lang="en" dir="ltr" className={inter.variable}>
       <head>
         <link rel="manifest" href="/site.webmanifest" />
+        {/* Add preload for fonts and critical assets */}
+        <link
+          rel="preconnect"
+          href="https://fonts.googleapis.com"
+          crossOrigin="anonymous"
+        />
+        <link
+          rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossOrigin="anonymous"
+        />
+        {/* Preload CV for faster download */}
+        <link rel="prefetch" href="/Zach_Lagden_CV.pdf" as="document" />
       </head>
       <body className={`${inter.className} bg-neutral-50 min-h-screen`}>
         {children}
