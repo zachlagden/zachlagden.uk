@@ -46,11 +46,11 @@ const TimelineItem: React.FC<TimelineItemProps> = ({
         ) : (
           <p className="text-blue-600 text-sm">{company}</p>
         )}
-        <div className="flex flex-wrap items-center gap-2 mt-1">
+        <div className="mt-1 space-y-1">
           <p className="text-neutral-500 text-sm">
             <time dateTime={date.split(" - ")[0]}>{date}</time>
           </p>
-          {location && <p className="text-neutral-400 text-xs">{location}</p>}
+          {location && <p className="text-neutral-400 text-xs block">{location}</p>}
         </div>
       </div>
 
