@@ -84,13 +84,13 @@ export default function Home() {
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
 
   // Refs for sections
-  const aboutRef = useRef<HTMLElement>(null);
-  const experienceRef = useRef<HTMLElement>(null);
-  const educationRef = useRef<HTMLElement>(null);
-  const skillsRef = useRef<HTMLElement>(null);
-  const certificationsRef = useRef<HTMLElement>(null);
-  const contactRef = useRef<HTMLElement>(null);
-  const mainContentRef = useRef<HTMLElement>(null);
+  const aboutRef = useRef<HTMLElement>(null) as React.RefObject<HTMLElement>;
+  const experienceRef = useRef<HTMLElement>(null) as React.RefObject<HTMLElement>;
+  const educationRef = useRef<HTMLElement>(null) as React.RefObject<HTMLElement>;
+  const skillsRef = useRef<HTMLElement>(null) as React.RefObject<HTMLElement>;
+  const certificationsRef = useRef<HTMLElement>(null) as React.RefObject<HTMLElement>;
+  const contactRef = useRef<HTMLElement>(null) as React.RefObject<HTMLElement>;
+  const mainContentRef = useRef<HTMLElement>(null) as React.RefObject<HTMLElement>;
 
   // Initialize device detection and preferences
   useEffect(() => {
