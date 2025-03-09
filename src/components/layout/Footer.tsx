@@ -90,7 +90,26 @@ const Footer: React.FC = () => {
                 zachlagden.uk
               </a>
             </div>
+            
+            <div className="flex justify-center md:justify-end mt-2">
+              <a
+                href="https://github.com/zachlagden/cv.zachlagden.uk"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-neutral-900 text-xs text-neutral-500 transition-colors flex items-center gap-1 focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-2 rounded px-3 py-1.5 bg-neutral-100 border border-neutral-200"
+                aria-label="Source Code on GitHub"
+              >
+                <Github className="w-3 h-3" aria-hidden="true" />
+                View Source
+              </a>
+            </div>
           </div>
+        </div>
+        
+        <div className="flex flex-col items-center justify-center mt-10 space-y-2">
+          <p className="text-xs text-neutral-400 flex items-center">
+            Made with <span className="text-red-500 mx-1">❤️</span> 
+          </p>
         </div>
       </div>
     </footer>
