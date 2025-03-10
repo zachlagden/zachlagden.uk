@@ -9,10 +9,6 @@
   box-sizing: border-box;
 }
 
-html {
-  scroll-behavior: smooth;
-}
-
 body {
   color: rgb(var(--foreground-rgb));
   background: rgb(var(--background-rgb));
@@ -20,6 +16,24 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
+}
+
+/* View Transitions API styles */
+@supports (view-transition-name: none) {
+  /* Section transitions */
+  section {
+    view-transition-name: section-transition;
+  }
+
+  /* Element transitions */
+  h2 {
+    view-transition-name: heading-transition;
+  }
+
+  /* For smoother content transitions */
+  .section-content {
+    view-transition-name: content-transition;
+  }
 }
 
 /* Scroll animations */
@@ -101,6 +115,30 @@ h6 {
   }
 }
 
+/* Enhanced link underlines */
+.animated-underline {
+  position: relative;
+  text-decoration: none;
+}
+
+.animated-underline:after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 1px;
+  bottom: 0;
+  left: 0;
+  background-color: currentColor;
+  transform: scaleX(0);
+  transform-origin: bottom right;
+  transition: transform 0.3s ease-out;
+}
+
+.animated-underline:hover:after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}
+
 /* Subtle grid background */
 .subtle-grid {
   background-image:
@@ -126,4 +164,17 @@ h6 {
 
 ::-webkit-scrollbar-thumb:hover {
   background: rgba(0, 0, 0, 0.2);
+}
+
+/* Enhanced focus outline */
+:focus-visible {
+  outline: 2px solid rgba(0, 0, 0, 0.2);
+  outline-offset: 2px;
+}
+
+/* Apply smooth scrolling only when Lenis is not active */
+@media (prefers-reduced-motion) {
+  html {
+    scroll-behavior: auto;
+  }
 }
