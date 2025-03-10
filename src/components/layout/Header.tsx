@@ -6,6 +6,7 @@ import { Mail, MapPin } from "lucide-react";
 import SocialIcon from "../ui/SocialIcon";
 import CopyButton from "../ui/CopyButton";
 import { Github, Linkedin, Instagram } from "lucide-react";
+import AnimatedText from "../ui/AnimatedText";
 
 interface HeaderProps {
   prefersReducedMotion: boolean;
@@ -48,29 +49,25 @@ const Header: React.FC<HeaderProps> = ({ prefersReducedMotion, isMobile }) => {
           duration: prefersReducedMotion ? 0.1 : 0.8,
         }}
       >
-        <motion.h1
+        {/* Animated text heading */}
+        <AnimatedText
+          text="Zach Lagden"
+          el="h1"
           className="text-5xl sm:text-6xl md:text-7xl font-bold tracking-tighter mb-3"
-          initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{
-            delay: 0.4,
-            duration: prefersReducedMotion ? 0.1 : 0.8,
-          }}
-        >
-          Zach Lagden
-        </motion.h1>
+          delay={0.4}
+          duration={0.8}
+          sequential={true}
+        />
 
-        <motion.p
+        {/* Animated text paragraph */}
+        <AnimatedText
+          text="Technical Architect & Entrepreneur"
+          el="p"
           className="text-xl sm:text-2xl text-neutral-600 mb-8 font-light tracking-wide"
-          initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{
-            delay: 0.6,
-            duration: prefersReducedMotion ? 0.1 : 0.8,
-          }}
-        >
-          Technical Architect & Entrepreneur
-        </motion.p>
+          delay={0.8}
+          duration={0.6}
+          sequential={true}
+        />
 
         <motion.div
           className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-8"
