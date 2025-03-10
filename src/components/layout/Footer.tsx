@@ -1,5 +1,6 @@
 import React from "react";
 import { Github, Linkedin, Instagram, Mail, Link } from "lucide-react";
+import CopyButton from "../ui/CopyButton";
 
 const Footer: React.FC = () => {
   return (
@@ -11,9 +12,9 @@ const Footer: React.FC = () => {
             <p className="text-xs text-neutral-500">
               Technical Architect & Entrepreneur
             </p>
-            <p className="text-xs text-neutral-400">
+            <div className="text-xs text-neutral-400 flex items-center justify-center md:justify-start">
               © {new Date().getFullYear()} All rights reserved.
-            </p>
+            </div>
           </div>
 
           <div className="space-y-4 flex flex-col items-center md:items-end">
@@ -49,13 +50,20 @@ const Footer: React.FC = () => {
               >
                 <Instagram className="w-5 h-5" aria-hidden="true" />
               </a>
-              <a
-                href="mailto:zachlagden@lagden.dev"
-                className="text-neutral-400 hover:text-neutral-900 transition-colors focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-2 rounded p-1"
-                aria-label="Email Contact"
-              >
-                <Mail className="w-5 h-5" aria-hidden="true" />
-              </a>
+              <div className="relative flex items-center">
+                <a
+                  href="mailto:zachlagden@lagden.dev"
+                  className="text-neutral-400 hover:text-neutral-900 transition-colors focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-2 rounded p-1"
+                  aria-label="Email Contact"
+                >
+                  <Mail className="w-5 h-5" aria-hidden="true" />
+                </a>
+                <CopyButton
+                  textToCopy="zachlagden@lagden.dev"
+                  className="absolute -top-1 -right-1 p-0.5 bg-white rounded-full"
+                  size="sm"
+                />
+              </div>
             </div>
 
             <div className="flex flex-wrap justify-center md:justify-end space-x-4 text-xs text-neutral-500">

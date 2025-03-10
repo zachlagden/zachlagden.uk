@@ -4,6 +4,7 @@ import React from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { Mail, MapPin } from "lucide-react";
 import SocialIcon from "../ui/SocialIcon";
+import CopyButton from "../ui/CopyButton";
 import { Github, Linkedin, Instagram } from "lucide-react";
 
 interface HeaderProps {
@@ -80,14 +81,19 @@ const Header: React.FC<HeaderProps> = ({ prefersReducedMotion, isMobile }) => {
             duration: prefersReducedMotion ? 0.1 : 0.8,
           }}
         >
-          <a
-            href="mailto:zachlagden@lagden.dev"
-            className="flex items-center gap-2 hover:text-neutral-800 text-neutral-500 transition-colors focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-2 rounded-lg px-2 py-1"
-            aria-label="Email Zach at zachlagden@lagden.dev"
-          >
-            <Mail className="w-4 h-4" aria-hidden="true" />
-            <span className="text-sm tracking-wide">zachlagden@lagden.dev</span>
-          </a>
+          <div className="flex items-center hover:text-neutral-800 text-neutral-500 transition-colors focus-within:outline-none focus-within:ring-2 focus-within:ring-black focus-within:ring-offset-2 rounded-lg px-2 py-1">
+            <a
+              href="mailto:zachlagden@lagden.dev"
+              className="flex items-center gap-2"
+              aria-label="Email Zach at zachlagden@lagden.dev"
+            >
+              <Mail className="w-4 h-4" aria-hidden="true" />
+              <span className="text-sm tracking-wide">
+                zachlagden@lagden.dev
+              </span>
+            </a>
+            <CopyButton textToCopy="zachlagden@lagden.dev" size="sm" />
+          </div>
           <span className="hidden sm:block text-neutral-300" aria-hidden="true">
             •
           </span>
