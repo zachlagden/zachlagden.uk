@@ -29,7 +29,7 @@ const NavItem: React.FC<NavItemProps> = ({
     {isActive && (
       <motion.div
         layoutId="activeSection"
-        className="absolute inset-0 bg-neutral-100 rounded-full"
+        className="absolute inset-0 bg-neutral-200 rounded-full"
         initial={false}
         transition={{ type: "spring", stiffness: 300, damping: 30 }}
         aria-hidden="true"
