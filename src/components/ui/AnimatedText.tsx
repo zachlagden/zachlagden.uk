@@ -57,7 +57,7 @@ function AnimatedText<E extends ElementType = "div">({
 
   // Determine the wrapper component (default to div)
   const Wrapper = el || "div";
-  
+
   // Check if we're on the client side
   useEffect(() => {
     setIsClientSide(true);
@@ -65,21 +65,22 @@ function AnimatedText<E extends ElementType = "div">({
 
   // Handle SplitType loading
   useEffect(() => {
-    if (isClientSide && typeof window !== 'undefined') {
+    if (isClientSide && typeof window !== "undefined") {
       if (window.SplitType) {
         setIsSplitTypeLoaded(true);
       } else {
         // Listen for SplitType to load from script
         const handleSplitTypeLoad = () => setIsSplitTypeLoaded(true);
-        window.addEventListener('splittype-loaded', handleSplitTypeLoad);
-        return () => window.removeEventListener('splittype-loaded', handleSplitTypeLoad);
+        window.addEventListener("splittype-loaded", handleSplitTypeLoad);
+        return () =>
+          window.removeEventListener("splittype-loaded", handleSplitTypeLoad);
       }
     }
   }, [isClientSide]);
 
   useEffect(() => {
     if (!isClientSide || !isSplitTypeLoaded || !textRef.current) return;
-    
+
     let splitText: SplitTypeInstance | null = null;
 
     try {
@@ -131,7 +132,16 @@ function AnimatedText<E extends ElementType = "div">({
         }
       }
     };
-  }, [isInView, text, once, sequential, duration, delay, isClientSide, isSplitTypeLoaded]);
+  }, [
+    isInView,
+    text,
+    once,
+    sequential,
+    duration,
+    delay,
+    isClientSide,
+    isSplitTypeLoaded,
+  ]);
 
   // Use type assertion to make TypeScript understand our intention
   return (
@@ -141,7 +151,7 @@ function AnimatedText<E extends ElementType = "div">({
           id="splittype-script"
           src="https://unpkg.com/split-type@0.3.3/umd/index.min.js"
           onLoad={() => {
-            window.dispatchEvent(new Event('splittype-loaded'));
+            window.dispatchEvent(new Event("splittype-loaded"));
           }}
           strategy="lazyOnload"
         />
