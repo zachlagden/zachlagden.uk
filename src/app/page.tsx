@@ -15,6 +15,10 @@ import SocialIcon from "@/components/ui/SocialIcon";
 import ScrollToTopButton from "@/components/ui/ScrollToTopButton";
 import KeyboardIndicator from "@/components/ui/KeyboardIndicator";
 import AboutSection from "@/components/sections/AboutSection";
+import GlobalBackground from "@/components/ui/GlobalBackground";
+import CustomCursor from "@/components/ui/CustomCursor";
+import NoiseTexture from "@/components/ui/NoiseTexture";
+import ScrollProgress from "@/components/ui/ScrollProgress";
 
 // Dynamically import non-critical sections for performance
 const ExperienceSection = dynamic(
@@ -232,6 +236,11 @@ export default function Home() {
       />
 
       <div className="min-h-screen bg-neutral-50 font-[system-ui] text-neutral-900">
+        {/* Global background pattern */}
+        <GlobalBackground opacity={0.2} />
+
+        <NoiseTexture opacity={0.03} blend="overlay" />
+
         {/* Navigation */}
         <Navigation
           activeSection={activeSection}
@@ -345,8 +354,16 @@ export default function Home() {
         <ScrollToTopButton visible={showScrollButton} />
 
         {/* Keyboard navigation indicator */}
-<KeyboardIndicator prefersReducedMotion={prefersReducedMotion} isMobile={isMobile} />
+        <KeyboardIndicator
+          prefersReducedMotion={prefersReducedMotion}
+          isMobile={isMobile}
+        />
       </div>
+
+      {/* Custom cursor */}
+      <CustomCursor />
+
+      <ScrollProgress height={3} color="rgba(0, 0, 0, 0.3)" />
     </>
   );
 }
