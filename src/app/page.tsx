@@ -345,7 +345,7 @@ export default function Home() {
         <ScrollToTopButton visible={showScrollButton} />
 
         {/* Keyboard navigation indicator */}
-        <KeyboardIndicator prefersReducedMotion={prefersReducedMotion} />
+<KeyboardIndicator prefersReducedMotion={prefersReducedMotion} isMobile={isMobile} />
       </div>
     </>
   );

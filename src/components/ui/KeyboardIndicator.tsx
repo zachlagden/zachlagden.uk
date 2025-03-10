@@ -6,19 +6,21 @@ import { Keyboard } from "lucide-react";
 
 interface KeyboardIndicatorProps {
   prefersReducedMotion: boolean;
+  isMobile?: boolean;
 }
 
 const KeyboardIndicator: React.FC<KeyboardIndicatorProps> = ({
   prefersReducedMotion,
+  isMobile = false,
 }) => {
   const [isVisible, setIsVisible] = useState(false);
   const [isHelpVisible, setIsHelpVisible] = useState(false);
   const [hasInteracted, setHasInteracted] = useState(false);
   const initialDisplayCompleted = useRef(false);
 
-  // Show indicator only on initial page load
+  // Show indicator only on initial page load and not on mobile
   useEffect(() => {
-    if (!initialDisplayCompleted.current && !hasInteracted) {
+    if (!initialDisplayCompleted.current && !hasInteracted && !isMobile) {
       const timer = setTimeout(() => {
         setIsVisible(true);
         initialDisplayCompleted.current = true;
@@ -26,7 +28,7 @@ const KeyboardIndicator: React.FC<KeyboardIndicatorProps> = ({
 
       return () => clearTimeout(timer);
     }
-  }, [hasInteracted]);
+  }, [hasInteracted, isMobile]);
 
   // Handle question mark key press
   useEffect(() => {
