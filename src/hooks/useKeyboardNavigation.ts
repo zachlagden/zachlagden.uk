@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { scrollToSection } from "@/utils/scrollUtils";
 
 interface UseKeyboardNavigationProps {
@@ -15,7 +15,16 @@ const useKeyboardNavigation = ({
   sectionIds,
   activeSection,
 }: UseKeyboardNavigationProps) => {
+  const [isClient, setIsClient] = useState(false);
+
+  // Set client-side state
   useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  useEffect(() => {
+    if (!isClient) return;
+
     const handleKeyDown = (e: KeyboardEvent) => {
       // Only respond to keyboard shortcuts when not in input/textarea
       if (
@@ -58,7 +67,7 @@ const useKeyboardNavigation = ({
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
     };
-  }, [sectionIds, activeSection]);
+  }, [sectionIds, activeSection, isClient]);
 };
 
 export default useKeyboardNavigation;

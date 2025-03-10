@@ -17,9 +17,17 @@ const KeyboardIndicator: React.FC<KeyboardIndicatorProps> = ({
   const [isHelpVisible, setIsHelpVisible] = useState(false);
   const [hasInteracted, setHasInteracted] = useState(false);
   const initialDisplayCompleted = useRef(false);
+  const [isClient, setIsClient] = useState(false);
+
+  // Check for client-side rendering
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
 
   // Show indicator only on initial page load and not on mobile
   useEffect(() => {
+    if (!isClient || prefersReducedMotion) return;
+
     if (!initialDisplayCompleted.current && !hasInteracted && !isMobile) {
       const timer = setTimeout(() => {
         setIsVisible(true);
@@ -28,10 +36,12 @@ const KeyboardIndicator: React.FC<KeyboardIndicatorProps> = ({
 
       return () => clearTimeout(timer);
     }
-  }, [hasInteracted, isMobile]);
+  }, [hasInteracted, isMobile, prefersReducedMotion, isClient]);
 
   // Handle question mark key press
   useEffect(() => {
+    if (!isClient) return;
+
     const handleKeyPress = (e: KeyboardEvent) => {
       if (
         e.key === "?" &&
@@ -60,7 +70,7 @@ const KeyboardIndicator: React.FC<KeyboardIndicatorProps> = ({
 
     window.addEventListener("keydown", handleKeyPress);
     return () => window.removeEventListener("keydown", handleKeyPress);
-  }, [isHelpVisible]);
+  }, [isHelpVisible, isClient]);
 
   const toggleHelp = () => {
     setIsHelpVisible(!isHelpVisible);
@@ -75,6 +85,12 @@ const KeyboardIndicator: React.FC<KeyboardIndicatorProps> = ({
       setIsVisible(false);
     }
   };
+
+  // Don't render during SSR
+  if (!isClient) return null;
+
+  // Don't render if user prefers reduced motion or on mobile
+  if (prefersReducedMotion || isMobile) return null;
 
   return (
     <>

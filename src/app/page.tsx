@@ -16,9 +16,13 @@ import ScrollToTopButton from "@/components/ui/ScrollToTopButton";
 import KeyboardIndicator from "@/components/ui/KeyboardIndicator";
 import AboutSection from "@/components/sections/AboutSection";
 import GlobalBackground from "@/components/ui/GlobalBackground";
-import CustomCursor from "@/components/ui/CustomCursor";
 import NoiseTexture from "@/components/ui/NoiseTexture";
 import ScrollProgress from "@/components/ui/ScrollProgress";
+
+// Dynamically import CustomCursor with SSR disabled
+const CustomCursor = dynamic(() => import("@/components/ui/CustomCursor"), {
+  ssr: false,
+});
 
 // Dynamically import non-critical sections for performance
 const ExperienceSection = dynamic(
@@ -83,9 +87,10 @@ export default function Home() {
   const [showScrollButton, setShowScrollButton] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-  // Device and preference detection
+  // Device and preference detection - initialize with reasonable defaults for SSR
   const [isMobile, setIsMobile] = useState(false);
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
+  const [isClient, setIsClient] = useState(false);
 
   // Refs for sections
   const aboutRef = useRef<HTMLElement>(null) as React.RefObject<HTMLElement>;
@@ -104,20 +109,48 @@ export default function Home() {
     null,
   ) as React.RefObject<HTMLElement>;
 
-  // Initialize device detection and preferences
+  // Initialize client-side state
   useEffect(() => {
-    setIsMobile(window.innerWidth < 768);
-    setPrefersReducedMotion(
-      window.matchMedia("(prefers-reduced-motion: reduce)").matches,
-    );
+    setIsClient(true);
+  }, []);
 
+  // Initialize device detection and preferences - client-side only
+  useEffect(() => {
+    if (!isClient) return;
+
+    const checkMediaQueries = () => {
+      setIsMobile(window.innerWidth < 768);
+      setPrefersReducedMotion(
+        window.matchMedia("(prefers-reduced-motion: reduce)").matches,
+      );
+    };
+
+    // Initial check
+    checkMediaQueries();
+
+    // Set up listeners for changes
     const handleResize = () => {
       setIsMobile(window.innerWidth < 768);
     };
 
+    const reducedMotionQuery = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    );
+    const handleReducedMotionChange = () => {
+      setPrefersReducedMotion(reducedMotionQuery.matches);
+    };
+
     window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
+    reducedMotionQuery.addEventListener("change", handleReducedMotionChange);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+      reducedMotionQuery.removeEventListener(
+        "change",
+        handleReducedMotionChange,
+      );
+    };
+  }, [isClient]);
 
   // Observer for sections
   useSectionObserver({
@@ -134,13 +167,19 @@ export default function Home() {
 
   // Handle scroll for scroll-to-top button
   useEffect(() => {
+    if (!isClient) return;
+
     const handleScroll = () => {
       setShowScrollButton(window.scrollY > 300);
     };
 
     window.addEventListener("scroll", handleScroll);
+
+    // Initial check
+    handleScroll();
+
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [isClient]);
 
   // Setup keyboard navigation
   const sectionIds = [
@@ -360,8 +399,8 @@ export default function Home() {
         />
       </div>
 
-      {/* Custom cursor */}
-      <CustomCursor />
+      {/* Custom cursor - only rendered client-side */}
+      {isClient && !prefersReducedMotion && !isMobile && <CustomCursor />}
 
       <ScrollProgress height={3} color="rgba(0, 0, 0, 0.3)" />
     </>

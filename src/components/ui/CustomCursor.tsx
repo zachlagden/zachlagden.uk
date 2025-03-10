@@ -7,8 +7,45 @@ const CustomCursor: React.FC = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [cursorVariant, setCursorVariant] = useState("default");
   const [isVisible, setIsVisible] = useState(false);
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
+  const [isTouchDevice, setIsTouchDevice] = useState(false);
 
   useEffect(() => {
+    // Check for touch device and reduced motion preference
+    const checkDeviceAndPreferences = () => {
+      setIsTouchDevice(
+        window.matchMedia("(hover: none)").matches ||
+          navigator.maxTouchPoints > 0,
+      );
+      setPrefersReducedMotion(
+        window.matchMedia("(prefers-reduced-motion: reduce)").matches,
+      );
+    };
+
+    checkDeviceAndPreferences();
+
+    // Listen for preference changes
+    const reducedMotionQuery = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    );
+    const handleReducedMotionChange = () => {
+      setPrefersReducedMotion(reducedMotionQuery.matches);
+    };
+
+    reducedMotionQuery.addEventListener("change", handleReducedMotionChange);
+
+    return () => {
+      reducedMotionQuery.removeEventListener(
+        "change",
+        handleReducedMotionChange,
+      );
+    };
+  }, []);
+
+  useEffect(() => {
+    // Skip all cursor effects if user prefers reduced motion or on touch devices
+    if (prefersReducedMotion || isTouchDevice) return;
+
     // Only show cursor after it's moved to prevent initial flash at [0,0]
     const onMouseEnter = () => setIsVisible(true);
     const onMouseLeave = () => setIsVisible(false);
@@ -47,7 +84,7 @@ const CustomCursor: React.FC = () => {
         el.removeEventListener("mouseleave", handleMouseLeaveInteractive);
       });
     };
-  }, [isVisible]);
+  }, [isVisible, prefersReducedMotion, isTouchDevice]);
 
   // Cursor variant animations
   const variants = {
@@ -70,8 +107,8 @@ const CustomCursor: React.FC = () => {
     },
   };
 
-  // Don't render on touch devices
-  if (typeof navigator !== "undefined" && navigator.maxTouchPoints > 0) {
+  // Don't render on touch devices or if user prefers reduced motion
+  if (isTouchDevice || prefersReducedMotion) {
     return null;
   }
 
@@ -89,6 +126,7 @@ const CustomCursor: React.FC = () => {
         stiffness: 700,
         damping: 30,
       }}
+      aria-hidden="true" // Hide from screen readers as this is decorative
     />
   );
 };

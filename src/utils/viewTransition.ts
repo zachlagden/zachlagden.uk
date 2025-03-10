@@ -9,6 +9,7 @@
  * Checks if the browser supports the View Transitions API
  */
 export const supportsViewTransitions = (): boolean => {
+  if (typeof document === "undefined") return false;
   return "startViewTransition" in document;
 };
 
@@ -38,6 +39,12 @@ type DocumentWithViewTransition = Document & {
 export const updateWithTransition = async (
   callback: () => Promise<void> | void,
 ): Promise<void> => {
+  if (typeof document === "undefined") {
+    // SSR environment, just run the callback
+    await callback();
+    return;
+  }
+
   const doc = document as DocumentWithViewTransition;
 
   if (supportsViewTransitions() && doc.startViewTransition) {
@@ -60,6 +67,8 @@ export const updateWithTransition = async (
  * using View Transitions API if available
  */
 export const scrollToSectionWithTransition = (id: string): void => {
+  if (typeof document === "undefined") return;
+
   const element = document.getElementById(id);
   if (!element) return;
 
@@ -69,11 +78,27 @@ export const scrollToSectionWithTransition = (id: string): void => {
   const elementPosition = elementRect - bodyRect;
   const offsetPosition = elementPosition - offset;
 
-  updateWithTransition(() => {
+  // Check for reduced motion preference
+  const prefersReducedMotion =
+    typeof window !== "undefined" &&
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  // Use instant scrolling for reduced motion preference
+  const behavior = prefersReducedMotion ? "auto" : "smooth";
+
+  if (supportsViewTransitions()) {
+    updateWithTransition(() => {
+      window.scrollTo({
+        top: offsetPosition,
+        behavior,
+      });
+      return Promise.resolve();
+    });
+  } else {
+    // Fallback for browsers without View Transitions
     window.scrollTo({
       top: offsetPosition,
-      behavior: "smooth",
+      behavior,
     });
-    return Promise.resolve();
-  });
+  }
 };

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 interface UseSectionObserverProps {
   sectionRefs: {
@@ -16,7 +16,17 @@ const useSectionObserver = ({
   sectionRefs,
   setActiveSection,
 }: UseSectionObserverProps) => {
+  const [isClient, setIsClient] = useState(false);
+
+  // Set client-side state
   useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  useEffect(() => {
+    if (!isClient) return;
+
+    // Create IntersectionObserver only on client
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -38,7 +48,7 @@ const useSectionObserver = ({
     return () => {
       observer.disconnect();
     };
-  }, [sectionRefs, setActiveSection]);
+  }, [sectionRefs, setActiveSection, isClient]);
 };
 
 export default useSectionObserver;

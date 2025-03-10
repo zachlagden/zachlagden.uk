@@ -2,6 +2,7 @@
 
 import React, { useEffect, useRef, ElementType, JSX } from "react";
 import { useInView } from "framer-motion";
+import Script from "next/script";
 
 // Define proper SplitType types
 interface SplitTypeChar extends HTMLSpanElement {
@@ -27,9 +28,6 @@ interface SplitTypeConstructor {
   ): SplitTypeInstance;
 }
 
-// Declare SplitType as a module to avoid TypeScript errors
-declare const SplitType: SplitTypeConstructor;
-
 // Generic props type that extends the HTML element props
 type AnimatedTextProps<E extends ElementType = "div"> = {
   text: string;
@@ -54,34 +52,55 @@ function AnimatedText<E extends ElementType = "div">({
   // Use HTMLElement as the base type for our ref since all HTML elements inherit from it
   const textRef = useRef<HTMLElement>(null);
   const isInView = useInView(textRef, { once });
+  const [isClientSide, setIsClientSide] = React.useState(false);
+  const [isSplitTypeLoaded, setIsSplitTypeLoaded] = React.useState(false);
 
   // Determine the wrapper component (default to div)
   const Wrapper = el || "div";
+  
+  // Check if we're on the client side
+  useEffect(() => {
+    setIsClientSide(true);
+  }, []);
+
+  // Handle SplitType loading
+  useEffect(() => {
+    if (isClientSide && typeof window !== 'undefined') {
+      if (window.SplitType) {
+        setIsSplitTypeLoaded(true);
+      } else {
+        // Listen for SplitType to load from script
+        const handleSplitTypeLoad = () => setIsSplitTypeLoaded(true);
+        window.addEventListener('splittype-loaded', handleSplitTypeLoad);
+        return () => window.removeEventListener('splittype-loaded', handleSplitTypeLoad);
+      }
+    }
+  }, [isClientSide]);
 
   useEffect(() => {
+    if (!isClientSide || !isSplitTypeLoaded || !textRef.current) return;
+    
     let splitText: SplitTypeInstance | null = null;
 
-    // We need to ensure the component is mounted before splitting text
-    if (textRef.current) {
-      try {
-        // Split the text into characters
-        splitText = new SplitType(textRef.current, {
-          types: "words,chars",
-          tagName: "span",
-        });
+    try {
+      // Split the text into characters
+      // @ts-expect-error - SplitType is loaded via script but TypeScript can't verify it
+      splitText = new window.SplitType(textRef.current, {
+        types: "words,chars",
+        tagName: "span",
+      });
 
-        // Hide all characters initially
-        if (splitText.chars) {
-          splitText.chars.forEach((char) => {
-            char.style.opacity = "0";
-            char.style.display = "inline-block";
-            char.style.transform = "translateY(1.5em)";
-            char.style.transition = `opacity ${duration}s ease, transform ${duration}s ease`;
-          });
-        }
-      } catch (error) {
-        console.error("Error initializing SplitType:", error);
+      // Hide all characters initially
+      if (splitText?.chars) {
+        splitText.chars.forEach((char) => {
+          char.style.opacity = "0";
+          char.style.display = "inline-block";
+          char.style.transform = "translateY(1.5em)";
+          char.style.transition = `opacity ${duration}s ease, transform ${duration}s ease`;
+        });
       }
+    } catch (error) {
+      console.error("Error initializing SplitType:", error);
     }
 
     if (isInView && splitText?.chars) {
@@ -112,19 +131,39 @@ function AnimatedText<E extends ElementType = "div">({
         }
       }
     };
-  }, [isInView, text, once, sequential, duration, delay]);
+  }, [isInView, text, once, sequential, duration, delay, isClientSide, isSplitTypeLoaded]);
 
   // Use type assertion to make TypeScript understand our intention
-  // We use ElementType to infer what kind of props we should pass
-  return React.createElement(
-    Wrapper,
-    {
-      ...props,
-      ref: textRef,
-      className,
-    },
-    text,
+  return (
+    <>
+      {isClientSide && !window.SplitType && (
+        <Script
+          id="splittype-script"
+          src="https://unpkg.com/split-type@0.3.3/umd/index.min.js"
+          onLoad={() => {
+            window.dispatchEvent(new Event('splittype-loaded'));
+          }}
+          strategy="lazyOnload"
+        />
+      )}
+      {React.createElement(
+        Wrapper,
+        {
+          ...props,
+          ref: textRef,
+          className,
+        },
+        text,
+      )}
+    </>
   );
+}
+
+// Add to Window interface
+declare global {
+  interface Window {
+    SplitType?: SplitTypeConstructor;
+  }
 }
 
 export default AnimatedText;
