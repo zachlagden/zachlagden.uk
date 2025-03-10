@@ -18,7 +18,7 @@ body {
   text-rendering: optimizeLegibility;
 }
 
-/* View Transitions API styles */
+/* View Transitions API styles - only applied when supported */
 @supports (view-transition-name: none) {
   /* Section transitions */
   section {
@@ -36,16 +36,18 @@ body {
   }
 }
 
-/* Scroll animations */
-@keyframes scroll-indication {
-  0%,
-  100% {
-    transform: translateY(0);
-    opacity: 0.3;
-  }
-  50% {
-    transform: translateY(10px);
-    opacity: 0.8;
+/* Scroll animations - respect prefers-reduced-motion */
+@media (prefers-reduced-motion: no-preference) {
+  @keyframes scroll-indication {
+    0%,
+    100% {
+      transform: translateY(0);
+      opacity: 0.3;
+    }
+    50% {
+      transform: translateY(10px);
+      opacity: 0.8;
+    }
   }
 }
 
@@ -59,15 +61,17 @@ h6 {
   letter-spacing: -0.02em;
 }
 
-/* Custom transitions */
-.transition-height {
-  transition-property: max-height;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 300ms;
+/* Custom transitions - respect prefers-reduced-motion */
+@media (prefers-reduced-motion: no-preference) {
+  .transition-height {
+    transition-property: max-height;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 300ms;
+  }
 }
 
-/* Hover effects */
-@media (hover: hover) {
+/* Hover effects - only apply if hover is available */
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
   .hover-lift {
     transition:
       transform 0.2s ease,
@@ -80,63 +84,69 @@ h6 {
   }
 }
 
-/* Section fade in */
-.section-hidden {
-  opacity: 0;
-  transform: translateY(20px);
-  transition:
-    opacity 0.6s ease,
-    transform 0.6s ease;
-}
-
-.section-visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* Custom animations */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-@keyframes slideUp {
-  from {
+/* Section fade in - respect prefers-reduced-motion */
+@media (prefers-reduced-motion: no-preference) {
+  .section-hidden {
     opacity: 0;
     transform: translateY(20px);
+    transition:
+      opacity 0.6s ease,
+      transform 0.6s ease;
   }
-  to {
+
+  .section-visible {
     opacity: 1;
     transform: translateY(0);
   }
 }
 
-/* Enhanced link underlines */
+/* Custom animations - respect prefers-reduced-motion */
+@media (prefers-reduced-motion: no-preference) {
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes slideUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+/* Enhanced link underlines - respect prefers-reduced-motion */
 .animated-underline {
   position: relative;
   text-decoration: none;
 }
 
-.animated-underline:after {
-  content: "";
-  position: absolute;
-  width: 100%;
-  height: 1px;
-  bottom: 0;
-  left: 0;
-  background-color: currentColor;
-  transform: scaleX(0);
-  transform-origin: bottom right;
-  transition: transform 0.3s ease-out;
-}
+@media (prefers-reduced-motion: no-preference) {
+  .animated-underline:after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 1px;
+    bottom: 0;
+    left: 0;
+    background-color: currentColor;
+    transform: scaleX(0);
+    transform-origin: bottom right;
+    transition: transform 0.3s ease-out;
+  }
 
-.animated-underline:hover:after {
-  transform: scaleX(1);
-  transform-origin: bottom left;
+  .animated-underline:hover:after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+  }
 }
 
 /* Subtle grid background */
@@ -147,33 +157,41 @@ h6 {
   background-size: 20px 20px;
 }
 
-/* Minimal scrollbar */
-::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+/* Minimal scrollbar - webkit only */
+@media (prefers-reduced-motion: no-preference) {
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 0, 0, 0.2);
+  }
 }
 
-::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-::-webkit-scrollbar-thumb {
-  background: rgba(0, 0, 0, 0.1);
-  border-radius: 4px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: rgba(0, 0, 0, 0.2);
-}
-
-/* Enhanced focus outline */
+/* Enhanced focus outline for accessibility */
 :focus-visible {
   outline: 2px solid rgba(0, 0, 0, 0.2);
   outline-offset: 2px;
 }
 
-/* Apply smooth scrolling only when Lenis is not active */
-@media (prefers-reduced-motion) {
+/* Apply smooth scrolling only when Lenis is not active and user prefers animations */
+@media (prefers-reduced-motion: no-preference) {
+  html:not(.lenis-smooth-scroll) {
+    scroll-behavior: smooth;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
   }
