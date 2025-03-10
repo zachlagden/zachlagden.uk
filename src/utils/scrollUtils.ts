@@ -5,14 +5,15 @@ import { scrollToSectionWithTransition } from "./viewTransition";
  */
 export const scrollToSection = (id: string): void => {
   if (typeof document === "undefined") return;
-  
+
   const element = document.getElementById(id);
   if (!element) return;
 
   const offset = 100; // Adjust as needed
-  
+
   // Check for reduced motion preference
-  const prefersReducedMotion = typeof window !== "undefined" && 
+  const prefersReducedMotion =
+    typeof window !== "undefined" &&
     window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   // Use Lenis if available and not reduced motion
@@ -40,14 +41,15 @@ export const scrollToSection = (id: string): void => {
  */
 export const scrollToTop = (): void => {
   if (typeof window === "undefined") return;
-  
+
   // Check for reduced motion preference
-  const prefersReducedMotion = 
-    window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  
+  const prefersReducedMotion = window.matchMedia(
+    "(prefers-reduced-motion: reduce)",
+  ).matches;
+
   // Use immediate scroll for reduced motion preference
   const immediate = prefersReducedMotion;
-  
+
   // Use Lenis if available
   if (window.lenis && !prefersReducedMotion) {
     try {
@@ -65,7 +67,7 @@ export const scrollToTop = (): void => {
 
   // Fall back to View Transitions API or standard behavior
   const behavior = prefersReducedMotion ? "auto" : "smooth";
-  
+
   // Try using View Transitions API
   try {
     import("./viewTransition")

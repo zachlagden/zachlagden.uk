@@ -7,7 +7,10 @@ interface LenisInstance {
   raf: (time: number) => void;
   resize: () => void;
   destroy: () => void;
-  scrollTo: (target: number | HTMLElement | string, options?: LenisScrollToOptions) => void;
+  scrollTo: (
+    target: number | HTMLElement | string,
+    options?: LenisScrollToOptions,
+  ) => void;
 }
 
 interface LenisScrollToOptions {
@@ -50,7 +53,7 @@ export default function SmoothScrollProvider({
 
     const checkIsTouchDevice = () => {
       return (
-        window.matchMedia("(hover: none)").matches || 
+        window.matchMedia("(hover: none)").matches ||
         navigator.maxTouchPoints > 0
       );
     };
@@ -60,85 +63,90 @@ export default function SmoothScrollProvider({
 
     // Listen for preference changes
     const reducedMotionQuery = window.matchMedia(
-      "(prefers-reduced-motion: reduce)"
+      "(prefers-reduced-motion: reduce)",
     );
-    
+
     const handleReducedMotionChange = () => {
       setPrefersReducedMotion(checkPrefersReducedMotion());
     };
-    
+
     reducedMotionQuery.addEventListener("change", handleReducedMotionChange);
-    
+
     return () => {
-      reducedMotionQuery.removeEventListener("change", handleReducedMotionChange);
+      reducedMotionQuery.removeEventListener(
+        "change",
+        handleReducedMotionChange,
+      );
     };
   }, [isClient]);
 
   // Initialize and manage Lenis instance
   useEffect(() => {
     if (!isClient) return;
-    
+
     // Skip initialization in these cases
     if (prefersReducedMotion || isTouchDevice) return;
 
     // Add the class to indicate Lenis is active
-    document.documentElement.classList.add('lenis-smooth-scroll');
+    document.documentElement.classList.add("lenis-smooth-scroll");
 
     let lenisInstance: LenisInstance | undefined;
     let animationId: number | undefined;
 
     // Dynamic import to ensure client-side only execution
-    import("@studio-freight/lenis").then((LenisModule) => {
-      try {
-        lenisInstance = new LenisModule.default({
-          duration: 0.8,
-          easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-          orientation: "vertical",
-          wheelMultiplier: 1,
-          smoothWheel: true,
-          touchMultiplier: 2,
-        });
+    import("lenis")
+      .then((LenisModule) => {
+        try {
+          lenisInstance = new LenisModule.default({
+            duration: 0.8,
+            easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+            orientation: "vertical",
+            wheelMultiplier: 1,
+            smoothWheel: true,
+            touchMultiplier: 2,
+          });
 
-        function raf(time: number) {
-          if (lenisInstance) {
-            lenisInstance.raf(time);
-            animationId = requestAnimationFrame(raf);
+          function raf(time: number) {
+            if (lenisInstance) {
+              lenisInstance.raf(time);
+              animationId = requestAnimationFrame(raf);
+            }
           }
+
+          animationId = requestAnimationFrame(raf);
+
+          // Properly handle window resize events
+          const handleResize = () => {
+            if (lenisInstance) lenisInstance.resize();
+          };
+
+          window.addEventListener("resize", handleResize);
+
+          // Make instance available globally for other components
+          window.lenis = lenisInstance;
+
+          return () => {
+            window.removeEventListener("resize", handleResize);
+            if (animationId) cancelAnimationFrame(animationId);
+            if (lenisInstance) lenisInstance.destroy();
+            window.lenis = undefined;
+            document.documentElement.classList.remove("lenis-smooth-scroll");
+          };
+        } catch (err) {
+          console.error("Failed to initialize smooth scrolling:", err);
+          document.documentElement.classList.remove("lenis-smooth-scroll");
         }
-
-        animationId = requestAnimationFrame(raf);
-        
-        // Properly handle window resize events
-        const handleResize = () => {
-          if (lenisInstance) lenisInstance.resize();
-        };
-        
-        window.addEventListener("resize", handleResize);
-        
-        // Make instance available globally for other components
-        window.lenis = lenisInstance;
-
-        return () => {
-          window.removeEventListener("resize", handleResize);
-          if (animationId) cancelAnimationFrame(animationId);
-          if (lenisInstance) lenisInstance.destroy();
-          window.lenis = undefined;
-          document.documentElement.classList.remove('lenis-smooth-scroll');
-        };
-      } catch (err) {
-        console.error("Failed to initialize smooth scrolling:", err);
-        document.documentElement.classList.remove('lenis-smooth-scroll');
-      }
-    }).catch(err => {
-      console.error("Failed to load Lenis:", err);
-      document.documentElement.classList.remove('lenis-smooth-scroll');
-    });
+      })
+      .catch((err) => {
+        console.error("Failed to load Lenis:", err);
+        document.documentElement.classList.remove("lenis-smooth-scroll");
+      });
 
     return () => {
       if (animationId) cancelAnimationFrame(animationId);
       if (lenisInstance) lenisInstance.destroy();
       window.lenis = undefined;
-      document.documentElement.classList.remove('lenis-smooth-scroll');
+      document.documentElement.classList.remove("lenis-smooth-scroll");
     };
   }, [isClient, prefersReducedMotion, isTouchDevice]);
 
