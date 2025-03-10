@@ -85,12 +85,20 @@ export default function Home() {
 
   // Refs for sections
   const aboutRef = useRef<HTMLElement>(null) as React.RefObject<HTMLElement>;
-  const experienceRef = useRef<HTMLElement>(null) as React.RefObject<HTMLElement>;
-  const educationRef = useRef<HTMLElement>(null) as React.RefObject<HTMLElement>;
+  const experienceRef = useRef<HTMLElement>(
+    null,
+  ) as React.RefObject<HTMLElement>;
+  const educationRef = useRef<HTMLElement>(
+    null,
+  ) as React.RefObject<HTMLElement>;
   const skillsRef = useRef<HTMLElement>(null) as React.RefObject<HTMLElement>;
-  const certificationsRef = useRef<HTMLElement>(null) as React.RefObject<HTMLElement>;
+  const certificationsRef = useRef<HTMLElement>(
+    null,
+  ) as React.RefObject<HTMLElement>;
   const contactRef = useRef<HTMLElement>(null) as React.RefObject<HTMLElement>;
-  const mainContentRef = useRef<HTMLElement>(null) as React.RefObject<HTMLElement>;
+  const mainContentRef = useRef<HTMLElement>(
+    null,
+  ) as React.RefObject<HTMLElement>;
 
   // Initialize device detection and preferences
   useEffect(() => {
