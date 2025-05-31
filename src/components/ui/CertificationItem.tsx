@@ -8,7 +8,7 @@ interface CertificationItemProps {
   title: string;
   issuer: string;
   date: string;
-  url: string;
+  url?: string;
 }
 
 const CertificationItem: React.FC<CertificationItemProps> = ({
@@ -30,14 +30,16 @@ const CertificationItem: React.FC<CertificationItemProps> = ({
     <p className="text-neutral-500 text-sm">
       {issuer} · {date}
     </p>
-    <a
-      href={url}
-      target="_blank"
-      rel="noopener noreferrer"
-      className="mt-4 inline-flex items-center text-sm text-blue-600 hover:text-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded px-2 py-1"
-    >
-      <Award className="w-4 h-4 mr-1" /> View Credential
-    </a>
+    {url && (
+      <a
+        href={url}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="mt-4 inline-flex items-center text-sm text-blue-600 hover:text-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded px-2 py-1"
+      >
+        <Award className="w-4 h-4 mr-1" /> View Credential
+      </a>
+    )}
   </motion.div>
 );
 
