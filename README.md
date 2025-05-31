@@ -1,10 +1,10 @@
 # Zach Lagden Portfolio
 
-![Next.js Version](https://img.shields.io/badge/Next.js-15.2.1-black)
+![Next.js Version](https://img.shields.io/badge/Next.js-15.2.3-black)
 ![React Version](https://img.shields.io/badge/React-19.0.0-blue)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5-blue)
 ![Tailwind CSS](https://img.shields.io/badge/TailwindCSS-4-teal)
-![License](https://img.shields.io/badge/License-MIT-green)
+![License](https://img.shields.io/badge/License-ZML--PL-green)
 
 A modern, responsive portfolio website for Zach Lagden built with Next.js, React, TypeScript, Framer Motion, and Tailwind CSS.
 
@@ -208,7 +208,7 @@ Alternatively, you can deploy to any platform that supports Next.js:
 
 ## 📝 License
 
-This project is licensed under the MIT License - see the LICENSE file for details.
+This project is licensed under the Zachariah Michael Lagden Public License (ZML-PL) - see the LICENCE file for details.
 
 ## 🙏 Acknowledgements
 
