@@ -1,0 +1,330 @@
+{
+  "metadata": {
+    "title": "Zach Lagden | Technical Architect & Entrepreneur",
+    "description": "18-year-old entrepreneur, technical architect, and full-stack developer based in Ascot, UK. Specializing in turning complex technical challenges into elegant, business-driving solutions.",
+    "keywords": [
+      "Zach Lagden",
+      "Web Developer",
+      "Full Stack Developer",
+      "React Developer",
+      "Next.js Developer",
+      "TypeScript",
+      "Python Developer",
+      "DigiGrow",
+      "Lagden Development",
+      "UK Developer",
+      "Ascot Web Developer",
+      "Technical Architect"
+    ],
+    "ogImage": "/og-image.png",
+    "twitterImage": "/twitter-image.png",
+    "googleAnalyticsId": "G-JGDJX5L7B9",
+    "siteUrl": "https://cv.zachlagden.uk"
+  },
+  "personal": {
+    "name": "Zach Lagden",
+    "title": "Technical Architect & Entrepreneur",
+    "email": "zachtest@zachlagden.uk",
+    "location": "Ascot, UK",
+    "locationMapUrl": "https://maps.app.goo.gl/4t9WquercPnWs2uM9",
+    "social": {
+      "github": "https://github.com/zachlagden",
+      "linkedin": "https://www.linkedin.com/in/zachlagden/",
+      "instagram": "https://instagram.com/z.lagden",
+      "email": "zachtest@zachlagden.uk"
+    },
+    "websites": {
+      "digigrow": "https://digigrow.uk",
+      "lagdenDev": "https://lagden.dev"
+    }
+  },
+  "navigation": [
+    { "id": "about", "label": "About Me" },
+    { "id": "experience", "label": "Experience" },
+    { "id": "education", "label": "Education" },
+    { "id": "skills", "label": "Skills" },
+    { "id": "certifications", "label": "Certifications" },
+    { "id": "contact", "label": "Contact" }
+  ],
+  "about": {
+    "mainDescription": "I'm an 18-year-old entrepreneur, technical architect, and full-stack developer based in Ascot, UK. With a passion for building elegant technical solutions, I thrive at the intersection of technology, business strategy, and creative thinking. I specialize in turning complex technical challenges into elegant, business-driving solutions while focusing on strategic planning, growth optimization, and digital transformation.",
+    "professionalValues": {
+      "title": "Professional Values",
+      "content": "I believe in personal ownership rather than just working for others. I value respect, speed, simplicity, and quality while maintaining high standards in all work. I combine technical expertise with business acumen."
+    },
+    "currentFocus": {
+      "title": "Current Focus",
+      "content": "Mastering NextJS for advanced web applications, improving Python, JavaScript and TypeScript skills, taking a research-heavy approach to technical architecture, running businesses effectively, and developing enterprise IT skills through my current placement."
+    }
+  },
+  "experience": [
+    {
+      "id": "apprentice",
+      "title": "Apprentice",
+      "company": "Bespoke IT Solutions UK",
+      "companyLink": "https://bespokeitsolutions.com/",
+      "startDate": "2025-05",
+      "endDate": null,
+      "current": true,
+      "location": "Farnborough, England, United Kingdom · On-site · Full-time",
+      "description": "Work placement as part of T-Level course (unpaid). Gaining hands-on experience in enterprise IT solutions. Working with Microsoft Intune, Python, and additional enterprise technologies.",
+      "skills": ["Microsoft Intune", "Python Programming", "Enterprise IT"]
+    },
+    {
+      "id": "digigrow",
+      "title": "Co-Founder & Director",
+      "company": "DigiGrow LTD",
+      "companyLink": "https://digigrow.uk/",
+      "startDate": "2024-06",
+      "endDate": null,
+      "current": true,
+      "location": "United Kingdom · Hybrid",
+      "description": "Redefining marketing with comprehensive web development and data-driven strategies. Leading digital transformation and web development projects. Working with individuals and small businesses on their digital needs. Notable clients include The Thatched Tavern, The Chertsey Show, and Blueview Group.",
+      "skills": [
+        "Business Strategy",
+        "Digital Transformation",
+        "Start-up Leadership",
+        "Web Development"
+      ]
+    },
+    {
+      "id": "lagden-dev",
+      "title": "Founder",
+      "company": "Lagden Development",
+      "companyLink": "https://lagden.dev",
+      "startDate": "2023-01",
+      "endDate": null,
+      "current": true,
+      "location": "United Kingdom · Remote",
+      "description": "Personal professional side project offering development services. Turning complex technical challenges into elegant, business-driving solutions. Portfolio available at lagden.dev/projects. Open-source work through GitHub (https://github.com/Lagden-Development).",
+      "skills": [
+        "Full-Stack Development",
+        "Project Management",
+        "Technical Architecture"
+      ]
+    },
+    {
+      "id": "freelance",
+      "title": "Freelance Full-Stack Web Developer",
+      "company": "Self-employed",
+      "companyLink": null,
+      "startDate": "2020-01",
+      "endDate": null,
+      "current": true,
+      "location": "United Kingdom · Remote",
+      "description": "Developing custom web solutions and managing client projects from inception to deployment.",
+      "skills": [
+        "Full-Stack Development",
+        "Client Relations",
+        "Project Management"
+      ]
+    },
+    {
+      "id": "step8up",
+      "title": "Skills Bootcamp Trainer",
+      "company": "Step8up Academy",
+      "companyLink": "https://academy.step8up.co.uk/",
+      "startDate": "2024-04",
+      "endDate": "2024-10",
+      "current": false,
+      "location": "United Kingdom · Hybrid",
+      "description": "Teaching programming and development skills with a focus on being genuine and respectful with students.",
+      "skills": ["Teaching", "Python", "Curriculum Development"]
+    },
+    {
+      "id": "jamcoding",
+      "title": "Head Code Coach",
+      "company": "Jam Coding",
+      "companyLink": "https://jamcoding.com/",
+      "startDate": "2023-09",
+      "endDate": "2024-10",
+      "current": false,
+      "location": "United Kingdom · On-site",
+      "description": "Leading programming education initiatives and teaching young people to code.",
+      "skills": ["Teaching", "Leadership", "Programming Education"]
+    }
+  ],
+  "education": [
+    {
+      "id": "t-level",
+      "institution": "Farnborough College of Technology",
+      "degree": "Level 3 T-Level in Digital Design, Production and Development",
+      "startDate": "2023-09",
+      "endDate": null,
+      "current": true,
+      "description": "Specializing in software development and digital design principles. Serving as Student Council Member and Course Representative.",
+      "skills": [
+        "Python",
+        "C#",
+        "Software Development",
+        "Digital Design",
+        "Project Management"
+      ]
+    },
+    {
+      "id": "secondary",
+      "institution": "Charters School",
+      "degree": "Secondary Education",
+      "startDate": "2018-06",
+      "endDate": "2023-04",
+      "current": false,
+      "description": "Comprehensive secondary education with focus on STEM subjects",
+      "subjects": {
+        "Core Subjects": ["Mathematics", "English"],
+        "Technology": ["Computer Science", "Business"],
+        "Sciences": ["Physics", "Chemistry", "Biology"],
+        "Additional": ["Princes Trust"]
+      }
+    }
+  ],
+  "skills": {
+    "categories": [
+      {
+        "name": "Programming Languages",
+        "skills": ["Python", "JavaScript", "TypeScript"]
+      },
+      {
+        "name": "Web Technologies",
+        "skills": [
+          "HTML5/CSS3",
+          "Flask",
+          "Tailwind CSS",
+          "React.js",
+          "Next.js",
+          "Django"
+        ]
+      },
+      {
+        "name": "Databases & Infrastructure",
+        "skills": [
+          "MongoDB",
+          "SQL",
+          "Ubuntu",
+          "NGINX",
+          "VPS",
+          "Cloudflare",
+          "Docker Compose"
+        ]
+      },
+      {
+        "name": "Development & DevOps",
+        "skills": [
+          "Git",
+          "API Design",
+          "REST APIs",
+          "Linux",
+          "Server Management",
+          "GitHub Actions",
+          "Pytest"
+        ]
+      },
+      {
+        "name": "Business & Leadership",
+        "skills": [
+          "Business Strategy",
+          "Start-up Leadership",
+          "Project Management",
+          "Agile Methodologies",
+          "Client Relations",
+          "Digital Transformation",
+          "Growth Optimization"
+        ]
+      },
+      {
+        "name": "Teaching & Leadership",
+        "skills": [
+          "Teaching",
+          "Curriculum Development",
+          "Mentorship",
+          "Leadership"
+        ]
+      },
+      {
+        "name": "Enterprise & Analytics",
+        "skills": [
+          "Microsoft Intune",
+          "Google Analytics",
+          "Google Tag Manager",
+          "Sentry",
+          "Umami Analytics"
+        ]
+      },
+      {
+        "name": "Design & Creative",
+        "skills": ["Figma", "Framer", "Graphic Design", "Logo Design"]
+      }
+    ]
+  },
+  "certifications": [
+    {
+      "id": "html-essentials",
+      "name": "HTML Essentials",
+      "issuer": "Cisco",
+      "issueDate": "2025-03",
+      "credentialId": "5d87f9d8-4c8c-4788-ad66-bfd7f8c65f44",
+      "credentialUrl": "https://www.credly.com/badges/5d87f9d8-4c8c-4788-ad66-bfd7f8c65f44"
+    },
+    {
+      "id": "js-essentials-1",
+      "name": "JavaScript Essentials 1",
+      "issuer": "Cisco",
+      "issueDate": "2025-03",
+      "credentialId": "19eb797a-328b-4078-8ae6-0dd434343194",
+      "credentialUrl": "https://www.credly.com/badges/19eb797a-328b-4078-8ae6-0dd434343194"
+    },
+    {
+      "id": "js-essentials-2",
+      "name": "JavaScript Essentials 2",
+      "issuer": "Cisco",
+      "issueDate": "2025-03",
+      "credentialId": "2fc51937-bdce-4eda-ae35-a9ddd317de0d",
+      "credentialUrl": "https://www.credly.com/badges/2fc51937-bdce-4eda-ae35-a9ddd317de0d"
+    },
+    {
+      "id": "python-essentials-1",
+      "name": "Python Essentials 1",
+      "issuer": "Cisco",
+      "issueDate": "2024-03",
+      "credentialId": "5cbb052a-46f4-425e-aea7-c07d6e8eca01",
+      "credentialUrl": "https://www.credly.com/badges/5cbb052a-46f4-425e-aea7-c07d6e8eca01"
+    },
+    {
+      "id": "it-essentials",
+      "name": "IT Essentials",
+      "issuer": "Cisco",
+      "issueDate": "2024-02",
+      "credentialId": "4abff770-6592-4200-8770-1938ff54b2fc",
+      "credentialUrl": "https://www.credly.com/badges/4abff770-6592-4200-8770-1938ff54b2fc"
+    },
+    {
+      "id": "python-essentials-2",
+      "name": "Python Essentials 2",
+      "issuer": "Cisco",
+      "issueDate": "2023-09",
+      "credentialId": "1b818c5b-5756-42d7-8fda-48665a045c94",
+      "credentialUrl": "https://www.credly.com/badges/1b818c5b-5756-42d7-8fda-48665a045c94"
+    }
+  ],
+  "contact": {
+    "introduction": "Interested in working together or have a question? Feel free to reach out!",
+    "formFields": {
+      "name": "Name",
+      "email": "Email Address",
+      "message": "Message"
+    },
+    "formspreeId": "mqapzrgk"
+  },
+  "footer": {
+    "copyright": "© 2025 All rights reserved",
+    "additionalLinks": [
+      { "label": "digigrow.uk", "url": "https://digigrow.uk" },
+      { "label": "lagden.dev", "url": "https://lagden.dev" },
+      { "label": "zachlagden.uk", "url": "https://zachlagden.uk" }
+    ],
+    "sourceCode": {
+      "label": "Source Code",
+      "url": "https://github.com/zachlagden/cv.zachlagden.uk"
+    },
+    "note": "Made with ❤️"
+  }
+}
