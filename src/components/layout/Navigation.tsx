@@ -2,20 +2,39 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import { User, Briefcase, GraduationCap, Code, Award } from "lucide-react";
+import {
+  User,
+  Briefcase,
+  GraduationCap,
+  Code,
+  Award,
+  Mail,
+} from "lucide-react";
 import NavItem from "../ui/NavItem";
+import { NavigationItem } from "@/types/content";
 
 interface NavigationProps {
   activeSection: string;
   scrollToSection: (id: string) => void;
   prefersReducedMotion: boolean;
+  navigation: NavigationItem[];
 }
 
 const Navigation: React.FC<NavigationProps> = ({
   activeSection,
   scrollToSection,
   prefersReducedMotion,
+  navigation,
 }) => {
+  // Map navigation IDs to icons
+  const iconMap: { [key: string]: React.ReactNode } = {
+    about: <User className="w-5 h-5" aria-hidden="true" />,
+    experience: <Briefcase className="w-5 h-5" aria-hidden="true" />,
+    education: <GraduationCap className="w-5 h-5" aria-hidden="true" />,
+    skills: <Code className="w-5 h-5" aria-hidden="true" />,
+    certifications: <Award className="w-5 h-5" aria-hidden="true" />,
+    contact: <Mail className="w-5 h-5" aria-hidden="true" />,
+  };
   return (
     <nav
       aria-label="Main Navigation"
@@ -30,36 +49,15 @@ const Navigation: React.FC<NavigationProps> = ({
           duration: prefersReducedMotion ? 0.1 : 0.5,
         }}
       >
-        <NavItem
-          label="About Me"
-          icon={<User className="w-5 h-5" aria-hidden="true" />}
-          isActive={activeSection === "about"}
-          onClick={() => scrollToSection("about")}
-        />
-        <NavItem
-          label="Experience"
-          icon={<Briefcase className="w-5 h-5" aria-hidden="true" />}
-          isActive={activeSection === "experience"}
-          onClick={() => scrollToSection("experience")}
-        />
-        <NavItem
-          label="Education"
-          icon={<GraduationCap className="w-5 h-5" aria-hidden="true" />}
-          isActive={activeSection === "education"}
-          onClick={() => scrollToSection("education")}
-        />
-        <NavItem
-          label="Skills"
-          icon={<Code className="w-5 h-5" aria-hidden="true" />}
-          isActive={activeSection === "skills"}
-          onClick={() => scrollToSection("skills")}
-        />
-        <NavItem
-          label="Certifications"
-          icon={<Award className="w-5 h-5" aria-hidden="true" />}
-          isActive={activeSection === "certifications"}
-          onClick={() => scrollToSection("certifications")}
-        />
+        {navigation.map((item) => (
+          <NavItem
+            key={item.id}
+            label={item.label}
+            icon={iconMap[item.id]}
+            isActive={activeSection === item.id}
+            onClick={() => scrollToSection(item.id)}
+          />
+        ))}
       </motion.div>
     </nav>
   );

@@ -7,13 +7,19 @@ import SocialIcon from "../ui/SocialIcon";
 import CopyButton from "../ui/CopyButton";
 import { Github, Linkedin, Instagram } from "lucide-react";
 import AnimatedText from "../ui/AnimatedText";
+import { ContentData } from "@/types/content";
 
 interface HeaderProps {
   prefersReducedMotion: boolean;
   isMobile: boolean;
+  content: ContentData;
 }
 
-const Header: React.FC<HeaderProps> = ({ prefersReducedMotion, isMobile }) => {
+const Header: React.FC<HeaderProps> = ({
+  prefersReducedMotion,
+  isMobile,
+  content,
+}) => {
   const { scrollY } = useScroll();
   const headerOpacity = useTransform(scrollY, [0, 300], [1, 0.3]);
   const headerScale = useTransform(scrollY, [0, 300], [1, 0.95]);
@@ -51,7 +57,7 @@ const Header: React.FC<HeaderProps> = ({ prefersReducedMotion, isMobile }) => {
       >
         {/* Animated text heading */}
         <AnimatedText
-          text="Zach Lagden"
+          text={content.personal.name}
           el="h1"
           className="text-5xl sm:text-6xl md:text-7xl font-bold tracking-tighter mb-3"
           delay={0.4}
@@ -61,7 +67,7 @@ const Header: React.FC<HeaderProps> = ({ prefersReducedMotion, isMobile }) => {
 
         {/* Animated text paragraph */}
         <AnimatedText
-          text="Technical Architect & Entrepreneur"
+          text={content.personal.title}
           el="p"
           className="text-xl sm:text-2xl text-neutral-600 mb-8 font-light tracking-wide"
           delay={0.8}
@@ -80,29 +86,31 @@ const Header: React.FC<HeaderProps> = ({ prefersReducedMotion, isMobile }) => {
         >
           <div className="flex items-center hover:text-neutral-800 text-neutral-500 transition-colors focus-within:outline-none focus-within:ring-2 focus-within:ring-black focus-within:ring-offset-2 rounded-lg px-2 py-1">
             <a
-              href="mailto:zachlagden@lagden.dev"
+              href={`mailto:${content.personal.email}`}
               className="flex items-center gap-2"
-              aria-label="Email Zach at zachlagden@lagden.dev"
+              aria-label={`Email ${content.personal.name.split(" ")[0]} at ${content.personal.email}`}
             >
               <Mail className="w-4 h-4" aria-hidden="true" />
               <span className="text-sm tracking-wide">
-                zachlagden@lagden.dev
+                {content.personal.email}
               </span>
             </a>
-            <CopyButton textToCopy="zachlagden@lagden.dev" size="sm" />
+            <CopyButton textToCopy={content.personal.email} size="sm" />
           </div>
           <span className="hidden sm:block text-neutral-300" aria-hidden="true">
             •
           </span>
           <a
-            href="https://maps.app.goo.gl/4t9WquercPnWs2uM9"
+            href={content.personal.locationMapUrl}
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center gap-2 hover:text-neutral-800 text-neutral-500 transition-colors focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-2 rounded-lg px-2 py-1"
-            aria-label="Location: Ascot, UK (opens Google Maps)"
+            aria-label={`Location: ${content.personal.location} (opens Google Maps)`}
           >
             <MapPin className="w-4 h-4" aria-hidden="true" />
-            <span className="text-sm tracking-wide">Ascot, UK</span>
+            <span className="text-sm tracking-wide">
+              {content.personal.location}
+            </span>
           </a>
         </motion.div>
 
@@ -120,25 +128,25 @@ const Header: React.FC<HeaderProps> = ({ prefersReducedMotion, isMobile }) => {
           <SocialIcon
             size="sm"
             label="GitHub Profile"
-            href="https://github.com/zachlagden"
+            href={content.personal.social.github}
             icon={<Github className="w-4 h-4" aria-hidden="true" />}
           />
           <SocialIcon
             size="sm"
             label="LinkedIn Profile"
-            href="https://www.linkedin.com/in/zachlagden/"
+            href={content.personal.social.linkedin}
             icon={<Linkedin className="w-4 h-4" aria-hidden="true" />}
           />
           <SocialIcon
             size="sm"
             label="Instagram Profile"
-            href="https://instagram.com/z.lagden"
+            href={content.personal.social.instagram}
             icon={<Instagram className="w-4 h-4" aria-hidden="true" />}
           />
           <SocialIcon
             size="sm"
             label="Email Contact"
-            href="mailto:zachlagden@lagden.dev"
+            href={`mailto:${content.personal.social.email}`}
             icon={<Mail className="w-4 h-4" aria-hidden="true" />}
           />
         </motion.div>

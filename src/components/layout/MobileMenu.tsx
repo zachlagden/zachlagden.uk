@@ -16,12 +16,15 @@ import {
   Mail,
 } from "lucide-react";
 import SocialIcon from "../ui/SocialIcon";
+import { NavigationItem, ContentData } from "@/types/content";
 
 interface MobileMenuProps {
   isOpen: boolean;
   setIsOpen: (isOpen: boolean) => void;
   activeSection: string;
   scrollToSection: (id: string) => void;
+  navigation: NavigationItem[];
+  content: ContentData;
 }
 
 const MobileMenu: React.FC<MobileMenuProps> = ({
@@ -29,7 +32,18 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
   setIsOpen,
   activeSection,
   scrollToSection,
+  navigation,
+  content,
 }) => {
+  // Map navigation IDs to icons
+  const iconMap: { [key: string]: React.ReactNode } = {
+    about: <User className="w-5 h-5" />,
+    experience: <Briefcase className="w-5 h-5" />,
+    education: <GraduationCap className="w-5 h-5" />,
+    skills: <Code className="w-5 h-5" />,
+    certifications: <Award className="w-5 h-5" />,
+    contact: <Mail className="w-5 h-5" />,
+  };
   return (
     <>
       {/* Mobile Menu Button */}
@@ -65,47 +79,21 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
               </button>
             </div>
             <nav className="p-6 space-y-6">
-              {[
-                {
-                  id: "about",
-                  label: "About Me",
-                  icon: <User className="w-5 h-5" />,
-                },
-                {
-                  id: "experience",
-                  label: "Experience",
-                  icon: <Briefcase className="w-5 h-5" />,
-                },
-                {
-                  id: "education",
-                  label: "Education",
-                  icon: <GraduationCap className="w-5 h-5" />,
-                },
-                {
-                  id: "skills",
-                  label: "Skills",
-                  icon: <Code className="w-5 h-5" />,
-                },
-                {
-                  id: "certifications",
-                  label: "Certifications",
-                  icon: <Award className="w-5 h-5" />,
-                },
-              ].map((section) => (
+              {navigation.map((item) => (
                 <button
-                  key={section.id}
+                  key={item.id}
                   onClick={() => {
-                    scrollToSection(section.id);
+                    scrollToSection(item.id);
                     setIsOpen(false);
                   }}
                   className={`flex items-center gap-3 w-full p-3 focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-2 rounded-lg ${
-                    activeSection === section.id
+                    activeSection === item.id
                       ? "text-neutral-900 bg-neutral-100"
                       : "text-neutral-500"
                   }`}
                 >
-                  {section.icon}
-                  <span className="text-lg">{section.label}</span>
+                  {iconMap[item.id]}
+                  <span className="text-lg">{item.label}</span>
                 </button>
               ))}
             </nav>
@@ -119,22 +107,22 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
               >
                 <SocialIcon
                   label="GitHub Profile"
-                  href="https://github.com/zachlagden"
+                  href={content.personal.social.github}
                   icon={<Github className="w-5 h-5" aria-hidden="true" />}
                 />
                 <SocialIcon
                   label="LinkedIn Profile"
-                  href="https://www.linkedin.com/in/zachlagden/"
+                  href={content.personal.social.linkedin}
                   icon={<Linkedin className="w-5 h-5" aria-hidden="true" />}
                 />
                 <SocialIcon
                   label="Instagram Profile"
-                  href="https://instagram.com/z.lagden"
+                  href={content.personal.social.instagram}
                   icon={<Instagram className="w-5 h-5" aria-hidden="true" />}
                 />
                 <SocialIcon
                   label="Email Contact"
-                  href="mailto:zachlagden@lagden.dev"
+                  href={`mailto:${content.personal.social.email}`}
                   icon={<Mail className="w-5 h-5" aria-hidden="true" />}
                 />
               </div>
