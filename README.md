@@ -32,8 +32,8 @@ A modern, responsive portfolio website for Zach Lagden built with Next.js, React
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/zachlagden/cv.zachlagden.uk.git
-cd cv.zachlagden.uk
+git clone https://github.com/zachlagden/zachlagden.uk.git
+cd zachlagden.uk
 ```
 
 2. Install dependencies:
@@ -198,7 +198,7 @@ To customize this portfolio for your own use:
 
 The simplest way to deploy this portfolio is using [Vercel](https://vercel.com/), the platform created by the makers of Next.js:
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fzachlagden%2Fcv.zachlagden.uk)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fzachlagden%2Fzachlagden.uk)
 
 Alternatively, you can deploy to any platform that supports Next.js:
 
