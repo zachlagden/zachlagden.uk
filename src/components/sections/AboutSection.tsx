@@ -5,13 +5,15 @@ import { motion } from "framer-motion";
 import { User } from "lucide-react";
 import Section from "../ui/Section";
 import AboutCard from "../ui/AboutCard";
+import { About } from "@/types/content";
 
 interface AboutSectionProps {
   prefersReducedMotion: boolean;
+  content: About;
 }
 
 const AboutSection = React.forwardRef<HTMLElement, AboutSectionProps>(
-  ({ prefersReducedMotion }, ref) => {
+  ({ prefersReducedMotion, content }, ref) => {
     return (
       <Section
         id="about"
@@ -29,21 +31,16 @@ const AboutSection = React.forwardRef<HTMLElement, AboutSectionProps>(
               transition={{ duration: prefersReducedMotion ? 0.1 : 0.8 }}
             >
               <p className="text-lg font-light mb-6 leading-relaxed">
-                I&apos;m a young entrepreneur, technical architect, and
-                full-stack developer based in Ascot, UK. With a passion for
-                building elegant technical solutions, I value respect, speed,
-                simplicity, and quality. As the Co-Founder & CTO of DigiGrow LTD
-                and creator of Lagden Development, I combine technical expertise
-                with business acumen to deliver exceptional results for clients.
+                {content.mainDescription}
               </p>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-12">
                 <AboutCard
-                  title="Professional Values"
-                  content="I believe in personal ownership rather than just working for others. My approach emphasizes getting things done with respect, speed, simplicity, and quality while maintaining high standards."
+                  title={content.professionalValues.title}
+                  content={content.professionalValues.content}
                 />
                 <AboutCard
-                  title="Current Focus"
-                  content="Mastering Next.js, improving my Python, JavaScript and TypeScript skills, while taking a research-heavy approach to technical architecture and running my businesses."
+                  title={content.currentFocus.title}
+                  content={content.currentFocus.content}
                 />
               </div>
             </motion.div>
