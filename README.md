@@ -221,9 +221,9 @@ This project is licensed under the Zachariah Michael Lagden Public License (ZML-
 
 ## 📞 Contact
 
-Zach Lagden - [zachlagden@lagden.dev](mailto:zachlagden@lagden.dev)
+Zach Lagden - [zach@zachlagden.uk](mailto:zach@zachlagden.uk)
 
-Project Link: [https://cv.zachlagden.uk](https://cv.zachlagden.uk)
+Project Link: [https://zachlagden.uk](https://zachlagden.uk)
 
 ---
 
