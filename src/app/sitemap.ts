@@ -1,9 +1,11 @@
 import type { MetadataRoute } from "next";
+import { loadContentServer } from "@/utils/serverContentLoader";
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const content = await loadContentServer();
   return [
     {
-      url: "https://cv.zachlagden.uk",
+      url: content.metadata.siteUrl,
       lastModified: new Date(),
       changeFrequency: "monthly",
       priority: 1,

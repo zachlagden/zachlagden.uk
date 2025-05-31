@@ -1,12 +1,14 @@
 import type { MetadataRoute } from "next";
+import { loadContentServer } from "@/utils/serverContentLoader";
 
-export default function robots(): MetadataRoute.Robots {
+export default async function robots(): Promise<MetadataRoute.Robots> {
+  const content = await loadContentServer();
   return {
     rules: {
       userAgent: "*",
       allow: "/",
     },
-    sitemap: "https://cv.zachlagden.uk/sitemap.xml",
-    host: "https://cv.zachlagden.uk",
+    sitemap: `${content.metadata.siteUrl}/sitemap.xml`,
+    host: content.metadata.siteUrl,
   };
 }
