@@ -11,13 +11,13 @@
     "format": "prettier --write ."
   },
   "dependencies": {
-    "@formspree/react": "^2.5.4",
+    "@formspree/react": "^3.0.0",
     "@next/third-parties": "^15.2.1",
     "@sentry/nextjs": "^9",
     "framer-motion": "^12.4.10",
     "import-in-the-middle": "^1.13.1",
     "lenis": "^1.2.3",
-    "lucide-react": "^0.479.0",
+    "lucide-react": "^0.511.0",
     "next": "15.2.3",
     "prettier": "^3.5.3",
     "react": "^19.0.0",
