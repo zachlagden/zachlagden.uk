@@ -280,7 +280,7 @@ export default function HomeClient({ content }: HomeClientProps) {
 
         {/* Fixed social links */}
         <div
-          className="fixed bottom-8 left-8 z-50 hidden lg:block"
+          className="fixed top-1/2 -translate-y-1/2 right-8 z-50 hidden lg:block"
           role="navigation"
           aria-label="Social Links"
         >

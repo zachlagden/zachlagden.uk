@@ -59,18 +59,6 @@
   },
   "experience": [
     {
-      "id": "apprentice",
-      "title": "Apprentice",
-      "company": "Bespoke IT Solutions UK",
-      "companyLink": "https://bespokeitsolutions.com/",
-      "startDate": "2025-05",
-      "endDate": null,
-      "current": true,
-      "location": "Farnborough, England, United Kingdom · On-site · Full-time",
-      "description": "Work placement as part of T-Level course (unpaid). Gaining hands-on experience in enterprise IT solutions. Working with Microsoft Intune, Python, and additional enterprise technologies.",
-      "skills": ["Microsoft Intune", "Python Programming", "Enterprise IT"]
-    },
-    {
       "id": "digigrow",
       "title": "Co-Founder & Director",
       "company": "DigiGrow LTD",
@@ -118,6 +106,18 @@
         "Client Relations",
         "Project Management"
       ]
+    },
+    {
+      "id": "apprentice",
+      "title": "Apprentice",
+      "company": "Bespoke IT Solutions UK",
+      "companyLink": "https://bespokeitsolutions.com/",
+      "startDate": "2025-05",
+      "endDate": "2025-07",
+      "current": true,
+      "location": "Farnborough, England, United Kingdom · On-site · Full-time",
+      "description": "Work placement as part of T-Level course (unpaid). Gaining hands-on experience in enterprise IT solutions. Working with Microsoft Intune, Python, and additional enterprise technologies.",
+      "skills": ["Microsoft Intune", "Python Programming", "Enterprise IT"]
     },
     {
       "id": "step8up",

@@ -29,13 +29,28 @@ const useSectionObserver = ({
     // Create IntersectionObserver only on client
     const observer = new IntersectionObserver(
       (entries) => {
+        // Find the section with the highest intersection ratio
+        let maxIntersection = 0;
+        let activeId = "";
+
         entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setActiveSection(entry.target.id);
+          if (
+            entry.isIntersecting &&
+            entry.intersectionRatio > maxIntersection
+          ) {
+            maxIntersection = entry.intersectionRatio;
+            activeId = entry.target.id;
           }
         });
+
+        if (activeId) {
+          setActiveSection(activeId);
+        }
       },
-      { threshold: 0.5 },
+      {
+        threshold: [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0],
+        rootMargin: "-20% 0px -20% 0px",
+      },
     );
 
     // Observe all section refs

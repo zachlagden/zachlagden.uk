@@ -7,6 +7,7 @@ import SocialIcon from "../ui/SocialIcon";
 import CopyButton from "../ui/CopyButton";
 import { Github, Linkedin, Instagram } from "lucide-react";
 import AnimatedText from "../ui/AnimatedText";
+import PresenceStatus from "../ui/PresenceStatus";
 import { ContentData } from "@/types/content";
 
 interface HeaderProps {
@@ -69,14 +70,14 @@ const Header: React.FC<HeaderProps> = ({
         <AnimatedText
           text={content.personal.title}
           el="p"
-          className="text-xl sm:text-2xl text-neutral-600 mb-8 font-light tracking-wide"
+          className="text-xl sm:text-2xl text-neutral-600 mb-2 font-light tracking-wide"
           delay={0.8}
           duration={0.6}
           sequential={true}
         />
 
         <motion.div
-          className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-8"
+          className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-4"
           initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{
@@ -113,6 +114,9 @@ const Header: React.FC<HeaderProps> = ({
             </span>
           </a>
         </motion.div>
+
+        {/* Presence Status */}
+        <PresenceStatus prefersReducedMotion={prefersReducedMotion} />
 
         <motion.div
           className="lg:hidden flex justify-center gap-6 mt-8"

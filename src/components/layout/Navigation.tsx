@@ -38,7 +38,7 @@ const Navigation: React.FC<NavigationProps> = ({
   return (
     <nav
       aria-label="Main Navigation"
-      className="fixed top-8 left-8 z-40 hidden lg:block"
+      className="fixed top-1/2 -translate-y-1/2 left-8 z-40 hidden lg:block"
     >
       <motion.div
         className="flex flex-col space-y-6 p-3 bg-white/90 backdrop-blur-sm rounded-full shadow-md"

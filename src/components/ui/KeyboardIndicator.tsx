@@ -55,16 +55,7 @@ const KeyboardIndicator: React.FC<KeyboardIndicatorProps> = ({
         setIsHelpVisible(!isHelpVisible);
         setHasInteracted(true);
 
-        if (isHelpVisible) {
-          // Show briefly after closing help
-          setIsVisible(true);
-          const hideTimer = setTimeout(() => {
-            setIsVisible(false);
-          }, 3000);
-          return () => clearTimeout(hideTimer);
-        } else {
-          setIsVisible(false);
-        }
+        setIsVisible(false);
       }
     };
 
@@ -76,14 +67,8 @@ const KeyboardIndicator: React.FC<KeyboardIndicatorProps> = ({
     setIsHelpVisible(!isHelpVisible);
     setHasInteracted(true);
 
-    if (isHelpVisible) {
-      // When closing help, show indicator briefly
-      setIsVisible(true);
-      setTimeout(() => setIsVisible(false), 3000);
-    } else {
-      // When opening help, hide the indicator
-      setIsVisible(false);
-    }
+    // Hide the indicator when opening or closing help
+    setIsVisible(false);
   };
 
   // Don't render during SSR
@@ -98,7 +83,7 @@ const KeyboardIndicator: React.FC<KeyboardIndicatorProps> = ({
         {isVisible && !isHelpVisible && (
           <motion.button
             onClick={toggleHelp}
-            className="fixed bottom-8 right-24 z-40 flex items-center gap-2 bg-black/80 text-white px-3 py-2 rounded-full shadow-lg text-xs"
+            className="fixed bottom-8 left-1/2 transform -translate-x-1/2 z-40 flex items-center gap-2 bg-black/80 text-white px-3 py-2 rounded-full shadow-lg text-xs"
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 10 }}
