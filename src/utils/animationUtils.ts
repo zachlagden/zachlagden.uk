@@ -4,8 +4,8 @@
 
 // Subtle hover animation for cards and interactive elements
 export const hoverAnimation = {
-  rest: { y: 0, transition: { duration: 0.2, ease: "easeInOut" } },
-  hover: { y: -3, transition: { duration: 0.2, ease: "easeInOut" } },
+  rest: { y: 0, transition: { duration: 0.2 } },
+  hover: { y: -3, transition: { duration: 0.2 } },
 };
 
 // For buttons and clickable elements
@@ -69,7 +69,7 @@ export const sectionAnimation = {
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] },
+    transition: { duration: 0.6 },
   },
 };
 
