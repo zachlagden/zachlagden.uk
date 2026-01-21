@@ -25,7 +25,7 @@ vi.mock('framer-motion', () => ({
 
         // Return element with filtered props
         const Tag = typeof prop === 'string' ? prop : 'div'
-        return <Tag {...rest}>{children}</Tag>
+        return React.createElement(Tag, rest as React.HTMLAttributes<HTMLElement>, children)
       }
       return Component
     },

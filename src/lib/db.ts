@@ -1,18 +1,19 @@
 import { MongoClient } from "mongodb";
 
-if (!process.env.MONGODB_URI) {
-  throw new Error('Invalid/Missing environment variable: "MONGODB_URI"');
-}
-
 const uri = process.env.MONGODB_URI;
 const options = {};
 
 let client: MongoClient;
 let clientPromise: Promise<MongoClient>;
 
-if (process.env.NODE_ENV === "development") {
+if (!uri) {
+  // Defer error until runtime to allow builds without env vars
+  clientPromise = Promise.reject(
+    new Error('Invalid/Missing environment variable: "MONGODB_URI"')
+  );
+} else if (process.env.NODE_ENV === "development") {
   // In development, use a global variable to preserve the client across hot reloads
-  let globalWithMongo = global as typeof globalThis & {
+  const globalWithMongo = global as typeof globalThis & {
     _mongoClientPromise?: Promise<MongoClient>;
   };
 
