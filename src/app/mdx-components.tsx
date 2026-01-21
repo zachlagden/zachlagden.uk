@@ -1,25 +1,40 @@
-import type { MDXComponents } from "mdx/types";
+import type { MDXComponents } from 'mdx/types'
+import { CodeBlock } from '@/components/syntax/CodeBlock'
 
-/**
- * Global MDX component overrides
- * These components replace default HTML elements in MDX content
- * @see https://nextjs.org/docs/app/guides/mdx#custom-elements
- */
 export function useMDXComponents(components: MDXComponents): MDXComponents {
   return {
-    // Custom component mappings for MDX content
-    // For now, provide basic passthrough components
-    // Will be enhanced in 04-02 with syntax highlighting and styling
-    pre: ({ children, ...props }) => (
-      <pre {...props} className="overflow-x-auto">
-        {children}
-      </pre>
-    ),
-    code: ({ children, ...props }) => (
-      <code {...props} className="font-mono">
-        {children}
-      </code>
-    ),
+    // Custom code block with syntax highlighting
+    pre: ({ children }) => {
+      // Extract className from the code element inside pre
+      const codeElement = children as React.ReactElement<{ className?: string, children?: React.ReactNode }>
+      const className = codeElement?.props?.className
+
+      return (
+        <CodeBlock className={className}>
+          {codeElement?.props?.children}
+        </CodeBlock>
+      )
+    },
+
+    // Inline code styling
+    code: ({ children, className, ...props }) => {
+      // If inside a pre (has language class), let pre handle it
+      if (className?.includes('language-')) {
+        return <code className={className} {...props}>{children}</code>
+      }
+
+      // Inline code
+      return (
+        <code
+          className="px-1.5 py-0.5 rounded bg-neutral-100 dark:bg-neutral-800 text-sm font-mono text-neutral-800 dark:text-neutral-200"
+          {...props}
+        >
+          {children}
+        </code>
+      )
+    },
+
+    // Pass through other components
     ...components,
-  };
+  }
 }
