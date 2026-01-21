@@ -10,18 +10,18 @@ See: .planning/PROJECT.md (updated 2026-01-21)
 ## Current Position
 
 Phase: 4 of 8 (Blog Core)
-Plan: 3 of 5 in current phase (In progress)
-Status: Phase 4 in progress - listing page with search/filters complete
-Last activity: 2026-01-21 - Completed 04-03-PLAN.md (Blog List Page)
+Plan: 4 of 5 in current phase (In progress)
+Status: Phase 4 in progress - individual post page complete
+Last activity: 2026-01-21 - Completed 04-04-PLAN.md (Individual Post Page)
 
-Progress: [████░-----] ~45% milestone (3 phases complete, 4th in progress)
+Progress: [████░-----] ~48% milestone (3 phases complete, 4th in progress)
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 15
-- Average duration: 6.5 min
-- Total execution time: 1.7 hours
+- Total plans completed: 16
+- Average duration: 6.8 min
+- Total execution time: 1.8 hours
 
 **By Phase:**
 
@@ -30,11 +30,11 @@ Progress: [████░-----] ~45% milestone (3 phases complete, 4th in progr
 | 01-dark-mode | 4 | 47min | 12min |
 | 02-testing-infrastructure | 3 | 11min | 3.7min |
 | 03-authentication | 5 | 24min | 4.8min |
-| 04-blog-core | 3 | 33min | 11min |
+| 04-blog-core | 4 | 41min | 10.3min |
 
 **Recent Trend:**
-- Last 5 plans: 03-05 (8min), 04-01 (9min), 04-02 (8min), 04-03 (16min)
-- Trend: Slight increase in avg time as complexity grows
+- Last 5 plans: 04-01 (9min), 04-02 (8min), 04-03 (16min), 04-04 (8min)
+- Trend: Consistent performance around 8-10min for blog features
 
 *Updated after each plan completion*
 
@@ -47,6 +47,10 @@ Recent decisions affecting current work:
 
 | Decision | Phase | Rationale |
 |----------|-------|-----------|
+| Hide TOC for posts with fewer than 3 headings | 04-04 | Table of contents adds little value for short posts; saves screen space |
+| Unicode escape in JSON-LD for XSS protection | 04-04 | Prevents script injection by escaping < and > as \u003c and \u003e in structured data |
+| IntersectionObserver for TOC active section | 04-04 | Efficient viewport tracking without scroll event listeners; better performance |
+| next-mdx-remote/rsc for MDX rendering | 04-04 | Compatible with Next.js 15 App Router Server Components; renders database MDX strings |
 | Suspense boundaries for useSearchParams | 04-03 | SearchFilter/CategoryPills use useSearchParams which causes CSR bailout if not wrapped in Suspense |
 | Multi-select filters via URL params | 04-03 | Allows combining categories and tags; enables shareable filtered links like /blog?category=Tutorials&q=react |
 | Debounced search with 300ms delay | 04-03 | Balances instant feedback with server load reduction; prevents excessive database queries |
@@ -123,7 +127,7 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-01-21T22:21:16Z
-Stopped at: Completed 04-03-PLAN.md (Blog List Page)
+Last session: 2026-01-21T22:32:02Z
+Stopped at: Completed 04-04-PLAN.md (Individual Post Page)
 Resume file: None
-Next: Continue Phase 4 - 04-04 (Individual Post Page)
+Next: Continue Phase 4 - 04-05 (Admin CRUD Operations)
