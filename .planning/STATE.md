@@ -10,18 +10,18 @@ See: .planning/PROJECT.md (updated 2026-01-21)
 ## Current Position
 
 Phase: 4 of 8 (Blog Core)
-Plan: 2 of 5 in current phase (In progress)
-Status: Phase 4 in progress - data layer and rendering complete
-Last activity: 2026-01-21 - Completed 04-02-PLAN.md (Blog Data Layer & Code Highlighting)
+Plan: 3 of 5 in current phase (In progress)
+Status: Phase 4 in progress - listing page with search/filters complete
+Last activity: 2026-01-21 - Completed 04-03-PLAN.md (Blog List Page)
 
-Progress: [████░-----] ~43% milestone (3 phases complete, 4th in progress)
+Progress: [████░-----] ~45% milestone (3 phases complete, 4th in progress)
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 14
-- Average duration: 6.1 min
-- Total execution time: 1.6 hours
+- Total plans completed: 15
+- Average duration: 6.5 min
+- Total execution time: 1.7 hours
 
 **By Phase:**
 
@@ -30,11 +30,11 @@ Progress: [████░-----] ~43% milestone (3 phases complete, 4th in progr
 | 01-dark-mode | 4 | 47min | 12min |
 | 02-testing-infrastructure | 3 | 11min | 3.7min |
 | 03-authentication | 5 | 24min | 4.8min |
-| 04-blog-core | 2 | 17min | 8.5min |
+| 04-blog-core | 3 | 33min | 11min |
 
 **Recent Trend:**
-- Last 5 plans: 03-04 (3min), 03-05 (8min), 04-01 (9min), 04-02 (8min)
-- Trend: Consistent efficiency (avg 7min across last 4 plans)
+- Last 5 plans: 03-05 (8min), 04-01 (9min), 04-02 (8min), 04-03 (16min)
+- Trend: Slight increase in avg time as complexity grows
 
 *Updated after each plan completion*
 
@@ -47,6 +47,10 @@ Recent decisions affecting current work:
 
 | Decision | Phase | Rationale |
 |----------|-------|-----------|
+| Suspense boundaries for useSearchParams | 04-03 | SearchFilter/CategoryPills use useSearchParams which causes CSR bailout if not wrapped in Suspense |
+| Multi-select filters via URL params | 04-03 | Allows combining categories and tags; enables shareable filtered links like /blog?category=Tutorials&q=react |
+| Debounced search with 300ms delay | 04-03 | Balances instant feedback with server load reduction; prevents excessive database queries |
+| Dynamic rendering for blog page | 04-03 | Blog content from database; static generation would require build-time DB connection |
 | Custom syntax highlighting CSS | 04-02 | External highlight.js themes not available; custom GitHub-inspired CSS eliminates dependency while matching site aesthetic |
 | SerializedPost for API responses | 04-02 | Converts ObjectId/Date to strings for Next.js API route compatibility; ensures all responses serializable |
 | Filter interfaces for MongoDB queries | 04-02 | Type-safe query building instead of 'any' types; improves IDE autocomplete and catches errors at compile time |
@@ -109,11 +113,17 @@ None yet.
 
 ### Blockers/Concerns
 
-None yet.
+**Pre-existing build issue (documented 04-03):**
+- Home page "/" has error preventing full build: `Cannot destructure property 'data' of '(0 , o.wV)(...)' as it is undefined`
+- Issue existed before Phase 04 changes (verified by checking previous commits)
+- Blog routes compile successfully despite home page issue
+- TypeScript compilation passes with zero errors
+- Appears to be client-side hook issue during SSR on home page
+- Does not block blog development but should be addressed before deployment
 
 ## Session Continuity
 
-Last session: 2026-01-21T22:01:30Z
-Stopped at: Completed 04-02-PLAN.md (Blog Data Layer & Code Highlighting)
+Last session: 2026-01-21T22:21:16Z
+Stopped at: Completed 04-03-PLAN.md (Blog List Page)
 Resume file: None
-Next: Continue Phase 4 - 04-03 (Blog List Page)
+Next: Continue Phase 4 - 04-04 (Individual Post Page)
