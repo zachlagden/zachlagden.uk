@@ -87,6 +87,7 @@ A professional online presence that authentically represents who you are and wha
 - Next.js 15.3.8 with App Router
 - React 19.1.4, TypeScript 5.8.3
 - Tailwind CSS 4.1.10 with Framer Motion 12
+- **Radix UI + shadcn/ui** — Component library for all UI elements (buttons, inputs, dialogs, toggles, etc.)
 - Content currently in `public/content.json`
 - Deployed to Vercel with Sentry monitoring
 
@@ -100,6 +101,7 @@ A professional online presence that authentically represents who you are and wha
 
 ## Constraints
 
+- **UI Components**: Radix UI + shadcn/ui — Maximize usage for all interactive elements (buttons, forms, dialogs, toggles, dropdowns, etc.). Prefer shadcn components over custom implementations.
 - **Database**: MongoDB — User's preferred database choice
 - **Auth**: GitHub OAuth only — Simplifies auth, aligns with developer identity
 - **Hosting**: Vercel — Current deployment platform, maintain compatibility
@@ -111,6 +113,7 @@ A professional online presence that authentically represents who you are and wha
 
 | Decision | Rationale | Outcome |
 |----------|-----------|---------|
+| Radix UI + shadcn/ui for all UI components | Accessible primitives, consistent design system, dark mode support built-in | Use throughout milestone |
 | MongoDB for blog storage | User preference, flexible schema for posts/comments | — Pending |
 | GitHub OAuth for auth | Developer-focused audience, simplifies implementation | — Pending |
 | Single admin user (zachlagden) | Personal portfolio, no multi-user admin needed | — Pending |
