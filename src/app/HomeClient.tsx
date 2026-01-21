@@ -401,7 +401,7 @@ export default function HomeClient({ content }: HomeClientProps) {
       {/* Custom cursor - only rendered client-side */}
       {isClient && !prefersReducedMotion && !isMobile && <CustomCursor />}
 
-      <ScrollProgress height={3} color="rgba(0, 0, 0, 0.3)" />
+      <ScrollProgress height={3} />
     </>
   );
 }
