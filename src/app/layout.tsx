@@ -6,6 +6,7 @@ import SmoothScrollProvider from "@/components/providers/SmoothScrollProvider";
 import { ThemeProvider } from "@/components/providers/theme-provider";
 import { ThemeToggle } from "@/components/theme/theme-toggle";
 import { SessionProvider } from "@/components/auth/SessionProvider";
+import { AuthStatus } from "@/components/auth/AuthStatus";
 import { loadContentServer } from "@/utils/serverContentLoader";
 
 // Optimize font loading
@@ -123,6 +124,7 @@ export default async function RootLayout({
             <SmoothScrollProvider>{children}</SmoothScrollProvider>
           </SessionProvider>
           <ThemeToggle />
+          <AuthStatus />
         </ThemeProvider>
       </body>
       <GoogleAnalytics
