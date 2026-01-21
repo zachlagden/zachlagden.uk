@@ -5,6 +5,7 @@ import { GoogleAnalytics } from "@next/third-parties/google";
 import SmoothScrollProvider from "@/components/providers/SmoothScrollProvider";
 import { ThemeProvider } from "@/components/providers/theme-provider";
 import { ThemeToggle } from "@/components/theme/theme-toggle";
+import { SessionProvider } from "@/components/auth/SessionProvider";
 import { loadContentServer } from "@/utils/serverContentLoader";
 
 // Optimize font loading
@@ -118,7 +119,9 @@ export default async function RootLayout({
           enableSystem
           disableTransitionOnChange={false}
         >
-          <SmoothScrollProvider>{children}</SmoothScrollProvider>
+          <SessionProvider>
+            <SmoothScrollProvider>{children}</SmoothScrollProvider>
+          </SessionProvider>
           <ThemeToggle />
         </ThemeProvider>
       </body>
