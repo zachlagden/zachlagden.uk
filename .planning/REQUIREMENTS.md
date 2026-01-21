@@ -137,72 +137,72 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| THEME-01 | TBD | Pending |
-| THEME-02 | TBD | Pending |
-| THEME-03 | TBD | Pending |
-| THEME-04 | TBD | Pending |
-| THEME-05 | TBD | Pending |
-| AUTH-01 | TBD | Pending |
-| AUTH-02 | TBD | Pending |
-| AUTH-03 | TBD | Pending |
-| AUTH-04 | TBD | Pending |
-| AUTH-05 | TBD | Pending |
-| BLOG-01 | TBD | Pending |
-| BLOG-02 | TBD | Pending |
-| BLOG-03 | TBD | Pending |
-| BLOG-04 | TBD | Pending |
-| BLOG-05 | TBD | Pending |
-| BLOG-06 | TBD | Pending |
-| BLOG-07 | TBD | Pending |
-| BLOG-08 | TBD | Pending |
-| BLOG-09 | TBD | Pending |
-| BLOG-10 | TBD | Pending |
-| ADMIN-01 | TBD | Pending |
-| ADMIN-02 | TBD | Pending |
-| ADMIN-03 | TBD | Pending |
-| ADMIN-04 | TBD | Pending |
-| ADMIN-05 | TBD | Pending |
-| ADMIN-06 | TBD | Pending |
-| ADMIN-07 | TBD | Pending |
-| ADMIN-08 | TBD | Pending |
-| ENGAGE-01 | TBD | Pending |
-| ENGAGE-02 | TBD | Pending |
-| ENGAGE-03 | TBD | Pending |
-| ENGAGE-04 | TBD | Pending |
-| ENGAGE-05 | TBD | Pending |
-| ENGAGE-06 | TBD | Pending |
-| PROJ-01 | TBD | Pending |
-| PROJ-02 | TBD | Pending |
-| PROJ-03 | TBD | Pending |
-| PROJ-04 | TBD | Pending |
-| PROJ-05 | TBD | Pending |
-| PROJ-06 | TBD | Pending |
-| UX-01 | TBD | Pending |
-| UX-02 | TBD | Pending |
-| UX-03 | TBD | Pending |
-| UX-04 | TBD | Pending |
-| PERF-01 | TBD | Pending |
-| PERF-02 | TBD | Pending |
-| PERF-03 | TBD | Pending |
-| PERF-04 | TBD | Pending |
-| SEO-01 | TBD | Pending |
-| SEO-02 | TBD | Pending |
-| SEO-03 | TBD | Pending |
-| SEO-04 | TBD | Pending |
-| TEST-01 | TBD | Pending |
-| TEST-02 | TBD | Pending |
-| TEST-03 | TBD | Pending |
-| TEST-04 | TBD | Pending |
-| CONTENT-01 | TBD | Pending |
-| CONTENT-02 | TBD | Pending |
-| CONTENT-03 | TBD | Pending |
-| CONTENT-04 | TBD | Pending |
+| THEME-01 | Phase 1 | Pending |
+| THEME-02 | Phase 1 | Pending |
+| THEME-03 | Phase 1 | Pending |
+| THEME-04 | Phase 1 | Pending |
+| THEME-05 | Phase 1 | Pending |
+| AUTH-01 | Phase 3 | Pending |
+| AUTH-02 | Phase 3 | Pending |
+| AUTH-03 | Phase 3 | Pending |
+| AUTH-04 | Phase 3 | Pending |
+| AUTH-05 | Phase 3 | Pending |
+| BLOG-01 | Phase 4 | Pending |
+| BLOG-02 | Phase 4 | Pending |
+| BLOG-03 | Phase 4 | Pending |
+| BLOG-04 | Phase 4 | Pending |
+| BLOG-05 | Phase 4 | Pending |
+| BLOG-06 | Phase 4 | Pending |
+| BLOG-07 | Phase 4 | Pending |
+| BLOG-08 | Phase 4 | Pending |
+| BLOG-09 | Phase 4 | Pending |
+| BLOG-10 | Phase 4 | Pending |
+| ADMIN-01 | Phase 5 | Pending |
+| ADMIN-02 | Phase 5 | Pending |
+| ADMIN-03 | Phase 5 | Pending |
+| ADMIN-04 | Phase 5 | Pending |
+| ADMIN-05 | Phase 5 | Pending |
+| ADMIN-06 | Phase 5 | Pending |
+| ADMIN-07 | Phase 5 | Pending |
+| ADMIN-08 | Phase 5 | Pending |
+| ENGAGE-01 | Phase 6 | Pending |
+| ENGAGE-02 | Phase 6 | Pending |
+| ENGAGE-03 | Phase 6 | Pending |
+| ENGAGE-04 | Phase 6 | Pending |
+| ENGAGE-05 | Phase 6 | Pending |
+| ENGAGE-06 | Phase 6 | Pending |
+| PROJ-01 | Phase 7 | Pending |
+| PROJ-02 | Phase 7 | Pending |
+| PROJ-03 | Phase 7 | Pending |
+| PROJ-04 | Phase 7 | Pending |
+| PROJ-05 | Phase 7 | Pending |
+| PROJ-06 | Phase 7 | Pending |
+| UX-01 | Phase 8 | Pending |
+| UX-02 | Phase 8 | Pending |
+| UX-03 | Phase 8 | Pending |
+| UX-04 | Phase 8 | Pending |
+| PERF-01 | Phase 8 | Pending |
+| PERF-02 | Phase 8 | Pending |
+| PERF-03 | Phase 5 | Pending |
+| PERF-04 | Phase 8 | Pending |
+| SEO-01 | Phase 4 | Pending |
+| SEO-02 | Phase 4 | Pending |
+| SEO-03 | Phase 4 | Pending |
+| SEO-04 | Phase 4 | Pending |
+| TEST-01 | Phase 2 | Pending |
+| TEST-02 | Phase 2 | Pending |
+| TEST-03 | Phase 2 | Pending |
+| TEST-04 | Phase 2 | Pending |
+| CONTENT-01 | Phase 8 | Pending |
+| CONTENT-02 | Phase 8 | Pending |
+| CONTENT-03 | Phase 8 | Pending |
+| CONTENT-04 | Phase 8 | Pending |
 
 **Coverage:**
 - v1 requirements: 54 total
-- Mapped to phases: 0
-- Unmapped: 54 ⚠️
+- Mapped to phases: 54
+- Unmapped: 0
 
 ---
 *Requirements defined: 2026-01-21*
-*Last updated: 2026-01-21 after initial definition*
+*Last updated: 2026-01-21 after roadmap creation*
