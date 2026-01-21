@@ -1,5 +1,8 @@
 import Link from "next/link"
 
+// Force dynamic rendering - this page doesn't need static generation
+export const dynamic = 'force-dynamic'
+
 export default function ForbiddenPage() {
   return (
     <div className="flex min-h-screen flex-col items-center justify-center p-4">
