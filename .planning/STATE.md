@@ -5,22 +5,22 @@
 See: .planning/PROJECT.md (updated 2026-01-21)
 
 **Core value:** A professional online presence that authentically represents who you are and what you build, with a blog for sharing technical content.
-**Current focus:** Phase 2 Complete - Ready for Phase 3
+**Current focus:** Phase 3 Authentication - In Progress
 
 ## Current Position
 
 Phase: 3 of 8 (Authentication)
-Plan: 3 of 5 in current phase (In progress)
-Status: Auth UI components complete
-Last activity: 2026-01-21 - Completed 03-03-PLAN.md (Auth UI Components)
+Plan: 4 of 5 in current phase (In progress)
+Status: Protected routes and admin controls complete
+Last activity: 2026-01-21 - Completed 03-04-PLAN.md (Protected Routes & Admin Controls)
 
-Progress: [███-------] ~31% milestone (2 phases + 3 plans complete)
+Progress: [███-------] ~35% milestone (2 phases + 4 plans complete)
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 10
-- Average duration: 6.7 min
+- Total plans completed: 11
+- Average duration: 6.3 min
 - Total execution time: 1.2 hours
 
 **By Phase:**
@@ -29,11 +29,11 @@ Progress: [███-------] ~31% milestone (2 phases + 3 plans complete)
 |-------|-------|-------|----------|
 | 01-dark-mode | 4 | 47min | 12min |
 | 02-testing-infrastructure | 3 | 11min | 3.7min |
-| 03-authentication | 3 | 13min | 4.3min |
+| 03-authentication | 4 | 16min | 4min |
 
 **Recent Trend:**
-- Last 5 plans: 02-03 (6min), 03-01 (6min), 03-02 (3min), 03-03 (4min)
-- Trend: Excellent efficiency (avg 4.75min across last 4 plans)
+- Last 5 plans: 03-01 (6min), 03-02 (3min), 03-03 (4min), 03-04 (3min)
+- Trend: Excellent efficiency (avg 4min across last 4 plans)
 
 *Updated after each plan completion*
 
@@ -46,6 +46,10 @@ Recent decisions affecting current work:
 
 | Decision | Phase | Rationale |
 |----------|-------|-----------|
+| DAL provides real security layer | 03-04 | Middleware is lightweight first check; DAL verifies auth server-side before data access |
+| Middleware uses auth.config.ts not auth.ts | 03-04 | Edge runtime cannot use MongoDB adapter; split config for compatibility |
+| Sign out everywhere via deleteMany | 03-04 | DELETE /api/auth/sessions with {all: true} revokes all user sessions for security |
+| AdminFAB shows context-aware actions | 03-04 | New Post on blog pages, Edit/Delete only on individual posts based on pathname |
 | Loading skeleton during session check | 03-03 | Prevents UI flash by showing skeleton in fixed position while session loads |
 | Admin badge positioned on avatar | 03-03 | Amber badge with "A" indicator provides clear visual distinction for admin users |
 | Glass effect pattern for auth UI | 03-03 | Matches ThemeToggle styling (backdrop-blur-md, semi-transparent) for visual consistency |
@@ -98,7 +102,7 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-01-21T20:11:21Z
-Stopped at: Completed 03-03-PLAN.md
+Last session: 2026-01-21T20:18:20Z
+Stopped at: Completed 03-04-PLAN.md
 Resume file: None
-Next: Phase 3 Plan 4 (Protected routes) - ready for execution
+Next: Phase 3 Plan 5 (Final integration and testing) - ready for execution
