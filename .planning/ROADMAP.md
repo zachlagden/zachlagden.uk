@@ -10,7 +10,7 @@ This roadmap transforms the existing portfolio into a full-featured platform wit
 - Integer phases (1, 2, 3): Planned milestone work
 - Decimal phases (2.1, 2.2): Urgent insertions (marked with INSERTED)
 
-- [ ] **Phase 1: Dark Mode** - shadcn/ui foundation + theme toggle with persistence, system preference detection, no flash
+- [x] **Phase 1: Dark Mode** - shadcn/ui foundation + theme toggle with persistence, system preference detection, no flash
 - [ ] **Phase 2: Testing Infrastructure** - Vitest + Playwright setup, CI integration
 - [ ] **Phase 3: Authentication** - GitHub OAuth with session persistence and admin detection
 - [ ] **Phase 4: Blog Core** - Blog listing, post pages, categories, search, SEO
@@ -38,7 +38,7 @@ Plans:
 - [x] 01-01-PLAN.md - UI Foundation (shadcn/ui setup, next-themes, ThemeProvider, CSS variables)
 - [x] 01-02-PLAN.md - Theme Toggle (iOS-style floating toggle with glass effect)
 - [x] 01-03-PLAN.md - Dark Mode Styles (update all existing components with dark: variants)
-- [ ] 01-04-PLAN.md - Gap Closure (fix missed components: VSCodeDisplay, SpotifyDisplay, ScrollProgress, SkillsVisualization)
+- [x] 01-04-PLAN.md - Gap Closure (fix missed components: VSCodeDisplay, SpotifyDisplay, ScrollProgress, SkillsVisualization)
 
 ### Phase 2: Testing Infrastructure
 **Goal**: Establish testing patterns before building complex features
@@ -156,7 +156,7 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7 -> 8
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Dark Mode | 3/4 | Gap closure needed | - |
+| 1. Dark Mode | 4/4 | ✓ Complete | 2026-01-21 |
 | 2. Testing Infrastructure | 0/TBD | Not started | - |
 | 3. Authentication | 0/TBD | Not started | - |
 | 4. Blog Core | 0/TBD | Not started | - |

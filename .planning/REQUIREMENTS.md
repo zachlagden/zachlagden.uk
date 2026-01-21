@@ -9,11 +9,11 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Dark Mode
 
-- [ ] **THEME-01**: User can toggle between light and dark themes
-- [ ] **THEME-02**: Theme preference persists across sessions (localStorage)
-- [ ] **THEME-03**: Theme defaults to system preference on first visit
-- [ ] **THEME-04**: No flash of wrong theme on page load
-- [ ] **THEME-05**: All UI elements respond correctly to theme changes
+- [x] **THEME-01**: User can toggle between light and dark themes
+- [x] **THEME-02**: Theme preference persists across sessions (localStorage)
+- [x] **THEME-03**: Theme defaults to system preference on first visit
+- [x] **THEME-04**: No flash of wrong theme on page load
+- [x] **THEME-05**: All UI elements respond correctly to theme changes
 
 ### Authentication
 
@@ -137,11 +137,11 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| THEME-01 | Phase 1 | Pending |
-| THEME-02 | Phase 1 | Pending |
-| THEME-03 | Phase 1 | Pending |
-| THEME-04 | Phase 1 | Pending |
-| THEME-05 | Phase 1 | Pending |
+| THEME-01 | Phase 1 | ✓ Complete |
+| THEME-02 | Phase 1 | ✓ Complete |
+| THEME-03 | Phase 1 | ✓ Complete |
+| THEME-04 | Phase 1 | ✓ Complete |
+| THEME-05 | Phase 1 | ✓ Complete |
 | AUTH-01 | Phase 3 | Pending |
 | AUTH-02 | Phase 3 | Pending |
 | AUTH-03 | Phase 3 | Pending |
