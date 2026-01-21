@@ -10,7 +10,7 @@ This roadmap transforms the existing portfolio into a full-featured platform wit
 - Integer phases (1, 2, 3): Planned milestone work
 - Decimal phases (2.1, 2.2): Urgent insertions (marked with INSERTED)
 
-- [ ] **Phase 1: Dark Mode** - Theme toggle with persistence, system preference detection, no flash
+- [ ] **Phase 1: Dark Mode** - shadcn/ui foundation + theme toggle with persistence, system preference detection, no flash
 - [ ] **Phase 2: Testing Infrastructure** - Vitest + Playwright setup, CI integration
 - [ ] **Phase 3: Authentication** - GitHub OAuth with session persistence and admin detection
 - [ ] **Phase 4: Blog Core** - Blog listing, post pages, categories, search, SEO
@@ -26,15 +26,17 @@ This roadmap transforms the existing portfolio into a full-featured platform wit
 **Depends on**: Nothing (first phase)
 **Requirements**: THEME-01, THEME-02, THEME-03, THEME-04, THEME-05
 **Success Criteria** (what must be TRUE):
-  1. User can toggle between light and dark themes via a visible control in the header
+  1. User can toggle between light and dark themes via a visible control (floating button, bottom-left)
   2. Theme preference persists across browser sessions (refreshing or returning later keeps the chosen theme)
   3. First-time visitors see the theme matching their system preference
   4. Page loads without any flash of the wrong theme (no FOUC)
   5. All existing UI elements (sections, cards, navigation) display correctly in both themes
+**Foundation**: Radix UI + shadcn/ui installed and configured as first plan
 **Plans**: TBD
 
 Plans:
-- [ ] 01-01: TBD
+- [ ] 01-01: UI Foundation (shadcn/ui setup, theme provider, CSS variables)
+- [ ] 01-02: TBD (theme toggle implementation)
 
 ### Phase 2: Testing Infrastructure
 **Goal**: Establish testing patterns before building complex features

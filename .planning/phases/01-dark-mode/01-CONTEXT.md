@@ -8,7 +8,7 @@
 
 Theme toggle with persistence, system preference detection, no flash. Users can switch between light and dark themes with the preference persisting across sessions. First-time visitors see their system preference. All existing UI elements display correctly in both themes.
 
-**Note:** This phase depends on Phase 0 (UI Foundation) which installs shadcn/ui and configures the theme provider.
+**Foundation:** First plan installs Radix UI + shadcn/ui and configures theme provider before building the toggle.
 
 </domain>
 
@@ -63,7 +63,7 @@ Theme toggle with persistence, system preference detection, no flash. Users can 
 <deferred>
 ## Deferred Ideas
 
-- **Phase 0: UI Foundation** — Install Radix UI + shadcn/ui, configure theme provider. This should be inserted before Phase 1 as foundation for all milestone work.
+None — discussion stayed within phase scope. shadcn/ui foundation incorporated into Phase 1 as first plan.
 
 </deferred>
 
