@@ -7,10 +7,11 @@
   --foreground-rgb: 17, 17, 17;
   --background-rgb: 250, 250, 250;
   --radius: 0.625rem;
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
+  /* Light mode colors - user specified */
+  --background: oklch(1 0 0); /* white #ffffff */
+  --foreground: oklch(0.145 0 0); /* near-black #0a0a0a */
+  --card: oklch(1 0 0); /* white #ffffff */
+  --card-foreground: oklch(0.145 0 0); /* near-black #0a0a0a */
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.145 0 0);
   --primary: oklch(0.205 0 0);
@@ -18,11 +19,11 @@
   --secondary: oklch(0.97 0 0);
   --secondary-foreground: oklch(0.205 0 0);
   --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
+  --muted-foreground: oklch(0.556 0 0); /* gray-600 #525252 */
   --accent: oklch(0.97 0 0);
   --accent-foreground: oklch(0.205 0 0);
   --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
+  --border: oklch(0.922 0 0); /* neutral-200 #e5e5e5 */
   --input: oklch(0.922 0 0);
   --ring: oklch(0.708 0 0);
   --chart-1: oklch(0.646 0.222 41.116);
@@ -42,6 +43,26 @@
 
 * {
   box-sizing: border-box;
+}
+
+/* Theme transition - respect prefers-reduced-motion */
+@media (prefers-reduced-motion: no-preference) {
+  *,
+  *::before,
+  *::after {
+    transition-property: color, background-color, border-color, box-shadow;
+    transition-duration: 150ms;
+    transition-timing-function: ease-in-out;
+  }
+}
+
+/* Reduced motion: instant switch (user requirement) */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+  }
 }
 
 body {
@@ -191,6 +212,13 @@ h6 {
   background-size: 20px 20px;
 }
 
+/* Dark mode grid - lighter lines for visibility */
+.dark .subtle-grid {
+  background-image:
+    linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+}
+
 /* Minimal scrollbar - webkit only */
 @media (prefers-reduced-motion: no-preference) {
   ::-webkit-scrollbar {
@@ -273,22 +301,23 @@ h6 {
 }
 
 .dark {
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.205 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.205 0 0);
-  --popover-foreground: oklch(0.985 0 0);
+  /* Dark mode colors - user specified */
+  --background: oklch(0.145 0 0); /* dark gray #0a0a0a */
+  --foreground: oklch(0.9 0 0); /* off-white #e5e5e5 for reduced eye strain */
+  --card: oklch(0.21 0 0); /* elevated surface #1a1a1a */
+  --card-foreground: oklch(0.9 0 0); /* off-white #e5e5e5 */
+  --popover: oklch(0.21 0 0);
+  --popover-foreground: oklch(0.9 0 0);
   --primary: oklch(0.922 0 0);
   --primary-foreground: oklch(0.205 0 0);
   --secondary: oklch(0.269 0 0);
   --secondary-foreground: oklch(0.985 0 0);
   --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
+  --muted-foreground: oklch(0.7 0 0); /* gray-400 #a3a3a3 */
   --accent: oklch(0.269 0 0);
   --accent-foreground: oklch(0.985 0 0);
   --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(1 0 0 / 10%);
+  --border: oklch(0.269 0 0); /* neutral-800 #262626 */
   --input: oklch(1 0 0 / 15%);
   --ring: oklch(0.556 0 0);
   --chart-1: oklch(0.488 0.243 264.376);
@@ -304,6 +333,34 @@ h6 {
   --sidebar-accent-foreground: oklch(0.985 0 0);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.556 0 0);
+}
+
+/* Dark mode glow effect - replaces shadows with subtle glow */
+.dark .shadow-lg {
+  box-shadow: 0 0 20px 0 rgb(255 255 255 / 0.05);
+}
+
+.dark .hover-lift:hover {
+  box-shadow: 0 0 25px 0 rgb(255 255 255 / 0.08);
+}
+
+/* Dark mode image brightness adjustment - reduce eye strain */
+.dark img {
+  filter: brightness(0.85) contrast(1.15);
+}
+
+/* Dark mode scrollbar */
+.dark::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.dark::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* Dark mode focus outline */
+.dark :focus-visible {
+  outline-color: rgba(255, 255, 255, 0.4);
 }
 
 @layer base {
