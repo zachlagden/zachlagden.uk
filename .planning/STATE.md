@@ -9,19 +9,19 @@ See: .planning/PROJECT.md (updated 2026-01-21)
 
 ## Current Position
 
-Phase: 3 of 8 (Authentication) ✓ VERIFIED
-Plan: 5 of 5 in current phase (All complete)
-Status: Phase 3 complete, goal verified
-Last activity: 2026-01-21 - Phase 3 verified, all criteria met
+Phase: 4 of 8 (Blog Core)
+Plan: 1 of 5 in current phase (In progress)
+Status: Phase 4 in progress - blog infrastructure complete
+Last activity: 2026-01-21 - Completed 04-01-PLAN.md (Blog Infrastructure)
 
-Progress: [████------] ~38% milestone (3 of 8 phases complete)
+Progress: [████░-----] ~40% milestone (3 phases complete, 4th in progress)
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 12
-- Average duration: 6.2 min
-- Total execution time: 1.3 hours
+- Total plans completed: 13
+- Average duration: 6.3 min
+- Total execution time: 1.5 hours
 
 **By Phase:**
 
@@ -30,10 +30,11 @@ Progress: [████------] ~38% milestone (3 of 8 phases complete)
 | 01-dark-mode | 4 | 47min | 12min |
 | 02-testing-infrastructure | 3 | 11min | 3.7min |
 | 03-authentication | 5 | 24min | 4.8min |
+| 04-blog-core | 1 | 9min | 9min |
 
 **Recent Trend:**
-- Last 5 plans: 03-02 (3min), 03-03 (4min), 03-04 (3min), 03-05 (8min)
-- Trend: Consistent efficiency (avg 4.5min across last 4 plans)
+- Last 5 plans: 03-03 (4min), 03-04 (3min), 03-05 (8min), 04-01 (9min)
+- Trend: Consistent efficiency (avg 6min across last 4 plans)
 
 *Updated after each plan completion*
 
@@ -46,6 +47,10 @@ Recent decisions affecting current work:
 
 | Decision | Phase | Rationale |
 |----------|-------|-----------|
+| rehype-highlight for syntax highlighting | 04-01 | Integrates with rehype plugin pipeline, provides GitHub-style code blocks without additional complexity |
+| Compound text search index design | 04-01 | Equality conditions (published, categories) before text fields optimizes MongoDB query performance |
+| previous_slugs array for redirects | 04-01 | Enables redirect support when post slugs change, prevents 404s on bookmarked links |
+| Three-tier type system for Post | 04-01 | Post (DB schema), PostDocument (MongoDB ops), SerializedPost (API) for clear separation of concerns |
 | Manual verification checkpoint for full OAuth flow | 03-05 | Automated tests can't complete GitHub OAuth; human verification confirms end-to-end functionality |
 | Mock next-auth/react in component tests | 03-05 | OAuth requires browser interaction and external service; mocking enables isolated component testing |
 | E2E tests verify redirect initiation | 03-05 | Tests confirm OAuth redirect to GitHub but stop before completion (manual interaction required) |
@@ -105,7 +110,7 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-01-21T20:30:00Z
-Stopped at: Phase 3 verified complete
+Last session: 2026-01-21T21:50:03Z
+Stopped at: Completed 04-01-PLAN.md (Blog Infrastructure)
 Resume file: None
-Next: Phase 4 (Blog Core) - ready for planning
+Next: Continue Phase 4 - 04-02 (Blog Content Rendering)
