@@ -11,7 +11,7 @@ This roadmap transforms the existing portfolio into a full-featured platform wit
 - Decimal phases (2.1, 2.2): Urgent insertions (marked with INSERTED)
 
 - [x] **Phase 1: Dark Mode** - shadcn/ui foundation + theme toggle with persistence, system preference detection, no flash
-- [ ] **Phase 2: Testing Infrastructure** - Vitest + Playwright setup, CI integration
+- [x] **Phase 2: Testing Infrastructure** - Vitest + Playwright setup, CI integration
 - [ ] **Phase 3: Authentication** - GitHub OAuth with session persistence and admin detection
 - [ ] **Phase 4: Blog Core** - Blog listing, post pages, categories, search, SEO
 - [ ] **Phase 5: Blog Admin** - Rich editor, CRUD operations, drafts, publishing
@@ -52,9 +52,9 @@ Plans:
 **Plans**: 3 plans in 3 waves
 
 Plans:
-- [ ] 02-01-PLAN.md - Vitest Setup (install dependencies, vitest.config.ts, vitest.setup.ts, test-utils with custom render)
-- [ ] 02-02-PLAN.md - Unit + Component Tests (utility tests for cn/formatDate, component test for ThemeToggle)
-- [ ] 02-03-PLAN.md - Playwright + CI (E2E tests for navigation/theme, GitHub Actions workflow with fail-fast)
+- [x] 02-01-PLAN.md - Vitest Setup (install dependencies, vitest.config.ts, vitest.setup.ts, test-utils with custom render)
+- [x] 02-02-PLAN.md - Unit + Component Tests (utility tests for cn/formatDate, component test for ThemeToggle)
+- [x] 02-03-PLAN.md - Playwright + CI (E2E tests for navigation/theme, GitHub Actions workflow with fail-fast)
 
 ### Phase 3: Authentication
 **Goal**: Users can sign in with GitHub and admins can access protected functionality
@@ -159,7 +159,7 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7 -> 8
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Dark Mode | 4/4 | ✓ Complete | 2026-01-21 |
-| 2. Testing Infrastructure | 0/3 | Planned | - |
+| 2. Testing Infrastructure | 3/3 | ✓ Complete | 2026-01-21 |
 | 3. Authentication | 0/TBD | Not started | - |
 | 4. Blog Core | 0/TBD | Not started | - |
 | 5. Blog Admin | 0/TBD | Not started | - |

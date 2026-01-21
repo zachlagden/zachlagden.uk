@@ -88,10 +88,10 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Testing
 
-- [ ] **TEST-01**: Unit tests exist for utility functions
-- [ ] **TEST-02**: Component tests exist for key UI components
-- [ ] **TEST-03**: E2E tests cover critical user flows (auth, blog viewing)
-- [ ] **TEST-04**: Tests run in CI pipeline
+- [x] **TEST-01**: Unit tests exist for utility functions
+- [x] **TEST-02**: Component tests exist for key UI components
+- [x] **TEST-03**: E2E tests cover critical user flows (auth, blog viewing)
+- [x] **TEST-04**: Tests run in CI pipeline
 
 ### Content Refresh
 
@@ -189,10 +189,10 @@ Which phases cover which requirements. Updated during roadmap creation.
 | SEO-02 | Phase 4 | Pending |
 | SEO-03 | Phase 4 | Pending |
 | SEO-04 | Phase 4 | Pending |
-| TEST-01 | Phase 2 | Pending |
-| TEST-02 | Phase 2 | Pending |
-| TEST-03 | Phase 2 | Pending |
-| TEST-04 | Phase 2 | Pending |
+| TEST-01 | Phase 2 | ✓ Complete |
+| TEST-02 | Phase 2 | ✓ Complete |
+| TEST-03 | Phase 2 | ✓ Complete |
+| TEST-04 | Phase 2 | ✓ Complete |
 | CONTENT-01 | Phase 8 | Pending |
 | CONTENT-02 | Phase 8 | Pending |
 | CONTENT-03 | Phase 8 | Pending |
