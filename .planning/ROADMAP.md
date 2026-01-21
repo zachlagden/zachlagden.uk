@@ -87,10 +87,14 @@ Plans:
   5. Blog posts have working SEO (meta tags, OG images, structured data) verifiable via social share preview
   6. Blog generates an RSS feed at /blog/rss.xml that validates
   7. Long posts display an auto-generated table of contents
-**Plans**: TBD
+**Plans**: 5 plans in 5 waves
 
 Plans:
-- [ ] 04-01: TBD
+- [ ] 04-01-PLAN.md - Blog Infrastructure (MDX config, Post model, MongoDB indexes)
+- [ ] 04-02-PLAN.md - Blog Data Layer (post fetching, search, syntax highlighting)
+- [ ] 04-03-PLAN.md - Blog Listing (PostCard, search/filter components, /blog page)
+- [ ] 04-04-PLAN.md - Post Detail (content rendering, TOC, SEO metadata)
+- [ ] 04-05-PLAN.md - SEO & Verification (OG images, RSS feed, sitemap, manual verification)
 
 ### Phase 5: Blog Admin
 **Goal**: Admin can create, edit, and manage blog posts with a rich editor
@@ -165,7 +169,7 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7 -> 8
 | 1. Dark Mode | 4/4 | ✓ Complete | 2026-01-21 |
 | 2. Testing Infrastructure | 3/3 | ✓ Complete | 2026-01-21 |
 | 3. Authentication | 5/5 | ✓ Complete | 2026-01-21 |
-| 4. Blog Core | 0/TBD | Not started | - |
+| 4. Blog Core | 0/5 | Planned | - |
 | 5. Blog Admin | 0/TBD | Not started | - |
 | 6. Blog Engagement | 0/TBD | Not started | - |
 | 7. Projects Showcase | 0/TBD | Not started | - |
