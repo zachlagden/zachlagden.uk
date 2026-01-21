@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import SmoothScrollProvider from "@/components/providers/SmoothScrollProvider";
+import { ThemeProvider } from "@/components/providers/theme-provider";
 import { loadContentServer } from "@/utils/serverContentLoader";
 
 // Optimize font loading
@@ -92,7 +93,7 @@ export default async function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" dir="ltr" className={inter.variable}>
+    <html lang="en" dir="ltr" className={inter.variable} suppressHydrationWarning>
       <head>
         <link rel="manifest" href="/site.webmanifest" />
         {/* Add preload for fonts and critical assets */}
@@ -109,8 +110,15 @@ export default async function RootLayout({
         {/* Preload CV for faster download */}
         <link rel="prefetch" href="/Zach_Lagden_CV.pdf" as="document" />
       </head>
-      <body className={`${inter.className} bg-neutral-50 min-h-screen`}>
-        <SmoothScrollProvider>{children}</SmoothScrollProvider>
+      <body className={`${inter.className} bg-white dark:bg-[#0a0a0a] min-h-screen`}>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange={false}
+        >
+          <SmoothScrollProvider>{children}</SmoothScrollProvider>
+        </ThemeProvider>
       </body>
       <GoogleAnalytics
         gaId={(await loadContentServer()).metadata.googleAnalyticsId}
