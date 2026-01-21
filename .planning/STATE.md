@@ -9,29 +9,30 @@ See: .planning/PROJECT.md (updated 2026-01-21)
 
 ## Current Position
 
-Phase: 1 of 8 (Dark Mode) ✓ VERIFIED
-Plan: 4 of 4 in current phase (All complete)
-Status: Phase 1 complete, goal verified
-Last activity: 2026-01-21 - Phase 1 verified, all gaps closed
+Phase: 2 of 8 (Testing Infrastructure)
+Plan: 1 of 3 in current phase
+Status: In progress
+Last activity: 2026-01-21 - Completed 02-01-PLAN.md
 
-Progress: [█---------] ~12% milestone (1 of 8 phases complete)
+Progress: [███-------] ~71% milestone (5 of 7 plans complete)
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 4
-- Average duration: 12 min
-- Total execution time: 0.8 hours
+- Total plans completed: 5
+- Average duration: 10 min
+- Total execution time: 0.9 hours
 
 **By Phase:**
 
 | Phase | Plans | Total | Avg/Plan |
 |-------|-------|-------|----------|
 | 01-dark-mode | 4 | 47min | 12min |
+| 02-testing-infrastructure | 1 | 3min | 3min |
 
 **Recent Trend:**
-- Last 5 plans: 01-01 (12min), 01-02 (18min), 01-03 (12min), 01-04 (5min)
-- Trend: Improving efficiency (5min last plan)
+- Last 5 plans: 01-02 (18min), 01-03 (12min), 01-04 (5min), 02-01 (3min)
+- Trend: Excellent efficiency (3min last plan)
 
 *Updated after each plan completion*
 
@@ -44,6 +45,11 @@ Recent decisions affecting current work:
 
 | Decision | Phase | Rationale |
 |----------|-------|-----------|
+| Use .tsx extension for vitest.setup file | 02-01 | JSX syntax requires TSX extension for proper compilation |
+| Mock Framer Motion globally in setup | 02-01 | Prevents animation timeouts that cause test hangs |
+| Mock Lenis globally in setup | 02-01 | Smooth scroll library not needed in test environment |
+| Custom render wraps ThemeProvider | 02-01 | Most components depend on theme context for dark mode |
+| test script runs watch mode by default | 02-01 | Aligns with development workflow, test:unit for CI |
 | Removed hardcoded color prop from ScrollProgress | 01-04 | Simplified API by using Tailwind dark: classes instead of inline styles |
 | ScrollProgress uses inverted colors | 01-04 | Dark bar on light background, light bar on dark background for optimal visibility |
 | Filter buttons use neutral-800 dark background | 01-04 | Ensures buttons stand out from page background (#0a0a0a) |
@@ -74,7 +80,7 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-01-21T05:33:03Z
-Stopped at: Completed 01-04-PLAN.md (Gap Closure)
+Last session: 2026-01-21T17:56:27Z
+Stopped at: Completed 02-01-PLAN.md (Testing Infrastructure Setup)
 Resume file: None
-Next: Phase 1 (Dark Mode) complete - ready for Phase 2
+Next: Ready for 02-02 or next phase plan
