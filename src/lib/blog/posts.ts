@@ -27,7 +27,13 @@ export async function getPublishedPosts(options?: {
   const db = client.db(DB_NAME)
   const collection = db.collection<Post>(COLLECTION)
 
-  const filter: any = { published: true }
+  interface Filter {
+    published: boolean
+    categories?: { $in: string[] }
+    tags?: { $in: string[] }
+  }
+
+  const filter: Filter = { published: true }
 
   if (options?.categories?.length) {
     filter.categories = { $in: options.categories }

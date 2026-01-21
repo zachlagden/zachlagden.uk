@@ -19,7 +19,14 @@ export async function searchPosts(options: SearchOptions): Promise<SerializedPos
   const db = client.db(DB_NAME)
   const collection = db.collection<Post>(COLLECTION)
 
-  const filter: any = { published: true }
+  interface Filter {
+    published: boolean
+    $text?: { $search: string }
+    categories?: { $in: string[] }
+    tags?: { $in: string[] }
+  }
+
+  const filter: Filter = { published: true }
 
   // Add text search if query provided
   if (options.query?.trim()) {
@@ -42,7 +49,8 @@ export async function searchPosts(options: SearchOptions): Promise<SerializedPos
     : {}
 
   // Build sort criteria - text score if searching, otherwise date
-  const sort: any = options.query?.trim()
+  type SortCriteria = { publishedAt: -1 } | { score: { $meta: string }, publishedAt: -1 }
+  const sort: SortCriteria = options.query?.trim()
     ? { score: { $meta: "textScore" }, publishedAt: -1 }
     : { publishedAt: -1 }
 
