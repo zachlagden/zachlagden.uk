@@ -1,6 +1,10 @@
 import { Feed } from 'feed'
 import { getPublishedPosts } from '@/lib/blog/posts'
 
+// Force dynamic rendering - RSS feed content comes from database
+export const dynamic = 'force-dynamic'
+export const revalidate = 3600 // Revalidate every hour
+
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://zachlagden.uk'
 const SITE_NAME = 'Zach Lagden'
 const SITE_DESCRIPTION = 'Technical articles about web development, TypeScript, React, and more.'

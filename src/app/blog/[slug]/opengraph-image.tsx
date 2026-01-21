@@ -1,7 +1,8 @@
 import { ImageResponse } from 'next/og'
 import { getPostBySlug } from '@/lib/blog/posts'
 
-export const runtime = 'edge'
+// Note: Removed 'edge' runtime due to reading-time package incompatibility
+// OG images will use Node.js runtime
 export const alt = 'Blog post cover'
 export const size = { width: 1200, height: 630 }
 export const contentType = 'image/png'
