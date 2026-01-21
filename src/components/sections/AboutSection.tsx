@@ -24,7 +24,7 @@ const AboutSection = React.forwardRef<HTMLElement, AboutSectionProps>(
         <div className="grid grid-cols-1 gap-8">
           <div className="space-y-8">
             <motion.div
-              className="text-neutral-800 leading-relaxed"
+              className="text-neutral-800 dark:text-[#e5e5e5] leading-relaxed"
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}

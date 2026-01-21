@@ -43,7 +43,7 @@ const ExperienceSection = React.forwardRef<HTMLElement, ExperienceSectionProps>(
                 {experience.skills.map((skill, i) => (
                   <span
                     key={i}
-                    className="text-xs py-1 px-3 bg-neutral-100 rounded-full"
+                    className="text-xs py-1 px-3 bg-neutral-100 dark:bg-neutral-800 rounded-full"
                   >
                     {skill}
                   </span>
