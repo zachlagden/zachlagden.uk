@@ -41,7 +41,7 @@ const Navigation: React.FC<NavigationProps> = ({
       className="fixed top-1/2 -translate-y-1/2 left-8 z-40 hidden lg:block"
     >
       <motion.div
-        className="flex flex-col space-y-6 p-3 bg-white/90 backdrop-blur-sm rounded-full shadow-md"
+        className="flex flex-col space-y-6 p-3 bg-white/90 dark:bg-[#0a0a0a]/90 backdrop-blur-sm rounded-full shadow-md dark:shadow-[0_0_20px_0_rgb(255_255_255/0.05)]"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{

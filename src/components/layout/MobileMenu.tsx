@@ -48,7 +48,7 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
     <>
       {/* Mobile Menu Button */}
       <button
-        className="fixed top-4 right-4 z-40 p-3 bg-white rounded-full shadow-md lg:hidden focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-2"
+        className="fixed top-4 right-4 z-40 p-3 bg-white dark:bg-[#0a0a0a] rounded-full shadow-md dark:shadow-[0_0_20px_0_rgb(255_255_255/0.05)] lg:hidden focus:outline-none focus:ring-2 focus:ring-black dark:focus:ring-white focus:ring-offset-2"
         onClick={() => setIsOpen(true)}
         aria-label="Open menu"
         aria-expanded={isOpen}
@@ -61,19 +61,19 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            className="fixed inset-0 bg-white z-50 lg:hidden"
+            className="fixed inset-0 bg-white dark:bg-[#0a0a0a] z-50 lg:hidden"
             initial={{ x: "100%" }}
             animate={{ x: 0 }}
             exit={{ x: "100%" }}
             transition={{ type: "spring", damping: 30 }}
             id="mobile-menu"
           >
-            <div className="flex justify-between items-center p-6 border-b">
+            <div className="flex justify-between items-center p-6 border-b border-neutral-200 dark:border-neutral-700">
               <span className="text-xl font-bold">Menu</span>
               <button
                 onClick={() => setIsOpen(false)}
                 aria-label="Close menu"
-                className="p-2 focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-2"
+                className="p-2 focus:outline-none focus:ring-2 focus:ring-black dark:focus:ring-white focus:ring-offset-2"
               >
                 <X className="w-6 h-6" />
               </button>
@@ -86,10 +86,10 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
                     scrollToSection(item.id);
                     setIsOpen(false);
                   }}
-                  className={`flex items-center gap-3 w-full p-3 focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-2 rounded-lg ${
+                  className={`flex items-center gap-3 w-full p-3 focus:outline-none focus:ring-2 focus:ring-black dark:focus:ring-white focus:ring-offset-2 rounded-lg ${
                     activeSection === item.id
-                      ? "text-neutral-900 bg-neutral-100"
-                      : "text-neutral-500"
+                      ? "text-neutral-900 dark:text-[#e5e5e5] bg-neutral-100 dark:bg-neutral-800"
+                      : "text-neutral-500 dark:text-neutral-400"
                   }`}
                 >
                   {iconMap[item.id]}

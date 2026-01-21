@@ -39,7 +39,7 @@ const Header: React.FC<HeaderProps> = ({
     >
       <div className="absolute inset-0 overflow-hidden">
         <motion.div
-          className="absolute top-0 left-0 right-0 h-1/2 bg-gradient-to-b from-neutral-900/5 to-transparent"
+          className="absolute top-0 left-0 right-0 h-1/2 bg-gradient-to-b from-neutral-900/5 dark:from-white/5 to-transparent"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: prefersReducedMotion ? 0.1 : 1 }}
@@ -70,7 +70,7 @@ const Header: React.FC<HeaderProps> = ({
         <AnimatedText
           text={content.personal.title}
           el="p"
-          className="text-xl sm:text-2xl text-neutral-600 mb-2 font-light tracking-wide"
+          className="text-xl sm:text-2xl text-neutral-600 dark:text-neutral-400 mb-2 font-light tracking-wide"
           delay={0.8}
           duration={0.6}
           sequential={true}
@@ -85,7 +85,7 @@ const Header: React.FC<HeaderProps> = ({
             duration: prefersReducedMotion ? 0.1 : 0.8,
           }}
         >
-          <div className="flex items-center hover:text-neutral-800 text-neutral-500 transition-colors focus-within:outline-none focus-within:ring-2 focus-within:ring-black focus-within:ring-offset-2 rounded-lg px-2 py-1">
+          <div className="flex items-center hover:text-neutral-800 dark:hover:text-white text-neutral-500 dark:text-neutral-400 transition-colors focus-within:outline-none focus-within:ring-2 focus-within:ring-black dark:focus-within:ring-white focus-within:ring-offset-2 rounded-lg px-2 py-1">
             <a
               href={`mailto:${content.personal.email}`}
               className="flex items-center gap-2"
@@ -98,14 +98,14 @@ const Header: React.FC<HeaderProps> = ({
             </a>
             <CopyButton textToCopy={content.personal.email} size="sm" />
           </div>
-          <span className="hidden sm:block text-neutral-300" aria-hidden="true">
+          <span className="hidden sm:block text-neutral-300 dark:text-neutral-600" aria-hidden="true">
             •
           </span>
           <a
             href={content.personal.locationMapUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-2 hover:text-neutral-800 text-neutral-500 transition-colors focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-2 rounded-lg px-2 py-1"
+            className="flex items-center gap-2 hover:text-neutral-800 dark:hover:text-white text-neutral-500 dark:text-neutral-400 transition-colors focus:outline-none focus:ring-2 focus:ring-black dark:focus:ring-white focus:ring-offset-2 rounded-lg px-2 py-1"
             aria-label={`Location: ${content.personal.location} (opens Google Maps)`}
           >
             <MapPin className="w-4 h-4" aria-hidden="true" />
@@ -178,7 +178,7 @@ const Header: React.FC<HeaderProps> = ({
             ease: "easeInOut",
           }}
         >
-          <div className="absolute inset-0 bg-gradient-to-b from-neutral-300 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-b from-neutral-300 dark:from-neutral-600 to-transparent" />
         </motion.div>
       </motion.div>
     </motion.header>
