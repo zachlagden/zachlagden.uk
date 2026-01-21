@@ -10,29 +10,29 @@ See: .planning/PROJECT.md (updated 2026-01-21)
 ## Current Position
 
 Phase: 2 of 8 (Testing Infrastructure)
-Plan: 2 of 3 in current phase
-Status: In progress
-Last activity: 2026-01-21 - Completed 02-02-PLAN.md
+Plan: 3 of 3 in current phase
+Status: Phase complete
+Last activity: 2026-01-21 - Completed 02-03-PLAN.md
 
-Progress: [███-------] ~86% milestone (6 of 7 plans complete)
+Progress: [███-------] 100% phase 2 complete (7 of 7 plans complete)
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 6
+- Total plans completed: 7
 - Average duration: 8 min
-- Total execution time: 0.9 hours
+- Total execution time: 1.0 hours
 
 **By Phase:**
 
 | Phase | Plans | Total | Avg/Plan |
 |-------|-------|-------|----------|
 | 01-dark-mode | 4 | 47min | 12min |
-| 02-testing-infrastructure | 2 | 5min | 2.5min |
+| 02-testing-infrastructure | 3 | 11min | 3.7min |
 
 **Recent Trend:**
-- Last 5 plans: 01-03 (12min), 01-04 (5min), 02-01 (3min), 02-02 (2min)
-- Trend: Excellent efficiency (2min last plan)
+- Last 5 plans: 01-04 (5min), 02-01 (3min), 02-02 (2min), 02-03 (6min)
+- Trend: Strong efficiency (avg 4min across phase 2)
 
 *Updated after each plan completion*
 
@@ -45,6 +45,10 @@ Recent decisions affecting current work:
 
 | Decision | Phase | Rationale |
 |----------|-------|-----------|
+| Chromium-only for E2E tests | 02-03 | Fast CI, covers most users; per CONTEXT.md decision |
+| Fail-fast CI pattern (unit → E2E) | 02-03 | Skip expensive E2E tests if unit tests fail |
+| Playwright webServer auto-starts dev | 02-03 | DX improvement - no manual server startup needed |
+| Playwright reports only on failure | 02-03 | Save storage costs, reports only needed for debugging |
 | Mock ResizeObserver globally in setup | 02-02 | Radix UI components require ResizeObserver which isn't in jsdom |
 | Mock entire next-themes module for tests | 02-02 | Testing component behavior, not next-themes implementation; bypasses localStorage/hydration issues |
 | Co-located test files next to source | 02-02 | Improves discoverability, follows Vitest convention |
@@ -83,7 +87,7 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-01-21T18:02:24Z
-Stopped at: Completed 02-02-PLAN.md (Unit & Component Tests)
+Last session: 2026-01-21T18:10:45Z
+Stopped at: Completed 02-03-PLAN.md (E2E Testing & CI) - Phase 2 complete
 Resume file: None
-Next: Ready for 02-03 or next phase plan
+Next: Ready for Phase 3 (Blog Design) or next phase planning
