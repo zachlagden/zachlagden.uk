@@ -49,10 +49,12 @@ Plans:
   2. Running `pnpm test` executes component tests for key UI components
   3. Running `pnpm test:e2e` executes end-to-end tests
   4. Tests run automatically in CI pipeline on every push/PR
-**Plans**: TBD
+**Plans**: 3 plans in 3 waves
 
 Plans:
-- [ ] 02-01: TBD
+- [ ] 02-01-PLAN.md - Vitest Setup (install dependencies, vitest.config.ts, vitest.setup.ts, test-utils with custom render)
+- [ ] 02-02-PLAN.md - Unit + Component Tests (utility tests for cn/formatDate, component test for ThemeToggle)
+- [ ] 02-03-PLAN.md - Playwright + CI (E2E tests for navigation/theme, GitHub Actions workflow with fail-fast)
 
 ### Phase 3: Authentication
 **Goal**: Users can sign in with GitHub and admins can access protected functionality
@@ -157,7 +159,7 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7 -> 8
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Dark Mode | 4/4 | ✓ Complete | 2026-01-21 |
-| 2. Testing Infrastructure | 0/TBD | Not started | - |
+| 2. Testing Infrastructure | 0/3 | Planned | - |
 | 3. Authentication | 0/TBD | Not started | - |
 | 4. Blog Core | 0/TBD | Not started | - |
 | 5. Blog Admin | 0/TBD | Not started | - |
