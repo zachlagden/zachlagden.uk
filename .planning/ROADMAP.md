@@ -32,11 +32,12 @@ This roadmap transforms the existing portfolio into a full-featured platform wit
   4. Page loads without any flash of the wrong theme (no FOUC)
   5. All existing UI elements (sections, cards, navigation) display correctly in both themes
 **Foundation**: Radix UI + shadcn/ui installed and configured as first plan
-**Plans**: TBD
+**Plans**: 3 plans in 2 waves
 
 Plans:
-- [ ] 01-01: UI Foundation (shadcn/ui setup, theme provider, CSS variables)
-- [ ] 01-02: TBD (theme toggle implementation)
+- [ ] 01-01-PLAN.md - UI Foundation (shadcn/ui setup, next-themes, ThemeProvider, CSS variables)
+- [ ] 01-02-PLAN.md - Theme Toggle (iOS-style floating toggle with glass effect)
+- [ ] 01-03-PLAN.md - Dark Mode Styles (update all existing components with dark: variants)
 
 ### Phase 2: Testing Infrastructure
 **Goal**: Establish testing patterns before building complex features
@@ -154,7 +155,7 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7 -> 8
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Dark Mode | 0/TBD | Not started | - |
+| 1. Dark Mode | 0/3 | Planned | - |
 | 2. Testing Infrastructure | 0/TBD | Not started | - |
 | 3. Authentication | 0/TBD | Not started | - |
 | 4. Blog Core | 0/TBD | Not started | - |
