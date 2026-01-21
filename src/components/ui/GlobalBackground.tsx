@@ -12,7 +12,7 @@ const GlobalBackground: React.FC<GlobalBackgroundProps> = ({
 }) => {
   return (
     <motion.div
-      className="fixed inset-0 pointer-events-none z-0 overflow-hidden text-neutral-900"
+      className="fixed inset-0 pointer-events-none z-0 overflow-hidden text-neutral-900 dark:text-neutral-100"
       initial={{ opacity: 0 }}
       animate={{ opacity }}
       transition={{ duration: 1.5 }}

@@ -60,7 +60,7 @@ const TimelineItem: React.FC<TimelineItemProps> = ({
               href={companyLink}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-blue-600 text-sm hover:text-blue-800 transition-colors flex items-center gap-1 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded"
+              className="text-blue-600 dark:text-blue-400 text-sm hover:text-blue-800 dark:hover:text-blue-300 transition-colors flex items-center gap-1 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded"
               whileHover="hover"
               variants={hoverAnimation}
             >
@@ -68,14 +68,14 @@ const TimelineItem: React.FC<TimelineItemProps> = ({
               <Link className="w-3 h-3" aria-hidden="true" />
             </motion.a>
           ) : (
-            <p className="text-blue-600 text-sm">{company}</p>
+            <p className="text-blue-600 dark:text-blue-400 text-sm">{company}</p>
           )}
           <div className="mt-1 space-y-1">
-            <p className="text-neutral-500 text-sm">
+            <p className="text-neutral-500 dark:text-neutral-400 text-sm">
               <time dateTime={date.split(" - ")[0]}>{date}</time>
             </p>
             {location && (
-              <p className="text-neutral-400 text-xs block">{location}</p>
+              <p className="text-neutral-400 dark:text-neutral-500 text-xs block">{location}</p>
             )}
           </div>
         </div>
@@ -87,7 +87,7 @@ const TimelineItem: React.FC<TimelineItemProps> = ({
             transition: { duration: 0.3 },
           }}
         >
-          <div className="prose prose-sm max-w-none text-neutral-600">
+          <div className="prose prose-sm max-w-none text-neutral-600 dark:text-neutral-400">
             {children}
           </div>
         </motion.div>

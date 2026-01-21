@@ -18,7 +18,7 @@ const ScrollToTopButton: React.FC<ScrollToTopButtonProps> = ({ visible }) => {
       {visible && (
         <motion.button
           onClick={scrollToTop}
-          className="fixed bottom-8 right-8 p-3 bg-black text-white rounded-full shadow-lg z-50 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-black"
+          className="fixed bottom-8 right-8 p-3 bg-black dark:bg-white text-white dark:text-black rounded-full shadow-lg dark:shadow-[0_0_20px_0_rgb(255_255_255/0.05)] z-50 focus:outline-none focus:ring-2 focus:ring-white dark:focus:ring-black focus:ring-offset-2 focus:ring-offset-black dark:focus:ring-offset-[#0a0a0a]"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: 20 }}

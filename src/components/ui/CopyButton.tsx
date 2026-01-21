@@ -33,7 +33,7 @@ const CopyButton: React.FC<CopyButtonProps> = ({
   return (
     <motion.button
       onClick={handleCopy}
-      className={`ml-1 text-neutral-400 hover:text-neutral-700 focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-2 rounded ${className}`}
+      className={`ml-1 text-neutral-400 hover:text-neutral-700 dark:hover:text-neutral-300 focus:outline-none focus:ring-2 focus:ring-black dark:focus:ring-white focus:ring-offset-2 rounded ${className}`}
       whileHover={{ scale: 1.1 }}
       whileTap={{ scale: 0.9 }}
       initial={{ opacity: 0.8 }}
