@@ -60,3 +60,10 @@ Object.defineProperty(window, 'lenis', {
   },
   writable: true,
 })
+
+// Mock ResizeObserver (required by Radix UI components like Tooltip)
+global.ResizeObserver = vi.fn().mockImplementation(() => ({
+  observe: vi.fn(),
+  unobserve: vi.fn(),
+  disconnect: vi.fn(),
+}))
