@@ -10,17 +10,17 @@ See: .planning/PROJECT.md (updated 2026-01-21)
 ## Current Position
 
 Phase: 2 of 8 (Testing Infrastructure)
-Plan: 1 of 3 in current phase
+Plan: 2 of 3 in current phase
 Status: In progress
-Last activity: 2026-01-21 - Completed 02-01-PLAN.md
+Last activity: 2026-01-21 - Completed 02-02-PLAN.md
 
-Progress: [███-------] ~71% milestone (5 of 7 plans complete)
+Progress: [███-------] ~86% milestone (6 of 7 plans complete)
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 5
-- Average duration: 10 min
+- Total plans completed: 6
+- Average duration: 8 min
 - Total execution time: 0.9 hours
 
 **By Phase:**
@@ -28,11 +28,11 @@ Progress: [███-------] ~71% milestone (5 of 7 plans complete)
 | Phase | Plans | Total | Avg/Plan |
 |-------|-------|-------|----------|
 | 01-dark-mode | 4 | 47min | 12min |
-| 02-testing-infrastructure | 1 | 3min | 3min |
+| 02-testing-infrastructure | 2 | 5min | 2.5min |
 
 **Recent Trend:**
-- Last 5 plans: 01-02 (18min), 01-03 (12min), 01-04 (5min), 02-01 (3min)
-- Trend: Excellent efficiency (3min last plan)
+- Last 5 plans: 01-03 (12min), 01-04 (5min), 02-01 (3min), 02-02 (2min)
+- Trend: Excellent efficiency (2min last plan)
 
 *Updated after each plan completion*
 
@@ -45,6 +45,9 @@ Recent decisions affecting current work:
 
 | Decision | Phase | Rationale |
 |----------|-------|-----------|
+| Mock ResizeObserver globally in setup | 02-02 | Radix UI components require ResizeObserver which isn't in jsdom |
+| Mock entire next-themes module for tests | 02-02 | Testing component behavior, not next-themes implementation; bypasses localStorage/hydration issues |
+| Co-located test files next to source | 02-02 | Improves discoverability, follows Vitest convention |
 | Use .tsx extension for vitest.setup file | 02-01 | JSX syntax requires TSX extension for proper compilation |
 | Mock Framer Motion globally in setup | 02-01 | Prevents animation timeouts that cause test hangs |
 | Mock Lenis globally in setup | 02-01 | Smooth scroll library not needed in test environment |
@@ -80,7 +83,7 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-01-21T17:56:27Z
-Stopped at: Completed 02-01-PLAN.md (Testing Infrastructure Setup)
+Last session: 2026-01-21T18:02:24Z
+Stopped at: Completed 02-02-PLAN.md (Unit & Component Tests)
 Resume file: None
-Next: Ready for 02-02 or next phase plan
+Next: Ready for 02-03 or next phase plan
