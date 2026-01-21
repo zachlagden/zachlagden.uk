@@ -122,9 +122,9 @@ export default async function RootLayout({
         >
           <SessionProvider>
             <SmoothScrollProvider>{children}</SmoothScrollProvider>
+            <ThemeToggle />
+            <AuthStatus />
           </SessionProvider>
-          <ThemeToggle />
-          <AuthStatus />
         </ThemeProvider>
       </body>
       <GoogleAnalytics
