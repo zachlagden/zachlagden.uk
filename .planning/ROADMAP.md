@@ -12,7 +12,7 @@ This roadmap transforms the existing portfolio into a full-featured platform wit
 
 - [x] **Phase 1: Dark Mode** - shadcn/ui foundation + theme toggle with persistence, system preference detection, no flash
 - [x] **Phase 2: Testing Infrastructure** - Vitest + Playwright setup, CI integration
-- [ ] **Phase 3: Authentication** - GitHub OAuth with session persistence and admin detection
+- [x] **Phase 3: Authentication** - GitHub OAuth with session persistence and admin detection
 - [ ] **Phase 4: Blog Core** - Blog listing, post pages, categories, search, SEO
 - [ ] **Phase 5: Blog Admin** - Rich editor, CRUD operations, drafts, publishing
 - [ ] **Phase 6: Blog Engagement** - Comments, reactions, moderation, related posts
@@ -69,11 +69,11 @@ Plans:
 **Plans**: 5 plans in 5 waves
 
 Plans:
-- [ ] 03-01-PLAN.md - Auth Infrastructure (Auth.js v5, MongoDB adapter, GitHub provider, type extensions)
-- [ ] 03-02-PLAN.md - Session Integration (SessionProvider wrapper, layout integration)
-- [ ] 03-03-PLAN.md - Auth UI Components (SignInButton, UserMenu with dropdown, AuthStatus wrapper)
-- [ ] 03-04-PLAN.md - Protected Routes & Admin (middleware, DAL, session API, AdminFAB, 403 page)
-- [ ] 03-05-PLAN.md - Auth Testing & Verification (component tests, E2E tests, manual verification checkpoint)
+- [x] 03-01-PLAN.md - Auth Infrastructure (Auth.js v5, MongoDB adapter, GitHub provider, type extensions)
+- [x] 03-02-PLAN.md - Session Integration (SessionProvider wrapper, layout integration)
+- [x] 03-03-PLAN.md - Auth UI Components (SignInButton, UserMenu with dropdown, AuthStatus wrapper)
+- [x] 03-04-PLAN.md - Protected Routes & Admin (middleware, DAL, session API, AdminFAB, 403 page)
+- [x] 03-05-PLAN.md - Auth Testing & Verification (component tests, E2E tests, manual verification checkpoint)
 
 ### Phase 4: Blog Core
 **Goal**: Users can browse and read published blog posts with full SEO support
@@ -164,7 +164,7 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7 -> 8
 |-------|----------------|--------|-----------|
 | 1. Dark Mode | 4/4 | ✓ Complete | 2026-01-21 |
 | 2. Testing Infrastructure | 3/3 | ✓ Complete | 2026-01-21 |
-| 3. Authentication | 0/5 | Planned | - |
+| 3. Authentication | 5/5 | ✓ Complete | 2026-01-21 |
 | 4. Blog Core | 0/TBD | Not started | - |
 | 5. Blog Admin | 0/TBD | Not started | - |
 | 6. Blog Engagement | 0/TBD | Not started | - |

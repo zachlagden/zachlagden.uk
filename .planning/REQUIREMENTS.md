@@ -17,11 +17,11 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Authentication
 
-- [ ] **AUTH-01**: User can sign in with GitHub OAuth
-- [ ] **AUTH-02**: Session persists across page navigation and browser refresh
-- [ ] **AUTH-03**: Admin user (zachlagden) sees admin UI when logged in
-- [ ] **AUTH-04**: Non-admin users can log in (for commenting/reactions)
-- [ ] **AUTH-05**: Protected routes redirect unauthenticated users to login
+- [x] **AUTH-01**: User can sign in with GitHub OAuth
+- [x] **AUTH-02**: Session persists across page navigation and browser refresh
+- [x] **AUTH-03**: Admin user (zachlagden) sees admin UI when logged in
+- [x] **AUTH-04**: Non-admin users can log in (for commenting/reactions)
+- [x] **AUTH-05**: Protected routes redirect unauthenticated users to login
 
 ### Blog Core
 
@@ -142,11 +142,11 @@ Which phases cover which requirements. Updated during roadmap creation.
 | THEME-03 | Phase 1 | ✓ Complete |
 | THEME-04 | Phase 1 | ✓ Complete |
 | THEME-05 | Phase 1 | ✓ Complete |
-| AUTH-01 | Phase 3 | Pending |
-| AUTH-02 | Phase 3 | Pending |
-| AUTH-03 | Phase 3 | Pending |
-| AUTH-04 | Phase 3 | Pending |
-| AUTH-05 | Phase 3 | Pending |
+| AUTH-01 | Phase 3 | ✓ Complete |
+| AUTH-02 | Phase 3 | ✓ Complete |
+| AUTH-03 | Phase 3 | ✓ Complete |
+| AUTH-04 | Phase 3 | ✓ Complete |
+| AUTH-05 | Phase 3 | ✓ Complete |
 | BLOG-01 | Phase 4 | Pending |
 | BLOG-02 | Phase 4 | Pending |
 | BLOG-03 | Phase 4 | Pending |
