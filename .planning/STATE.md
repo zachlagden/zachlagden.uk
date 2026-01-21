@@ -10,28 +10,28 @@ See: .planning/PROJECT.md (updated 2026-01-21)
 ## Current Position
 
 Phase: 1 of 8 (Dark Mode)
-Plan: 2 of 3 in current phase (Wave 2 complete)
-Status: In progress
-Last activity: 2026-01-21 - Completed 01-02-PLAN.md (Toggle Component)
+Plan: 4 of 4 in current phase (Phase complete)
+Status: Phase 1 complete
+Last activity: 2026-01-21 - Completed 01-04-PLAN.md (Gap Closure)
 
-Progress: [███-------] ~30% (estimate based on Phase 1 progress)
+Progress: [████------] 100% Phase 1 (4/4 plans)
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 2
-- Average duration: 15 min
-- Total execution time: 0.5 hours
+- Total plans completed: 4
+- Average duration: 12 min
+- Total execution time: 0.8 hours
 
 **By Phase:**
 
 | Phase | Plans | Total | Avg/Plan |
 |-------|-------|-------|----------|
-| 01-dark-mode | 2 | 30min | 15min |
+| 01-dark-mode | 4 | 47min | 12min |
 
 **Recent Trend:**
-- Last 5 plans: 01-01 (12min), 01-02 (18min)
-- Trend: Average 15min/plan
+- Last 5 plans: 01-01 (12min), 01-02 (18min), 01-03 (12min), 01-04 (5min)
+- Trend: Improving efficiency (5min last plan)
 
 *Updated after each plan completion*
 
@@ -44,6 +44,10 @@ Recent decisions affecting current work:
 
 | Decision | Phase | Rationale |
 |----------|-------|-----------|
+| Removed hardcoded color prop from ScrollProgress | 01-04 | Simplified API by using Tailwind dark: classes instead of inline styles |
+| ScrollProgress uses inverted colors | 01-04 | Dark bar on light background, light bar on dark background for optimal visibility |
+| Filter buttons use neutral-800 dark background | 01-04 | Ensures buttons stand out from page background (#0a0a0a) |
+| Presence indicator text hierarchy | 01-04 | Container (neutral-500/400), links (neutral-400/500), hover (lighter) for consistent readability |
 | Custom iOS-style switch instead of shadcn/ui Switch | 01-02 | Precise control over visual appearance while maintaining accessibility via ARIA |
 | Glass effect design for toggle container | 01-02 | backdrop-blur-md with semi-transparent backgrounds creates modern, premium aesthetic |
 | Fixed bottom-left positioning for toggle | 01-02 | Consistent location (bottom-6 left-6 z-50) makes toggle easy to find across all pages |
@@ -70,7 +74,7 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-01-21T05:05:55Z
-Stopped at: Completed 01-02-PLAN.md (Toggle Component)
+Last session: 2026-01-21T05:33:03Z
+Stopped at: Completed 01-04-PLAN.md (Gap Closure)
 Resume file: None
-Next: Phase 1 complete - all dark mode features implemented
+Next: Phase 1 (Dark Mode) complete - ready for Phase 2
