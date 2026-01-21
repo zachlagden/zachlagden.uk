@@ -10,18 +10,18 @@ See: .planning/PROJECT.md (updated 2026-01-21)
 ## Current Position
 
 Phase: 4 of 8 (Blog Core)
-Plan: 1 of 5 in current phase (In progress)
-Status: Phase 4 in progress - blog infrastructure complete
-Last activity: 2026-01-21 - Completed 04-01-PLAN.md (Blog Infrastructure)
+Plan: 2 of 5 in current phase (In progress)
+Status: Phase 4 in progress - data layer and rendering complete
+Last activity: 2026-01-21 - Completed 04-02-PLAN.md (Blog Data Layer & Code Highlighting)
 
-Progress: [████░-----] ~40% milestone (3 phases complete, 4th in progress)
+Progress: [████░-----] ~43% milestone (3 phases complete, 4th in progress)
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 13
-- Average duration: 6.3 min
-- Total execution time: 1.5 hours
+- Total plans completed: 14
+- Average duration: 6.1 min
+- Total execution time: 1.6 hours
 
 **By Phase:**
 
@@ -30,11 +30,11 @@ Progress: [████░-----] ~40% milestone (3 phases complete, 4th in progr
 | 01-dark-mode | 4 | 47min | 12min |
 | 02-testing-infrastructure | 3 | 11min | 3.7min |
 | 03-authentication | 5 | 24min | 4.8min |
-| 04-blog-core | 1 | 9min | 9min |
+| 04-blog-core | 2 | 17min | 8.5min |
 
 **Recent Trend:**
-- Last 5 plans: 03-03 (4min), 03-04 (3min), 03-05 (8min), 04-01 (9min)
-- Trend: Consistent efficiency (avg 6min across last 4 plans)
+- Last 5 plans: 03-04 (3min), 03-05 (8min), 04-01 (9min), 04-02 (8min)
+- Trend: Consistent efficiency (avg 7min across last 4 plans)
 
 *Updated after each plan completion*
 
@@ -47,6 +47,9 @@ Recent decisions affecting current work:
 
 | Decision | Phase | Rationale |
 |----------|-------|-----------|
+| Custom syntax highlighting CSS | 04-02 | External highlight.js themes not available; custom GitHub-inspired CSS eliminates dependency while matching site aesthetic |
+| SerializedPost for API responses | 04-02 | Converts ObjectId/Date to strings for Next.js API route compatibility; ensures all responses serializable |
+| Filter interfaces for MongoDB queries | 04-02 | Type-safe query building instead of 'any' types; improves IDE autocomplete and catches errors at compile time |
 | rehype-highlight for syntax highlighting | 04-01 | Integrates with rehype plugin pipeline, provides GitHub-style code blocks without additional complexity |
 | Compound text search index design | 04-01 | Equality conditions (published, categories) before text fields optimizes MongoDB query performance |
 | previous_slugs array for redirects | 04-01 | Enables redirect support when post slugs change, prevents 404s on bookmarked links |
@@ -110,7 +113,7 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-01-21T21:50:03Z
-Stopped at: Completed 04-01-PLAN.md (Blog Infrastructure)
+Last session: 2026-01-21T22:01:30Z
+Stopped at: Completed 04-02-PLAN.md (Blog Data Layer & Code Highlighting)
 Resume file: None
-Next: Continue Phase 4 - 04-02 (Blog Content Rendering)
+Next: Continue Phase 4 - 04-03 (Blog List Page)
