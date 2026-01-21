@@ -36,7 +36,8 @@ export function UserMenu() {
         method: "DELETE",
         body: JSON.stringify({ all: true }),
       })
-    } catch (error) {
+    } catch {
+      // Silently fail if API route doesn't exist yet
       console.log("Sign out everywhere API not yet available")
     }
     signOut({ callbackUrl: "/" })
