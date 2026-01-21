@@ -4,6 +4,7 @@ import { Inter } from "next/font/google";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import SmoothScrollProvider from "@/components/providers/SmoothScrollProvider";
 import { ThemeProvider } from "@/components/providers/theme-provider";
+import { ThemeToggle } from "@/components/theme/theme-toggle";
 import { loadContentServer } from "@/utils/serverContentLoader";
 
 // Optimize font loading
@@ -118,6 +119,7 @@ export default async function RootLayout({
           disableTransitionOnChange={false}
         >
           <SmoothScrollProvider>{children}</SmoothScrollProvider>
+          <ThemeToggle />
         </ThemeProvider>
       </body>
       <GoogleAnalytics
