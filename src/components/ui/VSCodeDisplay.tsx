@@ -134,7 +134,7 @@ const VSCodeDisplay: React.FC<VSCodeDisplayProps> = ({
 
   return (
     <motion.div
-      className="text-sm text-neutral-500 font-light"
+      className="text-sm text-neutral-500 dark:text-neutral-400 font-light"
       initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 5 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: prefersReducedMotion ? 0 : -5 }}
@@ -144,19 +144,19 @@ const VSCodeDisplay: React.FC<VSCodeDisplayProps> = ({
         <span className="text-blue-600">⌨</span>
         <span>
           {activityInfo.action} {activityInfo.target}
-          <span className="text-neutral-400"> in </span>
+          <span className="text-neutral-400 dark:text-neutral-500"> in </span>
           <a
             href="https://vscode.dev"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-neutral-400 hover:text-neutral-600 transition-colors"
+            className="text-neutral-400 dark:text-neutral-500 hover:text-neutral-600 dark:hover:text-neutral-300 transition-colors"
             aria-label="Open VS Code for the Web"
           >
             VS Code
           </a>
         </span>
         {data.startTime && (
-          <span className="text-neutral-400 tabular-nums text-xs">
+          <span className="text-neutral-400 dark:text-neutral-500 tabular-nums text-xs">
             {formatElapsedTime(elapsedTime)}
           </span>
         )}

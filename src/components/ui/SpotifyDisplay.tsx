@@ -47,7 +47,7 @@ const SpotifyDisplay: React.FC<SpotifyDisplayProps> = ({
 
   return (
     <motion.div
-      className="text-sm text-neutral-500 font-light"
+      className="text-sm text-neutral-500 dark:text-neutral-400 font-light"
       initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 5 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: prefersReducedMotion ? 0 : -5 }}
@@ -59,7 +59,7 @@ const SpotifyDisplay: React.FC<SpotifyDisplayProps> = ({
           href={data.trackUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="hover:text-neutral-700 transition-colors"
+          className="hover:text-neutral-700 dark:hover:text-neutral-300 transition-colors"
           aria-label={`Listen to ${data.trackName} on Spotify`}
         >
           {data.trackName}
@@ -69,12 +69,12 @@ const SpotifyDisplay: React.FC<SpotifyDisplayProps> = ({
           href={`https://open.spotify.com/search/${encodeURIComponent(data.artists[0])}`}
           target="_blank"
           rel="noopener noreferrer"
-          className="hover:text-neutral-700 transition-colors"
+          className="hover:text-neutral-700 dark:hover:text-neutral-300 transition-colors"
           aria-label={`View ${data.artists.join(", ")} on Spotify`}
         >
           {data.artists.join(", ")}
         </a>
-        <span className="text-neutral-400 tabular-nums text-xs">
+        <span className="text-neutral-400 dark:text-neutral-500 tabular-nums text-xs">
           {formatDuration(Math.max(0, currentTime))}/{formatDuration(totalTime)}
         </span>
       </div>
