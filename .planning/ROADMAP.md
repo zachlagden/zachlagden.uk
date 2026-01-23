@@ -13,7 +13,7 @@ This roadmap transforms the existing portfolio into a full-featured platform wit
 - [x] **Phase 1: Dark Mode** - shadcn/ui foundation + theme toggle with persistence, system preference detection, no flash
 - [x] **Phase 2: Testing Infrastructure** - Vitest + Playwright setup, CI integration
 - [x] **Phase 3: Authentication** - GitHub OAuth with session persistence and admin detection
-- [ ] **Phase 4: Blog Core** - Blog listing, post pages, categories, search, SEO
+- [x] **Phase 4: Blog Core** - Blog listing, post pages, categories, search, SEO
 - [ ] **Phase 5: Blog Admin** - Rich editor, CRUD operations, drafts, publishing
 - [ ] **Phase 6: Blog Engagement** - Comments, reactions, moderation, related posts
 - [ ] **Phase 7: Projects Showcase** - Project cards, GitHub integration, technology filters
@@ -90,11 +90,11 @@ Plans:
 **Plans**: 5 plans in 5 waves
 
 Plans:
-- [ ] 04-01-PLAN.md - Blog Infrastructure (MDX config, Post model, MongoDB indexes)
-- [ ] 04-02-PLAN.md - Blog Data Layer (post fetching, search, syntax highlighting)
-- [ ] 04-03-PLAN.md - Blog Listing (PostCard, search/filter components, /blog page)
-- [ ] 04-04-PLAN.md - Post Detail (content rendering, TOC, SEO metadata)
-- [ ] 04-05-PLAN.md - SEO & Verification (OG images, RSS feed, sitemap, manual verification)
+- [x] 04-01-PLAN.md - Blog Infrastructure (MDX config, Post model, MongoDB indexes)
+- [x] 04-02-PLAN.md - Blog Data Layer (post fetching, search, syntax highlighting)
+- [x] 04-03-PLAN.md - Blog Listing (PostCard, search/filter components, /blog page)
+- [x] 04-04-PLAN.md - Post Detail (content rendering, TOC, SEO metadata)
+- [x] 04-05-PLAN.md - SEO & Verification (OG images, RSS feed, sitemap, manual verification)
 
 ### Phase 5: Blog Admin
 **Goal**: Admin can create, edit, and manage blog posts with a rich editor
@@ -169,7 +169,7 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7 -> 8
 | 1. Dark Mode | 4/4 | ✓ Complete | 2026-01-21 |
 | 2. Testing Infrastructure | 3/3 | ✓ Complete | 2026-01-21 |
 | 3. Authentication | 5/5 | ✓ Complete | 2026-01-21 |
-| 4. Blog Core | 0/5 | Planned | - |
+| 4. Blog Core | 5/5 | ✓ Complete | 2026-01-23 |
 | 5. Blog Admin | 0/TBD | Not started | - |
 | 6. Blog Engagement | 0/TBD | Not started | - |
 | 7. Projects Showcase | 0/TBD | Not started | - |

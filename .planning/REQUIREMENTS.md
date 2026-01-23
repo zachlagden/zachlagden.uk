@@ -25,16 +25,16 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Blog Core
 
-- [ ] **BLOG-01**: User can view list of published blog posts
-- [ ] **BLOG-02**: User can view individual blog post with full content
-- [ ] **BLOG-03**: Blog posts display title, date, reading time, categories
-- [ ] **BLOG-04**: Blog posts render code blocks with syntax highlighting
-- [ ] **BLOG-05**: Blog posts have SEO metadata (title, description, OG images)
-- [ ] **BLOG-06**: Blog posts support categories/tags for organization
-- [ ] **BLOG-07**: User can filter posts by category/tag
-- [ ] **BLOG-08**: Blog generates RSS feed for subscribers
-- [ ] **BLOG-09**: User can search across blog posts
-- [ ] **BLOG-10**: Long posts display auto-generated table of contents
+- [x] **BLOG-01**: User can view list of published blog posts
+- [x] **BLOG-02**: User can view individual blog post with full content
+- [x] **BLOG-03**: Blog posts display title, date, reading time, categories
+- [x] **BLOG-04**: Blog posts render code blocks with syntax highlighting
+- [x] **BLOG-05**: Blog posts have SEO metadata (title, description, OG images)
+- [x] **BLOG-06**: Blog posts support categories/tags for organization
+- [x] **BLOG-07**: User can filter posts by category/tag
+- [x] **BLOG-08**: Blog generates RSS feed for subscribers
+- [x] **BLOG-09**: User can search across blog posts
+- [x] **BLOG-10**: Long posts display auto-generated table of contents
 
 ### Blog Admin
 
@@ -81,10 +81,10 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### SEO
 
-- [ ] **SEO-01**: All pages have appropriate meta tags
-- [ ] **SEO-02**: Blog posts have structured data (Article schema)
-- [ ] **SEO-03**: Sitemap includes blog posts dynamically
-- [ ] **SEO-04**: Social sharing cards work correctly (OG images)
+- [x] **SEO-01**: All pages have appropriate meta tags
+- [x] **SEO-02**: Blog posts have structured data (Article schema)
+- [x] **SEO-03**: Sitemap includes blog posts dynamically
+- [x] **SEO-04**: Social sharing cards work correctly (OG images)
 
 ### Testing
 
@@ -147,16 +147,16 @@ Which phases cover which requirements. Updated during roadmap creation.
 | AUTH-03 | Phase 3 | ✓ Complete |
 | AUTH-04 | Phase 3 | ✓ Complete |
 | AUTH-05 | Phase 3 | ✓ Complete |
-| BLOG-01 | Phase 4 | Pending |
-| BLOG-02 | Phase 4 | Pending |
-| BLOG-03 | Phase 4 | Pending |
-| BLOG-04 | Phase 4 | Pending |
-| BLOG-05 | Phase 4 | Pending |
-| BLOG-06 | Phase 4 | Pending |
-| BLOG-07 | Phase 4 | Pending |
-| BLOG-08 | Phase 4 | Pending |
-| BLOG-09 | Phase 4 | Pending |
-| BLOG-10 | Phase 4 | Pending |
+| BLOG-01 | Phase 4 | ✓ Complete |
+| BLOG-02 | Phase 4 | ✓ Complete |
+| BLOG-03 | Phase 4 | ✓ Complete |
+| BLOG-04 | Phase 4 | ✓ Complete |
+| BLOG-05 | Phase 4 | ✓ Complete |
+| BLOG-06 | Phase 4 | ✓ Complete |
+| BLOG-07 | Phase 4 | ✓ Complete |
+| BLOG-08 | Phase 4 | ✓ Complete |
+| BLOG-09 | Phase 4 | ✓ Complete |
+| BLOG-10 | Phase 4 | ✓ Complete |
 | ADMIN-01 | Phase 5 | Pending |
 | ADMIN-02 | Phase 5 | Pending |
 | ADMIN-03 | Phase 5 | Pending |
@@ -185,10 +185,10 @@ Which phases cover which requirements. Updated during roadmap creation.
 | PERF-02 | Phase 8 | Pending |
 | PERF-03 | Phase 5 | Pending |
 | PERF-04 | Phase 8 | Pending |
-| SEO-01 | Phase 4 | Pending |
-| SEO-02 | Phase 4 | Pending |
-| SEO-03 | Phase 4 | Pending |
-| SEO-04 | Phase 4 | Pending |
+| SEO-01 | Phase 4 | ✓ Complete |
+| SEO-02 | Phase 4 | ✓ Complete |
+| SEO-03 | Phase 4 | ✓ Complete |
+| SEO-04 | Phase 4 | ✓ Complete |
 | TEST-01 | Phase 2 | ✓ Complete |
 | TEST-02 | Phase 2 | ✓ Complete |
 | TEST-03 | Phase 2 | ✓ Complete |
