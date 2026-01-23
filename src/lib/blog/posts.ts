@@ -1,3 +1,4 @@
+import { ObjectId } from 'mongodb'
 import clientPromise from '@/lib/db'
 import type { Post, SerializedPost } from '@/models/Post'
 import readingTime from 'reading-time'
@@ -102,4 +103,31 @@ export async function getAllTags(): Promise<string[]> {
 export function calculateReadingTime(content: string): number {
   const stats = readingTime(content)
   return Math.ceil(stats.minutes)
+}
+
+// Get post by ID (for edit/delete operations)
+export async function getPostById(id: string): Promise<SerializedPost | null> {
+  const client = await clientPromise
+  const db = client.db(DB_NAME)
+  const collection = db.collection<Post>(COLLECTION)
+
+  try {
+    const post = await collection.findOne({ _id: new ObjectId(id) })
+    return post ? serializePost(post) : null
+  } catch {
+    // Invalid ObjectId format
+    return null
+  }
+}
+
+// Get post by slug for editing (ignores published status)
+export async function getPostBySlugForEdit(slug: string): Promise<SerializedPost | null> {
+  const client = await clientPromise
+  const db = client.db(DB_NAME)
+  const collection = db.collection<Post>(COLLECTION)
+
+  // Note: No published filter - admin can edit drafts
+  const post = await collection.findOne({ slug })
+
+  return post ? serializePost(post) : null
 }
