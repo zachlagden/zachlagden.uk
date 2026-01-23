@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { getPostBySlug, getPostByPreviousSlug } from '@/lib/blog/posts'
 import { generatePostMetadata, generateArticleJsonLd } from '@/lib/blog/metadata'
 import { extractHeadings } from '@/lib/blog/toc'
+import { getOptionalSession } from '@/lib/dal'
 import { PostHeader } from '@/components/blog/PostHeader'
 import { PostContent } from '@/components/blog/PostContent'
 import { MDXContent } from '@/components/blog/MDXContent'
@@ -49,6 +50,10 @@ export default async function PostPage({ params }: PostPageProps) {
   // Generate JSON-LD structured data
   const jsonLd = generateArticleJsonLd(post)
 
+  // Check if user is admin for edit/delete controls
+  const session = await getOptionalSession()
+  const isAdmin = session?.user?.role === 'admin'
+
   return (
     <>
       {/* JSON-LD Structured Data */}
@@ -62,7 +67,7 @@ export default async function PostPage({ params }: PostPageProps) {
           <div className="grid lg:grid-cols-[1fr_250px] gap-12">
             {/* Main Content */}
             <div className="max-w-3xl">
-              <PostHeader post={post} />
+              <PostHeader post={post} isAdmin={isAdmin} />
 
               <PostContent>
                 <MDXContent content={post.content} />

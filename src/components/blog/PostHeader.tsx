@@ -1,13 +1,16 @@
 import Link from 'next/link'
 import Image from 'next/image'
-import { ArrowLeft } from 'lucide-react'
+import { ArrowLeft, Pencil } from 'lucide-react'
+import { Button } from '@/components/ui/button'
+import { DeletePostButton } from './DeletePostButton'
 import type { SerializedPost } from '@/models/Post'
 
 interface PostHeaderProps {
   post: SerializedPost
+  isAdmin?: boolean
 }
 
-export function PostHeader({ post }: PostHeaderProps) {
+export function PostHeader({ post, isAdmin = false }: PostHeaderProps) {
   const publishedDate = post.publishedAt
     ? new Date(post.publishedAt).toLocaleDateString('en-US', {
         year: 'numeric',
@@ -75,6 +78,19 @@ export function PostHeader({ post }: PostHeaderProps) {
             className="object-cover"
             priority
           />
+        </div>
+      )}
+
+      {/* Admin controls */}
+      {isAdmin && (
+        <div className="flex gap-2 mt-4 pt-4 border-t border-neutral-200 dark:border-neutral-800">
+          <Button asChild size="sm" variant="outline">
+            <Link href={`/blog/${post.slug}/edit`}>
+              <Pencil className="h-4 w-4 mr-2" />
+              Edit
+            </Link>
+          </Button>
+          <DeletePostButton postId={post._id} postTitle={post.title} />
         </div>
       )}
     </header>
