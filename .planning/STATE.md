@@ -5,23 +5,23 @@
 See: .planning/PROJECT.md (updated 2026-01-21)
 
 **Core value:** A professional online presence that authentically represents who you are and what you build, with a blog for sharing technical content.
-**Current focus:** Phase 5 (Blog Admin) - Plan 1 complete
+**Current focus:** Phase 5 (Blog Admin) - Plan 2 complete
 
 ## Current Position
 
 Phase: 5 of 8 (Blog Admin)
-Plan: 1 of 4 in current phase
+Plan: 2 of 4 in current phase
 Status: In progress
-Last activity: 2026-01-23 - Completed 05-01-PLAN.md (Server Actions Infrastructure)
+Last activity: 2026-01-23 - Completed 05-02-PLAN.md (Tiptap Rich Text Editor)
 
-Progress: [█████░----] ~56% (18 of 32 plans complete)
+Progress: [█████░----] ~59% (19 of 32 plans complete)
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 18
-- Average duration: 6.9 min
-- Total execution time: 2.1 hours
+- Total plans completed: 19
+- Average duration: 6.7 min
+- Total execution time: 2.2 hours
 
 **By Phase:**
 
@@ -31,11 +31,11 @@ Progress: [█████░----] ~56% (18 of 32 plans complete)
 | 02-testing-infrastructure | 3 | 11min | 3.7min |
 | 03-authentication | 5 | 24min | 4.8min |
 | 04-blog-core | 5 | 53min | 10.6min |
-| 05-blog-admin | 1 | 4min | 4min |
+| 05-blog-admin | 2 | 8min | 4min |
 
 **Recent Trend:**
-- Last 5 plans: 04-03 (16min), 04-04 (8min), 04-05 (12min), 05-01 (4min)
-- Trend: Infrastructure plans tend to be faster than feature plans
+- Last 5 plans: 04-04 (8min), 04-05 (12min), 05-01 (4min), 05-02 (4min)
+- Trend: Editor components complete quickly with clear specifications
 
 *Updated after each plan completion*
 
@@ -48,6 +48,8 @@ Recent decisions affecting current work:
 
 | Decision | Phase | Rationale |
 |----------|-------|-----------|
+| HTML content storage in editor | 05-02 | Tiptap outputs HTML natively; next-mdx-remote can render both HTML and Markdown seamlessly |
+| immediatelyRender: false for SSR safety | 05-02 | Prevents hydration mismatches; editor loads client-side only |
 | FormData parsing for Server Actions | 05-01 | Enables native form submission without client-side JS; works with useFormState |
 | PostFormState type for form hooks | 05-01 | Designed for useFormState/useActionState with errors keyed by field name |
 | Slug uniqueness check before insert/update | 05-01 | Prevents duplicate URLs; checked in both createPost and updatePost |
@@ -81,7 +83,7 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-01-23T23:43:00Z
-Stopped at: Completed 05-01-PLAN.md (Server Actions Infrastructure)
+Last session: 2026-01-23T23:43:02Z
+Stopped at: Completed 05-02-PLAN.md (Tiptap Rich Text Editor)
 Resume file: None
-Next: 05-02-PLAN.md (Admin Post List)
+Next: 05-03-PLAN.md (Create/Edit Pages)
