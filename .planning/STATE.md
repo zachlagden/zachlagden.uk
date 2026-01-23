@@ -5,23 +5,23 @@
 See: .planning/PROJECT.md (updated 2026-01-21)
 
 **Core value:** A professional online presence that authentically represents who you are and what you build, with a blog for sharing technical content.
-**Current focus:** Phase 4 Complete - Ready for Phase 5
+**Current focus:** Phase 5 (Blog Admin) - Plan 1 complete
 
 ## Current Position
 
-Phase: 4 of 8 (Blog Core) ✓ VERIFIED
-Plan: 5 of 5 in current phase (All complete)
-Status: Phase 4 complete, goal verified
-Last activity: 2026-01-23 - Phase 4 verified, all criteria met
+Phase: 5 of 8 (Blog Admin)
+Plan: 1 of 4 in current phase
+Status: In progress
+Last activity: 2026-01-23 - Completed 05-01-PLAN.md (Server Actions Infrastructure)
 
-Progress: [█████-----] ~50% milestone (4 of 8 phases complete)
+Progress: [█████░----] ~56% (18 of 32 plans complete)
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 17
-- Average duration: 7.2 min
-- Total execution time: 2.0 hours
+- Total plans completed: 18
+- Average duration: 6.9 min
+- Total execution time: 2.1 hours
 
 **By Phase:**
 
@@ -31,10 +31,11 @@ Progress: [█████-----] ~50% milestone (4 of 8 phases complete)
 | 02-testing-infrastructure | 3 | 11min | 3.7min |
 | 03-authentication | 5 | 24min | 4.8min |
 | 04-blog-core | 5 | 53min | 10.6min |
+| 05-blog-admin | 1 | 4min | 4min |
 
 **Recent Trend:**
-- Last 5 plans: 04-02 (8min), 04-03 (16min), 04-04 (8min), 04-05 (12min)
-- Trend: Blog phase averaged ~11min per plan (more complex features)
+- Last 5 plans: 04-03 (16min), 04-04 (8min), 04-05 (12min), 05-01 (4min)
+- Trend: Infrastructure plans tend to be faster than feature plans
 
 *Updated after each plan completion*
 
@@ -47,6 +48,10 @@ Recent decisions affecting current work:
 
 | Decision | Phase | Rationale |
 |----------|-------|-----------|
+| FormData parsing for Server Actions | 05-01 | Enables native form submission without client-side JS; works with useFormState |
+| PostFormState type for form hooks | 05-01 | Designed for useFormState/useActionState with errors keyed by field name |
+| Slug uniqueness check before insert/update | 05-01 | Prevents duplicate URLs; checked in both createPost and updatePost |
+| previous_slugs via $addToSet | 05-01 | Avoids duplicates when adding old slugs for redirect support |
 | Simplified middleware (no NextAuth) | 04-05 | Edge runtime can't use MongoDB adapter; DAL handles security server-side |
 | Node.js runtime for OG images | 04-05 | reading-time package incompatible with Edge; acceptable tradeoff |
 | Hide TOC for posts with fewer than 3 headings | 04-04 | Table of contents adds little value for short posts; saves screen space |
@@ -59,11 +64,6 @@ Recent decisions affecting current work:
 | Dynamic rendering for blog page | 04-03 | Blog content from database; static generation would require build-time DB connection |
 | Custom syntax highlighting CSS | 04-02 | External highlight.js themes not available; custom GitHub-inspired CSS eliminates dependency while matching site aesthetic |
 | SerializedPost for API responses | 04-02 | Converts ObjectId/Date to strings for Next.js API route compatibility; ensures all responses serializable |
-| Filter interfaces for MongoDB queries | 04-02 | Type-safe query building instead of 'any' types; improves IDE autocomplete and catches errors at compile time |
-| rehype-highlight for syntax highlighting | 04-01 | Integrates with rehype plugin pipeline, provides GitHub-style code blocks without additional complexity |
-| Compound text search index design | 04-01 | Equality conditions (published, categories) before text fields optimizes MongoDB query performance |
-| previous_slugs array for redirects | 04-01 | Enables redirect support when post slugs change, prevents 404s on bookmarked links |
-| Three-tier type system for Post | 04-01 | Post (DB schema), PostDocument (MongoDB ops), SerializedPost (API) for clear separation of concerns |
 
 ### Pending Todos
 
@@ -81,7 +81,7 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-01-23T23:45:00Z
-Stopped at: Phase 4 verified complete
+Last session: 2026-01-23T23:43:00Z
+Stopped at: Completed 05-01-PLAN.md (Server Actions Infrastructure)
 Resume file: None
-Next: Phase 5 (Blog Admin) - ready for planning
+Next: 05-02-PLAN.md (Admin Post List)
