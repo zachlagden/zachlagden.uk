@@ -10,17 +10,17 @@ See: .planning/PROJECT.md (updated 2026-01-21)
 ## Current Position
 
 Phase: 7 of 8 (Projects Showcase)
-Plan: 1 of 3 in current phase (07-01 complete)
+Plan: 3 of 4 in current phase (07-01, 07-03 complete)
 Status: In progress
-Last activity: 2026-01-24 - Completed 07-01-PLAN.md (Projects Data Infrastructure)
+Last activity: 2026-01-24 - Completed 07-03-PLAN.md (GitHub Stats Integration)
 
-Progress: [███████░--] ~79% milestone (26/33 plans complete)
+Progress: [████████░-] ~82% milestone (27/33 plans complete)
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 26
-- Average duration: 5.7 min
+- Total plans completed: 27
+- Average duration: 5.6 min
 - Total execution time: 2.5 hours
 
 **By Phase:**
@@ -33,11 +33,11 @@ Progress: [███████░--] ~79% milestone (26/33 plans complete)
 | 04-blog-core | 5 | 53min | 10.6min |
 | 05-blog-admin | 4 | 19min | 4.8min |
 | 06-blog-engagement | 5 | 10min | 2min |
-| 07-projects-showcase | 1 | 1min | 1min |
+| 07-projects-showcase | 2 | 3min | 1.5min |
 
 **Recent Trend:**
-- Last 5 plans: 06-02 (3min), 06-03 (0min), 06-04 (2min), 06-05 (3min), 07-01 (1min)
-- Trend: Consistent fast execution; Phase 7 started with data infrastructure
+- Last 5 plans: 06-03 (0min), 06-04 (2min), 06-05 (3min), 07-01 (1min), 07-03 (2min)
+- Trend: Consistent fast execution; Phase 7 building on established patterns
 
 *Updated after each plan completion*
 
@@ -50,6 +50,9 @@ Recent decisions affecting current work:
 
 | Decision | Phase | Rationale |
 |----------|-------|-----------|
+| 10-minute GitHub cache duration | 07-03 | Balances data freshness with rate limit protection; 600-second revalidation prevents excessive API calls |
+| Optional GITHUB_TOKEN env var | 07-03 | Works without token (60 req/hour) but recommends setting for 5000 req/hour limit |
+| Graceful GitHub failures return null | 07-03 | 404/403/errors return null instead of throwing; prevents UI crashes from missing/private repos |
 | Featured boolean vs priority number | 07-01 | Simple boolean for featured flag instead of numeric priority; UI pattern is "featured first, then chronological" |
 | Technology filtering via MongoDB $in | 07-01 | Efficient array filtering for technology stack; mirrors tags filtering pattern from posts DAL |
 | Simpler Project model than Post | 07-01 | Projects don't need reading time, categories, or previous_slugs; focused on essential display fields |
@@ -111,7 +114,7 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-01-24T01:38:15Z
-Stopped at: Completed 07-01-PLAN.md (Projects Data Infrastructure)
+Last session: 2026-01-24T01:43:47Z
+Stopped at: Completed 07-03-PLAN.md (GitHub Stats Integration)
 Resume file: None
-Next: 07-02-PLAN.md (API Endpoints)
+Next: 07-02-PLAN.md (API Endpoints) or 07-04-PLAN.md (Projects Page)
