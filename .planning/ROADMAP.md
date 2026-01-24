@@ -125,10 +125,14 @@ Plans:
   3. Comments display author GitHub username, date, and content
   4. Admin can delete inappropriate comments (moderation)
   5. Each post shows related posts suggestions at the bottom
-**Plans**: TBD
+**Plans**: 5 plans in 3 waves
 
 Plans:
-- [ ] 06-01: TBD
+- [ ] 06-01-PLAN.md - Engagement Data Layer (Comment/Reaction models, comments/reactions DAL)
+- [ ] 06-02-PLAN.md - Engagement Server Actions (createComment, deleteComment, toggleReaction)
+- [ ] 06-03-PLAN.md - Comments UI (CommentForm, CommentList, Comment, DeleteCommentButton)
+- [ ] 06-04-PLAN.md - Reactions + Related Posts (ReactionButton, RelatedPosts, getRelatedPosts)
+- [ ] 06-05-PLAN.md - Integration + Verification (wire into post page, human verification)
 
 ### Phase 7: Projects Showcase
 **Goal**: Users can browse projects with technology filters and optional GitHub stats
@@ -174,7 +178,7 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7 -> 8
 | 3. Authentication | 5/5 | ✓ Complete | 2026-01-21 |
 | 4. Blog Core | 5/5 | ✓ Complete | 2026-01-23 |
 | 5. Blog Admin | 4/4 | ✓ Complete | 2026-01-24 |
-| 6. Blog Engagement | 0/TBD | Not started | - |
+| 6. Blog Engagement | 0/5 | Planned | - |
 | 7. Projects Showcase | 0/TBD | Not started | - |
 | 8. Polish & Performance | 0/TBD | Not started | - |
 
