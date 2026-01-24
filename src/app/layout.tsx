@@ -8,6 +8,7 @@ import { ThemeToggle } from "@/components/theme/theme-toggle";
 import { SessionProvider } from "@/components/auth/SessionProvider";
 import { AuthStatus } from "@/components/auth/AuthStatus";
 import { loadContentServer } from "@/utils/serverContentLoader";
+import { NuqsAdapter } from "nuqs/adapters/next/app";
 
 // Optimize font loading
 const inter = Inter({
@@ -121,7 +122,9 @@ export default async function RootLayout({
           disableTransitionOnChange={false}
         >
           <SessionProvider>
-            <SmoothScrollProvider>{children}</SmoothScrollProvider>
+            <NuqsAdapter>
+              <SmoothScrollProvider>{children}</SmoothScrollProvider>
+            </NuqsAdapter>
             <ThemeToggle />
             <AuthStatus />
           </SessionProvider>
