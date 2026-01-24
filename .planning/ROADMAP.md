@@ -14,7 +14,7 @@ This roadmap transforms the existing portfolio into a full-featured platform wit
 - [x] **Phase 2: Testing Infrastructure** - Vitest + Playwright setup, CI integration
 - [x] **Phase 3: Authentication** - GitHub OAuth with session persistence and admin detection
 - [x] **Phase 4: Blog Core** - Blog listing, post pages, categories, search, SEO
-- [ ] **Phase 5: Blog Admin** - Rich editor, CRUD operations, drafts, publishing
+- [x] **Phase 5: Blog Admin** - Rich editor, CRUD operations, drafts, publishing
 - [ ] **Phase 6: Blog Engagement** - Comments, reactions, moderation, related posts
 - [ ] **Phase 7: Projects Showcase** - Project cards, GitHub integration, technology filters
 - [ ] **Phase 8: Polish & Performance** - Animations, Core Web Vitals, content refresh
@@ -110,10 +110,10 @@ Plans:
 **Plans**: 4 plans in 3 waves
 
 Plans:
-- [ ] 05-01-PLAN.md - Server Actions Infrastructure (Zod validation, createPost, updatePost, deletePost, togglePublish)
-- [ ] 05-02-PLAN.md - Tiptap Editor Component (PostEditor with toolbar, lazy loading, syntax highlighting)
-- [ ] 05-03-PLAN.md - Create Post Page (/blog/new with PostForm, admin auth, editor integration)
-- [ ] 05-04-PLAN.md - Edit & Delete (edit page, DeletePostButton, admin controls on post pages)
+- [x] 05-01-PLAN.md - Server Actions Infrastructure (Zod validation, createPost, updatePost, deletePost, togglePublish)
+- [x] 05-02-PLAN.md - Tiptap Editor Component (PostEditor with toolbar, lazy loading, syntax highlighting)
+- [x] 05-03-PLAN.md - Create Post Page (/blog/new with PostForm, admin auth, editor integration)
+- [x] 05-04-PLAN.md - Edit & Delete (edit page, DeletePostButton, admin controls on post pages)
 
 ### Phase 6: Blog Engagement
 **Goal**: Authenticated users can engage with posts through comments and reactions
@@ -173,7 +173,7 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7 -> 8
 | 2. Testing Infrastructure | 3/3 | ✓ Complete | 2026-01-21 |
 | 3. Authentication | 5/5 | ✓ Complete | 2026-01-21 |
 | 4. Blog Core | 5/5 | ✓ Complete | 2026-01-23 |
-| 5. Blog Admin | 0/4 | In Progress | - |
+| 5. Blog Admin | 4/4 | ✓ Complete | 2026-01-24 |
 | 6. Blog Engagement | 0/TBD | Not started | - |
 | 7. Projects Showcase | 0/TBD | Not started | - |
 | 8. Polish & Performance | 0/TBD | Not started | - |

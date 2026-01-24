@@ -38,14 +38,14 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Blog Admin
 
-- [ ] **ADMIN-01**: Admin can create new blog posts with rich text editor
-- [ ] **ADMIN-02**: Admin can edit existing blog posts
-- [ ] **ADMIN-03**: Admin can delete blog posts
-- [ ] **ADMIN-04**: Admin can save posts as drafts (unpublished)
-- [ ] **ADMIN-05**: Admin can publish/unpublish posts
-- [ ] **ADMIN-06**: Editor supports markdown formatting (bold, italic, headings, lists)
-- [ ] **ADMIN-07**: Editor supports code blocks with language selection
-- [ ] **ADMIN-08**: Editor supports image embedding
+- [x] **ADMIN-01**: Admin can create new blog posts with rich text editor
+- [x] **ADMIN-02**: Admin can edit existing blog posts
+- [x] **ADMIN-03**: Admin can delete blog posts
+- [x] **ADMIN-04**: Admin can save posts as drafts (unpublished)
+- [x] **ADMIN-05**: Admin can publish/unpublish posts
+- [x] **ADMIN-06**: Editor supports markdown formatting (bold, italic, headings, lists)
+- [x] **ADMIN-07**: Editor supports code blocks with language selection
+- [x] **ADMIN-08**: Editor supports image embedding
 
 ### Blog Engagement
 
@@ -76,7 +76,7 @@ Requirements for initial release. Each maps to roadmap phases.
 
 - [ ] **PERF-01**: Site achieves good Core Web Vitals scores
 - [ ] **PERF-02**: Blog pages use appropriate caching strategy
-- [ ] **PERF-03**: Heavy components (editor) are lazy-loaded
+- [x] **PERF-03**: Heavy components (editor) are lazy-loaded
 - [ ] **PERF-04**: Images are optimized and lazy-loaded
 
 ### SEO
@@ -157,14 +157,14 @@ Which phases cover which requirements. Updated during roadmap creation.
 | BLOG-08 | Phase 4 | ✓ Complete |
 | BLOG-09 | Phase 4 | ✓ Complete |
 | BLOG-10 | Phase 4 | ✓ Complete |
-| ADMIN-01 | Phase 5 | Pending |
-| ADMIN-02 | Phase 5 | Pending |
-| ADMIN-03 | Phase 5 | Pending |
-| ADMIN-04 | Phase 5 | Pending |
-| ADMIN-05 | Phase 5 | Pending |
-| ADMIN-06 | Phase 5 | Pending |
-| ADMIN-07 | Phase 5 | Pending |
-| ADMIN-08 | Phase 5 | Pending |
+| ADMIN-01 | Phase 5 | ✓ Complete |
+| ADMIN-02 | Phase 5 | ✓ Complete |
+| ADMIN-03 | Phase 5 | ✓ Complete |
+| ADMIN-04 | Phase 5 | ✓ Complete |
+| ADMIN-05 | Phase 5 | ✓ Complete |
+| ADMIN-06 | Phase 5 | ✓ Complete |
+| ADMIN-07 | Phase 5 | ✓ Complete |
+| ADMIN-08 | Phase 5 | ✓ Complete |
 | ENGAGE-01 | Phase 6 | Pending |
 | ENGAGE-02 | Phase 6 | Pending |
 | ENGAGE-03 | Phase 6 | Pending |
@@ -183,7 +183,7 @@ Which phases cover which requirements. Updated during roadmap creation.
 | UX-04 | Phase 8 | Pending |
 | PERF-01 | Phase 8 | Pending |
 | PERF-02 | Phase 8 | Pending |
-| PERF-03 | Phase 5 | Pending |
+| PERF-03 | Phase 5 | ✓ Complete |
 | PERF-04 | Phase 8 | Pending |
 | SEO-01 | Phase 4 | ✓ Complete |
 | SEO-02 | Phase 4 | ✓ Complete |
