@@ -49,6 +49,10 @@ Recent decisions affecting current work:
 
 | Decision | Phase | Rationale |
 |----------|-------|-----------|
+| Small inline delete button for admins | 06-03 | h-6 w-6 ghost variant minimizes visual clutter while providing admin moderation |
+| Avatar fallback to username initial | 06-03 | Shows username initial in colored circle when GitHub avatarUrl is missing |
+| Sign-in prompt for unauthenticated users | 06-03 | Shows friendly CTA with MessageSquare icon instead of disabled form |
+| date-fns for relative timestamps | 06-03 | formatDistanceToNow for "2 hours ago" style instead of custom date math |
 | RelatedPosts returns null when empty | 06-04 | Graceful degradation - section doesn't render if no related posts found |
 | Categories weighted 2x in relevance scoring | 06-04 | Categories are broader topics, so overlap is more significant than tag overlap |
 | React 19 useOptimistic for instant feedback | 06-04 | No loading spinner needed; UI updates immediately on click with automatic rollback on error |
@@ -101,7 +105,7 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-01-24T06:43:45Z
-Stopped at: Completed 06-04-PLAN.md (Engagement UI Components)
+Last session: 2026-01-24T01:04:03Z
+Stopped at: Completed 06-03-PLAN.md (Comment UI Components)
 Resume file: None
-Next: Phase 6 (Blog Engagement) complete - ready for Phase 7 or integration
+Next: Phase 6 (Blog Engagement) complete - all 4 plans finished
