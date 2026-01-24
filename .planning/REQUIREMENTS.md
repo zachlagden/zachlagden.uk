@@ -49,12 +49,12 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Blog Engagement
 
-- [ ] **ENGAGE-01**: Authenticated users can comment on blog posts
-- [ ] **ENGAGE-02**: Authenticated users can react to blog posts (like/heart)
-- [ ] **ENGAGE-03**: Comments display author (GitHub username), date, content
-- [ ] **ENGAGE-04**: Post displays reaction count
-- [ ] **ENGAGE-05**: Admin can moderate comments (approve/delete)
-- [ ] **ENGAGE-06**: Related posts shown at end of each post
+- [x] **ENGAGE-01**: Authenticated users can comment on blog posts
+- [x] **ENGAGE-02**: Authenticated users can react to blog posts (like/heart)
+- [x] **ENGAGE-03**: Comments display author (GitHub username), date, content
+- [x] **ENGAGE-04**: Post displays reaction count
+- [x] **ENGAGE-05**: Admin can moderate comments (approve/delete)
+- [x] **ENGAGE-06**: Related posts shown at end of each post
 
 ### Projects Showcase
 
@@ -165,12 +165,12 @@ Which phases cover which requirements. Updated during roadmap creation.
 | ADMIN-06 | Phase 5 | ✓ Complete |
 | ADMIN-07 | Phase 5 | ✓ Complete |
 | ADMIN-08 | Phase 5 | ✓ Complete |
-| ENGAGE-01 | Phase 6 | Pending |
-| ENGAGE-02 | Phase 6 | Pending |
-| ENGAGE-03 | Phase 6 | Pending |
-| ENGAGE-04 | Phase 6 | Pending |
-| ENGAGE-05 | Phase 6 | Pending |
-| ENGAGE-06 | Phase 6 | Pending |
+| ENGAGE-01 | Phase 6 | ✓ Complete |
+| ENGAGE-02 | Phase 6 | ✓ Complete |
+| ENGAGE-03 | Phase 6 | ✓ Complete |
+| ENGAGE-04 | Phase 6 | ✓ Complete |
+| ENGAGE-05 | Phase 6 | ✓ Complete |
+| ENGAGE-06 | Phase 6 | ✓ Complete |
 | PROJ-01 | Phase 7 | Pending |
 | PROJ-02 | Phase 7 | Pending |
 | PROJ-03 | Phase 7 | Pending |
