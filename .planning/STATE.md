@@ -10,11 +10,11 @@ See: .planning/PROJECT.md (updated 2026-01-21)
 ## Current Position
 
 Phase: 5 of 8 (Blog Admin)
-Plan: 3 of 4 in current phase
-Status: In progress
-Last activity: 2026-01-23 - Completed 05-03-PLAN.md (Create Post Page)
+Plan: 4 of 4 in current phase
+Status: Phase complete
+Last activity: 2026-01-24 - Completed 05-04-PLAN.md (Edit & Delete)
 
-Progress: [██████----] ~63% (20 of 32 plans complete)
+Progress: [███████---] ~66% (21 of 32 plans complete)
 
 ## Performance Metrics
 
@@ -31,11 +31,11 @@ Progress: [██████----] ~63% (20 of 32 plans complete)
 | 02-testing-infrastructure | 3 | 11min | 3.7min |
 | 03-authentication | 5 | 24min | 4.8min |
 | 04-blog-core | 5 | 53min | 10.6min |
-| 05-blog-admin | 3 | 11min | 3.7min |
+| 05-blog-admin | 4 | 19min | 4.8min |
 
 **Recent Trend:**
-- Last 5 plans: 04-05 (12min), 05-01 (4min), 05-02 (4min), 05-03 (3min)
-- Trend: Form/UI components completing quickly; clear specs enable fast execution
+- Last 5 plans: 05-01 (4min), 05-02 (4min), 05-03 (3min), 05-04 (8min)
+- Trend: Blog admin phase complete; consistent execution velocity
 
 *Updated after each plan completion*
 
@@ -48,6 +48,9 @@ Recent decisions affecting current work:
 
 | Decision | Phase | Rationale |
 |----------|-------|-----------|
+| getPostBySlugForEdit ignores published filter | 05-04 | Admin can edit draft posts; separate function from public getPostBySlug |
+| AlertDialog for delete confirmation | 05-04 | Destructive actions require explicit confirmation to prevent accidents |
+| Admin controls via optional props | 05-04 | PostHeader accepts isAdmin/postId props; keeps component reusable |
 | Editor content via hidden input to FormData | 05-03 | Server Actions receive content as string; client state synced via hidden input |
 | Auto-slug with toggle option | 05-03 | Default auto-generate for UX; manual override for SEO control |
 | useActionState for form state management | 05-03 | React 19 pattern for Server Action form handling with pending state |
@@ -87,7 +90,7 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-01-23T23:49:13Z
-Stopped at: Completed 05-03-PLAN.md (Create Post Page)
+Last session: 2026-01-24T00:10:00Z
+Stopped at: Completed 05-04-PLAN.md (Edit & Delete)
 Resume file: None
-Next: 05-04-PLAN.md (Edit Post Page)
+Next: Phase 6 (next phase planning)
