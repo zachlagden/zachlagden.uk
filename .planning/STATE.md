@@ -10,18 +10,18 @@ See: .planning/PROJECT.md (updated 2026-01-21)
 ## Current Position
 
 Phase: 7 of 8 (Projects Showcase)
-Plan: 3 of 4 in current phase (07-01, 07-03 complete)
+Plan: 3 of 4 in current phase (07-01, 07-02, 07-03 complete)
 Status: In progress
-Last activity: 2026-01-24 - Completed 07-03-PLAN.md (GitHub Stats Integration)
+Last activity: 2026-01-24 - Completed 07-02-PLAN.md (Projects UI Components)
 
-Progress: [████████░-] ~82% milestone (27/33 plans complete)
+Progress: [████████░-] ~85% milestone (28/33 plans complete)
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 27
-- Average duration: 5.6 min
-- Total execution time: 2.5 hours
+- Total plans completed: 28
+- Average duration: 5.5 min
+- Total execution time: 2.6 hours
 
 **By Phase:**
 
@@ -33,11 +33,11 @@ Progress: [████████░-] ~82% milestone (27/33 plans complete)
 | 04-blog-core | 5 | 53min | 10.6min |
 | 05-blog-admin | 4 | 19min | 4.8min |
 | 06-blog-engagement | 5 | 10min | 2min |
-| 07-projects-showcase | 2 | 3min | 1.5min |
+| 07-projects-showcase | 3 | 6min | 2min |
 
 **Recent Trend:**
-- Last 5 plans: 06-03 (0min), 06-04 (2min), 06-05 (3min), 07-01 (1min), 07-03 (2min)
-- Trend: Consistent fast execution; Phase 7 building on established patterns
+- Last 5 plans: 06-04 (2min), 06-05 (3min), 07-01 (1min), 07-02 (3min), 07-03 (2min)
+- Trend: Consistent fast execution; Phase 7 UI components following blog patterns
 
 *Updated after each plan completion*
 
@@ -50,6 +50,10 @@ Recent decisions affecting current work:
 
 | Decision | Phase | Rationale |
 |----------|-------|-----------|
+| NuqsAdapter in root layout | 07-02 | Wraps entire app for global nuqs hook availability; enables type-safe URL state anywhere |
+| Tech badge max 5 with overflow | 07-02 | Prevents card height inconsistency; shows "+N more" for projects with many technologies |
+| Opacity-based tech colors | 07-02 | bg-color/10 pattern works in both themes without separate color definitions |
+| nuqs over URLSearchParams | 07-02 | Type-safe array parsing eliminates boilerplate; automatic URL sync and simpler API |
 | 10-minute GitHub cache duration | 07-03 | Balances data freshness with rate limit protection; 600-second revalidation prevents excessive API calls |
 | Optional GITHUB_TOKEN env var | 07-03 | Works without token (60 req/hour) but recommends setting for 5000 req/hour limit |
 | Graceful GitHub failures return null | 07-03 | 404/403/errors return null instead of throwing; prevents UI crashes from missing/private repos |
@@ -114,7 +118,7 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-01-24T01:43:47Z
-Stopped at: Completed 07-03-PLAN.md (GitHub Stats Integration)
+Last session: 2026-01-24T01:44:46Z
+Stopped at: Completed 07-02-PLAN.md (Projects UI Components)
 Resume file: None
-Next: 07-02-PLAN.md (API Endpoints) or 07-04-PLAN.md (Projects Page)
+Next: 07-04-PLAN.md (Projects Page)
