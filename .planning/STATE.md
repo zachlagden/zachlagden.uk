@@ -10,17 +10,17 @@ See: .planning/PROJECT.md (updated 2026-01-21)
 ## Current Position
 
 Phase: 6 of 8 (Blog Engagement)
-Plan: 2 of 4 in current phase (06-02 complete)
+Plan: 4 of 4 in current phase (06-04 complete)
 Status: In progress
-Last activity: 2026-01-24 - Completed 06-02-PLAN.md (Comment & Reaction Server Actions)
+Last activity: 2026-01-24 - Completed 06-04-PLAN.md (Engagement UI Components)
 
-Progress: [██████░---] ~67% milestone (22/33 plans complete)
+Progress: [███████---] ~73% milestone (24/33 plans complete)
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 23
-- Average duration: 6.1 min
+- Total plans completed: 24
+- Average duration: 6.0 min
 - Total execution time: 2.4 hours
 
 **By Phase:**
@@ -32,11 +32,11 @@ Progress: [██████░---] ~67% milestone (22/33 plans complete)
 | 03-authentication | 5 | 24min | 4.8min |
 | 04-blog-core | 5 | 53min | 10.6min |
 | 05-blog-admin | 4 | 19min | 4.8min |
-| 06-blog-engagement | 2 | 5min | 2.5min |
+| 06-blog-engagement | 4 | 7min | 1.8min |
 
 **Recent Trend:**
-- Last 5 plans: 05-03 (3min), 05-04 (8min), 06-01 (2min), 06-02 (3min)
-- Trend: Fast execution for data layer setup; blog engagement phase underway
+- Last 5 plans: 05-04 (8min), 06-01 (2min), 06-02 (3min), 06-03 (0min), 06-04 (2min)
+- Trend: Extremely fast execution for UI components; blog engagement phase complete
 
 *Updated after each plan completion*
 
@@ -49,6 +49,9 @@ Recent decisions affecting current work:
 
 | Decision | Phase | Rationale |
 |----------|-------|-----------|
+| RelatedPosts returns null when empty | 06-04 | Graceful degradation - section doesn't render if no related posts found |
+| Categories weighted 2x in relevance scoring | 06-04 | Categories are broader topics, so overlap is more significant than tag overlap |
+| React 19 useOptimistic for instant feedback | 06-04 | No loading spinner needed; UI updates immediately on click with automatic rollback on error |
 | getReactionState handles unauthenticated | 06-02 | Doesn't throw on missing session; returns { liked: false, count } for anonymous users |
 | toggleReaction returns full state | 06-02 | Returns { success, liked, count } so client can update UI without refetching |
 | createComment uses FormData pattern | 06-02 | Consistent with existing PostForm Server Actions; enables useActionState compatibility |
@@ -98,7 +101,7 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-01-24T00:57:51Z
-Stopped at: Completed 06-02-PLAN.md (Comment & Reaction Server Actions)
+Last session: 2026-01-24T06:43:45Z
+Stopped at: Completed 06-04-PLAN.md (Engagement UI Components)
 Resume file: None
-Next: Continue Phase 6 (Blog Engagement) with plan 06-03
+Next: Phase 6 (Blog Engagement) complete - ready for Phase 7 or integration
