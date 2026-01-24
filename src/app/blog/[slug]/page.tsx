@@ -1,14 +1,19 @@
 import { notFound, redirect } from 'next/navigation'
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import { getPostBySlug, getPostByPreviousSlug } from '@/lib/blog/posts'
+import { getPostBySlug, getPostByPreviousSlug, getRelatedPosts } from '@/lib/blog/posts'
 import { generatePostMetadata, generateArticleJsonLd } from '@/lib/blog/metadata'
 import { extractHeadings } from '@/lib/blog/toc'
 import { getOptionalSession } from '@/lib/dal'
+import { getCommentsByPostId } from '@/lib/dal/comments'
+import { getUserReaction, getReactionCount } from '@/lib/dal/reactions'
 import { PostHeader } from '@/components/blog/PostHeader'
 import { PostContent } from '@/components/blog/PostContent'
 import { MDXContent } from '@/components/blog/MDXContent'
 import { TableOfContents } from '@/components/blog/TableOfContents'
+import { CommentSection } from '@/components/blog/CommentSection'
+import { ReactionButton } from '@/components/blog/ReactionButton'
+import { RelatedPosts } from '@/components/blog/RelatedPosts'
 
 interface PostPageProps {
   params: Promise<{
@@ -54,6 +59,20 @@ export default async function PostPage({ params }: PostPageProps) {
   const session = await getOptionalSession()
   const isAdmin = session?.user?.role === 'admin'
 
+  // Fetch engagement data in parallel
+  const [comments, reactionCount, relatedPosts] = await Promise.all([
+    getCommentsByPostId(post._id),
+    getReactionCount(post._id),
+    getRelatedPosts(post._id, post.tags, post.categories, 3),
+  ])
+
+  // Check if current user has reacted (only if authenticated)
+  const isAuthenticated = !!session?.user
+  let userLiked = false
+  if (isAuthenticated && session.user.id) {
+    userLiked = await getUserReaction(post._id, session.user.id)
+  }
+
   return (
     <>
       {/* JSON-LD Structured Data */}
@@ -68,6 +87,16 @@ export default async function PostPage({ params }: PostPageProps) {
             {/* Main Content */}
             <div className="max-w-3xl">
               <PostHeader post={post} isAdmin={isAdmin} />
+
+              {/* Reaction Button */}
+              <div className="mb-8">
+                <ReactionButton
+                  postId={post._id}
+                  initialLiked={userLiked}
+                  initialCount={reactionCount}
+                  isAuthenticated={isAuthenticated}
+                />
+              </div>
 
               <PostContent>
                 <MDXContent content={post.content} />
@@ -92,6 +121,17 @@ export default async function PostPage({ params }: PostPageProps) {
                   </div>
                 </div>
               )}
+
+              {/* Comments Section */}
+              <CommentSection
+                postId={post._id}
+                comments={comments}
+                isAuthenticated={isAuthenticated}
+                isAdmin={isAdmin}
+              />
+
+              {/* Related Posts */}
+              <RelatedPosts posts={relatedPosts} />
             </div>
 
             {/* Table of Contents Sidebar */}
