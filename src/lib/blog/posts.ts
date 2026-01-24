@@ -131,3 +131,48 @@ export async function getPostBySlugForEdit(slug: string): Promise<SerializedPost
 
   return post ? serializePost(post) : null
 }
+
+// Get related posts based on shared tags and categories
+export async function getRelatedPosts(
+  currentPostId: string,
+  currentTags: string[],
+  currentCategories: string[],
+  limit: number = 3
+): Promise<SerializedPost[]> {
+  const client = await clientPromise
+  const db = client.db(DB_NAME)
+  const collection = db.collection<Post>(COLLECTION)
+
+  // Find posts with overlapping tags or categories
+  const relatedPosts = await collection.aggregate<Post>([
+    {
+      $match: {
+        _id: { $ne: new ObjectId(currentPostId) },
+        published: true,
+        $or: [
+          { tags: { $in: currentTags } },
+          { categories: { $in: currentCategories } }
+        ]
+      }
+    },
+    {
+      $addFields: {
+        // Calculate relevance score
+        // Categories weighted 2x (broader, more significant match)
+        relevanceScore: {
+          $add: [
+            { $size: { $ifNull: [{ $setIntersection: ['$tags', currentTags] }, []] } },
+            { $multiply: [
+              { $size: { $ifNull: [{ $setIntersection: ['$categories', currentCategories] }, []] } },
+              2
+            ]}
+          ]
+        }
+      }
+    },
+    { $sort: { relevanceScore: -1, publishedAt: -1 } },
+    { $limit: limit }
+  ]).toArray()
+
+  return relatedPosts.map(serializePost)
+}
