@@ -9,18 +9,18 @@ See: .planning/PROJECT.md (updated 2026-01-21)
 
 ## Current Position
 
-Phase: 5 of 8 (Blog Admin) ✓ VERIFIED
-Plan: 4 of 4 in current phase (All complete)
-Status: Phase 5 complete, goal verified
-Last activity: 2026-01-24 - Phase 5 verified, all criteria met
+Phase: 6 of 8 (Blog Engagement)
+Plan: 1 of 4 in current phase (06-01 complete)
+Status: In progress
+Last activity: 2026-01-24 - Completed 06-01-PLAN.md (Data Models & DAL)
 
-Progress: [██████░---] ~63% milestone (5 of 8 phases complete)
+Progress: [██████░---] ~64% milestone (21/33 plans complete)
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 21
-- Average duration: 6.4 min
+- Total plans completed: 22
+- Average duration: 6.2 min
 - Total execution time: 2.4 hours
 
 **By Phase:**
@@ -32,10 +32,11 @@ Progress: [██████░---] ~63% milestone (5 of 8 phases complete)
 | 03-authentication | 5 | 24min | 4.8min |
 | 04-blog-core | 5 | 53min | 10.6min |
 | 05-blog-admin | 4 | 19min | 4.8min |
+| 06-blog-engagement | 1 | 2min | 2min |
 
 **Recent Trend:**
-- Last 5 plans: 05-01 (4min), 05-02 (4min), 05-03 (3min), 05-04 (8min)
-- Trend: Blog admin phase complete; consistent execution velocity
+- Last 5 plans: 05-02 (4min), 05-03 (3min), 05-04 (8min), 06-01 (2min)
+- Trend: Fast execution for data layer setup; blog engagement phase underway
 
 *Updated after each plan completion*
 
@@ -48,6 +49,10 @@ Recent decisions affecting current work:
 
 | Decision | Phase | Rationale |
 |----------|-------|-----------|
+| toggleUserReaction returns newCount | 06-01 | Enables optimistic UI updates without refetching; instant feedback in client |
+| Heart-only reaction type for v1 | 06-01 | Simplify initial implementation; can extend later with more reaction types |
+| Oldest-first comment sorting | 06-01 | Natural reading order for conversations; users expect chronological flow |
+| Referenced comments collection | 06-01 | Avoid MongoDB 16MB document limit on popular posts; enables unbounded growth |
 | getPostBySlugForEdit ignores published filter | 05-04 | Admin can edit draft posts; separate function from public getPostBySlug |
 | AlertDialog for delete confirmation | 05-04 | Destructive actions require explicit confirmation to prevent accidents |
 | Admin controls via optional props | 05-04 | PostHeader accepts isAdmin/postId props; keeps component reusable |
@@ -90,7 +95,7 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-01-24T00:15:00Z
-Stopped at: Phase 5 verified complete
+Last session: 2026-01-24T00:56:51Z
+Stopped at: Completed 06-01-PLAN.md (Data Models & DAL)
 Resume file: None
-Next: Phase 6 (Blog Engagement) - ready for planning
+Next: Continue Phase 6 (Blog Engagement) with plan 06-02
