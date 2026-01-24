@@ -10,17 +10,17 @@ See: .planning/PROJECT.md (updated 2026-01-21)
 ## Current Position
 
 Phase: 6 of 8 (Blog Engagement)
-Plan: 1 of 4 in current phase (06-01 complete)
+Plan: 2 of 4 in current phase (06-02 complete)
 Status: In progress
-Last activity: 2026-01-24 - Completed 06-01-PLAN.md (Data Models & DAL)
+Last activity: 2026-01-24 - Completed 06-02-PLAN.md (Comment & Reaction Server Actions)
 
-Progress: [██████░---] ~64% milestone (21/33 plans complete)
+Progress: [██████░---] ~67% milestone (22/33 plans complete)
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 22
-- Average duration: 6.2 min
+- Total plans completed: 23
+- Average duration: 6.1 min
 - Total execution time: 2.4 hours
 
 **By Phase:**
@@ -32,10 +32,10 @@ Progress: [██████░---] ~64% milestone (21/33 plans complete)
 | 03-authentication | 5 | 24min | 4.8min |
 | 04-blog-core | 5 | 53min | 10.6min |
 | 05-blog-admin | 4 | 19min | 4.8min |
-| 06-blog-engagement | 1 | 2min | 2min |
+| 06-blog-engagement | 2 | 5min | 2.5min |
 
 **Recent Trend:**
-- Last 5 plans: 05-02 (4min), 05-03 (3min), 05-04 (8min), 06-01 (2min)
+- Last 5 plans: 05-03 (3min), 05-04 (8min), 06-01 (2min), 06-02 (3min)
 - Trend: Fast execution for data layer setup; blog engagement phase underway
 
 *Updated after each plan completion*
@@ -49,6 +49,9 @@ Recent decisions affecting current work:
 
 | Decision | Phase | Rationale |
 |----------|-------|-----------|
+| getReactionState handles unauthenticated | 06-02 | Doesn't throw on missing session; returns { liked: false, count } for anonymous users |
+| toggleReaction returns full state | 06-02 | Returns { success, liked, count } so client can update UI without refetching |
+| createComment uses FormData pattern | 06-02 | Consistent with existing PostForm Server Actions; enables useActionState compatibility |
 | toggleUserReaction returns newCount | 06-01 | Enables optimistic UI updates without refetching; instant feedback in client |
 | Heart-only reaction type for v1 | 06-01 | Simplify initial implementation; can extend later with more reaction types |
 | Oldest-first comment sorting | 06-01 | Natural reading order for conversations; users expect chronological flow |
@@ -95,7 +98,7 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-01-24T00:56:51Z
-Stopped at: Completed 06-01-PLAN.md (Data Models & DAL)
+Last session: 2026-01-24T00:57:51Z
+Stopped at: Completed 06-02-PLAN.md (Comment & Reaction Server Actions)
 Resume file: None
-Next: Continue Phase 6 (Blog Engagement) with plan 06-02
+Next: Continue Phase 6 (Blog Engagement) with plan 06-03
