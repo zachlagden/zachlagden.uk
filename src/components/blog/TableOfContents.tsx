@@ -68,7 +68,10 @@ export function TableOfContents({ headings }: TableOfContentsProps) {
   }
 
   return (
-    <nav className="sticky top-24 hidden max-h-[calc(100vh-8rem)] overflow-y-auto lg:block">
+    <nav
+      aria-label="Table of contents"
+      className="sticky top-24 hidden max-h-[calc(100vh-8rem)] overflow-y-auto lg:block"
+    >
       <h2 className="mb-4 text-sm font-semibold text-zinc-300">On This Page</h2>
       <ul className="space-y-2 text-sm">
         {headings.map((heading) => (

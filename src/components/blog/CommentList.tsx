@@ -9,7 +9,7 @@ interface CommentListProps {
 export function CommentList({ comments, isAdmin }: CommentListProps) {
   if (comments.length === 0) {
     return (
-      <p className="py-8 text-center text-zinc-600">
+      <p className="py-8 text-center text-zinc-500">
         No comments yet. Be the first to share your thoughts!
       </p>
     );

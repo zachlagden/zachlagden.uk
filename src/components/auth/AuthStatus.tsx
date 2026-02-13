@@ -11,7 +11,7 @@ export function AuthStatus() {
   if (status === "loading") {
     return (
       <div className="fixed top-6 right-6 z-50">
-        <div className="h-10 w-32 rounded-full bg-white/30 backdrop-blur-md animate-pulse" />
+        <div className="h-10 w-32 animate-pulse rounded-full bg-zinc-700/30 backdrop-blur-md" />
       </div>
     );
   }

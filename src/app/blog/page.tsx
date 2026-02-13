@@ -26,16 +26,14 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
   const categories = params.category?.split(",").filter(Boolean) || [];
   const tags = params.tag?.split(",").filter(Boolean) || [];
 
-  // Fetch filtered posts
-  const posts = await searchPosts({
-    query,
-    categories: categories.length > 0 ? categories : undefined,
-    tags: tags.length > 0 ? tags : undefined,
-    limit: 50,
-  });
-
-  // Fetch all available categories and tags for filters
-  const [allCategories, allTags] = await Promise.all([
+  // Fetch filtered posts and filter options in parallel
+  const [posts, allCategories, allTags] = await Promise.all([
+    searchPosts({
+      query,
+      categories: categories.length > 0 ? categories : undefined,
+      tags: tags.length > 0 ? tags : undefined,
+      limit: 50,
+    }),
     getAllCategories(),
     getAllTags(),
   ]);

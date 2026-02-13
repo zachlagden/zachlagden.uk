@@ -26,7 +26,7 @@ export default function PostLoading() {
           </div>
 
           {/* Meta info skeleton */}
-          <div className="mb-8 flex gap-4">
+          <div className="mb-8 flex flex-wrap gap-4">
             <div className="h-5 w-32 animate-pulse rounded bg-zinc-800" />
             <div className="h-5 w-24 animate-pulse rounded bg-zinc-800" />
             <div className="h-5 w-20 animate-pulse rounded bg-zinc-800" />

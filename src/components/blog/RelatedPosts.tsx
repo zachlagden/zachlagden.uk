@@ -59,7 +59,7 @@ export function RelatedPosts({ posts }: RelatedPostsProps) {
                 </h3>
 
                 {/* Meta */}
-                <p className="mt-2 font-mono text-xs text-zinc-600">
+                <p className="mt-2 font-mono text-xs text-zinc-500">
                   {post.readingTime} min read
                 </p>
               </div>

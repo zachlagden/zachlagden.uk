@@ -64,7 +64,7 @@ export function ProjectCard({ project, stats, index = 0 }: ProjectCardProps) {
               <TechnologyBadge key={tech} technology={tech} />
             ))}
             {project.technologies.length > 5 && (
-              <span className="self-center text-xs text-zinc-600">
+              <span className="self-center text-xs text-zinc-500">
                 +{project.technologies.length - 5} more
               </span>
             )}
@@ -109,7 +109,7 @@ export function ProjectCard({ project, stats, index = 0 }: ProjectCardProps) {
               </Link>
             )}
             {!project.demoUrl && !project.sourceUrl && (
-              <span className="text-sm text-zinc-600">Coming soon</span>
+              <span className="text-sm text-zinc-500">Coming soon</span>
             )}
           </div>
         </div>

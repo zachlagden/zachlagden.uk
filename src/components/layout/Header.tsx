@@ -39,7 +39,7 @@ export default function HeroSection() {
       >
         {/* Name with gradient */}
         <h1
-          className="font-heading text-7xl font-bold tracking-tighter md:text-8xl"
+          className="font-heading text-5xl font-bold tracking-tighter sm:text-7xl md:text-8xl"
           style={{
             backgroundImage: "linear-gradient(135deg, #06b6d4, #3b82f6)",
             WebkitBackgroundClip: "text",

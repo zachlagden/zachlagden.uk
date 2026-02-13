@@ -33,7 +33,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
       // Inline code
       return (
         <code
-          className="px-1.5 py-0.5 rounded bg-neutral-100 text-sm font-mono text-neutral-800"
+          className="rounded bg-zinc-800 px-1.5 py-0.5 font-mono text-sm text-zinc-200"
           {...props}
         >
           {children}

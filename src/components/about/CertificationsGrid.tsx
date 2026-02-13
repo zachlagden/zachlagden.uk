@@ -51,7 +51,7 @@ export default function CertificationsGrid({
                 href={cert.credentialUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mt-4 inline-flex items-center gap-1.5 text-sm text-cyan-500 transition-colors hover:text-cyan-400"
+                className="mt-4 inline-flex items-center gap-1.5 rounded text-sm text-cyan-500 transition-colors hover:text-cyan-400 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:ring-offset-2 focus:ring-offset-zinc-900"
               >
                 View credential
                 <ExternalLink className="h-3.5 w-3.5" aria-hidden="true" />

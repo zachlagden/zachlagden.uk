@@ -9,15 +9,15 @@ export function SignInButton() {
   };
 
   return (
-    <div className="fixed top-6 right-6 z-50">
+    <div className="fixed right-6 top-6 z-50">
       <button
         onClick={handleSignIn}
         className={cn(
-          "flex items-center gap-2 px-4 py-2 rounded-full",
-          "bg-white/30",
+          "flex items-center gap-2 rounded-full px-4 py-2",
+          "bg-zinc-800/80",
           "backdrop-blur-md",
-          "text-neutral-800",
-          "hover:bg-white/50",
+          "text-zinc-200",
+          "hover:bg-zinc-700/80",
           "transition-colors duration-150",
           "text-sm font-medium",
         )}

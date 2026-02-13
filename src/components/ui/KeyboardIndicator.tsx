@@ -83,14 +83,14 @@ const KeyboardIndicator: React.FC<KeyboardIndicatorProps> = ({
         {isVisible && !isHelpVisible && (
           <motion.button
             onClick={toggleHelp}
-            className="fixed bottom-8 left-1/2 transform -translate-x-1/2 z-40 flex items-center gap-2 bg-black/80 text-white px-3 py-2 rounded-full shadow-lg)] text-xs"
+            className="fixed bottom-8 left-1/2 z-40 flex -translate-x-1/2 transform items-center gap-2 rounded-full bg-zinc-800/90 px-3 py-2 text-xs text-zinc-300 shadow-lg backdrop-blur-md"
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 10 }}
             transition={{ duration: prefersReducedMotion ? 0.1 : 0.3 }}
             aria-label="Keyboard navigation available. Click for help."
           >
-            <Keyboard className="w-3.5 h-3.5" />
+            <Keyboard className="h-3.5 w-3.5" />
             <span>Press ? for keyboard shortcuts</span>
           </motion.button>
         )}
@@ -99,84 +99,84 @@ const KeyboardIndicator: React.FC<KeyboardIndicatorProps> = ({
       <AnimatePresence>
         {isHelpVisible && (
           <motion.div
-            className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm"
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={toggleHelp}
           >
             <motion.div
-              className="bg-white rounded-lg shadow-xl)] p-6 max-w-md mx-4"
+              className="mx-4 max-w-md rounded-lg border border-zinc-700 bg-zinc-900 p-6 shadow-xl"
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.9, opacity: 0 }}
               transition={{ type: "spring", damping: 20 }}
               onClick={(e) => e.stopPropagation()}
             >
-              <div className="flex items-start justify-between mb-4">
-                <div className="flex items-center gap-2">
-                  <Keyboard className="w-5 h-5" />
+              <div className="mb-4 flex items-start justify-between">
+                <div className="flex items-center gap-2 text-zinc-100">
+                  <Keyboard className="h-5 w-5" />
                   <h3 className="text-lg font-semibold">Keyboard Navigation</h3>
                 </div>
                 <button
                   onClick={toggleHelp}
-                  className="text-neutral-400 hover:text-neutral-900"
+                  className="text-zinc-500 hover:text-zinc-200"
                   aria-label="Close keyboard help"
                 >
-                  ×
+                  &times;
                 </button>
               </div>
 
               <div className="space-y-4">
                 <div>
-                  <h4 className="text-sm font-medium mb-2">
+                  <h4 className="mb-2 text-sm font-medium text-zinc-300">
                     Section Navigation
                   </h4>
-                  <div className="grid grid-cols-2 gap-y-2 text-sm">
+                  <div className="grid grid-cols-2 gap-y-2 text-sm text-zinc-400">
                     <div className="flex items-center gap-2">
-                      <kbd className="px-2 py-1 bg-neutral-100 border rounded text-xs">
-                        ↑
+                      <kbd className="rounded border border-zinc-700 bg-zinc-800 px-2 py-1 text-xs text-zinc-300">
+                        &uarr;
                       </kbd>
                       <span>Previous section</span>
                     </div>
                     <div className="flex items-center gap-2">
-                      <kbd className="px-2 py-1 bg-neutral-100 border rounded text-xs">
-                        ↓
+                      <kbd className="rounded border border-zinc-700 bg-zinc-800 px-2 py-1 text-xs text-zinc-300">
+                        &darr;
                       </kbd>
                       <span>Next section</span>
                     </div>
                     <div className="flex items-center gap-2">
-                      <kbd className="px-2 py-1 bg-neutral-100 border rounded text-xs">
+                      <kbd className="rounded border border-zinc-700 bg-zinc-800 px-2 py-1 text-xs text-zinc-300">
                         1
                       </kbd>
                       <span>About section</span>
                     </div>
                     <div className="flex items-center gap-2">
-                      <kbd className="px-2 py-1 bg-neutral-100 border rounded text-xs">
+                      <kbd className="rounded border border-zinc-700 bg-zinc-800 px-2 py-1 text-xs text-zinc-300">
                         2
                       </kbd>
                       <span>Experience</span>
                     </div>
                     <div className="flex items-center gap-2">
-                      <kbd className="px-2 py-1 bg-neutral-100 border rounded text-xs">
+                      <kbd className="rounded border border-zinc-700 bg-zinc-800 px-2 py-1 text-xs text-zinc-300">
                         3
                       </kbd>
                       <span>Education</span>
                     </div>
                     <div className="flex items-center gap-2">
-                      <kbd className="px-2 py-1 bg-neutral-100 border rounded text-xs">
+                      <kbd className="rounded border border-zinc-700 bg-zinc-800 px-2 py-1 text-xs text-zinc-300">
                         4
                       </kbd>
                       <span>Skills</span>
                     </div>
                     <div className="flex items-center gap-2">
-                      <kbd className="px-2 py-1 bg-neutral-100 border rounded text-xs">
+                      <kbd className="rounded border border-zinc-700 bg-zinc-800 px-2 py-1 text-xs text-zinc-300">
                         5
                       </kbd>
                       <span>Certifications</span>
                     </div>
                     <div className="flex items-center gap-2">
-                      <kbd className="px-2 py-1 bg-neutral-100 border rounded text-xs">
+                      <kbd className="rounded border border-zinc-700 bg-zinc-800 px-2 py-1 text-xs text-zinc-300">
                         6
                       </kbd>
                       <span>Contact</span>
@@ -185,9 +185,11 @@ const KeyboardIndicator: React.FC<KeyboardIndicatorProps> = ({
                 </div>
 
                 <div>
-                  <h4 className="text-sm font-medium mb-2">Help</h4>
-                  <div className="flex items-center gap-2 text-sm">
-                    <kbd className="px-2 py-1 bg-neutral-100 rounded text-xs">
+                  <h4 className="mb-2 text-sm font-medium text-zinc-300">
+                    Help
+                  </h4>
+                  <div className="flex items-center gap-2 text-sm text-zinc-400">
+                    <kbd className="rounded border border-zinc-700 bg-zinc-800 px-2 py-1 text-xs text-zinc-300">
                       ?
                     </kbd>
                     <span>Toggle this help dialog</span>
@@ -197,7 +199,7 @@ const KeyboardIndicator: React.FC<KeyboardIndicatorProps> = ({
 
               <button
                 onClick={toggleHelp}
-                className="w-full mt-6 py-2 bg-black text-white rounded-lg hover:bg-neutral-800 transition-colors"
+                className="mt-6 w-full rounded-lg bg-zinc-100 py-2 text-zinc-900 transition-colors hover:bg-zinc-200"
               >
                 Got it
               </button>

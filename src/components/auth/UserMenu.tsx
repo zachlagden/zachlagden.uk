@@ -29,46 +29,44 @@ export function UserMenu() {
   };
 
   const handleSignOutEverywhere = async () => {
-    // Will call API route created in later plan
-    // Gracefully fails if route doesn't exist yet
     try {
       await fetch("/api/auth/sessions", {
         method: "DELETE",
         body: JSON.stringify({ all: true }),
       });
     } catch {
-      // Silently fail if API route doesn't exist yet
       console.log("Sign out everywhere API not yet available");
     }
     signOut({ callbackUrl: "/" });
   };
 
   return (
-    <div className="fixed top-6 right-6 z-50" ref={menuRef}>
+    <div className="fixed right-6 top-6 z-50" ref={menuRef}>
       {/* Trigger - Avatar + Name */}
       <button
         onClick={() => setIsOpen(!isOpen)}
         className={cn(
-          "flex items-center gap-2 px-3 py-2 rounded-full",
-          "bg-white/30",
+          "flex items-center gap-2 rounded-full px-3 py-2",
+          "bg-zinc-800/80",
           "backdrop-blur-md",
-          "hover:bg-white/50",
+          "hover:bg-zinc-700/80",
           "transition-colors duration-150",
         )}
       >
         <div className="relative">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={session.user.image || "/placeholder-avatar.png"}
             alt={session.user.name || "User"}
             className="h-8 w-8 rounded-full"
           />
           {isAdmin && (
-            <span className="absolute -bottom-1 -right-1 h-4 w-4 rounded-full bg-amber-500 border-2 border-white flex items-center justify-center">
-              <span className="text-[8px] text-white font-bold">A</span>
+            <span className="absolute -bottom-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full border-2 border-zinc-900 bg-cyan-500">
+              <span className="text-[8px] font-bold text-zinc-950">A</span>
             </span>
           )}
         </div>
-        <span className="text-sm font-medium text-neutral-800">
+        <span className="text-sm font-medium text-zinc-200">
           {session.user.name}
         </span>
       </button>
@@ -77,22 +75,22 @@ export function UserMenu() {
       {isOpen && (
         <div
           className={cn(
-            "absolute top-full right-0 mt-2 w-48",
-            "bg-white/80",
-            "backdrop-blur-md rounded-lg",
+            "absolute right-0 top-full mt-2 w-48",
+            "bg-zinc-800/80",
+            "rounded-lg backdrop-blur-md",
             "shadow-lg",
-            "border border-neutral-200/50",
+            "border border-zinc-700/50",
             "py-1",
           )}
         >
           {/* User info */}
-          <div className="px-3 py-2 border-b border-neutral-200/50">
-            <p className="text-sm font-medium text-neutral-800">
+          <div className="border-b border-zinc-700/50 px-3 py-2">
+            <p className="text-sm font-medium text-zinc-200">
               {session.user.name}
             </p>
-            <p className="text-xs text-neutral-500">{session.user.email}</p>
+            <p className="text-xs text-zinc-400">{session.user.email}</p>
             {isAdmin && (
-              <span className="inline-block mt-1 px-2 py-0.5 text-xs bg-amber-100 text-amber-800 rounded">
+              <span className="mt-1 inline-block rounded bg-cyan-500/10 px-2 py-0.5 text-xs text-cyan-400">
                 Admin
               </span>
             )}
@@ -101,13 +99,13 @@ export function UserMenu() {
           {/* Menu items */}
           <button
             onClick={handleSignOut}
-            className="w-full px-3 py-2 text-left text-sm text-neutral-700 hover:bg-neutral-100/50"
+            className="w-full px-3 py-2 text-left text-sm text-zinc-300 hover:bg-zinc-700/50"
           >
             Sign out
           </button>
           <button
             onClick={handleSignOutEverywhere}
-            className="w-full px-3 py-2 text-left text-sm text-neutral-700 hover:bg-neutral-100/50"
+            className="w-full px-3 py-2 text-left text-sm text-zinc-300 hover:bg-zinc-700/50"
           >
             Sign out everywhere
           </button>

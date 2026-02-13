@@ -166,7 +166,10 @@ export function PostForm({
     <form action={formAction} className="space-y-8">
       {/* General error message */}
       {state.message && !state.success && (
-        <div className="p-4 rounded-md bg-destructive/10 border border-destructive/20 text-destructive">
+        <div
+          role="alert"
+          className="p-4 rounded-md bg-destructive/10 border border-destructive/20 text-destructive"
+        >
           {state.message}
         </div>
       )}
@@ -310,9 +313,14 @@ export function PostForm({
                 addCategory();
               }
             }}
-            className="max-w-xs"
+            className="min-w-0 max-w-xs"
           />
-          <Button type="button" variant="outline" onClick={addCategory}>
+          <Button
+            type="button"
+            variant="outline"
+            onClick={addCategory}
+            className="shrink-0"
+          >
             Add
           </Button>
         </div>
@@ -359,7 +367,7 @@ export function PostForm({
             value={newTag}
             onChange={(e) => setNewTag(e.target.value)}
             onKeyDown={handleTagKeyDown}
-            className="max-w-xs"
+            className="min-w-0 max-w-xs"
           />
           <Button
             type="button"
@@ -368,6 +376,7 @@ export function PostForm({
               addTag(newTag);
               setNewTag("");
             }}
+            className="shrink-0"
           >
             Add
           </Button>

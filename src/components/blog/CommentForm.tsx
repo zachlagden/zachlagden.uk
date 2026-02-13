@@ -60,7 +60,11 @@ export function CommentForm({ postId, isAuthenticated }: CommentFormProps) {
           aria-describedby={state.errors?.content ? "content-error" : undefined}
         />
         {state.errors?.content && (
-          <p id="content-error" className="mt-1 text-sm text-red-400">
+          <p
+            id="content-error"
+            role="alert"
+            className="mt-1 text-sm text-red-400"
+          >
             {state.errors.content[0]}
           </p>
         )}
@@ -74,7 +78,9 @@ export function CommentForm({ postId, isAuthenticated }: CommentFormProps) {
       </div>
 
       {state.message && !state.success && (
-        <p className="text-sm text-red-400">{state.message}</p>
+        <p role="alert" className="text-sm text-red-400">
+          {state.message}
+        </p>
       )}
     </form>
   );

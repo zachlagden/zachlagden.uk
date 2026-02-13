@@ -55,7 +55,7 @@ export function PostCard({ post, index = 0 }: PostCardProps) {
                 {post.categories[0]}
               </span>
             )}
-            <span className="font-mono text-xs text-zinc-600">
+            <span className="font-mono text-xs text-zinc-500">
               {post.readingTime} min read
             </span>
           </div>
@@ -73,7 +73,7 @@ export function PostCard({ post, index = 0 }: PostCardProps) {
           {/* Date */}
           <time
             dateTime={post.publishedAt || undefined}
-            className="mt-4 block font-mono text-xs text-zinc-600"
+            className="mt-4 block font-mono text-xs text-zinc-500"
           >
             {formatDate(post.publishedAt)}
           </time>

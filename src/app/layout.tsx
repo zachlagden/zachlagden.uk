@@ -5,10 +5,11 @@ import { GoogleAnalytics } from "@next/third-parties/google";
 import { SessionProvider } from "@/components/auth/SessionProvider";
 import { AuthStatus } from "@/components/auth/AuthStatus";
 import { AdminFAB } from "@/components/auth/AdminFAB";
-import { loadContentServer } from "@/utils/serverContentLoader";
+import { getSiteSetting } from "@/lib/content/site";
 import { NuqsAdapter } from "nuqs/adapters/next/app";
 import Navigation from "@/components/layout/Navigation";
 import Footer from "@/components/layout/Footer";
+import { ReducedMotionProvider } from "@/components/providers/ReducedMotionProvider";
 
 // Optimize font loading
 const inter = Inter({
@@ -36,19 +37,46 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export async function generateMetadata(): Promise<Metadata> {
-  const content = await loadContentServer();
+  // Fetch site settings from MongoDB in parallel
+  const [
+    titleSetting,
+    descSetting,
+    siteUrlSetting,
+    ogImageSetting,
+    twitterImageSetting,
+    keywordsSetting,
+  ] = await Promise.all([
+    getSiteSetting("title"),
+    getSiteSetting("description"),
+    getSiteSetting("siteUrl"),
+    getSiteSetting("ogImage"),
+    getSiteSetting("twitterImage"),
+    getSiteSetting("keywords"),
+  ]);
+
+  const title =
+    (titleSetting?.value as string) || "Zach Lagden | Full-Stack Developer";
+  const description =
+    (descSetting?.value as string) ||
+    "Full-stack developer and digital entrepreneur.";
+  const siteUrl = (siteUrlSetting?.value as string) || "https://zachlagden.uk";
+  const ogImage = (ogImageSetting?.value as string) || "/og-image.png";
+  const twitterImage =
+    (twitterImageSetting?.value as string) || "/twitter-image.png";
+  const keywords = (keywordsSetting?.value as string[]) || [];
+  const name = "Zach Lagden";
 
   return {
-    metadataBase: new URL(content.metadata.siteUrl),
+    metadataBase: new URL(siteUrl),
     title: {
-      default: content.metadata.title,
-      template: `%s | ${content.personal.name}`,
+      default: title,
+      template: `%s | ${name}`,
     },
-    description: content.metadata.description,
-    keywords: content.metadata.keywords,
-    authors: [{ name: content.personal.name }],
-    creator: content.personal.name,
-    publisher: content.personal.name,
+    description,
+    keywords,
+    authors: [{ name }],
+    creator: name,
+    publisher: name,
     formatDetection: {
       email: true,
       address: true,
@@ -64,24 +92,24 @@ export async function generateMetadata(): Promise<Metadata> {
     openGraph: {
       type: "website",
       locale: "en_GB",
-      url: content.metadata.siteUrl,
-      title: content.metadata.title,
-      description: content.metadata.description,
-      siteName: `${content.personal.name} Portfolio`,
+      url: siteUrl,
+      title,
+      description,
+      siteName: `${name} Portfolio`,
       images: [
         {
-          url: content.metadata.ogImage,
+          url: ogImage,
           width: 1200,
           height: 630,
-          alt: content.metadata.title,
+          alt: title,
         },
       ],
     },
     twitter: {
       card: "summary_large_image",
-      title: content.metadata.title,
-      description: content.metadata.description,
-      images: [content.metadata.twitterImage],
+      title,
+      description,
+      images: [twitterImage],
     },
     robots: {
       index: true,
@@ -135,13 +163,21 @@ export default async function RootLayout({
         className={`${inter.className} bg-[#0a0a0a] text-zinc-100 min-h-screen`}
       >
         <SessionProvider>
-          <NuqsAdapter>
-            <Navigation />
-            {children}
-            <Footer />
-          </NuqsAdapter>
-          <AuthStatus />
-          <AdminFAB />
+          <ReducedMotionProvider>
+            <NuqsAdapter>
+              <a
+                href="#main-content"
+                className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-lg focus:bg-cyan-500 focus:px-4 focus:py-2 focus:text-sm focus:font-medium focus:text-zinc-950"
+              >
+                Skip to main content
+              </a>
+              <Navigation />
+              <div id="main-content">{children}</div>
+              <Footer />
+            </NuqsAdapter>
+            <AuthStatus />
+            <AdminFAB />
+          </ReducedMotionProvider>
         </SessionProvider>
       </body>
       {process.env.NEXT_PUBLIC_GA_ID && (

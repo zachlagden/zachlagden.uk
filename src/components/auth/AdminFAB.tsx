@@ -84,22 +84,22 @@ export function AdminFAB({ editUrl, onDelete }: AdminFABProps) {
     <div className="fixed bottom-6 right-6 z-50 flex flex-col-reverse items-end gap-2">
       {/* Action buttons (shown when open) */}
       {isOpen && (
-        <div className="flex flex-col-reverse gap-2 mb-2">
+        <div className="mb-2 flex flex-col-reverse gap-2">
           {actions.map((action, index) =>
             action.href ? (
               <Link
                 key={index}
                 href={action.href}
                 className={cn(
-                  "flex items-center gap-2 px-4 py-2 rounded-full",
-                  "bg-white/80",
+                  "flex items-center gap-2 rounded-full px-4 py-2",
+                  "bg-zinc-800/80",
                   "backdrop-blur-md",
                   "shadow-lg",
                   "transition-all duration-150",
                   "animate-in fade-in slide-in-from-bottom-2",
                   action.variant === "danger"
-                    ? "text-red-600 hover:bg-red-50"
-                    : "text-neutral-800 hover:bg-white",
+                    ? "text-red-400 hover:bg-red-500/10"
+                    : "text-zinc-200 hover:bg-zinc-700",
                 )}
                 style={{ animationDelay: `${index * 50}ms` }}
               >
@@ -114,15 +114,15 @@ export function AdminFAB({ editUrl, onDelete }: AdminFABProps) {
                   setIsOpen(false);
                 }}
                 className={cn(
-                  "flex items-center gap-2 px-4 py-2 rounded-full",
-                  "bg-white/80",
+                  "flex items-center gap-2 rounded-full px-4 py-2",
+                  "bg-zinc-800/80",
                   "backdrop-blur-md",
                   "shadow-lg",
                   "transition-all duration-150",
                   "animate-in fade-in slide-in-from-bottom-2",
                   action.variant === "danger"
-                    ? "text-red-600 hover:bg-red-50"
-                    : "text-neutral-800 hover:bg-white",
+                    ? "text-red-400 hover:bg-red-500/10"
+                    : "text-zinc-200 hover:bg-zinc-700",
                 )}
                 style={{ animationDelay: `${index * 50}ms` }}
               >
@@ -138,9 +138,9 @@ export function AdminFAB({ editUrl, onDelete }: AdminFABProps) {
       <button
         onClick={() => setIsOpen(!isOpen)}
         className={cn(
-          "flex items-center justify-center h-14 w-14 rounded-full",
-          "bg-amber-500 hover:bg-amber-600",
-          "text-white shadow-lg",
+          "flex h-14 w-14 items-center justify-center rounded-full",
+          "bg-cyan-500 hover:bg-cyan-600",
+          "text-zinc-950 shadow-lg",
           "transition-all duration-150",
           isOpen && "rotate-45",
         )}

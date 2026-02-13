@@ -38,7 +38,7 @@ export function Comment({ comment, isAdmin }: CommentProps) {
       <div className="min-w-0 flex-1">
         <div className="mb-1 flex items-center gap-2">
           <span className="font-medium text-zinc-200">{comment.username}</span>
-          <span className="font-mono text-sm text-zinc-600">{timeAgo}</span>
+          <span className="font-mono text-sm text-zinc-500">{timeAgo}</span>
           {isAdmin && (
             <DeleteCommentButton
               commentId={comment._id}

@@ -68,19 +68,16 @@ export default async function PostPage({ params }: PostPageProps) {
   const session = await getOptionalSession();
   const isAdmin = session?.user?.role === "admin";
 
-  // Fetch engagement data in parallel
-  const [comments, reactionCount, relatedPosts] = await Promise.all([
+  // Fetch engagement data in parallel (including user reaction check)
+  const isAuthenticated = !!session?.user;
+  const [comments, reactionCount, relatedPosts, userLiked] = await Promise.all([
     getCommentsByPostId(post._id),
     getReactionCount(post._id),
     getRelatedPosts(post._id, post.tags, post.categories, 3),
+    isAuthenticated && session.user.id
+      ? getUserReaction(post._id, session.user.id)
+      : Promise.resolve(false),
   ]);
-
-  // Check if current user has reacted (only if authenticated)
-  const isAuthenticated = !!session?.user;
-  let userLiked = false;
-  if (isAuthenticated && session.user.id) {
-    userLiked = await getUserReaction(post._id, session.user.id);
-  }
 
   return (
     <>

@@ -31,7 +31,7 @@ export default function LatestPostsSection({ posts }: LatestPostsSectionProps) {
                   {post.categories[0]}
                 </span>
               )}
-              <span className="font-mono text-xs text-zinc-600">
+              <span className="font-mono text-xs text-zinc-500">
                 {post.readingTime} min read
               </span>
             </div>
@@ -44,7 +44,7 @@ export default function LatestPostsSection({ posts }: LatestPostsSectionProps) {
               {post.excerpt}
             </p>
 
-            <span className="mt-3 block font-mono text-xs text-zinc-600">
+            <span className="mt-3 block font-mono text-xs text-zinc-500">
               {post.publishedAt
                 ? new Date(post.publishedAt).toLocaleDateString("en-GB", {
                     day: "numeric",

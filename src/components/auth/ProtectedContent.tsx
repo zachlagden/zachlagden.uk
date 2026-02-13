@@ -20,7 +20,7 @@ export function ProtectedContent({
   if (status === "loading") {
     return (
       <div className="flex items-center justify-center p-8">
-        <div className="h-8 w-8 animate-spin rounded-full border-4 border-neutral-200 border-t-neutral-800" />
+        <div className="h-8 w-8 animate-spin rounded-full border-4 border-zinc-700 border-t-zinc-300" />
       </div>
     );
   }
@@ -30,10 +30,10 @@ export function ProtectedContent({
 
     return (
       <div className="flex flex-col items-center justify-center p-8 text-center">
-        <h2 className="text-xl font-semibold text-neutral-800 mb-2">
+        <h2 className="mb-2 text-xl font-semibold text-zinc-100">
           Sign in required
         </h2>
-        <p className="text-neutral-600 mb-4">
+        <p className="mb-4 text-zinc-400">
           Please sign in to access this content.
         </p>
         <button
@@ -41,10 +41,10 @@ export function ProtectedContent({
             signIn("github", { callbackUrl: window.location.href })
           }
           className={cn(
-            "flex items-center gap-2 px-4 py-2 rounded-lg",
-            "bg-neutral-900",
-            "text-white",
-            "hover:bg-neutral-800",
+            "flex items-center gap-2 rounded-lg px-4 py-2",
+            "bg-zinc-100",
+            "text-zinc-900",
+            "hover:bg-zinc-200",
             "transition-colors",
           )}
         >
@@ -59,10 +59,10 @@ export function ProtectedContent({
 
     return (
       <div className="flex flex-col items-center justify-center p-8 text-center">
-        <h2 className="text-xl font-semibold text-neutral-800 mb-2">
+        <h2 className="mb-2 text-xl font-semibold text-zinc-100">
           Access denied
         </h2>
-        <p className="text-neutral-600">
+        <p className="text-zinc-400">
           You don&apos;t have permission to access this content.
         </p>
       </div>

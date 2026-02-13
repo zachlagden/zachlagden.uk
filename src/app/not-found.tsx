@@ -6,20 +6,20 @@ import { Home, ArrowLeft } from "lucide-react";
 
 export default function NotFound() {
   return (
-    <div className="min-h-screen bg-neutral-50 font-[system-ui] text-neutral-900 flex flex-col items-center justify-center px-4">
-      <div className="text-center max-w-lg">
+    <div className="flex min-h-[calc(100vh-4rem)] flex-col items-center justify-center px-4">
+      <div className="max-w-lg text-center">
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
-          <div className="mb-6 inline-flex items-center justify-center w-20 h-20 rounded-full bg-neutral-100">
-            <span className="text-4xl font-bold text-neutral-800">404</span>
+          <div className="mb-6 inline-flex h-20 w-20 items-center justify-center rounded-full bg-zinc-800">
+            <span className="text-4xl font-bold text-zinc-300">404</span>
           </div>
         </motion.div>
 
         <motion.h1
-          className="text-4xl font-bold tracking-tighter mb-4"
+          className="mb-4 font-heading text-4xl font-bold tracking-tighter text-text-primary"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.6, delay: 0.2 }}
@@ -28,7 +28,7 @@ export default function NotFound() {
         </motion.h1>
 
         <motion.p
-          className="text-neutral-600 mb-8 leading-relaxed"
+          className="mb-8 leading-relaxed text-zinc-400"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.6, delay: 0.3 }}
@@ -38,39 +38,28 @@ export default function NotFound() {
         </motion.p>
 
         <motion.div
-          className="flex flex-col sm:flex-row items-center justify-center gap-4"
+          className="flex flex-col items-center justify-center gap-4 sm:flex-row"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.4 }}
         >
           <Link
             href="/"
-            className="flex items-center gap-2 bg-black text-white py-2 px-4 rounded-lg hover:bg-neutral-800 transition-colors focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-2"
+            className="flex items-center gap-2 rounded-lg bg-cyan-500 px-4 py-2 text-zinc-950 transition-colors hover:bg-cyan-600 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:ring-offset-2 focus:ring-offset-[#0a0a0a]"
           >
-            <Home className="w-4 h-4" />
+            <Home className="h-4 w-4" />
             Back to Home
           </Link>
 
           <button
             onClick={() => window.history.back()}
-            className="flex items-center gap-2 text-neutral-600 py-2 px-4 rounded-lg hover:text-neutral-900 hover:bg-neutral-100 transition-colors focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-2"
+            className="flex items-center gap-2 rounded-lg px-4 py-2 text-zinc-400 transition-colors hover:bg-zinc-800 hover:text-zinc-200 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:ring-offset-2 focus:ring-offset-[#0a0a0a]"
           >
-            <ArrowLeft className="w-4 h-4" />
+            <ArrowLeft className="h-4 w-4" />
             Go Back
           </button>
         </motion.div>
       </div>
-
-      <motion.div
-        className="mt-16 text-center"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.6, delay: 0.6 }}
-      >
-        <p className="text-xs text-neutral-400">
-          © {new Date().getFullYear()} Zach Lagden
-        </p>
-      </motion.div>
     </div>
   );
 }

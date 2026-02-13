@@ -1,14 +1,16 @@
 import type { MetadataRoute } from "next";
-import { loadContentServer } from "@/utils/serverContentLoader";
+import { getSiteSetting } from "@/lib/content/site";
 
 export default async function robots(): Promise<MetadataRoute.Robots> {
-  const content = await loadContentServer();
+  const siteUrlSetting = await getSiteSetting("siteUrl");
+  const siteUrl = (siteUrlSetting?.value as string) || "https://zachlagden.uk";
+
   return {
     rules: {
       userAgent: "*",
       allow: "/",
     },
-    sitemap: `${content.metadata.siteUrl}/sitemap.xml`,
-    host: content.metadata.siteUrl,
+    sitemap: `${siteUrl}/sitemap.xml`,
+    host: siteUrl,
   };
 }
