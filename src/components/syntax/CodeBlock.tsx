@@ -30,14 +30,14 @@ export function CodeBlock({ children, className }: CodeBlockProps) {
   return (
     <div className="relative group my-4">
       {/* Language badge */}
-      <div className="absolute top-0 right-0 px-3 py-1 text-xs font-mono text-neutral-500 dark:text-neutral-400 bg-neutral-100 dark:bg-neutral-800 rounded-bl-lg rounded-tr-lg border-b border-l border-neutral-200 dark:border-neutral-700">
+      <div className="absolute top-0 right-0 px-3 py-1 text-xs font-mono text-neutral-500 bg-neutral-100 rounded-bl-lg rounded-tr-lg border-b border-l border-neutral-200">
         {language}
       </div>
 
       {/* Copy button */}
       <button
         onClick={handleCopy}
-        className="absolute top-8 right-2 px-2 py-1 text-xs opacity-0 group-hover:opacity-100 transition-opacity bg-neutral-200 dark:bg-neutral-700 hover:bg-neutral-300 dark:hover:bg-neutral-600 rounded text-neutral-700 dark:text-neutral-300"
+        className="absolute top-8 right-2 px-2 py-1 text-xs opacity-0 group-hover:opacity-100 transition-opacity bg-neutral-200 hover:bg-neutral-300 rounded text-neutral-700"
         aria-label="Copy code"
       >
         {copied ? 'Copied!' : 'Copy'}
@@ -46,8 +46,8 @@ export function CodeBlock({ children, className }: CodeBlockProps) {
       {/* Code block */}
       <pre className={cn(
         'overflow-x-auto rounded-lg border',
-        'bg-neutral-50 dark:bg-[#0d1117]',  // GitHub dark theme background
-        'border-neutral-200 dark:border-neutral-700',
+        'bg-neutral-50',  // GitHub dark theme background
+        'border-neutral-200',
         'p-4 pt-8',  // Extra top padding for language badge
         'text-sm font-mono',
         className

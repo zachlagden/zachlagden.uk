@@ -1,6 +1,5 @@
 import { render, RenderOptions } from '@testing-library/react'
 import { ReactElement } from 'react'
-import { ThemeProvider } from 'next-themes'
 
 interface AllProvidersProps {
   children: React.ReactNode
@@ -8,20 +7,10 @@ interface AllProvidersProps {
 
 /**
  * Wraps components with all necessary providers for testing.
- * Currently includes ThemeProvider for dark mode support.
  * Add additional providers here as needed (e.g., auth context).
  */
 function AllProviders({ children }: AllProvidersProps) {
-  return (
-    <ThemeProvider
-      attribute="class"
-      defaultTheme="light"
-      enableSystem={false}
-      disableTransitionOnChange
-    >
-      {children}
-    </ThemeProvider>
-  )
+  return <>{children}</>
 }
 
 /**

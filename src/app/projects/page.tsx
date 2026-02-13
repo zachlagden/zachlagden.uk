@@ -47,14 +47,14 @@ export default async function ProjectsPage({ searchParams }: ProjectsPageProps) 
   });
 
   return (
-    <div className="min-h-screen bg-white dark:bg-neutral-950">
+    <div className="min-h-screen bg-white">
       {/* Header */}
-      <div className="border-b border-neutral-200 dark:border-neutral-800">
+      <div className="border-b border-neutral-200">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
-          <h1 className="text-4xl font-bold mb-4 text-neutral-900 dark:text-neutral-100">
+          <h1 className="text-4xl font-bold mb-4 text-neutral-900">
             Projects
           </h1>
-          <p className="text-lg text-neutral-600 dark:text-neutral-400 max-w-2xl">
+          <p className="text-lg text-neutral-600 max-w-2xl">
             A collection of projects I&apos;ve built, from full-stack applications to
             open-source contributions. Filter by technology to explore.
           </p>
@@ -66,12 +66,12 @@ export default async function ProjectsPage({ searchParams }: ProjectsPageProps) 
         {/* Filters */}
         {allTechnologies.length > 0 && (
           <div className="mb-8">
-            <h2 className="text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-3">
+            <h2 className="text-sm font-medium text-neutral-700 mb-3">
               Filter by technology
             </h2>
             <Suspense
               fallback={
-                <div className="h-10 bg-neutral-100 dark:bg-neutral-800 rounded-lg animate-pulse" />
+                <div className="h-10 bg-neutral-100 rounded-lg animate-pulse" />
               }
             >
               <TechnologyFilters technologies={allTechnologies} />

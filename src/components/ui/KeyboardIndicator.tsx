@@ -83,7 +83,7 @@ const KeyboardIndicator: React.FC<KeyboardIndicatorProps> = ({
         {isVisible && !isHelpVisible && (
           <motion.button
             onClick={toggleHelp}
-            className="fixed bottom-8 left-1/2 transform -translate-x-1/2 z-40 flex items-center gap-2 bg-black/80 dark:bg-white/80 text-white dark:text-black px-3 py-2 rounded-full shadow-lg dark:shadow-[0_0_20px_0_rgb(255_255_255/0.05)] text-xs"
+            className="fixed bottom-8 left-1/2 transform -translate-x-1/2 z-40 flex items-center gap-2 bg-black/80 text-white px-3 py-2 rounded-full shadow-lg)] text-xs"
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 10 }}
@@ -106,7 +106,7 @@ const KeyboardIndicator: React.FC<KeyboardIndicatorProps> = ({
             onClick={toggleHelp}
           >
             <motion.div
-              className="bg-white dark:bg-[#1a1a1a] rounded-lg shadow-xl dark:shadow-[0_0_20px_0_rgb(255_255_255/0.05)] p-6 max-w-md mx-4"
+              className="bg-white rounded-lg shadow-xl)] p-6 max-w-md mx-4"
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.9, opacity: 0 }}
@@ -120,7 +120,7 @@ const KeyboardIndicator: React.FC<KeyboardIndicatorProps> = ({
                 </div>
                 <button
                   onClick={toggleHelp}
-                  className="text-neutral-400 hover:text-neutral-900 dark:hover:text-white"
+                  className="text-neutral-400 hover:text-neutral-900"
                   aria-label="Close keyboard help"
                 >
                   ×
@@ -134,49 +134,49 @@ const KeyboardIndicator: React.FC<KeyboardIndicatorProps> = ({
                   </h4>
                   <div className="grid grid-cols-2 gap-y-2 text-sm">
                     <div className="flex items-center gap-2">
-                      <kbd className="px-2 py-1 bg-neutral-100 dark:bg-neutral-800 border dark:border-neutral-600 rounded text-xs">
+                      <kbd className="px-2 py-1 bg-neutral-100 border rounded text-xs">
                         ↑
                       </kbd>
                       <span>Previous section</span>
                     </div>
                     <div className="flex items-center gap-2">
-                      <kbd className="px-2 py-1 bg-neutral-100 dark:bg-neutral-800 border dark:border-neutral-600 rounded text-xs">
+                      <kbd className="px-2 py-1 bg-neutral-100 border rounded text-xs">
                         ↓
                       </kbd>
                       <span>Next section</span>
                     </div>
                     <div className="flex items-center gap-2">
-                      <kbd className="px-2 py-1 bg-neutral-100 dark:bg-neutral-800 border dark:border-neutral-600 rounded text-xs">
+                      <kbd className="px-2 py-1 bg-neutral-100 border rounded text-xs">
                         1
                       </kbd>
                       <span>About section</span>
                     </div>
                     <div className="flex items-center gap-2">
-                      <kbd className="px-2 py-1 bg-neutral-100 dark:bg-neutral-800 border dark:border-neutral-600 rounded text-xs">
+                      <kbd className="px-2 py-1 bg-neutral-100 border rounded text-xs">
                         2
                       </kbd>
                       <span>Experience</span>
                     </div>
                     <div className="flex items-center gap-2">
-                      <kbd className="px-2 py-1 bg-neutral-100 dark:bg-neutral-800 border dark:border-neutral-600 rounded text-xs">
+                      <kbd className="px-2 py-1 bg-neutral-100 border rounded text-xs">
                         3
                       </kbd>
                       <span>Education</span>
                     </div>
                     <div className="flex items-center gap-2">
-                      <kbd className="px-2 py-1 bg-neutral-100 dark:bg-neutral-800 border dark:border-neutral-600 rounded text-xs">
+                      <kbd className="px-2 py-1 bg-neutral-100 border rounded text-xs">
                         4
                       </kbd>
                       <span>Skills</span>
                     </div>
                     <div className="flex items-center gap-2">
-                      <kbd className="px-2 py-1 bg-neutral-100 dark:bg-neutral-800 border dark:border-neutral-600 rounded text-xs">
+                      <kbd className="px-2 py-1 bg-neutral-100 border rounded text-xs">
                         5
                       </kbd>
                       <span>Certifications</span>
                     </div>
                     <div className="flex items-center gap-2">
-                      <kbd className="px-2 py-1 bg-neutral-100 dark:bg-neutral-800 border dark:border-neutral-600 rounded text-xs">
+                      <kbd className="px-2 py-1 bg-neutral-100 border rounded text-xs">
                         6
                       </kbd>
                       <span>Contact</span>
@@ -197,7 +197,7 @@ const KeyboardIndicator: React.FC<KeyboardIndicatorProps> = ({
 
               <button
                 onClick={toggleHelp}
-                className="w-full mt-6 py-2 bg-black dark:bg-white text-white dark:text-black rounded-lg hover:bg-neutral-800 dark:hover:bg-neutral-200 transition-colors"
+                className="w-full mt-6 py-2 bg-black text-white rounded-lg hover:bg-neutral-800 transition-colors"
               >
                 Got it
               </button>

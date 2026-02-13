@@ -60,8 +60,8 @@ export function ReactionButton({
         'text-sm font-medium transition-all duration-200',
         'border focus:outline-none focus:ring-2 focus:ring-offset-2',
         optimisticState.liked
-          ? 'bg-red-50 dark:bg-red-950 border-red-200 dark:border-red-900 text-red-600 dark:text-red-400 focus:ring-red-500'
-          : 'bg-neutral-50 dark:bg-neutral-900 border-neutral-200 dark:border-neutral-800 text-neutral-600 dark:text-neutral-400 hover:bg-neutral-100 dark:hover:bg-neutral-800 focus:ring-neutral-500',
+          ? 'bg-red-50 border-red-200 text-red-600 focus:ring-red-500'
+          : 'bg-neutral-50 border-neutral-200 text-neutral-600 hover:bg-neutral-100 focus:ring-neutral-500',
         isPending && 'opacity-70 cursor-wait'
       )}
       aria-label={optimisticState.liked ? 'Unlike this post' : 'Like this post'}

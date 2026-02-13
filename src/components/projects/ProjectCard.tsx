@@ -28,9 +28,9 @@ export function ProjectCard({ project, stats }: ProjectCardProps) {
       transition={{ duration: 0.5 }}
       className="group"
     >
-      <div className="h-full border border-neutral-200 dark:border-neutral-700 rounded-lg overflow-hidden hover:border-neutral-300 dark:hover:border-neutral-600 transition-colors">
+      <div className="h-full border border-neutral-200 rounded-lg overflow-hidden hover:border-neutral-300 transition-colors">
         {/* Featured Image */}
-        <div className="relative aspect-[16/9] overflow-hidden bg-neutral-100 dark:bg-neutral-800">
+        <div className="relative aspect-[16/9] overflow-hidden bg-neutral-100">
           <Image
             src={project.featuredImage}
             alt={project.title}
@@ -49,12 +49,12 @@ export function ProjectCard({ project, stats }: ProjectCardProps) {
         {/* Content */}
         <div className="p-6">
           {/* Title */}
-          <h2 className="text-xl font-semibold mb-2 text-neutral-900 dark:text-neutral-100 line-clamp-2">
+          <h2 className="text-xl font-semibold mb-2 text-neutral-900 line-clamp-2">
             {project.title}
           </h2>
 
           {/* Description */}
-          <p className="text-neutral-600 dark:text-neutral-400 text-sm leading-relaxed mb-4 line-clamp-3">
+          <p className="text-neutral-600 text-sm leading-relaxed mb-4 line-clamp-3">
             {project.description}
           </p>
 
@@ -64,7 +64,7 @@ export function ProjectCard({ project, stats }: ProjectCardProps) {
               <TechnologyBadge key={tech} technology={tech} />
             ))}
             {project.technologies.length > 5 && (
-              <span className="text-xs text-neutral-500 dark:text-neutral-400 self-center">
+              <span className="text-xs text-neutral-500 self-center">
                 +{project.technologies.length - 5} more
               </span>
             )}
@@ -72,7 +72,7 @@ export function ProjectCard({ project, stats }: ProjectCardProps) {
 
           {/* GitHub Stats (optional) */}
           {stats && (
-            <div className="flex items-center gap-4 text-sm text-neutral-600 dark:text-neutral-400 mb-4">
+            <div className="flex items-center gap-4 text-sm text-neutral-600 mb-4">
               <span className="flex items-center gap-1">
                 <Star className="h-4 w-4" />
                 {stats.stars.toLocaleString()}
@@ -85,13 +85,13 @@ export function ProjectCard({ project, stats }: ProjectCardProps) {
           )}
 
           {/* Links */}
-          <div className="flex items-center gap-3 pt-4 border-t border-neutral-100 dark:border-neutral-800">
+          <div className="flex items-center gap-3 pt-4 border-t border-neutral-100">
             {project.demoUrl && (
               <Link
                 href={project.demoUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-1.5 text-sm font-medium text-neutral-700 dark:text-neutral-300 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors"
+                className="flex items-center gap-1.5 text-sm font-medium text-neutral-700 hover:text-neutral-900 transition-colors"
               >
                 <ExternalLink className="h-4 w-4" />
                 Demo
@@ -102,14 +102,14 @@ export function ProjectCard({ project, stats }: ProjectCardProps) {
                 href={project.sourceUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-1.5 text-sm font-medium text-neutral-700 dark:text-neutral-300 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors"
+                className="flex items-center gap-1.5 text-sm font-medium text-neutral-700 hover:text-neutral-900 transition-colors"
               >
                 <Github className="h-4 w-4" />
                 Source
               </Link>
             )}
             {!project.demoUrl && !project.sourceUrl && (
-              <span className="text-sm text-neutral-500 dark:text-neutral-500">
+              <span className="text-sm text-neutral-500">
                 Coming soon
               </span>
             )}

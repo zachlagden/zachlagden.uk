@@ -13,8 +13,8 @@ export function RelatedPosts({ posts }: RelatedPostsProps) {
   }
 
   return (
-    <section className="mt-16 pt-8 border-t border-neutral-200 dark:border-neutral-800">
-      <h2 className="text-2xl font-bold mb-6 text-neutral-900 dark:text-neutral-100">
+    <section className="mt-16 pt-8 border-t border-neutral-200">
+      <h2 className="text-2xl font-bold mb-6 text-neutral-900">
         Related Posts
       </h2>
 
@@ -25,7 +25,7 @@ export function RelatedPosts({ posts }: RelatedPostsProps) {
             href={`/blog/${post.slug}`}
             className="group block"
           >
-            <article className="h-full rounded-lg border border-neutral-200 dark:border-neutral-800 overflow-hidden hover:border-neutral-300 dark:hover:border-neutral-700 transition-colors">
+            <article className="h-full rounded-lg border border-neutral-200 overflow-hidden hover:border-neutral-300 transition-colors">
               {/* Thumbnail */}
               {post.featuredImage && (
                 <div className="relative aspect-video">
@@ -46,7 +46,7 @@ export function RelatedPosts({ posts }: RelatedPostsProps) {
                     {post.categories.slice(0, 2).map((category) => (
                       <span
                         key={category}
-                        className="text-xs px-2 py-0.5 rounded-full bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-400"
+                        className="text-xs px-2 py-0.5 rounded-full bg-neutral-100 text-neutral-600"
                       >
                         {category}
                       </span>
@@ -55,12 +55,12 @@ export function RelatedPosts({ posts }: RelatedPostsProps) {
                 )}
 
                 {/* Title */}
-                <h3 className="font-semibold text-neutral-900 dark:text-neutral-100 group-hover:text-neutral-600 dark:group-hover:text-neutral-300 transition-colors line-clamp-2">
+                <h3 className="font-semibold text-neutral-900 group-hover:text-neutral-600 transition-colors line-clamp-2">
                   {post.title}
                 </h3>
 
                 {/* Meta */}
-                <p className="mt-2 text-xs text-neutral-500 dark:text-neutral-500">
+                <p className="mt-2 text-xs text-neutral-500">
                   {post.readingTime} min read
                 </p>
               </div>

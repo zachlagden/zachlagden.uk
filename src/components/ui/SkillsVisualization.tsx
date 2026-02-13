@@ -41,7 +41,7 @@ const SkillsVisualization: React.FC<SkillsVisualizationProps> = ({
             className={`px-3 py-1.5 rounded-full text-sm transition-colors ${
               activeGroup === group.title
                 ? group.colorClass
-                : "bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-300 hover:bg-neutral-200 dark:hover:bg-neutral-700"
+                : "bg-neutral-100 text-neutral-600 hover:bg-neutral-200"
             }`}
             whileHover={{ y: -2 }}
             whileTap={{ scale: 0.95 }}
@@ -88,7 +88,7 @@ const SkillsVisualization: React.FC<SkillsVisualizationProps> = ({
       {activeGroup &&
         allSkills.filter((skill) => skill.group === activeGroup).length ===
           0 && (
-          <div className="text-center py-8 text-neutral-500 dark:text-neutral-400">
+          <div className="text-center py-8 text-neutral-500">
             No skills found in this category.
           </div>
         )}

@@ -182,7 +182,7 @@ export function EditorToolbar({ editor }: EditorToolbarProps) {
         <Link className="h-4 w-4" />
       </ToolbarButton>
       <ToolbarButton onClick={addImage} title="Add image">
-        <Image className="h-4 w-4" />
+        <Image className="h-4 w-4" aria-hidden="true" />
       </ToolbarButton>
 
       <ToolbarSeparator />

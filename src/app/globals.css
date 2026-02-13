@@ -1,13 +1,11 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
-@custom-variant dark (&:is(.dark *));
-
 :root {
   --foreground-rgb: 17, 17, 17;
   --background-rgb: 250, 250, 250;
   --radius: 0.625rem;
-  /* Light mode colors - user specified */
+  /* Light mode colors */
   --background: oklch(1 0 0); /* white #ffffff */
   --foreground: oklch(0.145 0 0); /* near-black #0a0a0a */
   --card: oklch(1 0 0); /* white #ffffff */
@@ -43,26 +41,6 @@
 
 * {
   box-sizing: border-box;
-}
-
-/* Theme transition - respect prefers-reduced-motion */
-@media (prefers-reduced-motion: no-preference) {
-  *,
-  *::before,
-  *::after {
-    transition-property: color, background-color, border-color, box-shadow;
-    transition-duration: 150ms;
-    transition-timing-function: ease-in-out;
-  }
-}
-
-/* Reduced motion: instant switch (user requirement) */
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    transition-duration: 0.01ms !important;
-  }
 }
 
 body {
@@ -212,13 +190,6 @@ h6 {
   background-size: 20px 20px;
 }
 
-/* Dark mode grid - lighter lines for visibility */
-.dark .subtle-grid {
-  background-image:
-    linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
-}
-
 /* Minimal scrollbar - webkit only */
 @media (prefers-reduced-motion: no-preference) {
   ::-webkit-scrollbar {
@@ -300,69 +271,6 @@ h6 {
   --color-sidebar-ring: var(--sidebar-ring);
 }
 
-.dark {
-  /* Dark mode colors - user specified */
-  --background: oklch(0.145 0 0); /* dark gray #0a0a0a */
-  --foreground: oklch(0.9 0 0); /* off-white #e5e5e5 for reduced eye strain */
-  --card: oklch(0.21 0 0); /* elevated surface #1a1a1a */
-  --card-foreground: oklch(0.9 0 0); /* off-white #e5e5e5 */
-  --popover: oklch(0.21 0 0);
-  --popover-foreground: oklch(0.9 0 0);
-  --primary: oklch(0.922 0 0);
-  --primary-foreground: oklch(0.205 0 0);
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.7 0 0); /* gray-400 #a3a3a3 */
-  --accent: oklch(0.269 0 0);
-  --accent-foreground: oklch(0.985 0 0);
-  --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(0.269 0 0); /* neutral-800 #262626 */
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.556 0 0);
-  --chart-1: oklch(0.488 0.243 264.376);
-  --chart-2: oklch(0.696 0.17 162.48);
-  --chart-3: oklch(0.769 0.188 70.08);
-  --chart-4: oklch(0.627 0.265 303.9);
-  --chart-5: oklch(0.645 0.246 16.439);
-  --sidebar: oklch(0.205 0 0);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.269 0 0);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.556 0 0);
-}
-
-/* Dark mode glow effect - replaces shadows with subtle glow */
-.dark .shadow-lg {
-  box-shadow: 0 0 20px 0 rgb(255 255 255 / 0.05);
-}
-
-.dark .hover-lift:hover {
-  box-shadow: 0 0 25px 0 rgb(255 255 255 / 0.08);
-}
-
-/* Dark mode image brightness adjustment - reduce eye strain */
-.dark img {
-  filter: brightness(0.85) contrast(1.15);
-}
-
-/* Dark mode scrollbar */
-.dark::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.1);
-}
-
-.dark::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.2);
-}
-
-/* Dark mode focus outline */
-.dark :focus-visible {
-  outline-color: rgba(255, 255, 255, 0.4);
-}
-
 @layer base {
   * {
     @apply border-border outline-ring/50;
@@ -373,7 +281,6 @@ h6 {
 }
 
 /* Syntax highlighting for code blocks - GitHub-inspired theme */
-/* Light mode */
 .hljs {
   color: #24292e;
 }
@@ -454,90 +361,6 @@ h6 {
 }
 
 .hljs-strong {
-  font-weight: 700;
-}
-
-/* Dark mode */
-.dark .hljs {
-  color: #c9d1d9;
-}
-
-.dark .hljs-comment,
-.dark .hljs-quote {
-  color: #8b949e;
-  font-style: italic;
-}
-
-.dark .hljs-keyword,
-.dark .hljs-selector-tag,
-.dark .hljs-subst {
-  color: #ff7b72;
-}
-
-.dark .hljs-number,
-.dark .hljs-literal,
-.dark .hljs-variable,
-.dark .hljs-template-variable,
-.dark .hljs-tag .hljs-attr {
-  color: #79c0ff;
-}
-
-.dark .hljs-string,
-.dark .hljs-doctag {
-  color: #a5d6ff;
-}
-
-.dark .hljs-title,
-.dark .hljs-section,
-.dark .hljs-selector-id {
-  color: #d2a8ff;
-  font-weight: 600;
-}
-
-.dark .hljs-type,
-.dark .hljs-class .hljs-title {
-  color: #d2a8ff;
-}
-
-.dark .hljs-tag,
-.dark .hljs-name,
-.dark .hljs-attribute {
-  color: #7ee787;
-  font-weight: 600;
-}
-
-.dark .hljs-regexp,
-.dark .hljs-link {
-  color: #a5d6ff;
-}
-
-.dark .hljs-symbol,
-.dark .hljs-bullet {
-  color: #ffa657;
-}
-
-.dark .hljs-built_in,
-.dark .hljs-builtin-name {
-  color: #79c0ff;
-}
-
-.dark .hljs-meta {
-  color: #8b949e;
-}
-
-.dark .hljs-deletion {
-  background: rgba(248, 81, 73, 0.15);
-}
-
-.dark .hljs-addition {
-  background: rgba(46, 160, 67, 0.15);
-}
-
-.dark .hljs-emphasis {
-  font-style: italic;
-}
-
-.dark .hljs-strong {
   font-weight: 700;
 }
 
@@ -667,8 +490,4 @@ h6 {
 /* Selection highlight */
 .tiptap ::selection {
   background-color: rgba(0, 0, 0, 0.1);
-}
-
-.dark .tiptap ::selection {
-  background-color: rgba(255, 255, 255, 0.15);
 }

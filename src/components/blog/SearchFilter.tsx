@@ -46,13 +46,13 @@ export function SearchFilter() {
         value={query}
         onChange={handleChange}
         placeholder="Search posts..."
-        className="w-full pl-11 pr-4 py-3 border border-neutral-200 dark:border-neutral-700 rounded-lg bg-white dark:bg-neutral-900 text-neutral-900 dark:text-neutral-100 placeholder-neutral-500 dark:placeholder-neutral-500 focus:outline-none focus:ring-2 focus:ring-neutral-300 dark:focus:ring-neutral-600 transition-colors"
+        className="w-full pl-11 pr-4 py-3 border border-neutral-200 rounded-lg bg-white text-neutral-900 placeholder-neutral-500 focus:outline-none focus:ring-2 focus:ring-neutral-300 transition-colors"
         aria-label="Search blog posts"
       />
       {query && (
         <button
           onClick={handleClear}
-          className="absolute inset-y-0 right-0 pr-4 flex items-center text-neutral-400 hover:text-neutral-600 dark:hover:text-neutral-300 transition-colors"
+          className="absolute inset-y-0 right-0 pr-4 flex items-center text-neutral-400 hover:text-neutral-600 transition-colors"
           aria-label="Clear search"
         >
           <svg

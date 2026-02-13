@@ -19,16 +19,16 @@ export function EmptyState({ technologies }: EmptyStateProps) {
   if (technologies.length > 0) {
     return (
       <div className="text-center py-16">
-        <FolderOpen className="h-12 w-12 mx-auto text-neutral-400 dark:text-neutral-600 mb-4" />
-        <h3 className="text-lg font-semibold text-neutral-900 dark:text-neutral-100 mb-2">
+        <FolderOpen className="h-12 w-12 mx-auto text-neutral-400 mb-4" />
+        <h3 className="text-lg font-semibold text-neutral-900 mb-2">
           No matching projects
         </h3>
-        <p className="text-neutral-600 dark:text-neutral-400 mb-4">
+        <p className="text-neutral-600 mb-4">
           No projects found with the selected technologies.
         </p>
         <button
           onClick={clearFilters}
-          className="text-sm font-medium text-neutral-700 dark:text-neutral-300 hover:text-neutral-900 dark:hover:text-neutral-100 underline underline-offset-2"
+          className="text-sm font-medium text-neutral-700 hover:text-neutral-900 underline underline-offset-2"
         >
           Clear filters
         </button>
@@ -38,11 +38,11 @@ export function EmptyState({ technologies }: EmptyStateProps) {
 
   return (
     <div className="text-center py-16">
-      <FolderOpen className="h-12 w-12 mx-auto text-neutral-400 dark:text-neutral-600 mb-4" />
-      <h3 className="text-lg font-semibold text-neutral-900 dark:text-neutral-100 mb-2">
+      <FolderOpen className="h-12 w-12 mx-auto text-neutral-400 mb-4" />
+      <h3 className="text-lg font-semibold text-neutral-900 mb-2">
         No projects yet
       </h3>
-      <p className="text-neutral-600 dark:text-neutral-400">
+      <p className="text-neutral-600">
         Check back soon for exciting projects!
       </p>
     </div>

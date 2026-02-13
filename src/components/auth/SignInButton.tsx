@@ -14,10 +14,10 @@ export function SignInButton() {
         onClick={handleSignIn}
         className={cn(
           "flex items-center gap-2 px-4 py-2 rounded-full",
-          "bg-white/30 dark:bg-gray-900/30",
+          "bg-white/30",
           "backdrop-blur-md",
-          "text-neutral-800 dark:text-neutral-200",
-          "hover:bg-white/50 dark:hover:bg-gray-900/50",
+          "text-neutral-800",
+          "hover:bg-white/50",
           "transition-colors duration-150",
           "text-sm font-medium"
         )}

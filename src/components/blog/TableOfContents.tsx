@@ -72,7 +72,7 @@ export function TableOfContents({ headings }: TableOfContentsProps) {
 
   return (
     <nav className="hidden lg:block sticky top-24 max-h-[calc(100vh-8rem)] overflow-y-auto">
-      <h2 className="text-sm font-semibold mb-4 text-neutral-900 dark:text-neutral-100">
+      <h2 className="text-sm font-semibold mb-4 text-neutral-900">
         On This Page
       </h2>
       <ul className="space-y-2 text-sm">
@@ -87,8 +87,8 @@ export function TableOfContents({ headings }: TableOfContentsProps) {
               className={cn(
                 'block py-1 transition-colors border-l-2',
                 activeId === heading.id
-                  ? 'border-neutral-900 dark:border-neutral-100 text-neutral-900 dark:text-neutral-100 font-medium'
-                  : 'border-neutral-200 dark:border-neutral-800 text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 hover:border-neutral-400 dark:hover:border-neutral-600',
+                  ? 'border-neutral-900 text-neutral-900 font-medium'
+                  : 'border-neutral-200 text-neutral-600 hover:text-neutral-900 hover:border-neutral-400',
                 'pl-3'
               )}
             >

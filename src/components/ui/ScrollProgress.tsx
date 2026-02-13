@@ -23,7 +23,7 @@ const ScrollProgress: React.FC<ScrollProgressProps> = ({
 
   return (
     <motion.div
-      className="fixed top-0 left-0 right-0 origin-left bg-neutral-900/80 dark:bg-neutral-100/80"
+      className="fixed top-0 left-0 right-0 origin-left bg-neutral-900/80"
       style={{
         scaleX,
         height,

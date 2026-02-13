@@ -41,10 +41,10 @@ const Section = React.forwardRef<HTMLElement, SectionProps>(
           }
         >
           <div className="flex items-center gap-3">
-            <div className="text-neutral-800 dark:text-[#e5e5e5]">{icon}</div>
+            <div className="text-neutral-800">{icon}</div>
             <h2 className="text-2xl font-bold tracking-tight">{title}</h2>
           </div>
-          <div className="mt-2 h-px w-16 bg-neutral-800 dark:bg-neutral-200" aria-hidden="true" />
+          <div className="mt-2 h-px w-16 bg-neutral-800" aria-hidden="true" />
         </motion.div>
 
         <motion.div

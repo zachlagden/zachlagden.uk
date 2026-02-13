@@ -1,4 +1,3 @@
-import { ObjectId } from 'mongodb'
 import clientPromise from '@/lib/db'
 import type { Project, SerializedProject } from '@/models/Project'
 

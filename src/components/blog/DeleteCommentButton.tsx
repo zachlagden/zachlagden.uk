@@ -41,7 +41,7 @@ export function DeleteCommentButton({ commentId, username }: DeleteCommentButton
         <Button
           variant="ghost"
           size="sm"
-          className="h-6 w-6 p-0 text-neutral-400 hover:text-red-600 dark:text-neutral-600 dark:hover:text-red-400"
+          className="h-6 w-6 p-0 text-neutral-400 hover:text-red-600"
           aria-label={`Delete comment by ${username}`}
         >
           <Trash2 className="h-3.5 w-3.5" />
@@ -56,7 +56,7 @@ export function DeleteCommentButton({ commentId, username }: DeleteCommentButton
           </AlertDialogDescription>
         </AlertDialogHeader>
         {error && (
-          <p className="text-sm text-red-600 dark:text-red-400">{error}</p>
+          <p className="text-sm text-red-600">{error}</p>
         )}
         <AlertDialogFooter>
           <AlertDialogCancel disabled={isPending}>Cancel</AlertDialogCancel>

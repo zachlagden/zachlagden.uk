@@ -27,12 +27,13 @@ export function CommentForm({ postId, isAuthenticated }: CommentFormProps) {
   // Not authenticated - show sign in prompt
   if (!isAuthenticated) {
     return (
-      <div className="rounded-lg border border-neutral-200 dark:border-neutral-800 p-6 text-center">
-        <MessageSquare className="w-8 h-8 mx-auto mb-3 text-neutral-400 dark:text-neutral-600" />
-        <p className="text-neutral-600 dark:text-neutral-400 mb-4">
+      <div className="rounded-lg border border-neutral-200 p-6 text-center">
+        <MessageSquare className="w-8 h-8 mx-auto mb-3 text-neutral-400" />
+        <p className="text-neutral-600 mb-4">
           Sign in to join the conversation
         </p>
         <Button asChild variant="outline">
+          {/* eslint-disable-next-line @next/next/no-html-link-for-pages */}
           <a href="/?auth=required">Sign in with GitHub</a>
         </Button>
       </div>
@@ -55,14 +56,14 @@ export function CommentForm({ postId, isAuthenticated }: CommentFormProps) {
           aria-describedby={state.errors?.content ? 'content-error' : undefined}
         />
         {state.errors?.content && (
-          <p id="content-error" className="mt-1 text-sm text-red-600 dark:text-red-400">
+          <p id="content-error" className="mt-1 text-sm text-red-600">
             {state.errors.content[0]}
           </p>
         )}
       </div>
 
       <div className="flex items-center justify-between">
-        <p className="text-xs text-neutral-500 dark:text-neutral-500">
+        <p className="text-xs text-neutral-500">
           Be respectful and constructive
         </p>
         <Button type="submit" disabled={isPending} size="sm">
@@ -71,7 +72,7 @@ export function CommentForm({ postId, isAuthenticated }: CommentFormProps) {
       </div>
 
       {state.message && !state.success && (
-        <p className="text-sm text-red-600 dark:text-red-400">{state.message}</p>
+        <p className="text-sm text-red-600">{state.message}</p>
       )}
     </form>
   )

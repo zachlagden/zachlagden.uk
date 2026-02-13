@@ -36,8 +36,8 @@ export function TechnologyFilters({ technologies }: TechnologyFiltersProps) {
               onClick={() => toggleTech(tech)}
               className={`px-3 py-1.5 text-sm font-medium rounded-full transition-colors ${
                 isActive
-                  ? "bg-neutral-800 dark:bg-neutral-200 text-white dark:text-neutral-900"
-                  : "bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-200 dark:hover:bg-neutral-700"
+                  ? "bg-neutral-800 text-white"
+                  : "bg-neutral-100 text-neutral-700 hover:bg-neutral-200"
               }`}
               aria-pressed={isActive}
             >
@@ -50,7 +50,7 @@ export function TechnologyFilters({ technologies }: TechnologyFiltersProps) {
       {hasActiveFilters && (
         <button
           onClick={clearFilters}
-          className="text-sm text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors"
+          className="text-sm text-neutral-600 hover:text-neutral-900 transition-colors"
         >
           Clear all filters
         </button>

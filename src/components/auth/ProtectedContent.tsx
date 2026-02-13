@@ -20,7 +20,7 @@ export function ProtectedContent({
   if (status === "loading") {
     return (
       <div className="flex items-center justify-center p-8">
-        <div className="h-8 w-8 animate-spin rounded-full border-4 border-neutral-200 border-t-neutral-800 dark:border-neutral-700 dark:border-t-neutral-200" />
+        <div className="h-8 w-8 animate-spin rounded-full border-4 border-neutral-200 border-t-neutral-800" />
       </div>
     )
   }
@@ -30,19 +30,19 @@ export function ProtectedContent({
 
     return (
       <div className="flex flex-col items-center justify-center p-8 text-center">
-        <h2 className="text-xl font-semibold text-neutral-800 dark:text-neutral-200 mb-2">
+        <h2 className="text-xl font-semibold text-neutral-800 mb-2">
           Sign in required
         </h2>
-        <p className="text-neutral-600 dark:text-neutral-400 mb-4">
+        <p className="text-neutral-600 mb-4">
           Please sign in to access this content.
         </p>
         <button
           onClick={() => signIn("github", { callbackUrl: window.location.href })}
           className={cn(
             "flex items-center gap-2 px-4 py-2 rounded-lg",
-            "bg-neutral-900 dark:bg-neutral-100",
-            "text-white dark:text-neutral-900",
-            "hover:bg-neutral-800 dark:hover:bg-neutral-200",
+            "bg-neutral-900",
+            "text-white",
+            "hover:bg-neutral-800",
             "transition-colors"
           )}
         >
@@ -57,10 +57,10 @@ export function ProtectedContent({
 
     return (
       <div className="flex flex-col items-center justify-center p-8 text-center">
-        <h2 className="text-xl font-semibold text-neutral-800 dark:text-neutral-200 mb-2">
+        <h2 className="text-xl font-semibold text-neutral-800 mb-2">
           Access denied
         </h2>
-        <p className="text-neutral-600 dark:text-neutral-400">
+        <p className="text-neutral-600">
           You don&apos;t have permission to access this content.
         </p>
       </div>

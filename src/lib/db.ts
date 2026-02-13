@@ -7,10 +7,15 @@ let client: MongoClient;
 let clientPromise: Promise<MongoClient>;
 
 if (!uri) {
-  // Defer error until runtime to allow builds without env vars
-  clientPromise = Promise.reject(
-    new Error('Invalid/Missing environment variable: "MONGODB_URI"')
-  );
+  // Create a lazy promise that only rejects when actually awaited,
+  // allowing builds to succeed without MONGODB_URI set
+  clientPromise = new Promise<MongoClient>((_, reject) => {
+    reject(
+      new Error('Invalid/Missing environment variable: "MONGODB_URI"')
+    );
+  });
+  // Prevent unhandled rejection during build
+  clientPromise.catch(() => {});
 } else if (process.env.NODE_ENV === "development") {
   // In development, use a global variable to preserve the client across hot reloads
   const globalWithMongo = global as typeof globalThis & {

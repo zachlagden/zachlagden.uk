@@ -24,8 +24,8 @@ export function Comment({ comment, isAdmin }: CommentProps) {
             className="rounded-full"
           />
         ) : (
-          <div className="w-10 h-10 rounded-full bg-neutral-200 dark:bg-neutral-800 flex items-center justify-center">
-            <span className="text-sm font-medium text-neutral-600 dark:text-neutral-400">
+          <div className="w-10 h-10 rounded-full bg-neutral-200 flex items-center justify-center">
+            <span className="text-sm font-medium text-neutral-600">
               {comment.username.charAt(0).toUpperCase()}
             </span>
           </div>
@@ -35,10 +35,10 @@ export function Comment({ comment, isAdmin }: CommentProps) {
       {/* Content */}
       <div className="flex-1 min-w-0">
         <div className="flex items-center gap-2 mb-1">
-          <span className="font-medium text-neutral-900 dark:text-neutral-100">
+          <span className="font-medium text-neutral-900">
             {comment.username}
           </span>
-          <span className="text-sm text-neutral-500 dark:text-neutral-500">
+          <span className="text-sm text-neutral-500">
             {timeAgo}
           </span>
           {isAdmin && (
@@ -48,7 +48,7 @@ export function Comment({ comment, isAdmin }: CommentProps) {
             />
           )}
         </div>
-        <p className="text-neutral-700 dark:text-neutral-300 whitespace-pre-wrap break-words">
+        <p className="text-neutral-700 whitespace-pre-wrap break-words">
           {comment.content}
         </p>
       </div>

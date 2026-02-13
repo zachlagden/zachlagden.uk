@@ -21,7 +21,7 @@ const SocialIcon: React.FC<SocialIconProps> = ({
       href={href}
       target="_blank"
       rel="noopener noreferrer"
-      className={`${size === "sm" ? "p-3" : "p-3"} rounded-full bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-black dark:focus:ring-white focus:ring-offset-2`}
+      className={`${size === "sm" ? "p-3" : "p-3"} rounded-full bg-neutral-100 text-neutral-600 hover:text-neutral-900 transition-colors focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-2`}
       whileHover={{ scale: 1.1, backgroundColor: "#f5f5f5" }}
       whileTap={{ scale: 0.9 }}
       aria-label={label}

@@ -58,7 +58,7 @@ export function CategoryPills({ categories, tags }: CategoryPillsProps) {
       {/* Categories */}
       {categories.length > 0 && (
         <div>
-          <h3 className="text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-2">
+          <h3 className="text-sm font-medium text-neutral-700 mb-2">
             Categories
           </h3>
           <div className="flex flex-wrap gap-2">
@@ -70,8 +70,8 @@ export function CategoryPills({ categories, tags }: CategoryPillsProps) {
                   onClick={() => toggleFilter("category", category)}
                   className={`px-3 py-1.5 text-sm font-medium rounded-full transition-colors ${
                     isActive
-                      ? "bg-neutral-800 dark:bg-neutral-200 text-white dark:text-neutral-900"
-                      : "bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-200 dark:hover:bg-neutral-700"
+                      ? "bg-neutral-800 text-white"
+                      : "bg-neutral-100 text-neutral-700 hover:bg-neutral-200"
                   }`}
                   aria-pressed={isActive}
                 >
@@ -86,7 +86,7 @@ export function CategoryPills({ categories, tags }: CategoryPillsProps) {
       {/* Tags */}
       {tags.length > 0 && (
         <div>
-          <h3 className="text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-2">
+          <h3 className="text-sm font-medium text-neutral-700 mb-2">
             Tags
           </h3>
           <div className="flex flex-wrap gap-2">
@@ -98,8 +98,8 @@ export function CategoryPills({ categories, tags }: CategoryPillsProps) {
                   onClick={() => toggleFilter("tag", tag)}
                   className={`px-3 py-1.5 text-sm font-medium rounded-full transition-colors ${
                     isActive
-                      ? "bg-neutral-800 dark:bg-neutral-200 text-white dark:text-neutral-900"
-                      : "bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-200 dark:hover:bg-neutral-700"
+                      ? "bg-neutral-800 text-white"
+                      : "bg-neutral-100 text-neutral-700 hover:bg-neutral-200"
                   }`}
                   aria-pressed={isActive}
                 >
@@ -115,7 +115,7 @@ export function CategoryPills({ categories, tags }: CategoryPillsProps) {
       {hasActiveFilters && (
         <button
           onClick={clearAllFilters}
-          className="text-sm text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors"
+          className="text-sm text-neutral-600 hover:text-neutral-900 transition-colors"
         >
           Clear all filters
         </button>

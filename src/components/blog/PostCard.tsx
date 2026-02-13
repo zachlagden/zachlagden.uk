@@ -32,10 +32,10 @@ export function PostCard({ post }: PostCardProps) {
     >
       <Link
         href={`/blog/${post.slug}`}
-        className="block h-full border border-neutral-200 dark:border-neutral-700 rounded-lg overflow-hidden hover:border-neutral-300 dark:hover:border-neutral-600 transition-colors"
+        className="block h-full border border-neutral-200 rounded-lg overflow-hidden hover:border-neutral-300 transition-colors"
       >
         {/* Featured Image */}
-        <div className="relative aspect-[16/9] overflow-hidden bg-neutral-100 dark:bg-neutral-800">
+        <div className="relative aspect-[16/9] overflow-hidden bg-neutral-100">
           <Image
             src={post.featuredImage}
             alt={post.title}
@@ -50,24 +50,24 @@ export function PostCard({ post }: PostCardProps) {
           {/* Categories - Primary category only for card */}
           {post.categories.length > 0 && (
             <div className="mb-3">
-              <span className="inline-block text-xs font-medium px-2.5 py-1 rounded-full bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300">
+              <span className="inline-block text-xs font-medium px-2.5 py-1 rounded-full bg-neutral-100 text-neutral-700">
                 {post.categories[0]}
               </span>
             </div>
           )}
 
           {/* Title */}
-          <h2 className="text-xl font-semibold mb-2 group-hover:text-neutral-600 dark:group-hover:text-neutral-300 transition-colors line-clamp-2">
+          <h2 className="text-xl font-semibold mb-2 group-hover:text-neutral-600 transition-colors line-clamp-2">
             {post.title}
           </h2>
 
           {/* Excerpt */}
-          <p className="text-neutral-600 dark:text-neutral-400 text-sm leading-relaxed mb-4 line-clamp-3">
+          <p className="text-neutral-600 text-sm leading-relaxed mb-4 line-clamp-3">
             {post.excerpt}
           </p>
 
           {/* Meta: Date and Reading Time */}
-          <div className="flex items-center gap-3 text-xs text-neutral-500 dark:text-neutral-500">
+          <div className="flex items-center gap-3 text-xs text-neutral-500">
             <time dateTime={post.publishedAt || undefined}>
               {formatDate(post.publishedAt)}
             </time>

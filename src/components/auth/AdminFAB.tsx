@@ -74,11 +74,11 @@ export function AdminFAB({ editUrl, onDelete }: AdminFABProps) {
                 href={action.href}
                 className={cn(
                   "flex items-center gap-2 px-4 py-2 rounded-full",
-                  "bg-white/80 dark:bg-gray-900/80",
+                  "bg-white/80",
                   "backdrop-blur-md",
-                  "text-neutral-800 dark:text-neutral-200",
-                  "shadow-lg dark:shadow-white/5",
-                  "hover:bg-white dark:hover:bg-gray-900",
+                  "text-neutral-800",
+                  "shadow-lg",
+                  "hover:bg-white",
                   "transition-all duration-150",
                   "animate-in fade-in slide-in-from-bottom-2"
                 )}
@@ -96,11 +96,11 @@ export function AdminFAB({ editUrl, onDelete }: AdminFABProps) {
                 }}
                 className={cn(
                   "flex items-center gap-2 px-4 py-2 rounded-full",
-                  "bg-white/80 dark:bg-gray-900/80",
+                  "bg-white/80",
                   "backdrop-blur-md",
-                  "text-red-600 dark:text-red-400",
-                  "shadow-lg dark:shadow-white/5",
-                  "hover:bg-red-50 dark:hover:bg-red-900/20",
+                  "text-red-600",
+                  "shadow-lg",
+                  "hover:bg-red-50",
                   "transition-all duration-150",
                   "animate-in fade-in slide-in-from-bottom-2"
                 )}

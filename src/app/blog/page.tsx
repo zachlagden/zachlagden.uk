@@ -41,14 +41,14 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
   ]);
 
   return (
-    <div className="min-h-screen bg-white dark:bg-neutral-950">
+    <div className="min-h-screen bg-white">
       {/* Header */}
-      <div className="border-b border-neutral-200 dark:border-neutral-800">
+      <div className="border-b border-neutral-200">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
-          <h1 className="text-4xl font-bold mb-4 text-neutral-900 dark:text-neutral-100">
+          <h1 className="text-4xl font-bold mb-4 text-neutral-900">
             Blog
           </h1>
-          <p className="text-lg text-neutral-600 dark:text-neutral-400 max-w-2xl">
+          <p className="text-lg text-neutral-600 max-w-2xl">
             Technical articles, tutorials, and insights on web development,
             React, TypeScript, and more.
           </p>
@@ -62,7 +62,7 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
           <div>
             {/* Search */}
             <div className="mb-8">
-              <Suspense fallback={<div className="h-12 bg-neutral-100 dark:bg-neutral-800 rounded-lg animate-pulse" />}>
+              <Suspense fallback={<div className="h-12 bg-neutral-100 rounded-lg animate-pulse" />}>
                 <SearchFilter />
               </Suspense>
             </div>
@@ -86,11 +86,11 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
 
           {/* Sidebar Filters */}
           <aside className="lg:sticky lg:top-8 h-fit">
-            <div className="border border-neutral-200 dark:border-neutral-700 rounded-lg p-6">
-              <h2 className="text-lg font-semibold mb-4 text-neutral-900 dark:text-neutral-100">
+            <div className="border border-neutral-200 rounded-lg p-6">
+              <h2 className="text-lg font-semibold mb-4 text-neutral-900">
                 Filters
               </h2>
-              <Suspense fallback={<div className="h-32 bg-neutral-100 dark:bg-neutral-800 rounded animate-pulse" />}>
+              <Suspense fallback={<div className="h-32 bg-neutral-100 rounded animate-pulse" />}>
                 <CategoryPills categories={allCategories} tags={allTags} />
               </Suspense>
             </div>

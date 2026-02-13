@@ -81,7 +81,7 @@ export default async function PostPage({ params }: PostPageProps) {
         dangerouslySetInnerHTML={{ __html: jsonLd }}
       />
 
-      <div className="min-h-screen bg-white dark:bg-neutral-950">
+      <div className="min-h-screen bg-white">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
           <div className="grid lg:grid-cols-[1fr_250px] gap-12">
             {/* Main Content */}
@@ -104,8 +104,8 @@ export default async function PostPage({ params }: PostPageProps) {
 
               {/* Tags */}
               {post.tags.length > 0 && (
-                <div className="mt-12 pt-8 border-t border-neutral-200 dark:border-neutral-800">
-                  <h3 className="text-sm font-semibold mb-3 text-neutral-900 dark:text-neutral-100">
+                <div className="mt-12 pt-8 border-t border-neutral-200">
+                  <h3 className="text-sm font-semibold mb-3 text-neutral-900">
                     Tags
                   </h3>
                   <div className="flex flex-wrap gap-2">
@@ -113,7 +113,7 @@ export default async function PostPage({ params }: PostPageProps) {
                       <Link
                         key={tag}
                         href={`/blog?tag=${encodeURIComponent(tag)}`}
-                        className="text-xs px-3 py-1 rounded-full bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-200 dark:hover:bg-neutral-700 transition-colors"
+                        className="text-xs px-3 py-1 rounded-full bg-neutral-100 text-neutral-700 hover:bg-neutral-200 transition-colors"
                       >
                         #{tag}
                       </Link>

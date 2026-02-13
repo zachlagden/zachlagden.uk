@@ -26,7 +26,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
       // Inline code
       return (
         <code
-          className="px-1.5 py-0.5 rounded bg-neutral-100 dark:bg-neutral-800 text-sm font-mono text-neutral-800 dark:text-neutral-200"
+          className="px-1.5 py-0.5 rounded bg-neutral-100 text-sm font-mono text-neutral-800"
           {...props}
         >
           {children}

@@ -16,8 +16,8 @@ export function CommentSection({
   isAdmin,
 }: CommentSectionProps) {
   return (
-    <section className="mt-12 pt-8 border-t border-neutral-200 dark:border-neutral-800">
-      <h2 className="text-2xl font-bold mb-6 text-neutral-900 dark:text-neutral-100">
+    <section className="mt-12 pt-8 border-t border-neutral-200">
+      <h2 className="text-2xl font-bold mb-6 text-neutral-900">
         Comments ({comments.length})
       </h2>
 

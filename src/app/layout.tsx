@@ -3,8 +3,6 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import SmoothScrollProvider from "@/components/providers/SmoothScrollProvider";
-import { ThemeProvider } from "@/components/providers/theme-provider";
-import { ThemeToggle } from "@/components/theme/theme-toggle";
 import { SessionProvider } from "@/components/auth/SessionProvider";
 import { AuthStatus } from "@/components/auth/AuthStatus";
 import { loadContentServer } from "@/utils/serverContentLoader";
@@ -82,10 +80,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export const viewport = {
-  themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#f5f5f5" },
-    { media: "(prefers-color-scheme: dark)", color: "#000000" },
-  ],
+  themeColor: "#f5f5f5",
   width: "device-width",
   initialScale: 1,
   maximumScale: 5,
@@ -97,7 +92,7 @@ export default async function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" dir="ltr" className={inter.variable} suppressHydrationWarning>
+    <html lang="en" dir="ltr" className={inter.variable}>
       <head>
         <link rel="manifest" href="/site.webmanifest" />
         {/* Add preload for fonts and critical assets */}
@@ -114,21 +109,13 @@ export default async function RootLayout({
         {/* Preload CV for faster download */}
         <link rel="prefetch" href="/Zach_Lagden_CV.pdf" as="document" />
       </head>
-      <body className={`${inter.className} bg-white dark:bg-[#0a0a0a] min-h-screen`}>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange={false}
-        >
-          <SessionProvider>
-            <NuqsAdapter>
-              <SmoothScrollProvider>{children}</SmoothScrollProvider>
-            </NuqsAdapter>
-            <ThemeToggle />
-            <AuthStatus />
-          </SessionProvider>
-        </ThemeProvider>
+      <body className={`${inter.className} bg-white min-h-screen`}>
+        <SessionProvider>
+          <NuqsAdapter>
+            <SmoothScrollProvider>{children}</SmoothScrollProvider>
+          </NuqsAdapter>
+          <AuthStatus />
+        </SessionProvider>
       </body>
       <GoogleAnalytics
         gaId={(await loadContentServer()).metadata.googleAnalyticsId}

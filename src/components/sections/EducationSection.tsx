@@ -46,7 +46,7 @@ const EducationSection = React.forwardRef<HTMLElement, EducationSectionProps>(
                   {education.skills.map((skill, i) => (
                     <span
                       key={i}
-                      className="text-xs py-1 px-3 bg-neutral-100 dark:bg-neutral-800 rounded-full"
+                      className="text-xs py-1 px-3 bg-neutral-100 rounded-full"
                     >
                       {skill}
                     </span>
@@ -59,7 +59,7 @@ const EducationSection = React.forwardRef<HTMLElement, EducationSectionProps>(
                     ([category, items]) => (
                       <div key={category}>
                         <h4 className="text-sm font-medium mb-2">{category}</h4>
-                        <ul className="text-sm text-neutral-600 dark:text-neutral-400 space-y-1">
+                        <ul className="text-sm text-neutral-600 space-y-1">
                           {items.map((item, i) => (
                             <li key={i}>{item}</li>
                           ))}
