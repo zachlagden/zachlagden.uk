@@ -238,3 +238,74 @@ export async function getContactInfo(): Promise<SerializedContactInfo | null> {
   const doc = await db.collection<ContactInfo>("contact_info").findOne();
   return doc ? serializeContactInfo(doc) : null;
 }
+
+// ─── Admin reads (include hidden items) ─────────────────────────────────────
+
+export async function getAllFeaturedWork(): Promise<SerializedFeaturedWork[]> {
+  const client = await clientPromise;
+  const db = client.db(DB_NAME);
+  const docs = await db
+    .collection<FeaturedWork>("featured_work")
+    .find()
+    .sort({ order: 1 })
+    .toArray();
+  return docs.map(serializeFeaturedWork);
+}
+
+export async function getAllSkillsPreview(): Promise<
+  SerializedSkillsPreview[]
+> {
+  const client = await clientPromise;
+  const db = client.db(DB_NAME);
+  const docs = await db
+    .collection<SkillsPreview>("skills_preview")
+    .find()
+    .sort({ order: 1 })
+    .toArray();
+  return docs.map(serializeSkillsPreview);
+}
+
+export async function getAllTestimonials(): Promise<SerializedTestimonial[]> {
+  const client = await clientPromise;
+  const db = client.db(DB_NAME);
+  const docs = await db
+    .collection<Testimonial>("testimonials")
+    .find()
+    .sort({ order: 1 })
+    .toArray();
+  return docs.map(serializeTestimonial);
+}
+
+export async function getAllExperience(): Promise<SerializedExperience[]> {
+  const client = await clientPromise;
+  const db = client.db(DB_NAME);
+  const docs = await db
+    .collection<Experience>("experience")
+    .find()
+    .sort({ order: 1 })
+    .toArray();
+  return docs.map(serializeExperience);
+}
+
+export async function getAllEducation(): Promise<SerializedEducation[]> {
+  const client = await clientPromise;
+  const db = client.db(DB_NAME);
+  const docs = await db
+    .collection<Education>("education")
+    .find()
+    .sort({ order: 1 })
+    .toArray();
+  return docs.map(serializeEducation);
+}
+
+export async function getAllCertifications(): Promise<
+  SerializedCertification[]
+> {
+  const client = await clientPromise;
+  const db = client.db(DB_NAME);
+  const docs = await db
+    .collection<Certification>("certifications")
+    .find()
+    .toArray();
+  return docs.map(serializeCertification);
+}

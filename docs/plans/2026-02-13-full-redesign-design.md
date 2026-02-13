@@ -372,20 +372,20 @@ const jetbrainsMono = JetBrains_Mono({
 - [x] Redesign comments/reactions (CommentSection.tsx, ReactionButton.tsx — dark themed)
 - [x] Redesign search/filter UI (SearchFilter.tsx, CategoryPills.tsx — dark inputs, horizontal pill filters)
 
-### Phase 5: Projects Redesign
+### Phase 5: Projects Redesign — COMPLETE
 
-- Redesign projects listing page
-- Redesign project cards
-- Redesign technology filters
+- [x] Redesign projects listing page (dark theme, full-width header, technology filters, project grid with GitHub stats)
+- [x] Redesign project cards (ProjectCard.tsx — dark cards with tech badges, GitHub stats, hover glow)
+- [x] Redesign technology filters (TechnologyFilters.tsx — horizontal pill row with URL-based state)
 
-### Phase 6: Admin Dashboard
+### Phase 6: Admin Dashboard — COMPLETE
 
-- Admin layout (sidebar nav, protected routes)
-- Homepage content management
-- About content management
-- Blog management integration
-- Projects management integration
-- Site settings management
+- [x] Admin layout (sidebar nav via AdminSidebar.tsx, protected routes via `requireAdmin()` in layout.tsx, `noindex` robots)
+- [x] Homepage content management (HomepageAdmin.tsx — hero, featured work, skills preview, testimonials, contact info CRUD)
+- [x] About content management (AboutAdmin.tsx — intro, experience, education, certifications, skills CRUD)
+- [x] Blog management integration (BlogAdmin.tsx — post listing with edit/delete/publish controls)
+- [x] Projects management integration (ProjectsAdmin.tsx — project listing with edit/delete/visibility controls)
+- [x] Site settings management (SettingsAdmin.tsx — site metadata, section visibility, configuration)
 
 ### Phase 7: Polish & QA
 

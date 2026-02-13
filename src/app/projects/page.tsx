@@ -53,52 +53,48 @@ export default async function ProjectsPage({
   });
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
       {/* Header */}
-      <div className="border-b border-neutral-200">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
-          <h1 className="text-4xl font-bold mb-4 text-neutral-900">Projects</h1>
-          <p className="text-lg text-neutral-600 max-w-2xl">
-            A collection of projects I&apos;ve built, from full-stack
-            applications to open-source contributions. Filter by technology to
-            explore.
-          </p>
+      <div className="py-24 sm:py-32">
+        <h1 className="font-heading text-5xl font-bold text-text-primary sm:text-6xl">
+          Projects
+        </h1>
+        <p className="mt-6 max-w-2xl text-lg leading-relaxed text-zinc-400">
+          A collection of projects I&apos;ve built, from full-stack applications
+          to open-source contributions. Filter by technology to explore.
+        </p>
+      </div>
+
+      {/* Filters */}
+      {allTechnologies.length > 0 && (
+        <div className="mb-10">
+          <Suspense
+            fallback={
+              <div className="h-10 animate-pulse rounded-lg bg-zinc-900" />
+            }
+          >
+            <TechnologyFilters technologies={allTechnologies} />
+          </Suspense>
         </div>
-      </div>
+      )}
 
-      {/* Main Content */}
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        {/* Filters */}
-        {allTechnologies.length > 0 && (
-          <div className="mb-8">
-            <h2 className="text-sm font-medium text-neutral-700 mb-3">
-              Filter by technology
-            </h2>
-            <Suspense
-              fallback={
-                <div className="h-10 bg-neutral-100 rounded-lg animate-pulse" />
-              }
-            >
-              <TechnologyFilters technologies={allTechnologies} />
-            </Suspense>
-          </div>
-        )}
-
-        {/* Projects Grid */}
-        {projects.length > 0 ? (
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {projects.map((project) => (
-              <ProjectCard
-                key={project._id}
-                project={project}
-                stats={statsMap.get(project._id)}
-              />
-            ))}
-          </div>
-        ) : (
+      {/* Projects Grid */}
+      {projects.length > 0 ? (
+        <div className="grid gap-8 pb-24 sm:grid-cols-2">
+          {projects.map((project, index) => (
+            <ProjectCard
+              key={project._id}
+              project={project}
+              stats={statsMap.get(project._id)}
+              index={index}
+            />
+          ))}
+        </div>
+      ) : (
+        <div className="pb-24">
           <EmptyState technologies={technologies} />
-        )}
-      </div>
+        </div>
+      )}
     </div>
   );
 }

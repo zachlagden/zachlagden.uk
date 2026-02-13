@@ -17,83 +17,83 @@ interface GitHubStats {
 interface ProjectCardProps {
   project: SerializedProject;
   stats?: GitHubStats | null;
+  index?: number;
 }
 
-export function ProjectCard({ project, stats }: ProjectCardProps) {
+export function ProjectCard({ project, stats, index = 0 }: ProjectCardProps) {
   return (
     <motion.article
       initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.5 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, delay: index * 0.1, ease: "easeOut" }}
       className="group"
     >
-      <div className="h-full border border-neutral-200 rounded-lg overflow-hidden hover:border-neutral-300 transition-colors">
+      <div className="flex h-full flex-col overflow-hidden rounded-lg border border-zinc-800 bg-zinc-900 transition-colors hover:border-cyan-500/20">
         {/* Featured Image */}
-        <div className="relative aspect-[16/9] overflow-hidden bg-neutral-100">
+        <div className="relative aspect-[16/9] overflow-hidden bg-zinc-800">
           <Image
             src={project.featuredImage}
             alt={project.title}
             fill
-            className="object-cover group-hover:scale-105 transition-transform duration-300"
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            className="object-cover transition-transform duration-300 group-hover:scale-105"
+            sizes="(max-width: 768px) 100vw, 50vw"
           />
           {/* Featured badge */}
           {project.featured && (
-            <span className="absolute top-3 left-3 px-2 py-1 text-xs font-medium bg-yellow-500 text-yellow-950 rounded">
+            <span className="absolute left-3 top-3 rounded bg-cyan-500 px-2 py-1 text-xs font-medium text-zinc-950">
               Featured
             </span>
           )}
         </div>
 
         {/* Content */}
-        <div className="p-6">
+        <div className="flex flex-1 flex-col p-6">
           {/* Title */}
-          <h2 className="text-xl font-semibold mb-2 text-neutral-900 line-clamp-2">
+          <h2 className="font-heading text-xl font-semibold text-zinc-100 line-clamp-2">
             {project.title}
           </h2>
 
           {/* Description */}
-          <p className="text-neutral-600 text-sm leading-relaxed mb-4 line-clamp-3">
+          <p className="mt-2 flex-1 text-sm leading-relaxed text-zinc-400 line-clamp-3">
             {project.description}
           </p>
 
           {/* Technologies */}
-          <div className="flex flex-wrap gap-1.5 mb-4">
+          <div className="mt-4 flex flex-wrap gap-1.5">
             {project.technologies.slice(0, 5).map((tech) => (
               <TechnologyBadge key={tech} technology={tech} />
             ))}
             {project.technologies.length > 5 && (
-              <span className="text-xs text-neutral-500 self-center">
+              <span className="self-center text-xs text-zinc-600">
                 +{project.technologies.length - 5} more
               </span>
             )}
           </div>
 
-          {/* GitHub Stats (optional) */}
+          {/* GitHub Stats */}
           {stats && (
-            <div className="flex items-center gap-4 text-sm text-neutral-600 mb-4">
+            <div className="mt-4 flex items-center gap-4 font-mono text-sm text-zinc-500">
               <span className="flex items-center gap-1">
-                <Star className="h-4 w-4" />
+                <Star className="h-4 w-4" aria-hidden="true" />
                 {stats.stars.toLocaleString()}
               </span>
               <span className="flex items-center gap-1">
-                <GitFork className="h-4 w-4" />
+                <GitFork className="h-4 w-4" aria-hidden="true" />
                 {stats.forks.toLocaleString()}
               </span>
             </div>
           )}
 
           {/* Links */}
-          <div className="flex items-center gap-3 pt-4 border-t border-neutral-100">
+          <div className="mt-4 flex items-center gap-4 border-t border-zinc-800 pt-4">
             {project.demoUrl && (
               <Link
                 href={project.demoUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-1.5 text-sm font-medium text-neutral-700 hover:text-neutral-900 transition-colors"
+                className="flex items-center gap-1.5 text-sm text-zinc-400 transition-colors hover:text-cyan-500"
               >
-                <ExternalLink className="h-4 w-4" />
+                <ExternalLink className="h-4 w-4" aria-hidden="true" />
                 Demo
               </Link>
             )}
@@ -102,14 +102,14 @@ export function ProjectCard({ project, stats }: ProjectCardProps) {
                 href={project.sourceUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-1.5 text-sm font-medium text-neutral-700 hover:text-neutral-900 transition-colors"
+                className="flex items-center gap-1.5 text-sm text-zinc-400 transition-colors hover:text-cyan-500"
               >
-                <Github className="h-4 w-4" />
+                <Github className="h-4 w-4" aria-hidden="true" />
                 Source
               </Link>
             )}
             {!project.demoUrl && !project.sourceUrl && (
-              <span className="text-sm text-neutral-500">Coming soon</span>
+              <span className="text-sm text-zinc-600">Coming soon</span>
             )}
           </div>
         </div>

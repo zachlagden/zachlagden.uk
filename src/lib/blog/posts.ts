@@ -140,6 +140,16 @@ export async function getPostBySlugForEdit(
   return post ? serializePost(post) : null;
 }
 
+// Get all posts (admin - includes drafts)
+export async function getAllPosts(): Promise<SerializedPost[]> {
+  const client = await clientPromise;
+  const db = client.db(DB_NAME);
+  const collection = db.collection<Post>(COLLECTION);
+
+  const posts = await collection.find().sort({ updatedAt: -1 }).toArray();
+  return posts.map(serializePost);
+}
+
 // Get related posts based on shared tags and categories
 export async function getRelatedPosts(
   currentPostId: string,

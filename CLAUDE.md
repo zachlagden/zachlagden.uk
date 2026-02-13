@@ -83,7 +83,16 @@ src/app/
 │   └── rss.xml/route.ts  # RSS feed
 ├── projects/
 │   ├── page.tsx          # Projects listing (tech filters, project grid)
+│   ├── loading.tsx       # Projects loading skeleton
 │   └── new/page.tsx      # New project (protected)
+├── admin/
+│   ├── layout.tsx        # Admin layout (auth guard, sidebar, noindex)
+│   ├── page.tsx          # Admin dashboard (section links)
+│   ├── homepage/page.tsx # Manage hero, featured work, skills, testimonials, contact
+│   ├── about/page.tsx    # Manage experience, education, certifications, skills
+│   ├── blog/page.tsx     # Manage posts (edit, delete, publish toggle)
+│   ├── projects/page.tsx # Manage projects (edit, delete, visibility toggle)
+│   └── settings/page.tsx # Site metadata, section visibility, configuration
 ├── 403/page.tsx          # Forbidden error page
 ├── layout.tsx            # Root layout (fonts, nav, footer, auth, analytics)
 ├── globals.css           # Global styles and Tailwind CSS theme tokens
@@ -137,6 +146,13 @@ All site content is stored in MongoDB. No static `content.json` files are used f
 src/components/
 ├── about/              # About page client component
 │   └── AboutClient.tsx
+├── admin/              # Admin dashboard components
+│   ├── AdminSidebar.tsx
+│   ├── HomepageAdmin.tsx
+│   ├── AboutAdmin.tsx
+│   ├── BlogAdmin.tsx
+│   ├── ProjectsAdmin.tsx
+│   └── SettingsAdmin.tsx
 ├── auth/               # Authentication components
 │   ├── AdminFAB.tsx
 │   ├── AuthStatus.tsx
@@ -215,6 +231,11 @@ src/components/
 - `src/lib/actions/comments.ts` — Comment CRUD
 - `src/lib/actions/reactions.ts` — Reaction management
 - `src/lib/actions/projects.ts` — Project CRUD
+- `src/lib/actions/admin-homepage.ts` — Admin CRUD for hero, featured work, skills preview, testimonials, contact info
+- `src/lib/actions/admin-about.ts` — Admin CRUD for about intro, experience, education, certifications, skills
+- `src/lib/actions/admin-settings.ts` — Admin updates for site metadata and settings
+
+All admin server actions use `requireAdmin()` from `src/lib/dal.ts` for auth enforcement and Zod schemas for input validation.
 
 ### 5. Custom Hooks
 
@@ -257,7 +278,7 @@ Typography uses CSS variables: `--font-space-grotesk`, `--font-inter`, `--font-j
 
 3. **Animations**: Framer Motion is used only for entrance animations (`initial → animate` with fade + translate). No scroll-linked animations, no parallax. `prefers-reduced-motion` is respected.
 
-4. **Authentication**: NextAuth v5 with MongoDB adapter. Protected routes use `ProtectedContent` wrapper. `AdminFAB` provides quick access to admin actions.
+4. **Authentication**: NextAuth v5 with MongoDB adapter. Protected routes use `ProtectedContent` wrapper. `AdminFAB` provides quick access to admin actions. The `/admin` route tree uses a layout-level auth guard (`requireAdmin()`) that checks session and role, redirecting unauthenticated users or non-admins.
 
 5. **Blog system**: MDX content rendered via next-mdx-remote with rehype plugins (syntax highlighting, auto-linking headings, slug generation). Tiptap editor for post creation/editing.
 

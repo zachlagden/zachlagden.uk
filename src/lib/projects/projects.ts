@@ -55,6 +55,19 @@ export async function getAllTechnologies(): Promise<string[]> {
   return technologies.sort();
 }
 
+// Get all projects (admin - includes unpublished)
+export async function getAllProjects(): Promise<SerializedProject[]> {
+  const client = await clientPromise;
+  const db = client.db(DB_NAME);
+  const collection = db.collection<Project>(COLLECTION);
+
+  const projects = await collection
+    .find()
+    .sort({ featured: -1, updatedAt: -1 })
+    .toArray();
+  return projects.map(serializeProject);
+}
+
 // Get single project by slug (for potential detail page)
 export async function getProjectBySlug(
   slug: string,

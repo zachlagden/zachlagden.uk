@@ -10,17 +10,17 @@ export default async function NewProjectPage() {
   await requireAdmin();
 
   return (
-    <main className="min-h-screen bg-white">
-      <div className="container max-w-3xl mx-auto px-4 sm:px-6 py-12">
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold">Add New Project</h1>
-          <p className="text-muted-foreground mt-2">
-            Add a project to your portfolio showcase
-          </p>
-        </div>
-
-        <ProjectForm />
+    <main className="mx-auto max-w-3xl px-4 py-12 sm:px-6">
+      <div className="mb-8">
+        <h1 className="font-heading text-3xl font-bold text-text-primary">
+          Add New Project
+        </h1>
+        <p className="mt-2 text-zinc-400">
+          Add a project to your portfolio showcase
+        </p>
       </div>
+
+      <ProjectForm />
     </main>
   );
 }
