@@ -1,12 +1,12 @@
-import { CommentForm } from './CommentForm'
-import { CommentList } from './CommentList'
-import type { SerializedComment } from '@/models/Comment'
+import { CommentForm } from "./CommentForm";
+import { CommentList } from "./CommentList";
+import type { SerializedComment } from "@/models/Comment";
 
 interface CommentSectionProps {
-  postId: string
-  comments: SerializedComment[]
-  isAuthenticated: boolean
-  isAdmin: boolean
+  postId: string;
+  comments: SerializedComment[];
+  isAuthenticated: boolean;
+  isAdmin: boolean;
 }
 
 export function CommentSection({
@@ -16,8 +16,8 @@ export function CommentSection({
   isAdmin,
 }: CommentSectionProps) {
   return (
-    <section className="mt-12 pt-8 border-t border-neutral-200">
-      <h2 className="text-2xl font-bold mb-6 text-neutral-900">
+    <section className="mt-12 border-t border-zinc-800 pt-8">
+      <h2 className="mb-6 font-heading text-2xl font-bold text-text-primary">
         Comments ({comments.length})
       </h2>
 
@@ -29,5 +29,5 @@ export function CommentSection({
       {/* Comment List */}
       <CommentList comments={comments} isAdmin={isAdmin} />
     </section>
-  )
+  );
 }

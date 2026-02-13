@@ -11,6 +11,16 @@ export const authConfig = {
     GitHub({
       clientId: process.env.AUTH_GITHUB_ID,
       clientSecret: process.env.AUTH_GITHUB_SECRET,
+      profile(profile) {
+        return {
+          id: profile.id.toString(),
+          name: profile.name || profile.login,
+          email: profile.email,
+          image: profile.avatar_url,
+          // Store GitHub username for admin checks (MongoDB stores extra fields)
+          githubUsername: profile.login,
+        };
+      },
     }),
   ],
   session: {
@@ -23,9 +33,11 @@ export const authConfig = {
       if (session.user) {
         session.user.id = user.id;
 
-        // Determine admin role based on GitHub username
+        // Determine admin role based on GitHub username stored in user record
         const adminUsername = process.env.ADMIN_GITHUB_USERNAME || "zachlagden";
-        session.user.role = user.name === adminUsername ? "admin" : "user";
+        const dbUser = user as typeof user & { githubUsername?: string };
+        session.user.role =
+          dbUser.githubUsername === adminUsername ? "admin" : "user";
       }
       return session;
     },

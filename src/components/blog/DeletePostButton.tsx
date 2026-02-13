@@ -1,9 +1,9 @@
-'use client'
+"use client";
 
-import { useState, useTransition } from 'react'
-import { useRouter } from 'next/navigation'
-import { Trash2 } from 'lucide-react'
-import { Button } from '@/components/ui/button'
+import { useState, useTransition } from "react";
+import { useRouter } from "next/navigation";
+import { Trash2 } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -14,30 +14,30 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
-} from '@/components/ui/alert-dialog'
-import { deletePost } from '@/lib/actions/posts'
+} from "@/components/ui/alert-dialog";
+import { deletePost } from "@/lib/actions/posts";
 
 interface DeletePostButtonProps {
-  postId: string
-  postTitle: string
+  postId: string;
+  postTitle: string;
 }
 
 export function DeletePostButton({ postId, postTitle }: DeletePostButtonProps) {
-  const router = useRouter()
-  const [isPending, startTransition] = useTransition()
-  const [error, setError] = useState<string | null>(null)
+  const router = useRouter();
+  const [isPending, startTransition] = useTransition();
+  const [error, setError] = useState<string | null>(null);
 
   const handleDelete = () => {
     startTransition(async () => {
-      const result = await deletePost(postId)
+      const result = await deletePost(postId);
       if (result.success) {
-        router.push('/blog')
-        router.refresh()
+        router.push("/blog");
+        router.refresh();
       } else {
-        setError(result.error ?? 'Failed to delete post')
+        setError(result.error ?? "Failed to delete post");
       }
-    })
-  }
+    });
+  };
 
   return (
     <AlertDialog>
@@ -51,12 +51,11 @@ export function DeletePostButton({ postId, postTitle }: DeletePostButtonProps) {
         <AlertDialogHeader>
           <AlertDialogTitle>Delete Post</AlertDialogTitle>
           <AlertDialogDescription>
-            Are you sure you want to delete &ldquo;{postTitle}&rdquo;? This action cannot be undone.
+            Are you sure you want to delete &ldquo;{postTitle}&rdquo;? This
+            action cannot be undone.
           </AlertDialogDescription>
         </AlertDialogHeader>
-        {error && (
-          <p className="text-sm text-destructive">{error}</p>
-        )}
+        {error && <p className="text-sm text-destructive">{error}</p>}
         <AlertDialogFooter>
           <AlertDialogCancel>Cancel</AlertDialogCancel>
           <AlertDialogAction
@@ -64,10 +63,10 @@ export function DeletePostButton({ postId, postTitle }: DeletePostButtonProps) {
             disabled={isPending}
             className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
           >
-            {isPending ? 'Deleting...' : 'Delete'}
+            {isPending ? "Deleting..." : "Delete"}
           </AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>
-  )
+  );
 }

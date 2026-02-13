@@ -109,9 +109,7 @@ export function ProjectCard({ project, stats }: ProjectCardProps) {
               </Link>
             )}
             {!project.demoUrl && !project.sourceUrl && (
-              <span className="text-sm text-neutral-500">
-                Coming soon
-              </span>
+              <span className="text-sm text-neutral-500">Coming soon</span>
             )}
           </div>
         </div>

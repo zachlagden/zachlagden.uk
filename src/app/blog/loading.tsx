@@ -1,67 +1,49 @@
 export default function Loading() {
   return (
-    <div className="min-h-screen bg-white">
+    <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
       {/* Header Skeleton */}
-      <div className="border-b border-neutral-200">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
-          <div className="h-10 w-32 bg-neutral-200 rounded mb-4 animate-pulse" />
-          <div className="h-6 w-full max-w-2xl bg-neutral-200 rounded animate-pulse" />
-        </div>
+      <div className="py-24 sm:py-32">
+        <div className="h-14 w-32 animate-pulse rounded bg-zinc-800" />
+        <div className="mt-6 h-6 w-full max-w-2xl animate-pulse rounded bg-zinc-800" />
       </div>
 
-      {/* Main Content Skeleton */}
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="grid lg:grid-cols-[1fr_300px] gap-8">
-          {/* Posts Grid Skeleton */}
-          <div>
-            {/* Search Skeleton */}
-            <div className="mb-8">
-              <div className="h-12 bg-neutral-200 rounded-lg animate-pulse" />
-            </div>
+      {/* Search Skeleton */}
+      <div className="mb-8">
+        <div className="h-12 animate-pulse rounded-lg bg-zinc-900" />
+      </div>
 
-            {/* Post Cards Skeleton */}
-            <div className="grid sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2 gap-6">
-              {[1, 2, 3, 4].map((i) => (
-                <div
-                  key={i}
-                  className="border border-neutral-200 rounded-lg overflow-hidden"
-                >
-                  {/* Image skeleton */}
-                  <div className="aspect-[16/9] bg-neutral-200 animate-pulse" />
-                  {/* Content skeleton */}
-                  <div className="p-6 space-y-3">
-                    <div className="h-5 w-20 bg-neutral-200 rounded-full animate-pulse" />
-                    <div className="h-6 w-full bg-neutral-200 rounded animate-pulse" />
-                    <div className="h-4 w-full bg-neutral-200 rounded animate-pulse" />
-                    <div className="h-4 w-3/4 bg-neutral-200 rounded animate-pulse" />
-                    <div className="flex gap-3 pt-2">
-                      <div className="h-3 w-24 bg-neutral-200 rounded animate-pulse" />
-                      <div className="h-3 w-16 bg-neutral-200 rounded animate-pulse" />
-                    </div>
-                  </div>
-                </div>
-              ))}
+      {/* Filter Pills Skeleton */}
+      <div className="mb-10 flex flex-wrap gap-2">
+        {[1, 2, 3, 4, 5].map((i) => (
+          <div
+            key={i}
+            className="h-8 w-20 animate-pulse rounded-full bg-zinc-800"
+          />
+        ))}
+      </div>
+
+      {/* Post Cards Grid Skeleton */}
+      <div className="grid gap-6 pb-24 sm:grid-cols-2 lg:grid-cols-3">
+        {[1, 2, 3, 4, 5, 6].map((i) => (
+          <div
+            key={i}
+            className="overflow-hidden rounded-lg border border-zinc-800 bg-zinc-900"
+          >
+            {/* Image skeleton */}
+            <div className="aspect-[16/9] animate-pulse bg-zinc-800" />
+            {/* Content skeleton */}
+            <div className="space-y-3 p-6">
+              <div className="flex gap-3">
+                <div className="h-5 w-20 animate-pulse rounded-full bg-zinc-800" />
+                <div className="h-5 w-16 animate-pulse rounded bg-zinc-800" />
+              </div>
+              <div className="h-6 w-full animate-pulse rounded bg-zinc-800" />
+              <div className="h-4 w-full animate-pulse rounded bg-zinc-800" />
+              <div className="h-4 w-3/4 animate-pulse rounded bg-zinc-800" />
+              <div className="h-3 w-24 animate-pulse rounded bg-zinc-800 pt-2" />
             </div>
           </div>
-
-          {/* Sidebar Skeleton */}
-          <aside className="lg:sticky lg:top-8 h-fit">
-            <div className="border border-neutral-200 rounded-lg p-6">
-              <div className="h-6 w-20 bg-neutral-200 rounded mb-4 animate-pulse" />
-              <div className="space-y-4">
-                <div className="h-4 w-24 bg-neutral-200 rounded animate-pulse" />
-                <div className="flex flex-wrap gap-2">
-                  {[1, 2, 3].map((i) => (
-                    <div
-                      key={i}
-                      className="h-8 w-24 bg-neutral-200 rounded-full animate-pulse"
-                    />
-                  ))}
-                </div>
-              </div>
-            </div>
-          </aside>
-        </div>
+        ))}
       </div>
     </div>
   );

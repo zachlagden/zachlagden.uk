@@ -10,14 +10,14 @@ interface TechnologyFiltersProps {
 export function TechnologyFilters({ technologies }: TechnologyFiltersProps) {
   const [selectedTech, setSelectedTech] = useQueryState(
     "tech",
-    parseAsArrayOf(parseAsString).withDefault([])
+    parseAsArrayOf(parseAsString).withDefault([]),
   );
 
   const toggleTech = (tech: string) => {
     setSelectedTech((current) =>
       current.includes(tech)
         ? current.filter((t) => t !== tech)
-        : [...current, tech]
+        : [...current, tech],
     );
   };
 

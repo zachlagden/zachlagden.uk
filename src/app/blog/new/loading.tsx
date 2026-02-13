@@ -1,4 +1,4 @@
-import { Skeleton } from '@/components/ui/skeleton'
+import { Skeleton } from "@/components/ui/skeleton";
 
 export default function NewPostLoading() {
   return (
@@ -63,5 +63,5 @@ export default function NewPostLoading() {
         </div>
       </div>
     </main>
-  )
+  );
 }

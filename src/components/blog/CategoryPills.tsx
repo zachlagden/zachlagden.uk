@@ -12,7 +12,8 @@ export function CategoryPills({ categories, tags }: CategoryPillsProps) {
   const router = useRouter();
   const searchParams = useSearchParams();
 
-  const activeCategories = searchParams.get("category")?.split(",").filter(Boolean) || [];
+  const activeCategories =
+    searchParams.get("category")?.split(",").filter(Boolean) || [];
   const activeTags = searchParams.get("tag")?.split(",").filter(Boolean) || [];
 
   const toggleFilter = useCallback(
@@ -23,7 +24,6 @@ export function CategoryPills({ categories, tags }: CategoryPillsProps) {
       const isActive = current.includes(value);
 
       if (isActive) {
-        // Remove from active filters
         const updated = current.filter((v) => v !== value);
         if (updated.length > 0) {
           params.set(type, updated.join(","));
@@ -31,7 +31,6 @@ export function CategoryPills({ categories, tags }: CategoryPillsProps) {
           params.delete(type);
         }
       } else {
-        // Add to active filters
         const updated = [...current, value];
         params.set(type, updated.join(","));
       }
@@ -39,7 +38,7 @@ export function CategoryPills({ categories, tags }: CategoryPillsProps) {
       const newUrl = params.toString() ? `/blog?${params.toString()}` : "/blog";
       router.push(newUrl);
     },
-    [router, searchParams]
+    [router, searchParams],
   );
 
   const clearAllFilters = useCallback(() => {
@@ -53,71 +52,57 @@ export function CategoryPills({ categories, tags }: CategoryPillsProps) {
 
   const hasActiveFilters = activeCategories.length > 0 || activeTags.length > 0;
 
+  if (categories.length === 0 && tags.length === 0) {
+    return null;
+  }
+
   return (
-    <div className="space-y-4">
+    <div className="flex flex-wrap items-center gap-2">
       {/* Categories */}
-      {categories.length > 0 && (
-        <div>
-          <h3 className="text-sm font-medium text-neutral-700 mb-2">
-            Categories
-          </h3>
-          <div className="flex flex-wrap gap-2">
-            {categories.map((category) => {
-              const isActive = activeCategories.includes(category);
-              return (
-                <button
-                  key={category}
-                  onClick={() => toggleFilter("category", category)}
-                  className={`px-3 py-1.5 text-sm font-medium rounded-full transition-colors ${
-                    isActive
-                      ? "bg-neutral-800 text-white"
-                      : "bg-neutral-100 text-neutral-700 hover:bg-neutral-200"
-                  }`}
-                  aria-pressed={isActive}
-                >
-                  {category}
-                </button>
-              );
-            })}
-          </div>
-        </div>
-      )}
+      {categories.map((category) => {
+        const isActive = activeCategories.includes(category);
+        return (
+          <button
+            key={`cat-${category}`}
+            onClick={() => toggleFilter("category", category)}
+            className={`rounded-full border px-3 py-1.5 text-sm font-medium transition-colors ${
+              isActive
+                ? "border-cyan-500/50 bg-cyan-500/10 text-cyan-400"
+                : "border-zinc-700 bg-zinc-800 text-zinc-400 hover:border-zinc-600 hover:text-zinc-300"
+            }`}
+            aria-pressed={isActive}
+          >
+            {category}
+          </button>
+        );
+      })}
 
       {/* Tags */}
-      {tags.length > 0 && (
-        <div>
-          <h3 className="text-sm font-medium text-neutral-700 mb-2">
-            Tags
-          </h3>
-          <div className="flex flex-wrap gap-2">
-            {tags.map((tag) => {
-              const isActive = activeTags.includes(tag);
-              return (
-                <button
-                  key={tag}
-                  onClick={() => toggleFilter("tag", tag)}
-                  className={`px-3 py-1.5 text-sm font-medium rounded-full transition-colors ${
-                    isActive
-                      ? "bg-neutral-800 text-white"
-                      : "bg-neutral-100 text-neutral-700 hover:bg-neutral-200"
-                  }`}
-                  aria-pressed={isActive}
-                >
-                  #{tag}
-                </button>
-              );
-            })}
-          </div>
-        </div>
-      )}
+      {tags.map((tag) => {
+        const isActive = activeTags.includes(tag);
+        return (
+          <button
+            key={`tag-${tag}`}
+            onClick={() => toggleFilter("tag", tag)}
+            className={`rounded-full border px-3 py-1.5 text-sm font-medium transition-colors ${
+              isActive
+                ? "border-cyan-500/50 bg-cyan-500/10 text-cyan-400"
+                : "border-zinc-700 bg-zinc-800 text-zinc-400 hover:border-zinc-600 hover:text-zinc-300"
+            }`}
+            aria-pressed={isActive}
+          >
+            #{tag}
+          </button>
+        );
+      })}
 
-      {/* Clear All Filters */}
+      {/* Clear All */}
       {hasActiveFilters && (
         <button
           onClick={clearAllFilters}
-          className="text-sm text-neutral-600 hover:text-neutral-900 transition-colors"
+          className="ml-2 text-sm text-zinc-500 transition-colors hover:text-cyan-500"
         >
-          Clear all filters
+          Clear filters
         </button>
       )}
     </div>

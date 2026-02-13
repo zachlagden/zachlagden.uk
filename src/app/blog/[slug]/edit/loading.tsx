@@ -1,4 +1,4 @@
-import { Skeleton } from '@/components/ui/skeleton'
+import { Skeleton } from "@/components/ui/skeleton";
 
 export default function EditPostLoading() {
   return (
@@ -63,5 +63,5 @@ export default function EditPostLoading() {
         </div>
       </div>
     </main>
-  )
+  );
 }

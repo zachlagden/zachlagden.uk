@@ -7,7 +7,7 @@ import { CategoryPills } from "@/components/blog/CategoryPills";
 import { EmptyState } from "@/components/blog/EmptyState";
 
 // Force dynamic rendering - blog content comes from database
-export const dynamic = 'force-dynamic';
+export const dynamic = "force-dynamic";
 
 interface BlogPageProps {
   searchParams: Promise<{
@@ -41,62 +41,57 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
   ]);
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
       {/* Header */}
-      <div className="border-b border-neutral-200">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
-          <h1 className="text-4xl font-bold mb-4 text-neutral-900">
-            Blog
-          </h1>
-          <p className="text-lg text-neutral-600 max-w-2xl">
-            Technical articles, tutorials, and insights on web development,
-            React, TypeScript, and more.
-          </p>
-        </div>
+      <div className="py-24 sm:py-32">
+        <h1 className="font-heading text-5xl font-bold text-text-primary sm:text-6xl">
+          Blog
+        </h1>
+        <p className="mt-6 max-w-2xl text-lg leading-relaxed text-zinc-400">
+          Technical articles, tutorials, and insights on web development, React,
+          TypeScript, and more.
+        </p>
       </div>
 
-      {/* Main Content */}
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="grid lg:grid-cols-[1fr_300px] gap-8">
-          {/* Posts Grid */}
-          <div>
-            {/* Search */}
-            <div className="mb-8">
-              <Suspense fallback={<div className="h-12 bg-neutral-100 rounded-lg animate-pulse" />}>
-                <SearchFilter />
-              </Suspense>
-            </div>
-
-            {/* Posts */}
-            {posts.length > 0 ? (
-              <div className="grid sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2 gap-6">
-                {posts.map((post) => (
-                  <PostCard key={post._id} post={post} />
-                ))}
-              </div>
-            ) : (
-              <EmptyState
-                query={query}
-                categories={categories}
-                tags={tags}
-                availableCategories={allCategories}
-              />
-            )}
-          </div>
-
-          {/* Sidebar Filters */}
-          <aside className="lg:sticky lg:top-8 h-fit">
-            <div className="border border-neutral-200 rounded-lg p-6">
-              <h2 className="text-lg font-semibold mb-4 text-neutral-900">
-                Filters
-              </h2>
-              <Suspense fallback={<div className="h-32 bg-neutral-100 rounded animate-pulse" />}>
-                <CategoryPills categories={allCategories} tags={allTags} />
-              </Suspense>
-            </div>
-          </aside>
-        </div>
+      {/* Search */}
+      <div className="mb-8">
+        <Suspense
+          fallback={
+            <div className="h-12 animate-pulse rounded-lg bg-zinc-900" />
+          }
+        >
+          <SearchFilter />
+        </Suspense>
       </div>
+
+      {/* Category/Tag Filters */}
+      <div className="mb-10">
+        <Suspense
+          fallback={
+            <div className="h-10 animate-pulse rounded-lg bg-zinc-900" />
+          }
+        >
+          <CategoryPills categories={allCategories} tags={allTags} />
+        </Suspense>
+      </div>
+
+      {/* Posts Grid */}
+      {posts.length > 0 ? (
+        <div className="grid gap-6 pb-24 sm:grid-cols-2 lg:grid-cols-3">
+          {posts.map((post, index) => (
+            <PostCard key={post._id} post={post} index={index} />
+          ))}
+        </div>
+      ) : (
+        <div className="pb-24">
+          <EmptyState
+            query={query}
+            categories={categories}
+            tags={tags}
+            availableCategories={allCategories}
+          />
+        </div>
+      )}
     </div>
   );
 }

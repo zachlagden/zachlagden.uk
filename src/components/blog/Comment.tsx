@@ -1,15 +1,17 @@
-import Image from 'next/image'
-import { formatDistanceToNow } from 'date-fns'
-import { DeleteCommentButton } from './DeleteCommentButton'
-import type { SerializedComment } from '@/models/Comment'
+import Image from "next/image";
+import { formatDistanceToNow } from "date-fns";
+import { DeleteCommentButton } from "./DeleteCommentButton";
+import type { SerializedComment } from "@/models/Comment";
 
 interface CommentProps {
-  comment: SerializedComment
-  isAdmin: boolean
+  comment: SerializedComment;
+  isAdmin: boolean;
 }
 
 export function Comment({ comment, isAdmin }: CommentProps) {
-  const timeAgo = formatDistanceToNow(new Date(comment.createdAt), { addSuffix: true })
+  const timeAgo = formatDistanceToNow(new Date(comment.createdAt), {
+    addSuffix: true,
+  });
 
   return (
     <article className="flex gap-4 py-4">
@@ -24,8 +26,8 @@ export function Comment({ comment, isAdmin }: CommentProps) {
             className="rounded-full"
           />
         ) : (
-          <div className="w-10 h-10 rounded-full bg-neutral-200 flex items-center justify-center">
-            <span className="text-sm font-medium text-neutral-600">
+          <div className="flex h-10 w-10 items-center justify-center rounded-full bg-zinc-800">
+            <span className="text-sm font-medium text-zinc-400">
               {comment.username.charAt(0).toUpperCase()}
             </span>
           </div>
@@ -33,14 +35,10 @@ export function Comment({ comment, isAdmin }: CommentProps) {
       </div>
 
       {/* Content */}
-      <div className="flex-1 min-w-0">
-        <div className="flex items-center gap-2 mb-1">
-          <span className="font-medium text-neutral-900">
-            {comment.username}
-          </span>
-          <span className="text-sm text-neutral-500">
-            {timeAgo}
-          </span>
+      <div className="min-w-0 flex-1">
+        <div className="mb-1 flex items-center gap-2">
+          <span className="font-medium text-zinc-200">{comment.username}</span>
+          <span className="font-mono text-sm text-zinc-600">{timeAgo}</span>
           {isAdmin && (
             <DeleteCommentButton
               commentId={comment._id}
@@ -48,10 +46,10 @@ export function Comment({ comment, isAdmin }: CommentProps) {
             />
           )}
         </div>
-        <p className="text-neutral-700 whitespace-pre-wrap break-words">
+        <p className="whitespace-pre-wrap break-words text-zinc-400">
           {comment.content}
         </p>
       </div>
     </article>
-  )
+  );
 }

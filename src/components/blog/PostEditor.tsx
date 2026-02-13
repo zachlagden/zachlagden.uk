@@ -1,26 +1,26 @@
-'use client'
+"use client";
 
-import { useEditor, EditorContent } from '@tiptap/react'
-import StarterKit from '@tiptap/starter-kit'
-import CodeBlockLowlight from '@tiptap/extension-code-block-lowlight'
-import Image from '@tiptap/extension-image'
-import Link from '@tiptap/extension-link'
-import Placeholder from '@tiptap/extension-placeholder'
-import { common, createLowlight } from 'lowlight'
-import { EditorToolbar } from './EditorToolbar'
+import { useEditor, EditorContent } from "@tiptap/react";
+import StarterKit from "@tiptap/starter-kit";
+import CodeBlockLowlight from "@tiptap/extension-code-block-lowlight";
+import Image from "@tiptap/extension-image";
+import Link from "@tiptap/extension-link";
+import Placeholder from "@tiptap/extension-placeholder";
+import { common, createLowlight } from "lowlight";
+import { EditorToolbar } from "./EditorToolbar";
 
-const lowlight = createLowlight(common)
+const lowlight = createLowlight(common);
 
 interface PostEditorProps {
-  initialContent: string // HTML content from database
-  onChange: (html: string) => void // Called on content change
-  placeholder?: string
+  initialContent: string; // HTML content from database
+  onChange: (html: string) => void; // Called on content change
+  placeholder?: string;
 }
 
 export function PostEditor({
   initialContent,
   onChange,
-  placeholder = 'Start writing...',
+  placeholder = "Start writing...",
 }: PostEditorProps) {
   const editor = useEditor({
     extensions: [
@@ -44,9 +44,9 @@ export function PostEditor({
     content: initialContent,
     immediatelyRender: false, // Critical: prevents SSR hydration issues
     onUpdate: ({ editor }) => {
-      onChange(editor.getHTML())
+      onChange(editor.getHTML());
     },
-  })
+  });
 
   if (!editor) {
     return (
@@ -57,7 +57,7 @@ export function PostEditor({
           <div className="h-4 bg-muted rounded w-1/2" />
         </div>
       </div>
-    )
+    );
   }
 
   return (
@@ -65,5 +65,5 @@ export function PostEditor({
       <EditorToolbar editor={editor} />
       <EditorContent editor={editor} className="tiptap" />
     </div>
-  )
+  );
 }

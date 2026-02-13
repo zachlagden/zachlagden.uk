@@ -1,49 +1,49 @@
-'use client'
+"use client";
 
-import { useState, useActionState, useEffect } from 'react'
-import { useRouter } from 'next/navigation'
-import dynamic from 'next/dynamic'
-import Image from 'next/image'
-import { createPost, updatePost } from '@/lib/actions/posts'
-import { generateSlug, type PostFormState } from '@/lib/blog/validation'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { Textarea } from '@/components/ui/textarea'
-import { Label } from '@/components/ui/label'
-import { Skeleton } from '@/components/ui/skeleton'
-import { cn } from '@/lib/utils'
+import { useState, useActionState, useEffect } from "react";
+import { useRouter } from "next/navigation";
+import dynamic from "next/dynamic";
+import Image from "next/image";
+import { createPost, updatePost } from "@/lib/actions/posts";
+import { generateSlug, type PostFormState } from "@/lib/blog/validation";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Label } from "@/components/ui/label";
+import { Skeleton } from "@/components/ui/skeleton";
+import { cn } from "@/lib/utils";
 
 // Lazy-load the editor to avoid blocking page render
 const PostEditor = dynamic(
-  () => import('./PostEditor').then((m) => m.PostEditor),
+  () => import("./PostEditor").then((m) => m.PostEditor),
   {
     ssr: false,
     loading: () => <EditorSkeleton />,
-  }
-)
+  },
+);
 
 interface PostFormProps {
-  mode: 'create' | 'edit'
+  mode: "create" | "edit";
   initialData?: {
-    id?: string
-    title: string
-    slug: string
-    excerpt: string
-    content: string
-    categories: string[]
-    tags: string[]
-    featuredImage: string
-    published: boolean
-  }
-  availableCategories: string[]
-  availableTags: string[]
+    id?: string;
+    title: string;
+    slug: string;
+    excerpt: string;
+    content: string;
+    categories: string[];
+    tags: string[];
+    featuredImage: string;
+    published: boolean;
+  };
+  availableCategories: string[];
+  availableTags: string[];
 }
 
 const initialState: PostFormState = {
   success: undefined,
   message: undefined,
   errors: undefined,
-}
+};
 
 export function PostForm({
   mode,
@@ -51,56 +51,59 @@ export function PostForm({
   availableCategories,
   availableTags,
 }: PostFormProps) {
-  const router = useRouter()
+  const router = useRouter();
 
   // Form state using useActionState
   const boundAction =
-    mode === 'edit' && initialData?.id
+    mode === "edit" && initialData?.id
       ? updatePost.bind(null, initialData.id)
-      : createPost
+      : createPost;
 
-  const [state, formAction, isPending] = useActionState(boundAction, initialState)
+  const [state, formAction, isPending] = useActionState(
+    boundAction,
+    initialState,
+  );
 
   // Local state for editor content (not managed by form directly)
-  const [content, setContent] = useState(initialData?.content ?? '')
+  const [content, setContent] = useState(initialData?.content ?? "");
 
   // Local state for slug auto-generation
-  const [autoSlug, setAutoSlug] = useState(mode === 'create')
-  const [title, setTitle] = useState(initialData?.title ?? '')
-  const [slug, setSlug] = useState(initialData?.slug ?? '')
+  const [autoSlug, setAutoSlug] = useState(mode === "create");
+  const [title, setTitle] = useState(initialData?.title ?? "");
+  const [slug, setSlug] = useState(initialData?.slug ?? "");
 
   // Local state for categories and tags
   const [selectedCategories, setSelectedCategories] = useState<string[]>(
-    initialData?.categories ?? []
-  )
+    initialData?.categories ?? [],
+  );
   const [selectedTags, setSelectedTags] = useState<string[]>(
-    initialData?.tags ?? []
-  )
-  const [newTag, setNewTag] = useState('')
-  const [newCategory, setNewCategory] = useState('')
+    initialData?.tags ?? [],
+  );
+  const [newTag, setNewTag] = useState("");
+  const [newCategory, setNewCategory] = useState("");
 
   // Auto-generate slug from title
   useEffect(() => {
     if (autoSlug && title) {
-      setSlug(generateSlug(title))
+      setSlug(generateSlug(title));
     }
-  }, [autoSlug, title])
+  }, [autoSlug, title]);
 
   // Handle successful form submission
   useEffect(() => {
     if (state.success && slug) {
-      router.push(`/blog/${slug}`)
+      router.push(`/blog/${slug}`);
     }
-  }, [state.success, slug, router])
+  }, [state.success, slug, router]);
 
   // Handle title change
   function handleTitleChange(e: React.ChangeEvent<HTMLInputElement>) {
-    setTitle(e.target.value)
+    setTitle(e.target.value);
   }
 
   // Handle slug change
   function handleSlugChange(e: React.ChangeEvent<HTMLInputElement>) {
-    setSlug(e.target.value)
+    setSlug(e.target.value);
   }
 
   // Toggle category selection
@@ -108,53 +111,56 @@ export function PostForm({
     setSelectedCategories((prev) =>
       prev.includes(category)
         ? prev.filter((c) => c !== category)
-        : [...prev, category]
-    )
+        : [...prev, category],
+    );
   }
 
   // Add new category
   function addCategory() {
-    if (newCategory.trim() && !selectedCategories.includes(newCategory.trim())) {
-      setSelectedCategories((prev) => [...prev, newCategory.trim()])
-      setNewCategory('')
+    if (
+      newCategory.trim() &&
+      !selectedCategories.includes(newCategory.trim())
+    ) {
+      setSelectedCategories((prev) => [...prev, newCategory.trim()]);
+      setNewCategory("");
     }
   }
 
   // Remove tag
   function removeTag(tag: string) {
-    setSelectedTags((prev) => prev.filter((t) => t !== tag))
+    setSelectedTags((prev) => prev.filter((t) => t !== tag));
   }
 
   // Add new tag
   function addTag(tag: string) {
-    const trimmedTag = tag.trim()
+    const trimmedTag = tag.trim();
     if (trimmedTag && !selectedTags.includes(trimmedTag)) {
-      setSelectedTags((prev) => [...prev, trimmedTag])
+      setSelectedTags((prev) => [...prev, trimmedTag]);
     }
   }
 
   // Handle tag input keydown (comma or enter adds tag)
   function handleTagKeyDown(e: React.KeyboardEvent<HTMLInputElement>) {
-    if (e.key === 'Enter' || e.key === ',') {
-      e.preventDefault()
-      addTag(newTag)
-      setNewTag('')
+    if (e.key === "Enter" || e.key === ",") {
+      e.preventDefault();
+      addTag(newTag);
+      setNewTag("");
     }
   }
 
   // Check if featured image URL is valid for preview
   function isValidImageUrl(url: string): boolean {
     try {
-      new URL(url)
-      return url.startsWith('http://') || url.startsWith('https://')
+      new URL(url);
+      return url.startsWith("http://") || url.startsWith("https://");
     } catch {
-      return false
+      return false;
     }
   }
 
   const [featuredImage, setFeaturedImage] = useState(
-    initialData?.featuredImage ?? ''
-  )
+    initialData?.featuredImage ?? "",
+  );
 
   return (
     <form action={formAction} className="space-y-8">
@@ -206,7 +212,7 @@ export function PostForm({
           aria-invalid={!!state.errors?.slug}
         />
         <p className="text-xs text-muted-foreground">
-          URL: /blog/{slug || 'your-slug-here'}
+          URL: /blog/{slug || "your-slug-here"}
         </p>
         {state.errors?.slug && (
           <p className="text-sm text-destructive">{state.errors.slug[0]}</p>
@@ -219,20 +225,20 @@ export function PostForm({
           <Label htmlFor="excerpt">Excerpt</Label>
           <span
             className={cn(
-              'text-xs',
+              "text-xs",
               (initialData?.excerpt?.length ?? 0) > 450
-                ? 'text-amber-500'
-                : 'text-muted-foreground'
+                ? "text-amber-500"
+                : "text-muted-foreground",
             )}
           >
             {/* Use a key to force re-render on excerpt change */}
-            <ExcerptCounter initialValue={initialData?.excerpt ?? ''} />
+            <ExcerptCounter initialValue={initialData?.excerpt ?? ""} />
           </span>
         </div>
         <Textarea
           id="excerpt"
           name="excerpt"
-          defaultValue={initialData?.excerpt ?? ''}
+          defaultValue={initialData?.excerpt ?? ""}
           placeholder="A brief summary of the post (2-3 sentences)"
           rows={3}
           maxLength={500}
@@ -283,10 +289,10 @@ export function PostForm({
               type="button"
               onClick={() => toggleCategory(category)}
               className={cn(
-                'px-3 py-1.5 rounded-full text-sm transition-colors border',
+                "px-3 py-1.5 rounded-full text-sm transition-colors border",
                 selectedCategories.includes(category)
-                  ? 'bg-primary text-primary-foreground border-primary'
-                  : 'bg-muted/50 text-muted-foreground border-border hover:bg-muted'
+                  ? "bg-primary text-primary-foreground border-primary"
+                  : "bg-muted/50 text-muted-foreground border-border hover:bg-muted",
               )}
             >
               {category}
@@ -299,9 +305,9 @@ export function PostForm({
             value={newCategory}
             onChange={(e) => setNewCategory(e.target.value)}
             onKeyDown={(e) => {
-              if (e.key === 'Enter') {
-                e.preventDefault()
-                addCategory()
+              if (e.key === "Enter") {
+                e.preventDefault();
+                addCategory();
               }
             }}
             className="max-w-xs"
@@ -312,7 +318,12 @@ export function PostForm({
         </div>
         {/* Hidden inputs for categories */}
         {selectedCategories.map((category) => (
-          <input key={category} type="hidden" name="categories" value={category} />
+          <input
+            key={category}
+            type="hidden"
+            name="categories"
+            value={category}
+          />
         ))}
         {state.errors?.categories && (
           <p className="text-sm text-destructive">
@@ -354,8 +365,8 @@ export function PostForm({
             type="button"
             variant="outline"
             onClick={() => {
-              addTag(newTag)
-              setNewTag('')
+              addTag(newTag);
+              setNewTag("");
             }}
           >
             Add
@@ -363,7 +374,7 @@ export function PostForm({
         </div>
         {availableTags.length > 0 && (
           <div className="text-xs text-muted-foreground">
-            Suggestions:{' '}
+            Suggestions:{" "}
             {availableTags
               .filter((tag) => !selectedTags.includes(tag))
               .slice(0, 10)
@@ -420,10 +431,10 @@ export function PostForm({
       <div className="flex gap-4">
         <Button type="submit" disabled={isPending}>
           {isPending
-            ? 'Saving...'
-            : mode === 'create'
-              ? 'Create Post'
-              : 'Update Post'}
+            ? "Saving..."
+            : mode === "create"
+              ? "Create Post"
+              : "Update Post"}
         </Button>
         <Button
           type="button"
@@ -435,23 +446,23 @@ export function PostForm({
         </Button>
       </div>
     </form>
-  )
+  );
 }
 
 // Excerpt character counter component
 function ExcerptCounter({ initialValue }: { initialValue: string }) {
-  const [count, setCount] = useState(initialValue.length)
+  const [count, setCount] = useState(initialValue.length);
 
   useEffect(() => {
-    const textarea = document.getElementById('excerpt') as HTMLTextAreaElement
+    const textarea = document.getElementById("excerpt") as HTMLTextAreaElement;
     if (textarea) {
-      const handleInput = () => setCount(textarea.value.length)
-      textarea.addEventListener('input', handleInput)
-      return () => textarea.removeEventListener('input', handleInput)
+      const handleInput = () => setCount(textarea.value.length);
+      textarea.addEventListener("input", handleInput);
+      return () => textarea.removeEventListener("input", handleInput);
     }
-  }, [])
+  }, []);
 
-  return <span>{count}/500</span>
+  return <span>{count}/500</span>;
 }
 
 // Editor skeleton for lazy loading
@@ -474,5 +485,5 @@ function EditorSkeleton() {
         <Skeleton className="h-4 w-5/6" />
       </div>
     </div>
-  )
+  );
 }

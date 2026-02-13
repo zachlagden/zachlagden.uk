@@ -1,43 +1,43 @@
-import Link from 'next/link'
-import Image from 'next/image'
-import { ArrowLeft, Pencil } from 'lucide-react'
-import { Button } from '@/components/ui/button'
-import { DeletePostButton } from './DeletePostButton'
-import type { SerializedPost } from '@/models/Post'
+import Link from "next/link";
+import Image from "next/image";
+import { ArrowLeft, Pencil } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { DeletePostButton } from "./DeletePostButton";
+import type { SerializedPost } from "@/models/Post";
 
 interface PostHeaderProps {
-  post: SerializedPost
-  isAdmin?: boolean
+  post: SerializedPost;
+  isAdmin?: boolean;
 }
 
 export function PostHeader({ post, isAdmin = false }: PostHeaderProps) {
   const publishedDate = post.publishedAt
-    ? new Date(post.publishedAt).toLocaleDateString('en-US', {
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric'
+    ? new Date(post.publishedAt).toLocaleDateString("en-GB", {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
       })
-    : null
+    : null;
 
   return (
     <header className="mb-8">
       {/* Back link */}
       <Link
         href="/blog"
-        className="inline-flex items-center gap-2 text-sm text-neutral-600 hover:text-neutral-900 transition-colors mb-6"
+        className="mb-6 inline-flex items-center gap-2 text-sm text-zinc-500 transition-colors hover:text-cyan-500"
       >
-        <ArrowLeft className="w-4 h-4" />
+        <ArrowLeft className="h-4 w-4" />
         Back to Blog
       </Link>
 
       {/* Categories */}
       {post.categories.length > 0 && (
-        <div className="flex flex-wrap gap-2 mb-4">
+        <div className="mb-4 flex flex-wrap gap-2">
           {post.categories.map((category) => (
             <Link
               key={category}
               href={`/blog?category=${encodeURIComponent(category)}`}
-              className="text-xs font-medium px-3 py-1 rounded-full bg-neutral-100 text-neutral-700 hover:bg-neutral-200 transition-colors"
+              className="rounded-full border border-zinc-700 bg-zinc-800 px-3 py-1 text-xs font-medium text-zinc-400 transition-colors hover:border-zinc-600 hover:text-zinc-300"
             >
               {category}
             </Link>
@@ -46,31 +46,34 @@ export function PostHeader({ post, isAdmin = false }: PostHeaderProps) {
       )}
 
       {/* Title */}
-      <h1 className="text-4xl md:text-5xl font-bold mb-4 text-neutral-900">
+      <h1 className="mb-4 font-heading text-4xl font-bold text-text-primary md:text-5xl">
         {post.title}
       </h1>
 
       {/* Excerpt */}
-      <p className="text-lg text-neutral-600 mb-6">
-        {post.excerpt}
-      </p>
+      <p className="mb-6 text-lg text-zinc-400">{post.excerpt}</p>
 
       {/* Meta info */}
-      <div className="flex flex-wrap items-center gap-4 text-sm text-neutral-600 mb-8">
-        <span>By {post.author}</span>
+      <div className="mb-8 flex flex-wrap items-center gap-4 text-sm text-zinc-500">
+        <span>{post.author}</span>
         {publishedDate && (
           <>
-            <span className="text-neutral-300">•</span>
-            <time dateTime={post.publishedAt || undefined}>{publishedDate}</time>
+            <span className="text-zinc-700">&middot;</span>
+            <time
+              dateTime={post.publishedAt || undefined}
+              className="font-mono"
+            >
+              {publishedDate}
+            </time>
           </>
         )}
-        <span className="text-neutral-300">•</span>
-        <span>{post.readingTime} min read</span>
+        <span className="text-zinc-700">&middot;</span>
+        <span className="font-mono">{post.readingTime} min read</span>
       </div>
 
       {/* Featured image */}
       {post.featuredImage && (
-        <div className="relative aspect-video w-full overflow-hidden rounded-lg border border-neutral-200">
+        <div className="relative aspect-video w-full overflow-hidden rounded-lg border border-zinc-800">
           <Image
             src={post.featuredImage}
             alt={post.title}
@@ -83,10 +86,10 @@ export function PostHeader({ post, isAdmin = false }: PostHeaderProps) {
 
       {/* Admin controls */}
       {isAdmin && (
-        <div className="flex gap-2 mt-4 pt-4 border-t border-neutral-200">
+        <div className="mt-4 flex gap-2 border-t border-zinc-800 pt-4">
           <Button asChild size="sm" variant="outline">
             <Link href={`/blog/${post.slug}/edit`}>
-              <Pencil className="h-4 w-4 mr-2" />
+              <Pencil className="mr-2 h-4 w-4" />
               Edit
             </Link>
           </Button>
@@ -94,5 +97,5 @@ export function PostHeader({ post, isAdmin = false }: PostHeaderProps) {
         </div>
       )}
     </header>
-  )
+  );
 }

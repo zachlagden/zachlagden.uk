@@ -2,7 +2,7 @@
 
 import React, { useCallback, useEffect, useState } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
-import { Search } from "lucide-react";
+import { Search, X } from "lucide-react";
 
 export function SearchFilter() {
   const router = useRouter();
@@ -38,36 +38,24 @@ export function SearchFilter() {
 
   return (
     <div className="relative">
-      <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-        <Search className="h-5 w-5 text-neutral-400" />
+      <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-4">
+        <Search className="h-5 w-5 text-zinc-500" aria-hidden="true" />
       </div>
       <input
         type="search"
         value={query}
         onChange={handleChange}
         placeholder="Search posts..."
-        className="w-full pl-11 pr-4 py-3 border border-neutral-200 rounded-lg bg-white text-neutral-900 placeholder-neutral-500 focus:outline-none focus:ring-2 focus:ring-neutral-300 transition-colors"
+        className="w-full rounded-lg border border-zinc-800 bg-zinc-900 py-3 pl-11 pr-10 text-zinc-100 placeholder-zinc-500 transition-colors focus:border-cyan-500/50 focus:outline-none focus:ring-2 focus:ring-cyan-500/20"
         aria-label="Search blog posts"
       />
       {query && (
         <button
           onClick={handleClear}
-          className="absolute inset-y-0 right-0 pr-4 flex items-center text-neutral-400 hover:text-neutral-600 transition-colors"
+          className="absolute inset-y-0 right-0 flex items-center pr-4 text-zinc-500 transition-colors hover:text-zinc-300"
           aria-label="Clear search"
         >
-          <svg
-            className="h-5 w-5"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M6 18L18 6M6 6l12 12"
-            />
-          </svg>
+          <X className="h-5 w-5" aria-hidden="true" />
         </button>
       )}
     </div>

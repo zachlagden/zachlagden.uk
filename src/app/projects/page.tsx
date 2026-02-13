@@ -21,7 +21,9 @@ interface ProjectsPageProps {
   }>;
 }
 
-export default async function ProjectsPage({ searchParams }: ProjectsPageProps) {
+export default async function ProjectsPage({
+  searchParams,
+}: ProjectsPageProps) {
   // Await searchParams (Next.js 15 Promise-based API)
   const params = await searchParams;
 
@@ -30,13 +32,17 @@ export default async function ProjectsPage({ searchParams }: ProjectsPageProps) 
 
   // Fetch filtered projects and all technologies for filter UI
   const [projects, allTechnologies] = await Promise.all([
-    getProjects({ technologies: technologies.length > 0 ? technologies : undefined }),
+    getProjects({
+      technologies: technologies.length > 0 ? technologies : undefined,
+    }),
     getAllTechnologies(),
   ]);
 
   // Fetch GitHub stats for all projects with githubRepo (parallel)
   const statsPromises = projects.map((project) =>
-    project.githubRepo ? getProjectGitHubStats(project.githubRepo) : Promise.resolve(null)
+    project.githubRepo
+      ? getProjectGitHubStats(project.githubRepo)
+      : Promise.resolve(null),
   );
   const allStats = await Promise.all(statsPromises);
 
@@ -51,12 +57,11 @@ export default async function ProjectsPage({ searchParams }: ProjectsPageProps) 
       {/* Header */}
       <div className="border-b border-neutral-200">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
-          <h1 className="text-4xl font-bold mb-4 text-neutral-900">
-            Projects
-          </h1>
+          <h1 className="text-4xl font-bold mb-4 text-neutral-900">Projects</h1>
           <p className="text-lg text-neutral-600 max-w-2xl">
-            A collection of projects I&apos;ve built, from full-stack applications to
-            open-source contributions. Filter by technology to explore.
+            A collection of projects I&apos;ve built, from full-stack
+            applications to open-source contributions. Filter by technology to
+            explore.
           </p>
         </div>
       </div>

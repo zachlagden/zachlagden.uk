@@ -10,9 +10,7 @@ if (!uri) {
   // Create a lazy promise that only rejects when actually awaited,
   // allowing builds to succeed without MONGODB_URI set
   clientPromise = new Promise<MongoClient>((_, reject) => {
-    reject(
-      new Error('Invalid/Missing environment variable: "MONGODB_URI"')
-    );
+    reject(new Error('Invalid/Missing environment variable: "MONGODB_URI"'));
   });
   // Prevent unhandled rejection during build
   clientPromise.catch(() => {});

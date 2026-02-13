@@ -1,8 +1,8 @@
-import { render, RenderOptions } from '@testing-library/react'
-import { ReactElement } from 'react'
+import { render, RenderOptions } from "@testing-library/react";
+import { ReactElement } from "react";
 
 interface AllProvidersProps {
-  children: React.ReactNode
+  children: React.ReactNode;
 }
 
 /**
@@ -10,7 +10,7 @@ interface AllProvidersProps {
  * Add additional providers here as needed (e.g., auth context).
  */
 function AllProviders({ children }: AllProvidersProps) {
-  return <>{children}</>
+  return <>{children}</>;
 }
 
 /**
@@ -19,9 +19,9 @@ function AllProviders({ children }: AllProvidersProps) {
  */
 function customRender(
   ui: ReactElement,
-  options?: Omit<RenderOptions, 'wrapper'>
+  options?: Omit<RenderOptions, "wrapper">,
 ) {
-  return render(ui, { wrapper: AllProviders, ...options })
+  return render(ui, { wrapper: AllProviders, ...options });
 }
 
-export { customRender as render }
+export { customRender as render };

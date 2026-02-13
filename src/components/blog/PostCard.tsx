@@ -8,16 +8,16 @@ import type { SerializedPost } from "@/models/Post";
 
 interface PostCardProps {
   post: SerializedPost;
+  index?: number;
 }
 
-export function PostCard({ post }: PostCardProps) {
-  // Format date for display
+export function PostCard({ post, index = 0 }: PostCardProps) {
   const formatDate = (dateString: string | null) => {
     if (!dateString) return "Draft";
     const date = new Date(dateString);
-    return new Intl.DateTimeFormat("en-US", {
-      month: "short",
+    return new Intl.DateTimeFormat("en-GB", {
       day: "numeric",
+      month: "short",
       year: "numeric",
     }).format(date);
   };
@@ -25,55 +25,58 @@ export function PostCard({ post }: PostCardProps) {
   return (
     <motion.article
       initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.5 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, delay: index * 0.1, ease: "easeOut" }}
       className="group"
     >
       <Link
         href={`/blog/${post.slug}`}
-        className="block h-full border border-neutral-200 rounded-lg overflow-hidden hover:border-neutral-300 transition-colors"
+        className="flex h-full flex-col overflow-hidden rounded-lg border border-zinc-800 bg-zinc-900 transition-colors hover:border-cyan-500/20"
       >
         {/* Featured Image */}
-        <div className="relative aspect-[16/9] overflow-hidden bg-neutral-100">
-          <Image
-            src={post.featuredImage}
-            alt={post.title}
-            fill
-            className="object-cover group-hover:scale-105 transition-transform duration-300"
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-          />
-        </div>
+        {post.featuredImage && (
+          <div className="relative aspect-[16/9] overflow-hidden bg-zinc-800">
+            <Image
+              src={post.featuredImage}
+              alt={post.title}
+              fill
+              className="object-cover transition-transform duration-300 group-hover:scale-105"
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            />
+          </div>
+        )}
 
         {/* Content */}
-        <div className="p-6">
-          {/* Categories - Primary category only for card */}
-          {post.categories.length > 0 && (
-            <div className="mb-3">
-              <span className="inline-block text-xs font-medium px-2.5 py-1 rounded-full bg-neutral-100 text-neutral-700">
+        <div className="flex flex-1 flex-col p-6">
+          {/* Category pill + reading time */}
+          <div className="flex items-center gap-3">
+            {post.categories[0] && (
+              <span className="rounded-full border border-zinc-700 bg-zinc-800 px-2.5 py-0.5 text-xs text-zinc-400">
                 {post.categories[0]}
               </span>
-            </div>
-          )}
+            )}
+            <span className="font-mono text-xs text-zinc-600">
+              {post.readingTime} min read
+            </span>
+          </div>
 
           {/* Title */}
-          <h2 className="text-xl font-semibold mb-2 group-hover:text-neutral-600 transition-colors line-clamp-2">
+          <h2 className="mt-3 font-heading text-lg font-medium text-zinc-100 transition-colors group-hover:text-cyan-500 line-clamp-2">
             {post.title}
           </h2>
 
           {/* Excerpt */}
-          <p className="text-neutral-600 text-sm leading-relaxed mb-4 line-clamp-3">
+          <p className="mt-2 flex-1 text-sm leading-relaxed text-zinc-400 line-clamp-3">
             {post.excerpt}
           </p>
 
-          {/* Meta: Date and Reading Time */}
-          <div className="flex items-center gap-3 text-xs text-neutral-500">
-            <time dateTime={post.publishedAt || undefined}>
-              {formatDate(post.publishedAt)}
-            </time>
-            <span>•</span>
-            <span>{post.readingTime} min read</span>
-          </div>
+          {/* Date */}
+          <time
+            dateTime={post.publishedAt || undefined}
+            className="mt-4 block font-mono text-xs text-zinc-600"
+          >
+            {formatDate(post.publishedAt)}
+          </time>
         </div>
       </Link>
     </motion.article>

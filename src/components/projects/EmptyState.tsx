@@ -11,7 +11,7 @@ interface EmptyStateProps {
 export function EmptyState({ technologies }: EmptyStateProps) {
   const [, setSelectedTech] = useQueryState(
     "tech",
-    parseAsArrayOf(parseAsString).withDefault([])
+    parseAsArrayOf(parseAsString).withDefault([]),
   );
 
   const clearFilters = () => setSelectedTech([]);
@@ -42,9 +42,7 @@ export function EmptyState({ technologies }: EmptyStateProps) {
       <h3 className="text-lg font-semibold text-neutral-900 mb-2">
         No projects yet
       </h3>
-      <p className="text-neutral-600">
-        Check back soon for exciting projects!
-      </p>
+      <p className="text-neutral-600">Check back soon for exciting projects!</p>
     </div>
   );
 }

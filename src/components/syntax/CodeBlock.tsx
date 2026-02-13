@@ -1,61 +1,64 @@
-'use client'
+"use client";
 
-import { useState } from 'react'
-import { cn } from '@/lib/utils'
+import { useState } from "react";
+import { cn } from "@/lib/utils";
 
 interface CodeBlockProps {
-  children: React.ReactNode
-  className?: string  // Contains language class from rehype-highlight (e.g., "hljs language-typescript")
+  children: React.ReactNode;
+  className?: string;
 }
 
 export function CodeBlock({ children, className }: CodeBlockProps) {
-  const [copied, setCopied] = useState(false)
+  const [copied, setCopied] = useState(false);
 
   // Extract language from className (e.g., "language-typescript" -> "typescript")
-  const language = className?.split(' ')
-    .find(c => c.startsWith('language-'))
-    ?.replace('language-', '') ?? 'text'
+  const language =
+    className
+      ?.split(" ")
+      .find((c) => c.startsWith("language-"))
+      ?.replace("language-", "") ?? "text";
 
   const handleCopy = async () => {
-    // Get text content from children
-    const text = typeof children === 'string'
-      ? children
-      : (children as React.ReactElement<{ children?: string }>)?.props?.children ?? ''
+    const text =
+      typeof children === "string"
+        ? children
+        : ((children as React.ReactElement<{ children?: string }>)?.props
+            ?.children ?? "");
 
-    await navigator.clipboard.writeText(text)
-    setCopied(true)
-    setTimeout(() => setCopied(false), 2000)
-  }
+    await navigator.clipboard.writeText(text);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
 
   return (
-    <div className="relative group my-4">
+    <div className="group relative my-4">
       {/* Language badge */}
-      <div className="absolute top-0 right-0 px-3 py-1 text-xs font-mono text-neutral-500 bg-neutral-100 rounded-bl-lg rounded-tr-lg border-b border-l border-neutral-200">
+      <div className="absolute right-0 top-0 rounded-bl-lg rounded-tr-lg border-b border-l border-zinc-700 bg-zinc-800 px-3 py-1 font-mono text-xs text-zinc-500">
         {language}
       </div>
 
       {/* Copy button */}
       <button
         onClick={handleCopy}
-        className="absolute top-8 right-2 px-2 py-1 text-xs opacity-0 group-hover:opacity-100 transition-opacity bg-neutral-200 hover:bg-neutral-300 rounded text-neutral-700"
+        className="absolute right-2 top-8 rounded bg-zinc-700 px-2 py-1 text-xs text-zinc-300 opacity-0 transition-opacity hover:bg-zinc-600 group-hover:opacity-100"
         aria-label="Copy code"
       >
-        {copied ? 'Copied!' : 'Copy'}
+        {copied ? "Copied!" : "Copy"}
       </button>
 
       {/* Code block */}
-      <pre className={cn(
-        'overflow-x-auto rounded-lg border',
-        'bg-neutral-50',  // GitHub dark theme background
-        'border-neutral-200',
-        'p-4 pt-8',  // Extra top padding for language badge
-        'text-sm font-mono',
-        className
-      )}>
-        <code className={className}>
-          {children}
-        </code>
+      <pre
+        className={cn(
+          "overflow-x-auto rounded-lg border",
+          "bg-zinc-900",
+          "border-zinc-800",
+          "p-4 pt-8",
+          "text-sm font-mono",
+          className,
+        )}
+      >
+        <code className={className}>{children}</code>
       </pre>
     </div>
-  )
+  );
 }

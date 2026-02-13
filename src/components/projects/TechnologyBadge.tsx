@@ -35,7 +35,10 @@ interface TechnologyBadgeProps {
   className?: string;
 }
 
-export function TechnologyBadge({ technology, className = "" }: TechnologyBadgeProps) {
+export function TechnologyBadge({
+  technology,
+  className = "",
+}: TechnologyBadgeProps) {
   const colorClass = TECH_COLORS[technology] || DEFAULT_COLOR;
 
   return (

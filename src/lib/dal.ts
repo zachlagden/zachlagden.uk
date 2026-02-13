@@ -1,6 +1,6 @@
-import "server-only"
-import { auth } from "@/lib/auth"
-import { redirect } from "next/navigation"
+import "server-only";
+import { auth } from "@/lib/auth";
+import { redirect } from "next/navigation";
 
 /**
  * Verify user is authenticated. Use in server components and API routes.
@@ -8,17 +8,17 @@ import { redirect } from "next/navigation"
  * @throws Redirects to home if not authenticated
  */
 export async function verifySession() {
-  const session = await auth()
+  const session = await auth();
 
   if (!session?.user) {
-    redirect("/?auth=required")
+    redirect("/?auth=required");
   }
 
   return {
     userId: session.user.id,
     role: session.user.role,
     user: session.user,
-  }
+  };
 }
 
 /**
@@ -27,13 +27,13 @@ export async function verifySession() {
  * @throws Error if not admin (403)
  */
 export async function requireAdmin() {
-  const { user, role } = await verifySession()
+  const { user, role } = await verifySession();
 
   if (role !== "admin") {
-    throw new Error("Unauthorized: Admin access required")
+    throw new Error("Unauthorized: Admin access required");
   }
 
-  return { user, role }
+  return { user, role };
 }
 
 /**
@@ -41,5 +41,5 @@ export async function requireAdmin() {
  * @returns Session or null
  */
 export async function getOptionalSession() {
-  return await auth()
+  return await auth();
 }

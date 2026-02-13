@@ -1,8 +1,8 @@
-import { loadContentServer } from "@/utils/serverContentLoader";
+import { getPublishedPosts } from "@/lib/blog/posts";
 import HomeClient from "./HomeClient";
 
 export default async function Home() {
-  const content = await loadContentServer();
+  const latestPosts = await getPublishedPosts({ limit: 3 });
 
-  return <HomeClient content={content} />;
+  return <HomeClient latestPosts={latestPosts} />;
 }

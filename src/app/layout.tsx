@@ -1,20 +1,38 @@
 import "./globals.css";
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Inter, Space_Grotesk, JetBrains_Mono } from "next/font/google";
 import { GoogleAnalytics } from "@next/third-parties/google";
-import SmoothScrollProvider from "@/components/providers/SmoothScrollProvider";
 import { SessionProvider } from "@/components/auth/SessionProvider";
 import { AuthStatus } from "@/components/auth/AuthStatus";
+import { AdminFAB } from "@/components/auth/AdminFAB";
 import { loadContentServer } from "@/utils/serverContentLoader";
 import { NuqsAdapter } from "nuqs/adapters/next/app";
+import Navigation from "@/components/layout/Navigation";
+import Footer from "@/components/layout/Footer";
 
 // Optimize font loading
 const inter = Inter({
   subsets: ["latin"],
   display: "swap",
   preload: true,
-  weight: ["400", "500", "600", "700"],
+  weight: ["400", "500", "600"],
   variable: "--font-inter",
+});
+
+const spaceGrotesk = Space_Grotesk({
+  subsets: ["latin"],
+  display: "swap",
+  preload: true,
+  weight: ["500", "600", "700"],
+  variable: "--font-space-grotesk",
+});
+
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ["latin"],
+  display: "swap",
+  preload: true,
+  weight: ["400", "500"],
+  variable: "--font-jetbrains-mono",
 });
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -80,7 +98,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export const viewport = {
-  themeColor: "#f5f5f5",
+  themeColor: "#0a0a0a",
   width: "device-width",
   initialScale: 1,
   maximumScale: 5,
@@ -92,7 +110,11 @@ export default async function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" dir="ltr" className={inter.variable}>
+    <html
+      lang="en"
+      dir="ltr"
+      className={`${inter.variable} ${spaceGrotesk.variable} ${jetbrainsMono.variable}`}
+    >
       <head>
         <link rel="manifest" href="/site.webmanifest" />
         {/* Add preload for fonts and critical assets */}
@@ -109,17 +131,22 @@ export default async function RootLayout({
         {/* Preload CV for faster download */}
         <link rel="prefetch" href="/Zach_Lagden_CV.pdf" as="document" />
       </head>
-      <body className={`${inter.className} bg-white min-h-screen`}>
+      <body
+        className={`${inter.className} bg-[#0a0a0a] text-zinc-100 min-h-screen`}
+      >
         <SessionProvider>
           <NuqsAdapter>
-            <SmoothScrollProvider>{children}</SmoothScrollProvider>
+            <Navigation />
+            {children}
+            <Footer />
           </NuqsAdapter>
           <AuthStatus />
+          <AdminFAB />
         </SessionProvider>
       </body>
-      <GoogleAnalytics
-        gaId={(await loadContentServer()).metadata.googleAnalyticsId}
-      />
+      {process.env.NEXT_PUBLIC_GA_ID && (
+        <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID} />
+      )}
     </html>
   );
 }

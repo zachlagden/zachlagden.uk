@@ -21,7 +21,7 @@ export interface GitHubStats {
  */
 async function fetchRepoStatsUncached(
   owner: string,
-  repo: string
+  repo: string,
 ): Promise<GitHubStats | null> {
   try {
     const { data } = await octokit.rest.repos.get({
@@ -65,7 +65,7 @@ export const getRepoStats = unstable_cache(
   {
     revalidate: 600, // 10 minutes
     tags: ["github-stats"],
-  }
+  },
 );
 
 /**
@@ -74,7 +74,7 @@ export const getRepoStats = unstable_cache(
  * @returns Tuple of [owner, repo] or null if invalid format
  */
 export function parseGitHubRepo(
-  githubRepo: string | null | undefined
+  githubRepo: string | null | undefined,
 ): [string, string] | null {
   if (!githubRepo) return null;
 
@@ -93,7 +93,7 @@ export function parseGitHubRepo(
  * @returns Stats or null
  */
 export async function getProjectGitHubStats(
-  githubRepo: string | null | undefined
+  githubRepo: string | null | undefined,
 ): Promise<GitHubStats | null> {
   const parsed = parseGitHubRepo(githubRepo);
   if (!parsed) return null;
