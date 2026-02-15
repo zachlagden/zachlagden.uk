@@ -88,26 +88,15 @@ const Header: React.FC<HeaderProps> = ({
     };
   }, [introPhase]);
 
-  // Phase transitions
-  const handleLettersComplete = useCallback(() => {
-    const timer = setTimeout(() => {
-      // Measure the large size before swapping to normal
-      if (h1Ref.current) {
-        const largeHeight = h1Ref.current.getBoundingClientRect().height;
-        // Temporarily apply normal sizing to measure target
-        const prevFontSize = h1Ref.current.style.fontSize;
-        h1Ref.current.style.fontSize = "";
-        const normalHeight = h1Ref.current.getBoundingClientRect().height;
-        h1Ref.current.style.fontSize = prevFontSize;
-
-        if (normalHeight > 0) {
-          setFallStartScale(largeHeight / normalHeight);
-        }
-      }
-      setIntroPhase("fall");
-    }, 800);
-    return () => clearTimeout(timer);
-  }, []);
+  // Letter animation timing constants
+  const CHAR_INITIAL_DELAY = 0.3; // seconds before first char starts
+  const CHAR_STAGGER = 0.05; // seconds between each char
+  const CHAR_DURATION = 0.4; // seconds for each char's animation
+  // Total time until the last character finishes animating
+  const lettersFullDuration =
+    CHAR_INITIAL_DELAY + (nameChars.length - 1) * CHAR_STAGGER + CHAR_DURATION;
+  // Pause after all letters are visible before starting fall
+  const POST_LETTERS_PAUSE = 0.8; // seconds
 
   const handleFallComplete = useCallback(() => {
     setIntroPhase("reveal");
@@ -118,24 +107,36 @@ const Header: React.FC<HeaderProps> = ({
     onIntroComplete();
   }, [onIntroComplete]);
 
+  // letters → fall: wait for all chars to finish, then pause, then measure + fall
+  useEffect(() => {
+    if (introPhase !== "letters") return;
+
+    const totalWait = (lettersFullDuration + POST_LETTERS_PAUSE) * 1000;
+    const timer = setTimeout(() => {
+      // Measure the large size before swapping to normal
+      if (h1Ref.current) {
+        const largeHeight = h1Ref.current.getBoundingClientRect().height;
+        const prevFontSize = h1Ref.current.style.fontSize;
+        h1Ref.current.style.fontSize = "";
+        const normalHeight = h1Ref.current.getBoundingClientRect().height;
+        h1Ref.current.style.fontSize = prevFontSize;
+
+        if (normalHeight > 0) {
+          setFallStartScale(largeHeight / normalHeight);
+        }
+      }
+      setIntroPhase("fall");
+    }, totalWait);
+
+    return () => clearTimeout(timer);
+  }, [introPhase, lettersFullDuration]);
+
   // Trigger reveal-complete after last element animates
   useEffect(() => {
     if (introPhase !== "reveal") return;
     const timer = setTimeout(handleRevealComplete, 1300);
     return () => clearTimeout(timer);
   }, [introPhase, handleRevealComplete]);
-
-  // Track when all letters have animated in
-  const [lettersAnimated, setLettersAnimated] = useState(0);
-  useEffect(() => {
-    if (
-      introPhase === "letters" &&
-      lettersAnimated >= nameChars.length &&
-      nameChars.length > 0
-    ) {
-      handleLettersComplete();
-    }
-  }, [lettersAnimated, nameChars.length, introPhase, handleLettersComplete]);
 
   const introDone = introPhase === "done";
 
@@ -243,16 +244,11 @@ const Header: React.FC<HeaderProps> = ({
                     : isPreLetters
                       ? { duration: 0 }
                       : {
-                          duration: 0.4,
+                          duration: CHAR_DURATION,
                           ease: "easeOut",
-                          delay: 0.3 + i * 0.05,
+                          delay: CHAR_INITIAL_DELAY + i * CHAR_STAGGER,
                         }
                 }
-                onAnimationComplete={() => {
-                  if (!prefersReducedMotion) {
-                    setLettersAnimated((prev) => prev + 1);
-                  }
-                }}
               >
                 {char === " " ? "\u00A0" : char}
               </motion.span>
