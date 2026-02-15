@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback, useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { Mail, MapPin } from "lucide-react";
 import SocialIcon from "../ui/SocialIcon";
@@ -10,6 +10,9 @@ import PresenceStatus from "../ui/PresenceStatus";
 import { ContentData } from "@/types/content";
 
 type IntroPhase = "letters" | "fall" | "reveal" | "done";
+
+// Large font-size for the intro (renders crisp, no scale blur)
+const INTRO_FONT_SIZE = "clamp(3rem, 13vw, 11rem)";
 
 interface HeaderProps {
   prefersReducedMotion: boolean;
@@ -34,6 +37,11 @@ const Header: React.FC<HeaderProps> = ({
   const headerTranslateY = useTransform(scrollY, [0, 300], [0, -20]);
 
   const nameChars = content.personal.name.split("");
+  const h1Ref = useRef<HTMLHeadingElement>(null);
+
+  // Scale ratio used when transitioning from large font-size to normal.
+  // Calculated once at the start of "fall" so the size swap is seamless.
+  const [fallStartScale, setFallStartScale] = useState(1);
 
   // Lock body scroll during intro
   useEffect(() => {
@@ -55,8 +63,22 @@ const Header: React.FC<HeaderProps> = ({
 
   // Phase transitions
   const handleLettersComplete = useCallback(() => {
-    // Wait a beat after all letters are visible before falling
-    const timer = setTimeout(() => setIntroPhase("fall"), 800);
+    const timer = setTimeout(() => {
+      // Measure the large size before swapping to normal
+      if (h1Ref.current) {
+        const largeHeight = h1Ref.current.getBoundingClientRect().height;
+        // Temporarily apply normal sizing to measure target
+        const prevFontSize = h1Ref.current.style.fontSize;
+        h1Ref.current.style.fontSize = "";
+        const normalHeight = h1Ref.current.getBoundingClientRect().height;
+        h1Ref.current.style.fontSize = prevFontSize;
+
+        if (normalHeight > 0) {
+          setFallStartScale(largeHeight / normalHeight);
+        }
+      }
+      setIntroPhase("fall");
+    }, 800);
     return () => clearTimeout(timer);
   }, []);
 
@@ -72,7 +94,6 @@ const Header: React.FC<HeaderProps> = ({
   // Trigger reveal-complete after last element animates
   useEffect(() => {
     if (introPhase !== "reveal") return;
-    // Last element delay (0.75s) + duration (0.5s) = 1.25s
     const timer = setTimeout(handleRevealComplete, 1300);
     return () => clearTimeout(timer);
   }, [introPhase, handleRevealComplete]);
@@ -90,21 +111,10 @@ const Header: React.FC<HeaderProps> = ({
   }, [lettersAnimated, nameChars.length, introPhase, handleLettersComplete]);
 
   const introDone = introPhase === "done";
-  const initialScale = isMobile ? 2 : 2.8;
 
-  // Determine name container styles based on phase
-  const getNameContainerStyle = () => {
-    if (prefersReducedMotion || introDone) {
-      return { scale: 1, rotateX: 0, y: 0 };
-    }
-    if (introPhase === "letters") {
-      return { scale: initialScale, rotateX: 0, y: 0 };
-    }
-    // fall phase animates via Framer Motion animate prop
-    return undefined;
-  };
-
-  const nameInitialStyle = getNameContainerStyle();
+  // During "letters" phase: use large font-size for crisp rendering.
+  // During "fall" and after: use normal font-size (Tailwind classes handle it).
+  const useIntroFontSize = introPhase === "letters";
 
   // Slide-up reveal helper
   const revealVariant = (delayAfterLand: number) => ({
@@ -147,23 +157,30 @@ const Header: React.FC<HeaderProps> = ({
           className="flex justify-center"
         >
           <motion.h1
+            ref={h1Ref}
             className="text-5xl sm:text-6xl md:text-7xl font-bold tracking-tighter mb-3 inline-flex flex-wrap justify-center"
-            style={{ transformOrigin: "center center" }}
+            style={{
+              transformOrigin: "center center",
+              // Large font-size during "letters" for crisp text, removed after
+              ...(useIntroFontSize ? { fontSize: INTRO_FONT_SIZE } : {}),
+            }}
             initial={
               prefersReducedMotion
                 ? { scale: 1, rotateX: 0 }
-                : { scale: initialScale, rotateX: 0 }
+                : { scale: 1, rotateX: 0 }
             }
             animate={
-              prefersReducedMotion || introPhase === "letters"
-                ? nameInitialStyle
-                : introPhase === "fall"
-                  ? {
-                      scale: 1,
-                      rotateX: [0, 18, 5, 0],
-                      y: [0, 10, -3, 0],
-                    }
-                  : { scale: 1, rotateX: 0, y: 0 }
+              prefersReducedMotion
+                ? { scale: 1, rotateX: 0, y: 0 }
+                : introPhase === "letters"
+                  ? { scale: 1, rotateX: 0, y: 0 }
+                  : introPhase === "fall"
+                    ? {
+                        scale: [fallStartScale, 1],
+                        rotateX: [0, 18, 5, 0],
+                        y: [0, 10, -3, 0],
+                      }
+                    : { scale: 1, rotateX: 0, y: 0 }
             }
             transition={
               introPhase === "fall"
