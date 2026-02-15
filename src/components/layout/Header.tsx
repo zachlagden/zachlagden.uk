@@ -9,7 +9,7 @@ import { Github, Linkedin, Instagram } from "lucide-react";
 import PresenceStatus from "../ui/PresenceStatus";
 import { ContentData } from "@/types/content";
 
-type IntroPhase = "letters" | "fall" | "reveal" | "done";
+type IntroPhase = "loading" | "letters" | "fall" | "reveal" | "done";
 
 // Large font-size for the intro (renders crisp, no scale blur)
 const INTRO_FONT_SIZE = "clamp(3rem, 13vw, 11rem)";
@@ -28,7 +28,7 @@ const Header: React.FC<HeaderProps> = ({
   onIntroComplete,
 }) => {
   const [introPhase, setIntroPhase] = useState<IntroPhase>(
-    prefersReducedMotion ? "done" : "letters",
+    prefersReducedMotion ? "done" : "loading",
   );
 
   const { scrollY } = useScroll();
@@ -43,23 +43,50 @@ const Header: React.FC<HeaderProps> = ({
   // Calculated once at the start of "fall" so the size swap is seamless.
   const [fallStartScale, setFallStartScale] = useState(1);
 
-  // Lock body scroll during intro
+  // Remove loader and unlock body on reduced motion or intro complete
   useEffect(() => {
     if (prefersReducedMotion) {
+      // Immediately remove loader and unlock
+      const loader = document.getElementById("initial-loader");
+      if (loader) loader.remove();
+      document.body.classList.remove("intro-locked");
       onIntroComplete();
       return;
     }
 
-    if (introPhase !== "done") {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "";
+    if (introPhase === "done") {
+      document.body.classList.remove("intro-locked");
     }
+  }, [introPhase, prefersReducedMotion, onIntroComplete]);
+
+  // Font readiness gate — wait for fonts then fade out loader, start letters
+  useEffect(() => {
+    if (introPhase !== "loading") return;
+
+    let cancelled = false;
+
+    document.fonts.ready.then(() => {
+      if (cancelled) return;
+
+      const loader = document.getElementById("initial-loader");
+      if (loader) {
+        loader.classList.add("loader-fade-out");
+        // Wait for the CSS fade-out transition (300ms)
+        setTimeout(() => {
+          if (!cancelled) {
+            loader.remove();
+            setIntroPhase("letters");
+          }
+        }, 300);
+      } else {
+        setIntroPhase("letters");
+      }
+    });
 
     return () => {
-      document.body.style.overflow = "";
+      cancelled = true;
     };
-  }, [introPhase, prefersReducedMotion, onIntroComplete]);
+  }, [introPhase]);
 
   // Phase transitions
   const handleLettersComplete = useCallback(() => {
@@ -112,9 +139,10 @@ const Header: React.FC<HeaderProps> = ({
 
   const introDone = introPhase === "done";
 
-  // During "letters" phase: use large font-size for crisp rendering.
+  // During "loading" and "letters" phases: use large font-size for crisp rendering.
   // During "fall" and after: use normal font-size (Tailwind classes handle it).
-  const useIntroFontSize = introPhase === "letters";
+  const useIntroFontSize = introPhase === "loading" || introPhase === "letters";
+  const isPreLetters = introPhase === "loading";
 
   // Slide-up reveal helper
   const revealVariant = (delayAfterLand: number) => ({
@@ -172,7 +200,7 @@ const Header: React.FC<HeaderProps> = ({
             animate={
               prefersReducedMotion
                 ? { scale: 1, rotateX: 0, y: 0 }
-                : introPhase === "letters"
+                : introPhase === "loading" || introPhase === "letters"
                   ? { scale: 1, rotateX: 0, y: 0 }
                   : introPhase === "fall"
                     ? {
@@ -206,15 +234,19 @@ const Header: React.FC<HeaderProps> = ({
                     ? { opacity: 1, y: 0 }
                     : { opacity: 0, y: 40 }
                 }
-                animate={{ opacity: 1, y: 0 }}
+                animate={
+                  isPreLetters ? { opacity: 0, y: 40 } : { opacity: 1, y: 0 }
+                }
                 transition={
                   prefersReducedMotion
                     ? { duration: 0 }
-                    : {
-                        duration: 0.4,
-                        ease: "easeOut",
-                        delay: 0.3 + i * 0.05,
-                      }
+                    : isPreLetters
+                      ? { duration: 0 }
+                      : {
+                          duration: 0.4,
+                          ease: "easeOut",
+                          delay: 0.3 + i * 0.05,
+                        }
                 }
                 onAnimationComplete={() => {
                   if (!prefersReducedMotion) {

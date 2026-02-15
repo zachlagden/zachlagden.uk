@@ -108,7 +108,12 @@ export default async function RootLayout({
         {/* Preload CV for faster download */}
         <link rel="prefetch" href="/Zach_Lagden_CV.pdf" as="document" />
       </head>
-      <body className={`${inter.className} bg-neutral-50 min-h-screen`}>
+      <body
+        className={`${inter.className} bg-neutral-50 min-h-screen intro-locked`}
+      >
+        <div id="initial-loader" aria-hidden="true">
+          <div className="loader-dot" />
+        </div>
         {children}
       </body>
       <GoogleAnalytics
