@@ -96,7 +96,7 @@ const Header: React.FC<HeaderProps> = ({
   const lettersFullDuration =
     CHAR_INITIAL_DELAY + (nameChars.length - 1) * CHAR_STAGGER + CHAR_DURATION;
   // Pause after all letters are visible before starting fall
-  const POST_LETTERS_PAUSE = 0.8; // seconds
+  const POST_LETTERS_PAUSE = 0.3; // seconds
 
   const handleFallComplete = useCallback(() => {
     setIntroPhase("reveal");
