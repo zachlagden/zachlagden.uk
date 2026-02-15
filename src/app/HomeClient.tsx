@@ -1,6 +1,12 @@
 "use client";
 
-import React, { useState, useRef, useEffect, Suspense } from "react";
+import React, {
+  useState,
+  useRef,
+  useEffect,
+  useCallback,
+  Suspense,
+} from "react";
 import dynamic from "next/dynamic";
 import Script from "next/script";
 import { Github, Linkedin, Instagram, Mail } from "lucide-react";
@@ -93,6 +99,11 @@ export default function HomeClient({ content }: HomeClientProps) {
   const [activeSection, setActiveSection] = useState("about");
   const [showScrollButton, setShowScrollButton] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [introComplete, setIntroComplete] = useState(false);
+
+  const handleIntroComplete = useCallback(() => {
+    setIntroComplete(true);
+  }, []);
 
   // Device and preference detection - initialize with reasonable defaults for SSR
   const [isMobile, setIsMobile] = useState(false);
@@ -276,6 +287,7 @@ export default function HomeClient({ content }: HomeClientProps) {
           scrollToSection={scrollToSection}
           prefersReducedMotion={prefersReducedMotion}
           navigation={content.navigation}
+          introComplete={introComplete}
         />
 
         {/* Fixed social links */}
@@ -286,11 +298,13 @@ export default function HomeClient({ content }: HomeClientProps) {
         >
           <motion.div
             className="flex flex-col space-y-6 p-3 bg-white/90 backdrop-blur-sm rounded-full shadow-md"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
+            initial={{ opacity: 0, x: 20 }}
+            animate={
+              introComplete ? { opacity: 1, x: 0 } : { opacity: 0, x: 20 }
+            }
             transition={{
-              delay: 0.9,
-              duration: prefersReducedMotion ? 0.1 : 0.5,
+              duration: prefersReducedMotion ? 0.1 : 0.4,
+              ease: "easeOut",
             }}
           >
             <SocialIcon
@@ -321,6 +335,7 @@ export default function HomeClient({ content }: HomeClientProps) {
           prefersReducedMotion={prefersReducedMotion}
           isMobile={isMobile}
           content={content}
+          onIntroComplete={handleIntroComplete}
         />
 
         {/* Main Content */}

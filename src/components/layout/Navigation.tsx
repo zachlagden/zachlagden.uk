@@ -18,6 +18,7 @@ interface NavigationProps {
   scrollToSection: (id: string) => void;
   prefersReducedMotion: boolean;
   navigation: NavigationItem[];
+  introComplete?: boolean;
 }
 
 const Navigation: React.FC<NavigationProps> = ({
@@ -25,6 +26,7 @@ const Navigation: React.FC<NavigationProps> = ({
   scrollToSection,
   prefersReducedMotion,
   navigation,
+  introComplete = true,
 }) => {
   // Map navigation IDs to icons
   const iconMap: { [key: string]: React.ReactNode } = {
@@ -42,11 +44,11 @@ const Navigation: React.FC<NavigationProps> = ({
     >
       <motion.div
         className="flex flex-col space-y-6 p-3 bg-white/90 backdrop-blur-sm rounded-full shadow-md"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
+        initial={{ opacity: 0, x: -20 }}
+        animate={introComplete ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
         transition={{
-          delay: 0.8,
-          duration: prefersReducedMotion ? 0.1 : 0.5,
+          duration: prefersReducedMotion ? 0.1 : 0.4,
+          ease: "easeOut",
         }}
       >
         {navigation.map((item) => (

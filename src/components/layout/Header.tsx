@@ -1,40 +1,133 @@
 "use client";
 
-import React from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { Mail, MapPin } from "lucide-react";
 import SocialIcon from "../ui/SocialIcon";
 import CopyButton from "../ui/CopyButton";
 import { Github, Linkedin, Instagram } from "lucide-react";
-import AnimatedText from "../ui/AnimatedText";
 import PresenceStatus from "../ui/PresenceStatus";
 import { ContentData } from "@/types/content";
+
+type IntroPhase = "letters" | "fall" | "reveal" | "done";
 
 interface HeaderProps {
   prefersReducedMotion: boolean;
   isMobile: boolean;
   content: ContentData;
+  onIntroComplete: () => void;
 }
 
 const Header: React.FC<HeaderProps> = ({
   prefersReducedMotion,
   isMobile,
   content,
+  onIntroComplete,
 }) => {
+  const [introPhase, setIntroPhase] = useState<IntroPhase>(
+    prefersReducedMotion ? "done" : "letters",
+  );
+
   const { scrollY } = useScroll();
   const headerOpacity = useTransform(scrollY, [0, 300], [1, 0.3]);
   const headerScale = useTransform(scrollY, [0, 300], [1, 0.95]);
   const headerTranslateY = useTransform(scrollY, [0, 300], [0, -20]);
 
+  const nameChars = content.personal.name.split("");
+
+  // Lock body scroll during intro
+  useEffect(() => {
+    if (prefersReducedMotion) {
+      onIntroComplete();
+      return;
+    }
+
+    if (introPhase !== "done") {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [introPhase, prefersReducedMotion, onIntroComplete]);
+
+  // Phase transitions
+  const handleLettersComplete = useCallback(() => {
+    // Wait a beat after all letters are visible before falling
+    const timer = setTimeout(() => setIntroPhase("fall"), 800);
+    return () => clearTimeout(timer);
+  }, []);
+
+  const handleFallComplete = useCallback(() => {
+    setIntroPhase("reveal");
+  }, []);
+
+  const handleRevealComplete = useCallback(() => {
+    setIntroPhase("done");
+    onIntroComplete();
+  }, [onIntroComplete]);
+
+  // Trigger reveal-complete after last element animates
+  useEffect(() => {
+    if (introPhase !== "reveal") return;
+    // Last element delay (0.75s) + duration (0.5s) = 1.25s
+    const timer = setTimeout(handleRevealComplete, 1300);
+    return () => clearTimeout(timer);
+  }, [introPhase, handleRevealComplete]);
+
+  // Track when all letters have animated in
+  const [lettersAnimated, setLettersAnimated] = useState(0);
+  useEffect(() => {
+    if (
+      introPhase === "letters" &&
+      lettersAnimated >= nameChars.length &&
+      nameChars.length > 0
+    ) {
+      handleLettersComplete();
+    }
+  }, [lettersAnimated, nameChars.length, introPhase, handleLettersComplete]);
+
+  const introDone = introPhase === "done";
+  const initialScale = isMobile ? 2 : 2.8;
+
+  // Determine name container styles based on phase
+  const getNameContainerStyle = () => {
+    if (prefersReducedMotion || introDone) {
+      return { scale: 1, rotateX: 0, y: 0 };
+    }
+    if (introPhase === "letters") {
+      return { scale: initialScale, rotateX: 0, y: 0 };
+    }
+    // fall phase animates via Framer Motion animate prop
+    return undefined;
+  };
+
+  const nameInitialStyle = getNameContainerStyle();
+
+  // Slide-up reveal helper
+  const revealVariant = (delayAfterLand: number) => ({
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.5,
+        ease: "easeOut",
+        delay: delayAfterLand,
+      },
+    },
+  });
+
   return (
     <motion.header
       className="h-screen flex flex-col justify-center items-center relative"
       style={{
-        opacity: headerOpacity,
-        scale: headerScale,
-        y: headerTranslateY,
+        opacity: introDone ? headerOpacity : 1,
+        scale: introDone ? headerScale : 1,
+        y: introDone ? headerTranslateY : 0,
       }}
-      transition={{}}
       initial={{ opacity: 1, scale: 1, y: 0 }}
     >
       <div className="absolute inset-0 overflow-hidden">
@@ -47,43 +140,101 @@ const Header: React.FC<HeaderProps> = ({
         />
       </div>
 
-      <motion.div
-        className="relative z-20 text-center px-4"
-        initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{
-          delay: 0.2,
-          duration: prefersReducedMotion ? 0.1 : 0.8,
-        }}
-      >
-        {/* Animated text heading */}
-        <AnimatedText
-          text={content.personal.name}
-          el="h1"
-          className="text-5xl sm:text-6xl md:text-7xl font-bold tracking-tighter mb-3"
-          delay={0.4}
-          duration={0.8}
-          sequential={true}
-        />
+      <div className="relative z-20 text-center px-4">
+        {/* Name — animated character-by-character, then 3D fall */}
+        <motion.div
+          style={{ perspective: 1000 }}
+          className="flex justify-center"
+        >
+          <motion.h1
+            className="text-5xl sm:text-6xl md:text-7xl font-bold tracking-tighter mb-3 inline-flex flex-wrap justify-center"
+            style={{ transformOrigin: "center center" }}
+            initial={
+              prefersReducedMotion
+                ? { scale: 1, rotateX: 0 }
+                : { scale: initialScale, rotateX: 0 }
+            }
+            animate={
+              prefersReducedMotion || introPhase === "letters"
+                ? nameInitialStyle
+                : introPhase === "fall"
+                  ? {
+                      scale: 1,
+                      rotateX: [0, 18, 5, 0],
+                      y: [0, 10, -3, 0],
+                    }
+                  : { scale: 1, rotateX: 0, y: 0 }
+            }
+            transition={
+              introPhase === "fall"
+                ? {
+                    duration: 0.9,
+                    ease: [0.22, 1, 0.36, 1],
+                  }
+                : { duration: 0 }
+            }
+            onAnimationComplete={() => {
+              if (introPhase === "fall") {
+                handleFallComplete();
+              }
+            }}
+          >
+            {nameChars.map((char, i) => (
+              <motion.span
+                key={i}
+                className="inline-block"
+                style={char === " " ? { width: "0.3em" } : undefined}
+                initial={
+                  prefersReducedMotion
+                    ? { opacity: 1, y: 0 }
+                    : { opacity: 0, y: 40 }
+                }
+                animate={{ opacity: 1, y: 0 }}
+                transition={
+                  prefersReducedMotion
+                    ? { duration: 0 }
+                    : {
+                        duration: 0.4,
+                        ease: "easeOut",
+                        delay: 0.3 + i * 0.05,
+                      }
+                }
+                onAnimationComplete={() => {
+                  if (!prefersReducedMotion) {
+                    setLettersAnimated((prev) => prev + 1);
+                  }
+                }}
+              >
+                {char === " " ? "\u00A0" : char}
+              </motion.span>
+            ))}
+          </motion.h1>
+        </motion.div>
 
-        {/* Animated text paragraph */}
-        <AnimatedText
-          text={content.personal.title}
-          el="p"
+        {/* Title */}
+        <motion.p
           className="text-xl sm:text-2xl text-neutral-600 mb-2 font-light tracking-wide"
-          delay={0.8}
-          duration={0.6}
-          sequential={true}
-        />
+          variants={revealVariant(0.15)}
+          initial={prefersReducedMotion ? "visible" : "hidden"}
+          animate={
+            prefersReducedMotion || introPhase === "reveal" || introDone
+              ? "visible"
+              : "hidden"
+          }
+        >
+          {content.personal.title}
+        </motion.p>
 
+        {/* Contact info row */}
         <motion.div
           className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-4"
-          initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{
-            delay: 0.8,
-            duration: prefersReducedMotion ? 0.1 : 0.8,
-          }}
+          variants={revealVariant(0.3)}
+          initial={prefersReducedMotion ? "visible" : "hidden"}
+          animate={
+            prefersReducedMotion || introPhase === "reveal" || introDone
+              ? "visible"
+              : "hidden"
+          }
         >
           <div className="flex items-center hover:text-neutral-800 text-neutral-500 transition-colors focus-within:outline-none focus-within:ring-2 focus-within:ring-black focus-within:ring-offset-2 rounded-lg px-2 py-1">
             <a
@@ -99,7 +250,7 @@ const Header: React.FC<HeaderProps> = ({
             <CopyButton textToCopy={content.personal.email} size="sm" />
           </div>
           <span className="hidden sm:block text-neutral-300" aria-hidden="true">
-            •
+            &bull;
           </span>
           <a
             href={content.personal.locationMapUrl}
@@ -116,16 +267,28 @@ const Header: React.FC<HeaderProps> = ({
         </motion.div>
 
         {/* Presence Status */}
-        <PresenceStatus prefersReducedMotion={prefersReducedMotion} />
+        <motion.div
+          variants={revealVariant(0.45)}
+          initial={prefersReducedMotion ? "visible" : "hidden"}
+          animate={
+            prefersReducedMotion || introPhase === "reveal" || introDone
+              ? "visible"
+              : "hidden"
+          }
+        >
+          <PresenceStatus prefersReducedMotion={prefersReducedMotion} />
+        </motion.div>
 
+        {/* Mobile social links */}
         <motion.div
           className="lg:hidden flex justify-center gap-6 mt-8"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{
-            delay: 1,
-            duration: prefersReducedMotion ? 0.1 : 0.8,
-          }}
+          variants={revealVariant(0.6)}
+          initial={prefersReducedMotion ? "visible" : "hidden"}
+          animate={
+            prefersReducedMotion || introPhase === "reveal" || introDone
+              ? "visible"
+              : "hidden"
+          }
           role="navigation"
           aria-label="Social Links"
         >
@@ -154,24 +317,30 @@ const Header: React.FC<HeaderProps> = ({
             icon={<Mail className="w-4 h-4" aria-hidden="true" />}
           />
         </motion.div>
-      </motion.div>
+      </div>
 
+      {/* Scroll indicator */}
       <motion.div
         className="absolute bottom-12 left-0 right-0 flex justify-center"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{
-          delay: 1.2,
-          duration: prefersReducedMotion ? 0.1 : 0.8,
-        }}
+        variants={revealVariant(0.75)}
+        initial={prefersReducedMotion ? "visible" : "hidden"}
+        animate={
+          prefersReducedMotion || introPhase === "reveal" || introDone
+            ? "visible"
+            : "hidden"
+        }
         aria-hidden="true"
       >
         <motion.div
           className="w-1 h-16 relative"
-          animate={{
-            scaleY: isMobile ? [0.5, 1, 0.5] : [0.3, 1, 0.3],
-            opacity: isMobile ? [0.3, 0.7, 0.3] : [0.2, 0.6, 0.2],
-          }}
+          animate={
+            introDone
+              ? {
+                  scaleY: isMobile ? [0.5, 1, 0.5] : [0.3, 1, 0.3],
+                  opacity: isMobile ? [0.3, 0.7, 0.3] : [0.2, 0.6, 0.2],
+                }
+              : {}
+          }
           transition={{
             duration: isMobile ? 1.5 : 2,
             repeat: Infinity,
