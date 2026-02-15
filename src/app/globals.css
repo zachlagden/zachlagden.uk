@@ -184,9 +184,8 @@ h6 {
   outline-offset: 2px;
 }
 
-/* Apply smooth scrolling only when Lenis is not active and user prefers animations */
 @media (prefers-reduced-motion: no-preference) {
-  html:not(.lenis-smooth-scroll) {
+  html {
     scroll-behavior: smooth;
   }
 }

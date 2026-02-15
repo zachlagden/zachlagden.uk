@@ -2,7 +2,6 @@ import "./globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { GoogleAnalytics } from "@next/third-parties/google";
-import SmoothScrollProvider from "@/components/providers/SmoothScrollProvider";
 import { loadContentServer } from "@/utils/serverContentLoader";
 
 // Optimize font loading
@@ -110,7 +109,7 @@ export default async function RootLayout({
         <link rel="prefetch" href="/Zach_Lagden_CV.pdf" as="document" />
       </head>
       <body className={`${inter.className} bg-neutral-50 min-h-screen`}>
-        <SmoothScrollProvider>{children}</SmoothScrollProvider>
+        {children}
       </body>
       <GoogleAnalytics
         gaId={(await loadContentServer()).metadata.googleAnalyticsId}
