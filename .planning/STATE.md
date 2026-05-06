@@ -12,7 +12,7 @@ See: .planning/PROJECT.md (updated 2026-05-06)
 Phase: 1 of 4 (Runtime Stability)
 Plan: 0 of TBD in current phase
 Status: Ready to plan
-Last activity: 2026-05-06 — Completed quick task 260506-euf: CLEAN-01..03 cleanup batch
+Last activity: 2026-05-06 — Completed quick task 260506-ew4: CLEAN-04 autosave restore
 
 Progress: [░░░░░░░░░░] 0%
 
@@ -72,6 +72,7 @@ None yet.
 | 260506-enh | PERF-03: CustomCursor event delegation | 2026-05-06 | e8fedc3 | [260506-enh-perf-03-customcursor-event-delegation](./quick/260506-enh-perf-03-customcursor-event-delegation/) |
 | 260506-et0 | PERF-04: BlogSearch skip initial empty-query fetch | 2026-05-06 | 5ea16d3 | [260506-et0-perf-04-blogsearch-skip-initial-empty-qu](./quick/260506-et0-perf-04-blogsearch-skip-initial-empty-qu/) |
 | 260506-euf | CLEAN-01..03: delete dead code, dead deps, stale config | 2026-05-06 | 44de169 | [260506-euf-clean-01-03-delete-dead-code-and-stale-c](./quick/260506-euf-clean-01-03-delete-dead-code-and-stale-c/) |
+| 260506-ew4 | CLEAN-04: useAutoSave quota-safe + restore-on-mount | 2026-05-06 | fefc60c | [260506-ew4-clean-04-useautosave-quota-safe-restore-](./quick/260506-ew4-clean-04-useautosave-quota-safe-restore-/) |
 
 ## Deferred Items
 
