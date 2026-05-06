@@ -12,7 +12,7 @@ See: .planning/PROJECT.md (updated 2026-05-06)
 Phase: 1 of 4 (Runtime Stability)
 Plan: 0 of TBD in current phase
 Status: Ready to plan
-Last activity: 2026-05-06 — Completed quick task 260506-e71: STAB-05 intro-locked centralisation. Phase 1 (Runtime Stability) now complete (5/5 STAB items).
+Last activity: 2026-05-06 — Completed quick task 260506-ech: SEC-02 + SEC-03 security headers
 
 Progress: [░░░░░░░░░░] 0%
 
@@ -62,6 +62,7 @@ None yet.
 | 260506-dyv | STAB-01 + STAB-02: add error boundaries (app/error.tsx, app/global-error.tsx) | 2026-05-06 | 909d7f2 | [260506-dyv-stab-01-stab-02-add-error-boundaries-app](./quick/260506-dyv-stab-01-stab-02-add-error-boundaries-app/) |
 | 260506-e2t | STAB-03 + STAB-04: intro animation race fixes (font-ready timeout, rAF cancel guard) | 2026-05-06 | 6edb503 | [260506-e2t-stab-03-stab-04-intro-animation-race-fix](./quick/260506-e2t-stab-03-stab-04-intro-animation-race-fix/) |
 | 260506-e71 | STAB-05: centralise intro-locked lifecycle to home route only | 2026-05-06 | b1dfac3 | [260506-e71-stab-05-centralise-intro-locked-removal-](./quick/260506-e71-stab-05-centralise-intro-locked-removal-/) |
+| 260506-ech | SEC-02 + SEC-03: security headers and poweredByHeader in next.config.ts | 2026-05-06 | fea6904 | [260506-ech-sec-02-sec-03-security-headers-and-power](./quick/260506-ech-sec-02-sec-03-security-headers-and-power/) |
 
 ## Deferred Items
 
