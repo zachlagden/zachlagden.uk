@@ -14,7 +14,11 @@ function getAdminUsernames(): string[] {
 function getAdapter() {
   try {
     return MongoDBAdapter(getClientPromise());
-  } catch {
+  } catch (err) {
+    console.error(
+      "[auth] MongoDB adapter failed to initialise — falling back to JWT-only sessions. DB-backed account linking and admin verification will not work until MONGODB_URI is set and reachable.",
+      err,
+    );
     return undefined;
   }
 }
