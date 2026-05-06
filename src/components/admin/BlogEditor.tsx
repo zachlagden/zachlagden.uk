@@ -62,13 +62,6 @@ export default function BlogEditor({ post }: BlogEditorProps) {
     5000,
   );
 
-  // Derive slug from title during render when autoSlug is enabled
-  const derivedSlug =
-    autoSlug && state.title ? slugify(state.title) : state.slug;
-  if (derivedSlug !== state.slug) {
-    setState((prev) => ({ ...prev, slug: derivedSlug }));
-  }
-
   const insertMarkdown = useCallback((prefix: string, suffix: string = "") => {
     const textarea = document.querySelector(
       'textarea[name="content"]',
@@ -172,9 +165,14 @@ export default function BlogEditor({ post }: BlogEditorProps) {
         type="text"
         placeholder="Post title"
         value={state.title}
-        onChange={(e) =>
-          setState((prev) => ({ ...prev, title: e.target.value }))
-        }
+        onChange={(e) => {
+          const title = e.target.value;
+          setState((prev) => ({
+            ...prev,
+            title,
+            slug: autoSlug ? slugify(title) : prev.slug,
+          }));
+        }}
         className="w-full text-3xl font-heading font-bold tracking-tight bg-transparent border-none outline-none placeholder:text-neutral-300"
       />
 
