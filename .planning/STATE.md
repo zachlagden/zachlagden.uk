@@ -12,7 +12,7 @@ See: .planning/PROJECT.md (updated 2026-05-06)
 Phase: 1 of 4 (Runtime Stability)
 Plan: 0 of TBD in current phase
 Status: Ready to plan
-Last activity: 2026-05-06 — Completed quick task 260506-ew4: CLEAN-04 autosave restore
+Last activity: 2026-05-06 — Completed quick task 260506-exp: CLEAN-05 ensureIndexes
 
 Progress: [░░░░░░░░░░] 0%
 
@@ -73,6 +73,7 @@ None yet.
 | 260506-et0 | PERF-04: BlogSearch skip initial empty-query fetch | 2026-05-06 | 5ea16d3 | [260506-et0-perf-04-blogsearch-skip-initial-empty-qu](./quick/260506-et0-perf-04-blogsearch-skip-initial-empty-qu/) |
 | 260506-euf | CLEAN-01..03: delete dead code, dead deps, stale config | 2026-05-06 | 44de169 | [260506-euf-clean-01-03-delete-dead-code-and-stale-c](./quick/260506-euf-clean-01-03-delete-dead-code-and-stale-c/) |
 | 260506-ew4 | CLEAN-04: useAutoSave quota-safe + restore-on-mount | 2026-05-06 | fefc60c | [260506-ew4-clean-04-useautosave-quota-safe-restore-](./quick/260506-ew4-clean-04-useautosave-quota-safe-restore-/) |
+| 260506-exp | CLEAN-05: invoke ensureIndexes on first DB use | 2026-05-06 | 7ba4c33 | [260506-exp-clean-05-invoke-ensureindexes-on-first-d](./quick/260506-exp-clean-05-invoke-ensureindexes-on-first-d/) |
 
 ## Deferred Items
 
