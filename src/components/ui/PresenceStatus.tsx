@@ -15,6 +15,9 @@ interface PresenceStatusProps {
   prefersReducedMotion?: boolean;
 }
 
+const BASE_INTERVAL_MS = 30_000;
+const BACKOFF_STEPS_MS = [5_000, 10_000, 30_000, 60_000, 300_000];
+
 const PresenceStatus: React.FC<PresenceStatusProps> = ({
   prefersReducedMotion = false,
 }) => {
@@ -25,22 +28,21 @@ const PresenceStatus: React.FC<PresenceStatusProps> = ({
   );
   const [activities, setActivities] = useState<ParsedActivityData[]>([]);
   const abortControllerRef = useRef<AbortController | null>(null);
-  const intervalRef = useRef<NodeJS.Timeout | null>(null);
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const consecutiveErrorsRef = useRef(0);
 
   const discordUserId = process.env.NEXT_PUBLIC_DISCORD_USER_ID;
 
-  const fetchData = useCallback(async () => {
+  const fetchData = useCallback(async (): Promise<boolean> => {
     if (!discordUserId) {
       setError("Discord user ID not configured");
       setIsLoading(false);
-      return;
+      return false;
     }
 
-    // Abort previous request if still pending
     if (abortControllerRef.current) {
       abortControllerRef.current.abort();
     }
-
     abortControllerRef.current = new AbortController();
 
     try {
@@ -50,40 +52,84 @@ const PresenceStatus: React.FC<PresenceStatusProps> = ({
       );
 
       if (response.ok && response.presence_data) {
-        const parsedSpotify = parseSpotifyData(
-          response.presence_data.spotify_status,
+        setSpotifyData(parseSpotifyData(response.presence_data.spotify_status));
+        setActivities(
+          parseActivityData(response.presence_data.misc_activities),
         );
-        const parsedActivities = parseActivityData(
-          response.presence_data.misc_activities,
-        );
-
-        setSpotifyData(parsedSpotify);
-        setActivities(parsedActivities);
         setError(null);
-      } else {
-        setError("Failed to fetch presence data");
+        return true;
       }
+      setError("Failed to fetch presence data");
+      return false;
     } catch (err) {
       if (err instanceof Error && err.name !== "AbortError") {
         console.warn("Presence API error:", err.message);
         setError(err.message);
+        return false;
       }
+      // AbortError — caller is replacing this fetch; don't count as failure
+      return true;
     } finally {
       setIsLoading(false);
     }
   }, [discordUserId]);
 
   useEffect(() => {
-    // Initial fetch
-    fetchData();
+    if (!discordUserId) return;
+    if (typeof document === "undefined") return;
 
-    // Set up polling every 5 seconds
-    intervalRef.current = setInterval(fetchData, 5000);
+    let cancelled = false;
+
+    const schedule = (delayMs: number) => {
+      if (cancelled) return;
+      timeoutRef.current = setTimeout(tick, delayMs);
+    };
+
+    const tick = async () => {
+      if (cancelled) return;
+      if (document.hidden) {
+        // Pause polling while tab is hidden — visibilitychange will resume
+        return;
+      }
+      const ok = await fetchData();
+      if (cancelled) return;
+
+      if (ok) {
+        consecutiveErrorsRef.current = 0;
+        schedule(BASE_INTERVAL_MS);
+      } else {
+        const idx = Math.min(
+          consecutiveErrorsRef.current,
+          BACKOFF_STEPS_MS.length - 1,
+        );
+        consecutiveErrorsRef.current += 1;
+        schedule(BACKOFF_STEPS_MS[idx]);
+      }
+    };
+
+    const handleVisibilityChange = () => {
+      if (document.hidden) {
+        if (timeoutRef.current) {
+          clearTimeout(timeoutRef.current);
+          timeoutRef.current = null;
+        }
+      } else {
+        // Tab became visible — fetch immediately and resume schedule
+        if (timeoutRef.current) clearTimeout(timeoutRef.current);
+        void tick();
+      }
+    };
+
+    // Initial fetch
+    void tick();
+    document.addEventListener("visibilitychange", handleVisibilityChange);
 
     return () => {
-      // Cleanup
-      if (intervalRef.current) {
-        clearInterval(intervalRef.current);
+      cancelled = true;
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+        timeoutRef.current = null;
       }
       if (abortControllerRef.current) {
         abortControllerRef.current.abort();
