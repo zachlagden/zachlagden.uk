@@ -12,7 +12,7 @@ See: .planning/PROJECT.md (updated 2026-05-06)
 Phase: 1 of 4 (Runtime Stability)
 Plan: 0 of TBD in current phase
 Status: Ready to plan
-Last activity: 2026-05-06 — Completed quick task 260506-eyt: CLEAN-06 stricter lint rules
+Last activity: 2026-05-06 — Completed quick task 260506-f2v: CLEAN-07 + CLEAN-08. ALL 23 v1 REQUIREMENTS COMPLETE.
 
 Progress: [░░░░░░░░░░] 0%
 
@@ -75,6 +75,7 @@ None yet.
 | 260506-ew4 | CLEAN-04: useAutoSave quota-safe + restore-on-mount | 2026-05-06 | fefc60c | [260506-ew4-clean-04-useautosave-quota-safe-restore-](./quick/260506-ew4-clean-04-useautosave-quota-safe-restore-/) |
 | 260506-exp | CLEAN-05: invoke ensureIndexes on first DB use | 2026-05-06 | 7ba4c33 | [260506-exp-clean-05-invoke-ensureindexes-on-first-d](./quick/260506-exp-clean-05-invoke-ensureindexes-on-first-d/) |
 | 260506-eyt | CLEAN-06: ESLint exhaustive-deps + no-floating-promises | 2026-05-06 | cc8561e | [260506-eyt-clean-06-eslint-exhaustive-deps-no-float](./quick/260506-eyt-clean-06-eslint-exhaustive-deps-no-float/) |
+| 260506-f2v | CLEAN-07 + CLEAN-08: rehype-slug headings and real sitemap dates | 2026-05-06 | ae144e2 | [260506-f2v-clean-07-clean-08-rehype-slug-headings-a](./quick/260506-f2v-clean-07-clean-08-rehype-slug-headings-a/) |
 
 ## Deferred Items
 
