@@ -60,12 +60,12 @@ Acknowledged but deferred to a later milestone.
 
 ### Polish
 
-- **POLISH-01**: `BlogPagination` shows first 2 / current ± 1 / last 2 with `…` truncation (CONCERNS #28)
-- **POLISH-02**: `BlogPostCard` `sizes` tuned to actual 33vw column at `lg` breakpoint (CONCERNS #29)
-- **POLISH-03**: `not-found.tsx` only shows "Go Back" when `document.referrer` is same-origin (CONCERNS #27)
+- ✓ **POLISH-01**: `BlogPagination` windowed pagination with `…` truncation — shipped (commit 21807e1)
+- ✓ **POLISH-02**: `BlogPostCard` `sizes` tuned for 3-column lg grid — shipped (commit 21807e1)
+- ✓ **POLISH-03**: `not-found.tsx` hides "Go Back" unless same-origin referrer — shipped (commit 21807e1)
 - **POLISH-04**: Framer Motion usage audited; trivial fades replaced by CSS keyframes from `globals.css` (CONCERNS #20)
 - **POLISH-05**: OG/Twitter PNGs re-compressed or converted to optimised JPEG/WebP (CONCERNS #19)
-- **POLISH-06**: TypeScript `target` bumped to `ES2022` (CONCERNS #26)
+- ✓ **POLISH-06**: TypeScript `target` ES2017 → ES2022 — shipped (commit 21807e1)
 
 ## Out of Scope
 
