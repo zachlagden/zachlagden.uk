@@ -57,19 +57,19 @@ export default function BlogListClient({
   const handleTagClick = (tag: string) => {
     const newTag = selectedTag === tag ? "" : tag;
     setSelectedTag(newTag);
-    fetchPosts(1, newTag, searchQuery);
+    void fetchPosts(1, newTag, searchQuery);
   };
 
   const handleSearch = useCallback(
     (query: string) => {
       setSearchQuery(query);
-      fetchPosts(1, selectedTag, query);
+      void fetchPosts(1, selectedTag, query);
     },
     [selectedTag, fetchPosts],
   );
 
   const handlePageChange = (newPage: number) => {
-    fetchPosts(newPage, selectedTag, searchQuery);
+    void fetchPosts(newPage, selectedTag, searchQuery);
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 

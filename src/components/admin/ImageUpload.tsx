@@ -40,7 +40,7 @@ export default function ImageUpload({ value, onChange }: ImageUploadProps) {
       setDragOver(false);
       const file = e.dataTransfer.files[0];
       if (file && file.type.startsWith("image/")) {
-        upload(file);
+        void upload(file);
       }
     },
     [upload],
@@ -48,7 +48,7 @@ export default function ImageUpload({ value, onChange }: ImageUploadProps) {
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
-    if (file) upload(file);
+    if (file) void upload(file);
   };
 
   if (value) {

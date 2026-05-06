@@ -87,7 +87,7 @@ export const scrollToSectionWithTransition = (id: string): void => {
   const behavior = prefersReducedMotion ? "auto" : "smooth";
 
   if (supportsViewTransitions()) {
-    updateWithTransition(() => {
+    void updateWithTransition(() => {
       window.scrollTo({
         top: offsetPosition,
         behavior,
