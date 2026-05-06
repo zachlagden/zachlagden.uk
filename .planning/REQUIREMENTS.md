@@ -63,8 +63,8 @@ Acknowledged but deferred to a later milestone.
 - ✓ **POLISH-01**: `BlogPagination` windowed pagination with `…` truncation — shipped (commit 21807e1)
 - ✓ **POLISH-02**: `BlogPostCard` `sizes` tuned for 3-column lg grid — shipped (commit 21807e1)
 - ✓ **POLISH-03**: `not-found.tsx` hides "Go Back" unless same-origin referrer — shipped (commit 21807e1)
-- **POLISH-04**: Framer Motion usage audited; trivial fades replaced by CSS keyframes from `globals.css` (CONCERNS #20)
-- **POLISH-05**: OG/Twitter PNGs re-compressed or converted to optimised JPEG/WebP (CONCERNS #19)
+- **POLISH-04**: Framer Motion usage audited; trivial fades replaced by CSS keyframes from `globals.css` (CONCERNS #20) — *deferred: ~30 files of state-dependent animation; bigger than polish, defer to a dedicated refactor*
+- ✓ **POLISH-05**: OG/Twitter/icon PNGs re-compressed via sharp palette quantization — shipped (commit 297aedf, ~290 KB saved)
 - ✓ **POLISH-06**: TypeScript `target` ES2017 → ES2022 — shipped (commit 21807e1)
 
 ## Out of Scope

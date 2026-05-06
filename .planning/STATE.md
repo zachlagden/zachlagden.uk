@@ -12,7 +12,7 @@ See: .planning/PROJECT.md (updated 2026-05-06)
 Phase: 4 of 4 (Cleanup & Tooling) — COMPLETE
 Plan: All quick tasks executed via /gsd-quick path (no formal plan/execute cycles needed for individually-scoped fixes)
 Status: Stabilisation milestone COMPLETE — 23/23 v1 requirements shipped
-Last activity: 2026-05-06 — Shipped 4 v2 polish items (POLISH-01..03, 06). Two remain (POLISH-04 framer audit, POLISH-05 image compression)
+Last activity: 2026-05-06 — Shipped 5 of 6 v2 polish items. Only POLISH-04 (Framer Motion audit) remains, deferred as bigger than polish
 
 Progress: [██████████] 100%
 
@@ -77,6 +77,7 @@ None yet.
 | 260506-eyt | CLEAN-06: ESLint exhaustive-deps + no-floating-promises | 2026-05-06 | cc8561e | [260506-eyt-clean-06-eslint-exhaustive-deps-no-float](./quick/260506-eyt-clean-06-eslint-exhaustive-deps-no-float/) |
 | 260506-f2v | CLEAN-07 + CLEAN-08: rehype-slug headings and real sitemap dates | 2026-05-06 | ae144e2 | [260506-f2v-clean-07-clean-08-rehype-slug-headings-a](./quick/260506-f2v-clean-07-clean-08-rehype-slug-headings-a/) |
 | 260506-frq | POLISH-01..03 + POLISH-06: deferred polish batch | 2026-05-06 | 21807e1 | [260506-frq-polish-01-03-06-deferred-polish-batch](./quick/260506-frq-polish-01-03-06-deferred-polish-batch/) |
+| 260506-fu2 | POLISH-05: image compression (~290 KB saved) | 2026-05-06 | 297aedf | [260506-fu2-polish-05-image-compression](./quick/260506-fu2-polish-05-image-compression/) |
 
 ## Deferred Items
 
