@@ -18,6 +18,14 @@ const SpotifyDisplay: React.FC<SpotifyDisplayProps> = ({
     new Date().getTime() - data.startTime.getTime(),
   );
 
+  // Track previous startTime in state to detect prop changes during render
+  const [prevStartTime, setPrevStartTime] = useState(data.startTime.getTime());
+
+  if (prevStartTime !== data.startTime.getTime()) {
+    setPrevStartTime(data.startTime.getTime());
+    setCurrentTime(new Date().getTime() - data.startTime.getTime());
+  }
+
   useEffect(() => {
     if (!data.isPlaying) return;
 
@@ -35,11 +43,6 @@ const SpotifyDisplay: React.FC<SpotifyDisplayProps> = ({
 
     return () => clearInterval(interval);
   }, [data.startTime, data.endTime, data.isPlaying]);
-
-  // Update currentTime when data changes (new track or API update)
-  useEffect(() => {
-    setCurrentTime(new Date().getTime() - data.startTime.getTime());
-  }, [data.startTime]);
 
   if (!data.isPlaying) return null;
 

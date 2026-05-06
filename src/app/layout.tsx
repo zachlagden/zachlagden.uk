@@ -1,8 +1,10 @@
 import "./globals.css";
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Inter, Syne, JetBrains_Mono } from "next/font/google";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import { loadContentServer } from "@/utils/serverContentLoader";
+import SessionProvider from "@/components/auth/SessionProvider";
+import SignInButton from "@/components/auth/SignInButton";
 
 // Optimize font loading
 const inter = Inter({
@@ -11,6 +13,22 @@ const inter = Inter({
   preload: true,
   weight: ["400", "500", "600", "700"],
   variable: "--font-inter",
+});
+
+const syne = Syne({
+  subsets: ["latin"],
+  display: "swap",
+  preload: true,
+  weight: ["400", "500", "600", "700", "800"],
+  variable: "--font-syne",
+});
+
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ["latin"],
+  display: "swap",
+  preload: false,
+  weight: ["400", "500"],
+  variable: "--font-jetbrains",
 });
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -91,7 +109,11 @@ export default async function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" dir="ltr" className={inter.variable}>
+    <html
+      lang="en"
+      dir="ltr"
+      className={`${inter.variable} ${syne.variable} ${jetbrainsMono.variable}`}
+    >
       <head>
         <link rel="manifest" href="/site.webmanifest" />
         {/* Add preload for fonts and critical assets */}
@@ -111,10 +133,13 @@ export default async function RootLayout({
       <body
         className={`${inter.className} bg-neutral-50 min-h-screen intro-locked`}
       >
-        <div id="initial-loader" aria-hidden="true">
-          <div className="loader-dot" />
-        </div>
-        {children}
+        <SessionProvider>
+          <div id="initial-loader" aria-hidden="true">
+            <div className="loader-dot" />
+          </div>
+          <SignInButton />
+          {children}
+        </SessionProvider>
       </body>
       <GoogleAnalytics
         gaId={(await loadContentServer()).metadata.googleAnalyticsId}

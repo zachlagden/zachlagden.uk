@@ -1,6 +1,12 @@
 "use client";
 
-import React, { useState, useEffect, useRef } from "react";
+import React, {
+  useState,
+  useEffect,
+  useRef,
+  useSyncExternalStore,
+  useCallback,
+} from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Keyboard } from "lucide-react";
 
@@ -17,12 +23,14 @@ const KeyboardIndicator: React.FC<KeyboardIndicatorProps> = ({
   const [isHelpVisible, setIsHelpVisible] = useState(false);
   const [hasInteracted, setHasInteracted] = useState(false);
   const initialDisplayCompleted = useRef(false);
-  const [isClient, setIsClient] = useState(false);
-
-  // Check for client-side rendering
-  useEffect(() => {
-    setIsClient(true);
-  }, []);
+  const subscribeNoop = useCallback(() => () => {}, []);
+  const getIsClient = useCallback(() => true, []);
+  const getIsClientServer = useCallback(() => false, []);
+  const isClient = useSyncExternalStore(
+    subscribeNoop,
+    getIsClient,
+    getIsClientServer,
+  );
 
   // Show indicator only on initial page load and not on mobile
   useEffect(() => {

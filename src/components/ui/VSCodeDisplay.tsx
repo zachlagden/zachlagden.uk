@@ -15,13 +15,21 @@ const VSCodeDisplay: React.FC<VSCodeDisplayProps> = ({
 }) => {
   const [elapsedTime, setElapsedTime] = useState(0);
 
+  // Track previous startTime in state to detect prop changes during render
+  const [prevStartTime, setPrevStartTime] = useState(
+    data.startTime?.getTime() ?? null,
+  );
+
+  if (data.startTime && prevStartTime !== data.startTime.getTime()) {
+    setPrevStartTime(data.startTime.getTime());
+    const now = new Date().getTime();
+    setElapsedTime(Math.floor((now - data.startTime.getTime()) / 1000));
+  }
+
   useEffect(() => {
     if (!data.startTime) return;
 
-    // Calculate initial elapsed time
-    const now = new Date().getTime();
     const start = data.startTime.getTime();
-    setElapsedTime(Math.floor((now - start) / 1000));
 
     // Update elapsed time every second
     const interval = setInterval(() => {
@@ -31,15 +39,6 @@ const VSCodeDisplay: React.FC<VSCodeDisplayProps> = ({
     }, 1000);
 
     return () => clearInterval(interval);
-  }, [data.startTime]);
-
-  // Update elapsed time when data changes
-  useEffect(() => {
-    if (data.startTime) {
-      const now = new Date().getTime();
-      const start = data.startTime.getTime();
-      setElapsedTime(Math.floor((now - start) / 1000));
-    }
   }, [data.startTime]);
 
   const formatElapsedTime = (seconds: number): string => {

@@ -1,6 +1,13 @@
 "use client";
 
-import React, { useEffect, useRef, ElementType, JSX } from "react";
+import React, {
+  useEffect,
+  useRef,
+  useSyncExternalStore,
+  useCallback,
+  ElementType,
+  JSX,
+} from "react";
 import { useInView } from "framer-motion";
 import Script from "next/script";
 
@@ -52,31 +59,30 @@ function AnimatedText<E extends ElementType = "div">({
   // Use HTMLElement as the base type for our ref since all HTML elements inherit from it
   const textRef = useRef<HTMLElement>(null);
   const isInView = useInView(textRef, { once });
-  const [isClientSide, setIsClientSide] = React.useState(false);
-  const [isSplitTypeLoaded, setIsSplitTypeLoaded] = React.useState(false);
+  const subscribeNoop = useCallback(() => () => {}, []);
+  const getIsClient = useCallback(() => true, []);
+  const getIsClientServer = useCallback(() => false, []);
+  const isClientSide = useSyncExternalStore(
+    subscribeNoop,
+    getIsClient,
+    getIsClientServer,
+  );
+
+  // Track SplitType availability via subscription
+  const subscribeSplitType = useCallback((callback: () => void) => {
+    window.addEventListener("splittype-loaded", callback);
+    return () => window.removeEventListener("splittype-loaded", callback);
+  }, []);
+  const getSplitTypeLoaded = useCallback(() => !!window.SplitType, []);
+  const getSplitTypeLoadedServer = useCallback(() => false, []);
+  const isSplitTypeLoaded = useSyncExternalStore(
+    subscribeSplitType,
+    getSplitTypeLoaded,
+    getSplitTypeLoadedServer,
+  );
 
   // Determine the wrapper component (default to div)
   const Wrapper = el || "div";
-
-  // Check if we're on the client side
-  useEffect(() => {
-    setIsClientSide(true);
-  }, []);
-
-  // Handle SplitType loading
-  useEffect(() => {
-    if (isClientSide && typeof window !== "undefined") {
-      if (window.SplitType) {
-        setIsSplitTypeLoaded(true);
-      } else {
-        // Listen for SplitType to load from script
-        const handleSplitTypeLoad = () => setIsSplitTypeLoaded(true);
-        window.addEventListener("splittype-loaded", handleSplitTypeLoad);
-        return () =>
-          window.removeEventListener("splittype-loaded", handleSplitTypeLoad);
-      }
-    }
-  }, [isClientSide]);
 
   useEffect(() => {
     if (!isClientSide || !isSplitTypeLoaded || !textRef.current) return;

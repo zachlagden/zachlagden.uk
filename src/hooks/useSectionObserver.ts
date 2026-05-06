@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useCallback, useSyncExternalStore } from "react";
 
 interface UseSectionObserverProps {
   sectionRefs: {
@@ -16,12 +16,14 @@ const useSectionObserver = ({
   sectionRefs,
   setActiveSection,
 }: UseSectionObserverProps) => {
-  const [isClient, setIsClient] = useState(false);
-
-  // Set client-side state
-  useEffect(() => {
-    setIsClient(true);
-  }, []);
+  const subscribeNoop = useCallback(() => () => {}, []);
+  const getIsClient = useCallback(() => true, []);
+  const getIsClientServer = useCallback(() => false, []);
+  const isClient = useSyncExternalStore(
+    subscribeNoop,
+    getIsClient,
+    getIsClientServer,
+  );
 
   useEffect(() => {
     if (!isClient) return;

@@ -8,6 +8,7 @@ import {
   GraduationCap,
   Code,
   Award,
+  Newspaper,
   Mail,
 } from "lucide-react";
 import NavItem from "../ui/NavItem";
@@ -35,6 +36,7 @@ const Navigation: React.FC<NavigationProps> = ({
     education: <GraduationCap className="w-5 h-5" aria-hidden="true" />,
     skills: <Code className="w-5 h-5" aria-hidden="true" />,
     certifications: <Award className="w-5 h-5" aria-hidden="true" />,
+    blog: <Newspaper className="w-5 h-5" aria-hidden="true" />,
     contact: <Mail className="w-5 h-5" aria-hidden="true" />,
   };
   return (

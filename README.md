@@ -1,7 +1,7 @@
 # Zach Lagden Portfolio
 
-![Next.js Version](https://img.shields.io/badge/Next.js-15.3.3-black)
-![React Version](https://img.shields.io/badge/React-19.1.0-blue)
+![Next.js Version](https://img.shields.io/badge/Next.js-16.1.6-black)
+![React Version](https://img.shields.io/badge/React-19.2.4-blue)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5.8.3-blue)
 ![Tailwind CSS](https://img.shields.io/badge/TailwindCSS-4.1.8-teal)
 ![License](https://img.shields.io/badge/License-ZML--PL-green)
@@ -12,14 +12,13 @@ A modern, responsive portfolio website for Zach Lagden built with Next.js, React
 
 ## 🚀 Features
 
-- **Modern Stack**: Built with Next.js 15, React 19, and TypeScript
+- **Modern Stack**: Built with Next.js 16, React 19, and TypeScript
 - **Dynamic Content**: Content management through centralized JSON data
 - **Responsive Design**: Mobile-first approach that looks great on all devices
 - **Smooth Animations**: Engaging UI animations using Framer Motion
 - **Accessibility**: WCAG compliant with keyboard navigation and screen reader support
 - **Performance Optimized**: Fast load times with optimized assets
 - **SEO Ready**: Comprehensive metadata, OpenGraph, and structured data
-- **Error Tracking**: Integrated Sentry for monitoring and error reporting
 - **Analytics**: Google Analytics integration for visitor insights
 
 ## 📋 Prerequisites
@@ -48,12 +47,6 @@ pnpm install
 bun install
 ```
 
-3. Create a `.env` file in the root directory with your Sentry DSN (optional):
-
-```
-NEXT_PUBLIC_SENTRY_DSN=your_sentry_dsn
-```
-
 ## 💻 Development
 
 Start the development server:
@@ -68,19 +61,9 @@ pnpm dev
 bun dev
 ```
 
-For faster refresh with Turbopack:
-
-```bash
-npm run devturbo
-# or
-yarn devturbo
-# or
-pnpm devturbo
-# or
-bun devturbo
-```
-
 Open [http://localhost:3000](http://localhost:3000) to view the app in your browser.
+
+> **Note**: Next.js 16 uses Turbopack by default, so `pnpm dev` already has fast refresh enabled.
 
 ## 🏗️ Building for Production
 
@@ -141,8 +124,6 @@ bun lint
 │   ├── hooks/            # Custom React hooks
 │   ├── types/            # TypeScript type definitions
 │   ├── utils/            # Utility functions
-│   └── instrumentation.ts # Sentry instrumentation
-├── sentry.*.config.ts    # Sentry configuration files
 ├── next.config.ts        # Next.js configuration
 ├── package.json          # Project dependencies and scripts
 ├── postcss.config.mjs    # PostCSS configuration
@@ -178,11 +159,10 @@ The project can be deployed to various hosting platforms that support Next.js ap
 ## 📊 Analytics & Monitoring
 
 - **Google Analytics**: Track user behavior and site metrics
-- **Sentry**: Monitor application performance and capture errors in production
 
 ## 🛡️ Environment Variables
 
-The project uses Sentry for error tracking which is configured directly in the Sentry configuration files rather than through environment variables. No specific environment variables are required to run the application.
+No specific environment variables are required to run the application.
 
 ## 🔧 Customization
 
@@ -217,7 +197,6 @@ This project is licensed under the Zachariah Michael Lagden Public License (ZML-
 - [Tailwind CSS](https://tailwindcss.com/) - Utility-first CSS framework
 - [Lucide Icons](https://lucide.dev/) - Beautiful & consistent icons
 - [Vercel](https://vercel.com/) - Deployment platform
-- [Sentry](https://sentry.io/) - Error tracking
 
 ## 📞 Contact
 

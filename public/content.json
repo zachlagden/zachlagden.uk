@@ -44,17 +44,18 @@
     { "id": "education", "label": "Education" },
     { "id": "skills", "label": "Skills" },
     { "id": "certifications", "label": "Certifications" },
+    { "id": "blog", "label": "Blog" },
     { "id": "contact", "label": "Contact" }
   ],
   "about": {
-    "mainDescription": "I'm an 18-year-old entrepreneur, technical architect, and full-stack developer based in Ascot, UK. With a passion for building elegant technical solutions, I thrive at the intersection of technology, business strategy, and creative thinking. I specialize in turning complex technical challenges into elegant, business-driving solutions while focusing on strategic planning, growth optimization, and digital transformation.",
+    "mainDescription": "I'm an 18-year-old entrepreneur, technical architect, and full-stack developer based in Ascot, UK. With a passion for building elegant technical solutions, I thrive at the intersection of technology, business strategy, and creative thinking. I specialize in turning complex technical challenges into elegant, business-driving solutions while focusing on strategic planning, growth optimization, and digital transformation. I also build multi-agent AI systems and contribute to open-source projects used by hundreds.",
     "professionalValues": {
       "title": "Professional Values",
       "content": "I believe in personal ownership rather than just working for others. I value respect, speed, simplicity, and quality while maintaining high standards in all work. I combine technical expertise with business acumen."
     },
     "currentFocus": {
       "title": "Current Focus",
-      "content": "Mastering NextJS for advanced web applications, improving Python, JavaScript and TypeScript skills, taking a research-heavy approach to technical architecture, running businesses effectively, and developing enterprise IT skills through my current placement."
+      "content": "Building AI agent systems for business operations, mastering NextJS for advanced web applications, improving Python, Rust, JavaScript and TypeScript skills, taking a research-heavy approach to technical architecture, running businesses effectively, and developing enterprise IT skills through my current placement."
     }
   },
   "experience": [
@@ -84,11 +85,12 @@
       "endDate": null,
       "current": true,
       "location": "United Kingdom · Remote",
-      "description": "Personal professional side project offering development services. Turning complex technical challenges into elegant, business-driving solutions. Portfolio available at lagden.dev/projects. Open-source work through GitHub (https://github.com/Lagden-Development).",
+      "description": "Personal professional side project offering development services and open-source tools. Turning complex technical challenges into elegant, business-driving solutions. Notable projects include multi-agent AI systems and optimised Pi-hole blocklists used by hundreds. Portfolio available at lagden.dev/projects.",
       "skills": [
         "Full-Stack Development",
         "Project Management",
-        "Technical Architecture"
+        "Technical Architecture",
+        "AI Agent Development"
       ]
     },
     {
@@ -114,9 +116,9 @@
       "companyLink": "https://bespokeitsolutions.com/",
       "startDate": "2025-05",
       "endDate": "2025-07",
-      "current": true,
+      "current": false,
       "location": "Farnborough, England, United Kingdom · On-site · Full-time",
-      "description": "Work placement as part of T-Level course (unpaid). Gaining hands-on experience in enterprise IT solutions. Working with Microsoft Intune, Python, and additional enterprise technologies.",
+      "description": "Work placement as part of T-Level course (unpaid). Gained hands-on experience in enterprise IT solutions. Worked with Microsoft Intune, Python, and additional enterprise technologies.",
       "skills": ["Microsoft Intune", "Python Programming", "Enterprise IT"]
     },
     {
@@ -140,7 +142,7 @@
       "endDate": "2024-10",
       "current": false,
       "location": "United Kingdom · On-site",
-      "description": "Leading programming education initiatives and teaching young people to code.",
+      "description": "Led programming education initiatives and taught young people to code.",
       "skills": ["Teaching", "Leadership", "Programming Education"]
     }
   ],
@@ -181,7 +183,7 @@
     "categories": [
       {
         "name": "Programming Languages",
-        "skills": ["Python", "JavaScript", "TypeScript"]
+        "skills": ["Python", "JavaScript", "TypeScript", "Rust", "PHP"]
       },
       {
         "name": "Web Technologies",
@@ -191,7 +193,9 @@
           "Tailwind CSS",
           "React.js",
           "Next.js",
-          "Django"
+          "Django",
+          "React Native",
+          "WordPress"
         ]
       },
       {
@@ -203,7 +207,8 @@
           "NGINX",
           "VPS",
           "Cloudflare",
-          "Docker Compose"
+          "Docker Compose",
+          "Coolify"
         ]
       },
       {
@@ -215,7 +220,17 @@
           "Linux",
           "Server Management",
           "GitHub Actions",
-          "Pytest"
+          "Pytest",
+          "CI/CD Pipelines"
+        ]
+      },
+      {
+        "name": "AI & Automation",
+        "skills": [
+          "AI Agent Architecture",
+          "Multi-Agent Systems",
+          "AI-Assisted Development",
+          "Prompt Engineering"
         ]
       },
       {
@@ -315,15 +330,14 @@
     "formspreeId": "mqapzrgk"
   },
   "footer": {
-    "copyright": "© 2025 All rights reserved",
+    "copyright": "© 2026 All rights reserved",
     "additionalLinks": [
       { "label": "digigrow.uk", "url": "https://digigrow.uk" },
-      { "label": "lagden.dev", "url": "https://lagden.dev" },
-      { "label": "zachlagden.uk", "url": "https://zachlagden.uk" }
+      { "label": "lagden.dev", "url": "https://lagden.dev" }
     ],
     "sourceCode": {
       "label": "Source Code",
-      "url": "https://github.com/zachlagden/cv.zachlagden.uk"
+      "url": "https://github.com/zachlagden/zachlagden.uk"
     },
     "note": "Made with ❤️"
   }

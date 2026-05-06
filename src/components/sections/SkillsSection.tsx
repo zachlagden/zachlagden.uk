@@ -9,10 +9,11 @@ import { Skills } from "@/types/content";
 
 interface SkillsSectionProps {
   content: Skills;
+  sectionIndex?: number;
 }
 
 const SkillsSection = React.forwardRef<HTMLElement, SkillsSectionProps>(
-  ({ content }, ref) => {
+  ({ content, sectionIndex }, ref) => {
     const [viewMode, setViewMode] = useState<"list" | "visual">("list");
 
     // Map skill categories to include color classes
@@ -39,6 +40,7 @@ const SkillsSection = React.forwardRef<HTMLElement, SkillsSectionProps>(
         title="Skills"
         icon={<Code className="w-6 h-6" aria-hidden="true" />}
         ref={ref}
+        sectionIndex={sectionIndex}
       >
         {/* View mode toggle */}
         <div className="flex justify-end mb-8">
@@ -68,22 +70,29 @@ const SkillsSection = React.forwardRef<HTMLElement, SkillsSectionProps>(
           </div>
         </div>
 
-        <div
-          className="space-y-12"
-          aria-label="Professional skills and competencies"
-        >
+        <div aria-label="Professional skills and competencies">
           {viewMode === "list" ? (
-            // List view (original)
-            <>
-              {skillGroups.map((group) => (
-                <SkillCategory
-                  key={group.title}
-                  title={group.title}
-                  skills={group.skills}
-                  colorClass={group.colorClass}
-                />
-              ))}
-            </>
+            // List view — staggered grid with first item spanning 2 cols
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+              {skillGroups.map((group, i) => {
+                const row = Math.floor(i / 2);
+                const col = i % 2;
+                const delay = row * 0.15 + col * 0.1;
+                return (
+                  <div
+                    key={group.title}
+                    className={i === 0 ? "md:col-span-2" : ""}
+                  >
+                    <SkillCategory
+                      title={group.title}
+                      skills={group.skills}
+                      colorClass={group.colorClass}
+                      delay={delay}
+                    />
+                  </div>
+                );
+              })}
+            </div>
           ) : (
             // Visual view (new interactive visualization)
             <SkillsVisualization skillGroups={skillGroups} />

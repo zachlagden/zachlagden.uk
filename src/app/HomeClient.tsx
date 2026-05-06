@@ -5,6 +5,7 @@ import React, {
   useRef,
   useEffect,
   useCallback,
+  useSyncExternalStore,
   Suspense,
 } from "react";
 import dynamic from "next/dynamic";
@@ -27,6 +28,7 @@ import ScrollProgress from "@/components/ui/ScrollProgress";
 
 // Types
 import { ContentData } from "@/types/content";
+import { BlogPostSerialized } from "@/types/blog";
 
 // Dynamically import CustomCursor with SSR disabled
 const CustomCursor = dynamic(() => import("@/components/ui/CustomCursor"), {
@@ -74,6 +76,13 @@ const CertificationsSection = dynamic(
   },
 );
 
+const BlogSection = dynamic(() => import("@/components/sections/BlogSection"), {
+  loading: () => (
+    <div className="py-16 md:py-24 scroll-mt-24 animate-pulse bg-neutral-100 h-96 rounded-lg"></div>
+  ),
+  ssr: true,
+});
+
 // Contact form loaded dynamically as it's new and not critical for initial load
 const ContactSection = dynamic(
   () => import("@/components/sections/ContactSection"),
@@ -92,9 +101,13 @@ import { scrollToSection } from "@/utils/scrollUtils";
 
 interface HomeClientProps {
   content: ContentData;
+  blogPosts?: BlogPostSerialized[];
 }
 
-export default function HomeClient({ content }: HomeClientProps) {
+export default function HomeClient({
+  content,
+  blogPosts = [],
+}: HomeClientProps) {
   // State
   const [activeSection, setActiveSection] = useState("about");
   const [showScrollButton, setShowScrollButton] = useState(false);
@@ -108,7 +121,14 @@ export default function HomeClient({ content }: HomeClientProps) {
   // Device and preference detection - initialize with reasonable defaults for SSR
   const [isMobile, setIsMobile] = useState(false);
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
-  const [isClient, setIsClient] = useState(false);
+  const subscribeNoop = useCallback(() => () => {}, []);
+  const getIsClient = useCallback(() => true, []);
+  const getIsClientServer = useCallback(() => false, []);
+  const isClient = useSyncExternalStore(
+    subscribeNoop,
+    getIsClient,
+    getIsClientServer,
+  );
 
   // Refs for sections
   const aboutRef = useRef<HTMLElement>(null) as React.RefObject<HTMLElement>;
@@ -122,15 +142,11 @@ export default function HomeClient({ content }: HomeClientProps) {
   const certificationsRef = useRef<HTMLElement>(
     null,
   ) as React.RefObject<HTMLElement>;
+  const blogRef = useRef<HTMLElement>(null) as React.RefObject<HTMLElement>;
   const contactRef = useRef<HTMLElement>(null) as React.RefObject<HTMLElement>;
   const mainContentRef = useRef<HTMLElement>(
     null,
   ) as React.RefObject<HTMLElement>;
-
-  // Initialize client-side state
-  useEffect(() => {
-    setIsClient(true);
-  }, []);
 
   // Initialize device detection and preferences - client-side only
   useEffect(() => {
@@ -178,6 +194,7 @@ export default function HomeClient({ content }: HomeClientProps) {
       education: educationRef,
       skills: skillsRef,
       certifications: certificationsRef,
+      blog: blogRef,
       contact: contactRef,
     },
     setActiveSection,
@@ -277,7 +294,7 @@ export default function HomeClient({ content }: HomeClientProps) {
 
       <div className="min-h-screen bg-neutral-50 font-[system-ui] text-neutral-900">
         {/* Global background pattern */}
-        <GlobalBackground opacity={0.2} />
+        <GlobalBackground />
 
         <NoiseTexture opacity={0.03} blend="overlay" />
 
@@ -311,24 +328,38 @@ export default function HomeClient({ content }: HomeClientProps) {
               label="GitHub Profile"
               href={content.personal.social.github}
               icon={<Github className="w-5 h-5" aria-hidden="true" />}
+              brandColor="#24292e"
             />
             <SocialIcon
               label="LinkedIn Profile"
               href={content.personal.social.linkedin}
               icon={<Linkedin className="w-5 h-5" aria-hidden="true" />}
+              brandColor="#0077b5"
             />
             <SocialIcon
               label="Instagram Profile"
               href={content.personal.social.instagram}
               icon={<Instagram className="w-5 h-5" aria-hidden="true" />}
+              brandColor="#e4405f"
             />
             <SocialIcon
               label="Email Contact"
               href={`mailto:${content.personal.social.email}`}
               icon={<Mail className="w-5 h-5" aria-hidden="true" />}
+              brandColor="#111111"
             />
           </motion.div>
         </div>
+
+        {/* Decorative edge-bleed elements */}
+        <div
+          className="fixed top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-neutral-300/50 to-transparent z-10 pointer-events-none"
+          aria-hidden="true"
+        />
+        <div
+          className="fixed bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-neutral-300/50 to-transparent z-10 pointer-events-none"
+          aria-hidden="true"
+        />
 
         {/* Header */}
         <Header
@@ -350,6 +381,7 @@ export default function HomeClient({ content }: HomeClientProps) {
             ref={aboutRef}
             prefersReducedMotion={prefersReducedMotion}
             content={content.about}
+            sectionIndex={0}
           />
 
           {/* Dynamically loaded sections */}
@@ -361,6 +393,7 @@ export default function HomeClient({ content }: HomeClientProps) {
             <ExperienceSection
               ref={experienceRef}
               content={content.experience}
+              sectionIndex={1}
             />
           </Suspense>
 
@@ -369,7 +402,11 @@ export default function HomeClient({ content }: HomeClientProps) {
               <div className="py-16 md:py-24 animate-pulse bg-neutral-100/50 h-96 rounded-lg"></div>
             }
           >
-            <EducationSection ref={educationRef} content={content.education} />
+            <EducationSection
+              ref={educationRef}
+              content={content.education}
+              sectionIndex={2}
+            />
           </Suspense>
 
           <Suspense
@@ -377,7 +414,11 @@ export default function HomeClient({ content }: HomeClientProps) {
               <div className="py-16 md:py-24 animate-pulse bg-neutral-100/50 h-96 rounded-lg"></div>
             }
           >
-            <SkillsSection ref={skillsRef} content={content.skills} />
+            <SkillsSection
+              ref={skillsRef}
+              content={content.skills}
+              sectionIndex={3}
+            />
           </Suspense>
 
           <Suspense
@@ -388,6 +429,7 @@ export default function HomeClient({ content }: HomeClientProps) {
             <CertificationsSection
               ref={certificationsRef}
               content={content.certifications}
+              sectionIndex={4}
             />
           </Suspense>
 
@@ -396,7 +438,19 @@ export default function HomeClient({ content }: HomeClientProps) {
               <div className="py-16 md:py-24 animate-pulse bg-neutral-100/50 h-96 rounded-lg"></div>
             }
           >
-            <ContactSection ref={contactRef} content={content.contact} />
+            <BlogSection ref={blogRef} posts={blogPosts} sectionIndex={5} />
+          </Suspense>
+
+          <Suspense
+            fallback={
+              <div className="py-16 md:py-24 animate-pulse bg-neutral-100/50 h-96 rounded-lg"></div>
+            }
+          >
+            <ContactSection
+              ref={contactRef}
+              content={content.contact}
+              sectionIndex={6}
+            />
           </Suspense>
         </main>
 

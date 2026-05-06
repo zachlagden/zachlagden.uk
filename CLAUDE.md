@@ -8,11 +8,10 @@ This is a personal portfolio website for Zach Lagden built with Next.js, React, 
 
 ## Technology Stack
 
-- **Frontend**: Next.js 15 (App Router), React 19, TypeScript 5
+- **Frontend**: Next.js 16 (App Router), React 19.2, TypeScript 5
 - **Styling**: Tailwind CSS 4, PostCSS
-- **Animations**: Framer Motion, Split-Type, Lenis (smooth scrolling)
+- **Animations**: Framer Motion, Split-Type
 - **Forms**: Formspree
-- **Monitoring**: Sentry
 - **Analytics**: Google Analytics
 
 ## Common Commands
@@ -20,11 +19,8 @@ This is a personal portfolio website for Zach Lagden built with Next.js, React, 
 ### Development
 
 ```bash
-# Start the development server
+# Start the development server (uses Turbopack by default)
 pnpm dev
-
-# Start development with Turbopack (faster refreshes)
-pnpm devturbo
 ```
 
 ### Building & Deployment
@@ -40,7 +36,7 @@ pnpm start
 ### Code Quality
 
 ```bash
-# Run ESLint
+# Run ESLint (uses eslint CLI directly, not next lint)
 pnpm lint
 
 # Format code with Prettier
@@ -52,39 +48,30 @@ pnpm format
 The project follows a component-based architecture using Next.js App Router with dynamic content loading:
 
 1. **App Structure**
-
    - `src/app`: Contains page components and layouts using Next.js App Router
    - Entry point is `src/app/page.tsx` with `src/app/layout.tsx` as the root layout
    - `src/app/HomeClient.tsx`: Main client-side component handling content loading and rendering
 
 2. **Content Management**
-
    - `public/content.json`: Centralized content data file
    - `src/types/content.ts`: TypeScript interfaces for all content types
    - `src/utils/contentLoader.ts`: Client-side content loading utilities
    - `src/utils/serverContentLoader.ts`: Server-side content loading utilities
 
 3. **Components Organization**
-
    - `src/components/layout`: Header, Footer, Navigation components (accept content props)
    - `src/components/sections`: Main content sections (About, Experience, Skills, etc.)
    - `src/components/ui`: Reusable UI components
-   - `src/components/providers`: Context providers (e.g., SmoothScrollProvider)
+   - `src/components/providers`: Context providers
 
 4. **Custom Hooks**
-
    - `src/hooks/useKeyboardNavigation.ts`: Handles keyboard navigation for accessibility
    - `src/hooks/useSectionObserver.ts`: Tracks active sections during scrolling
 
 5. **Utilities**
-
    - `src/utils/animationUtils.ts`: Animation-related utility functions
    - `src/utils/scrollUtils.ts`: Scroll handling utilities
    - `src/utils/viewTransition.ts`: Handles view transitions API with fallbacks
-
-6. **Monitoring and Instrumentation**
-   - Sentry integration via `sentry.*.config.ts` files
-   - Instrumentation setup in `src/instrumentation.ts`
 
 ## Key Implementation Details
 
@@ -92,15 +79,13 @@ The project follows a component-based architecture using Next.js App Router with
 
 2. **Component Props Pattern**: All components accept content as props rather than hardcoding data, enabling easy content updates.
 
-3. **Smooth Scrolling**: Uses Lenis for smooth scrolling with a provider pattern and fallbacks for reduced motion preferences.
+3. **Smooth Scrolling**: Uses CSS-based smooth scrolling with fallbacks for reduced motion preferences.
 
 4. **Animations**: Implements progressive enhancement with Framer Motion and text animations via Split-Type.
 
 5. **Accessibility**: Includes keyboard navigation support, proper ARIA attributes, and respects user preferences for reduced motion.
 
 6. **SEO**: Implements comprehensive metadata with OpenGraph tags, structured data, and proper sitemap generation using dynamic content.
-
-7. **Error Handling**: Uses Sentry for error tracking and monitoring with custom configuration.
 
 ## Development Approach
 

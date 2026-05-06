@@ -35,13 +35,22 @@ RUN adduser --system --uid 1001 nextjs
 
 COPY --from=builder /app/public ./public
 
+# Create uploads directory for blog images
+RUN mkdir -p public/uploads
+
 RUN mkdir .next
 RUN chown nextjs:nodejs .next
 
 COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 
+# Ensure uploads dir is writable
+RUN chown nextjs:nodejs public/uploads
+
 USER nextjs
+
+# Volume mount for persistent uploads
+VOLUME ["/app/public/uploads"]
 
 EXPOSE 3000
 

@@ -9,13 +9,13 @@ import { Contact } from "@/types/content";
 
 interface ContactSectionProps {
   content: Contact;
+  sectionIndex?: number;
 }
 
 const ContactSection = React.forwardRef<HTMLElement, ContactSectionProps>(
-  ({ content }, ref) => {
+  ({ content, sectionIndex }, ref) => {
     const [state, handleSubmit] = useForm(content.formspreeId);
 
-    // Animation variants
     const containerVariants = {
       hidden: { opacity: 0 },
       show: {
@@ -37,33 +37,55 @@ const ContactSection = React.forwardRef<HTMLElement, ContactSectionProps>(
         title="Get In Touch"
         icon={<Mail className="w-6 h-6" aria-hidden="true" />}
         ref={ref}
+        sectionIndex={sectionIndex}
       >
-        <div className="max-w-2xl mx-auto">
-          {state.succeeded ? (
+        {state.succeeded ? (
+          <motion.div
+            className="text-center bg-emerald-50 p-8 rounded-lg border border-emerald-100 max-w-2xl mx-auto"
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.5 }}
+          >
+            <CheckCircle className="w-16 h-16 text-emerald-500 mx-auto mb-4" />
+            <h3 className="text-xl font-heading font-semibold text-emerald-800 mb-2">
+              Message Sent!
+            </h3>
+            <p className="text-emerald-700">
+              Thank you for reaching out. I&apos;ll get back to you as soon as
+              possible.
+            </p>
+          </motion.div>
+        ) : (
+          <div className="flex flex-col lg:flex-row gap-12 lg:gap-16 items-start">
+            {/* Decorative left column — lg only */}
             <motion.div
-              className="text-center bg-emerald-50 p-8 rounded-lg border border-emerald-100"
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.5 }}
+              className="hidden lg:block lg:w-1/3 sticky top-32"
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
             >
-              <CheckCircle className="w-16 h-16 text-emerald-500 mx-auto mb-4" />
-              <h3 className="text-xl font-semibold text-emerald-800 mb-2">
-                Message Sent!
-              </h3>
-              <p className="text-emerald-700">
-                Thank you for reaching out. I&apos;ll get back to you as soon as
-                possible.
+              <span className="font-heading text-5xl xl:text-6xl font-extrabold tracking-tighter text-neutral-900/20 leading-tight block">
+                Say
+                <br />
+                Hello.
+              </span>
+              <p className="text-neutral-500 mt-6 text-sm leading-relaxed">
+                {content.introduction}
               </p>
             </motion.div>
-          ) : (
+
+            {/* Form — offset right */}
             <motion.div
+              className="w-full lg:w-2/3"
               variants={containerVariants}
               initial="hidden"
               whileInView="show"
               viewport={{ once: true, margin: "-50px" }}
             >
+              {/* Mobile intro text */}
               <motion.p
-                className="text-neutral-600 mb-8 text-center"
+                className="lg:hidden text-neutral-600 mb-8"
                 variants={itemVariants}
               >
                 {content.introduction}
@@ -71,7 +93,7 @@ const ContactSection = React.forwardRef<HTMLElement, ContactSectionProps>(
 
               <motion.form
                 onSubmit={handleSubmit}
-                className="space-y-6"
+                className="space-y-6 max-w-lg"
                 variants={containerVariants}
               >
                 <motion.div variants={itemVariants}>
@@ -158,8 +180,8 @@ const ContactSection = React.forwardRef<HTMLElement, ContactSectionProps>(
                 </motion.div>
               </motion.form>
             </motion.div>
-          )}
-        </div>
+          </div>
+        )}
       </Section>
     );
   },

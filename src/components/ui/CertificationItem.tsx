@@ -9,6 +9,7 @@ interface CertificationItemProps {
   issuer: string;
   date: string;
   url?: string;
+  delay?: number;
 }
 
 const CertificationItem: React.FC<CertificationItemProps> = ({
@@ -16,17 +17,24 @@ const CertificationItem: React.FC<CertificationItemProps> = ({
   issuer,
   date,
   url,
+  delay = 0,
 }) => (
   <motion.div
     initial={{ opacity: 0, y: 20 }}
     whileInView={{ opacity: 1, y: 0 }}
     viewport={{ once: true }}
-    transition={{ duration: 0.5 }}
-    className="p-6 border border-neutral-200 rounded-lg hover:border-neutral-300 transition-colors"
-    whileHover={{ y: -2, boxShadow: "0 4px 6px rgba(0, 0, 0, 0.05)" }}
+    transition={{ duration: 0.5, delay }}
+    className="p-6 border border-neutral-200 rounded-lg transition-colors relative overflow-hidden group"
+    whileHover={{
+      y: -2,
+      boxShadow: "0 8px 24px rgba(0, 0, 0, 0.06)",
+      borderColor: "rgb(163, 163, 163)",
+      background:
+        "linear-gradient(135deg, rgba(59, 130, 246, 0.02) 0%, rgba(147, 51, 234, 0.02) 100%)",
+    }}
     role="listitem"
   >
-    <h3 className="text-lg font-medium mb-1">{title}</h3>
+    <h3 className="text-lg font-heading font-medium mb-1">{title}</h3>
     <p className="text-neutral-500 text-sm">
       {issuer} · {date}
     </p>

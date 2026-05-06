@@ -83,3 +83,46 @@ export const tooltipAnimation = {
     transition: { duration: 0.2 },
   },
 };
+
+// Slide from left animation
+export const slideFromLeftAnimation = {
+  hidden: { opacity: 0, x: -30 },
+  visible: {
+    opacity: 1,
+    x: 0,
+    transition: { duration: 0.5, ease: "easeOut" },
+  },
+};
+
+// Slide from right animation
+export const slideFromRightAnimation = {
+  hidden: { opacity: 0, x: 30 },
+  visible: {
+    opacity: 1,
+    x: 0,
+    transition: { duration: 0.5, ease: "easeOut" },
+  },
+};
+
+// Wave stagger container
+export const waveStaggerAnimation = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.08,
+      delayChildren: 0.1,
+    },
+  },
+};
+
+// Card entrance with subtle scale and rotation
+export const cardEntranceAnimation = {
+  hidden: { opacity: 0, scale: 0.95, rotate: -1 },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    rotate: 0,
+    transition: { duration: 0.5, ease: "easeOut" },
+  },
+};

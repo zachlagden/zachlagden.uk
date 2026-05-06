@@ -41,8 +41,9 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-# Sentry Config File
-.env.sentry-build-plugin
+# Uploaded blog images (persisted via Docker volume)
+public/uploads/*
+!public/uploads/.gitkeep
 
 # Logs
 logs/

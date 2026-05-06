@@ -9,6 +9,7 @@ import {
   GraduationCap,
   Code,
   Award,
+  Newspaper,
   Menu,
   Github,
   Linkedin,
@@ -42,6 +43,7 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
     education: <GraduationCap className="w-5 h-5" />,
     skills: <Code className="w-5 h-5" />,
     certifications: <Award className="w-5 h-5" />,
+    blog: <Newspaper className="w-5 h-5" />,
     contact: <Mail className="w-5 h-5" />,
   };
   return (

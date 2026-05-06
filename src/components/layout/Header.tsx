@@ -1,6 +1,12 @@
 "use client";
 
-import React, { useState, useEffect, useCallback, useRef } from "react";
+import React, {
+  useState,
+  useEffect,
+  useCallback,
+  useRef,
+  useSyncExternalStore,
+} from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { Mail, MapPin } from "lucide-react";
 import SocialIcon from "../ui/SocialIcon";
@@ -11,8 +17,8 @@ import { ContentData } from "@/types/content";
 
 type IntroPhase = "loading" | "letters" | "fall" | "reveal" | "done";
 
-// Large font-size for the intro (renders crisp, no scale blur)
-const INTRO_FONT_SIZE = "clamp(3rem, 13vw, 11rem)";
+// Target width as a fraction of viewport (0.92 = 92% of viewport width)
+const INTRO_WIDTH_RATIO = 0.92;
 
 interface HeaderProps {
   prefersReducedMotion: boolean;
@@ -39,6 +45,12 @@ const Header: React.FC<HeaderProps> = ({
   const nameChars = content.personal.name.split("");
   const h1Ref = useRef<HTMLHeadingElement>(null);
 
+  // Dynamically computed intro font size that fills ~92% of viewport width.
+  // Measured once after fonts load by rendering at a probe size and scaling.
+  const [introFontSize, setIntroFontSize] = useState<string | undefined>(
+    undefined,
+  );
+
   // Scale ratio used when transitioning from large font-size to normal.
   // Calculated once at the start of "fall" so the size swap is seamless.
   const [fallStartScale, setFallStartScale] = useState(1);
@@ -46,9 +58,9 @@ const Header: React.FC<HeaderProps> = ({
   // Remove loader and unlock body on reduced motion or intro complete
   useEffect(() => {
     if (prefersReducedMotion) {
-      // Immediately remove loader and unlock
+      // Immediately hide loader and unlock
       const loader = document.getElementById("initial-loader");
-      if (loader) loader.remove();
+      if (loader) loader.style.display = "none";
       document.body.classList.remove("intro-locked");
       onIntroComplete();
       return;
@@ -59,14 +71,62 @@ const Header: React.FC<HeaderProps> = ({
     }
   }, [introPhase, prefersReducedMotion, onIntroComplete]);
 
-  // Font readiness gate — wait for fonts then fade out loader, start letters
+  // Measure the ideal intro font size so the name fills the viewport width.
+  // Renders h1 at a known probe size, measures width, then scales to fit.
+  const measureIntroFontSize = useCallback(() => {
+    const el = h1Ref.current;
+    if (!el) return;
+
+    const PROBE_SIZE = 100; // px — arbitrary base for measurement
+    const prev = el.style.fontSize;
+    el.style.fontSize = `${PROBE_SIZE}px`;
+    const textWidth = el.scrollWidth;
+    el.style.fontSize = prev;
+
+    if (textWidth > 0) {
+      const available = window.innerWidth * INTRO_WIDTH_RATIO;
+      const ideal = Math.floor((available / textWidth) * PROBE_SIZE);
+      // Floor to avoid sub-pixel rounding that could still overflow
+      setIntroFontSize(`${ideal}px`);
+    }
+  }, []);
+
+  // Detect if page loaded with scroll offset (e.g. browser restored scroll position)
+  const subscribeNoop = useCallback(() => () => {}, []);
+  const getIsScrolled = useCallback(() => window.scrollY > 0, []);
+  const getIsScrolledServer = useCallback(() => false, []);
+  const wasScrolledOnLoad = useSyncExternalStore(
+    subscribeNoop,
+    getIsScrolled,
+    getIsScrolledServer,
+  );
+
+  // Font readiness gate — wait for fonts then measure, fade out loader, start letters.
+  // If the page loads with a scroll offset (e.g. user reloaded while scrolled down),
+  // skip the entire intro sequence to avoid a broken animation.
   useEffect(() => {
     if (introPhase !== "loading") return;
+
+    // Skip intro when page is already scrolled (e.g. browser restored scroll position)
+    if (wasScrolledOnLoad) {
+      const loader = document.getElementById("initial-loader");
+      if (loader) loader.style.display = "none";
+      document.body.classList.remove("intro-locked");
+      // Use requestAnimationFrame to defer the state update out of the synchronous effect body
+      requestAnimationFrame(() => {
+        setIntroPhase("done");
+        onIntroComplete();
+      });
+      return;
+    }
 
     let cancelled = false;
 
     document.fonts.ready.then(() => {
       if (cancelled) return;
+
+      // Measure after fonts are loaded so glyph widths are accurate
+      measureIntroFontSize();
 
       const loader = document.getElementById("initial-loader");
       if (loader) {
@@ -74,7 +134,7 @@ const Header: React.FC<HeaderProps> = ({
         // Wait for the CSS fade-out transition (300ms)
         setTimeout(() => {
           if (!cancelled) {
-            loader.remove();
+            loader.style.display = "none";
             setIntroPhase("letters");
           }
         }, 300);
@@ -86,7 +146,7 @@ const Header: React.FC<HeaderProps> = ({
     return () => {
       cancelled = true;
     };
-  }, [introPhase]);
+  }, [introPhase, wasScrolledOnLoad, measureIntroFontSize, onIntroComplete]);
 
   // Letter animation timing constants
   const CHAR_INITIAL_DELAY = 0.3; // seconds before first char starts
@@ -153,7 +213,7 @@ const Header: React.FC<HeaderProps> = ({
       y: 0,
       transition: {
         duration: 0.5,
-        ease: "easeOut",
+        ease: "easeOut" as const,
         delay: delayAfterLand,
       },
     },
@@ -187,11 +247,13 @@ const Header: React.FC<HeaderProps> = ({
         >
           <motion.h1
             ref={h1Ref}
-            className="text-5xl sm:text-6xl md:text-7xl font-bold tracking-tighter mb-3 inline-flex flex-wrap justify-center"
+            className={`text-5xl sm:text-6xl md:text-7xl font-heading font-extrabold tracking-tighter mb-3 inline-flex justify-center ${useIntroFontSize ? "flex-nowrap" : "flex-wrap"}`}
             style={{
               transformOrigin: "center center",
               // Large font-size during "letters" for crisp text, removed after
-              ...(useIntroFontSize ? { fontSize: INTRO_FONT_SIZE } : {}),
+              ...(useIntroFontSize && introFontSize
+                ? { fontSize: introFontSize }
+                : {}),
             }}
             initial={
               prefersReducedMotion
@@ -342,24 +404,28 @@ const Header: React.FC<HeaderProps> = ({
             label="GitHub Profile"
             href={content.personal.social.github}
             icon={<Github className="w-4 h-4" aria-hidden="true" />}
+            brandColor="#24292e"
           />
           <SocialIcon
             size="sm"
             label="LinkedIn Profile"
             href={content.personal.social.linkedin}
             icon={<Linkedin className="w-4 h-4" aria-hidden="true" />}
+            brandColor="#0077b5"
           />
           <SocialIcon
             size="sm"
             label="Instagram Profile"
             href={content.personal.social.instagram}
             icon={<Instagram className="w-4 h-4" aria-hidden="true" />}
+            brandColor="#e4405f"
           />
           <SocialIcon
             size="sm"
             label="Email Contact"
             href={`mailto:${content.personal.social.email}`}
             icon={<Mail className="w-4 h-4" aria-hidden="true" />}
+            brandColor="#111111"
           />
         </motion.div>
       </div>

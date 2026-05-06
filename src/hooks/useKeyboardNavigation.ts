@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useCallback, useSyncExternalStore } from "react";
 import { scrollToSection } from "@/utils/scrollUtils";
 
 interface UseKeyboardNavigationProps {
@@ -15,12 +15,14 @@ const useKeyboardNavigation = ({
   sectionIds,
   activeSection,
 }: UseKeyboardNavigationProps) => {
-  const [isClient, setIsClient] = useState(false);
-
-  // Set client-side state
-  useEffect(() => {
-    setIsClient(true);
-  }, []);
+  const subscribeNoop = useCallback(() => () => {}, []);
+  const getIsClient = useCallback(() => true, []);
+  const getIsClientServer = useCallback(() => false, []);
+  const isClient = useSyncExternalStore(
+    subscribeNoop,
+    getIsClient,
+    getIsClientServer,
+  );
 
   useEffect(() => {
     if (!isClient) return;

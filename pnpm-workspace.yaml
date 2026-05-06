@@ -1,5 +1,4 @@
 onlyBuiltDependencies:
-  - '@sentry/cli'
-  - '@tailwindcss/oxide'
+  - "@tailwindcss/oxide"
   - sharp
   - unrs-resolver
