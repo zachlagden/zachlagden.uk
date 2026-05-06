@@ -12,7 +12,7 @@ See: .planning/PROJECT.md (updated 2026-05-06)
 Phase: 1 of 4 (Runtime Stability)
 Plan: 0 of TBD in current phase
 Status: Ready to plan
-Last activity: 2026-05-06 — Completed quick task 260506-ee3: SEC-04 auth fail-loud
+Last activity: 2026-05-06 — Completed quick task 260506-efn: SEC-01 markdown sanitize schema
 
 Progress: [░░░░░░░░░░] 0%
 
@@ -64,6 +64,7 @@ None yet.
 | 260506-e71 | STAB-05: centralise intro-locked lifecycle to home route only | 2026-05-06 | b1dfac3 | [260506-e71-stab-05-centralise-intro-locked-removal-](./quick/260506-e71-stab-05-centralise-intro-locked-removal-/) |
 | 260506-ech | SEC-02 + SEC-03: security headers and poweredByHeader in next.config.ts | 2026-05-06 | fea6904 | [260506-ech-sec-02-sec-03-security-headers-and-power](./quick/260506-ech-sec-02-sec-03-security-headers-and-power/) |
 | 260506-ee3 | SEC-04: auth adapter fail-loud logging | 2026-05-06 | 58daa80 | [260506-ee3-sec-04-auth-adapter-fail-loud](./quick/260506-ee3-sec-04-auth-adapter-fail-loud/) |
+| 260506-efn | SEC-01: explicit allow-list schema for rehype-sanitize | 2026-05-06 | 16060dd | [260506-efn-sec-01-explicit-rehype-sanitize-schema-i](./quick/260506-efn-sec-01-explicit-rehype-sanitize-schema-i/) |
 
 ## Deferred Items
 
