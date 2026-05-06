@@ -1,10 +1,31 @@
 "use client";
 
+import { useSyncExternalStore } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { Home, ArrowLeft } from "lucide-react";
 
+const noopSubscribe = () => () => {};
+const getCanGoBack = () => {
+  if (typeof document === "undefined" || !document.referrer) return false;
+  try {
+    return new URL(document.referrer).origin === window.location.origin;
+  } catch {
+    return false;
+  }
+};
+const getCanGoBackServer = () => false;
+
 export default function NotFound() {
+  // Only show "Go Back" if the user has a same-origin referrer.
+  // Avoids navigating to a hostile referrer or doing nothing when the
+  // user landed via a shared bad URL or bookmark.
+  const canGoBack = useSyncExternalStore(
+    noopSubscribe,
+    getCanGoBack,
+    getCanGoBackServer,
+  );
+
   return (
     <div className="min-h-screen bg-neutral-50 font-[system-ui] text-neutral-900 flex flex-col items-center justify-center px-4">
       <div className="text-center max-w-lg">
@@ -51,13 +72,15 @@ export default function NotFound() {
             Back to Home
           </Link>
 
-          <button
-            onClick={() => window.history.back()}
-            className="flex items-center gap-2 text-neutral-600 py-2 px-4 rounded-lg hover:text-neutral-900 hover:bg-neutral-100 transition-colors focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-2"
-          >
-            <ArrowLeft className="w-4 h-4" />
-            Go Back
-          </button>
+          {canGoBack && (
+            <button
+              onClick={() => window.history.back()}
+              className="flex items-center gap-2 text-neutral-600 py-2 px-4 rounded-lg hover:text-neutral-900 hover:bg-neutral-100 transition-colors focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-2"
+            >
+              <ArrowLeft className="w-4 h-4" />
+              Go Back
+            </button>
+          )}
         </motion.div>
       </div>
 
