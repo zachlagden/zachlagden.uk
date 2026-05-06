@@ -1,10 +1,19 @@
 import { getPublishedPosts } from "@/lib/blog";
 import { loadContentServer } from "@/utils/serverContentLoader";
+import type { BlogPost } from "@/types/blog";
+
+export const dynamic = "force-dynamic";
 
 export async function GET() {
   const content = await loadContentServer();
-  const { posts } = await getPublishedPosts(1, 20);
   const siteUrl = content.metadata.siteUrl;
+
+  let posts: BlogPost[] = [];
+  try {
+    ({ posts } = await getPublishedPosts(1, 20));
+  } catch (err) {
+    console.error("[blog/feed] Failed to load posts from MongoDB:", err);
+  }
 
   const items = posts
     .map(

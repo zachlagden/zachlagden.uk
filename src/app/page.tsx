@@ -10,8 +10,8 @@ export default async function Home() {
   try {
     const posts = await getLatestPosts(3);
     blogPosts = posts.map(serializePost);
-  } catch {
-    blogPosts = [];
+  } catch (err) {
+    console.error("[home] Failed to load latest posts from MongoDB:", err);
   }
 
   return <HomeClient content={content} blogPosts={blogPosts} />;

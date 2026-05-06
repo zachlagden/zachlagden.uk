@@ -9,8 +9,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   let slugs: string[] = [];
   try {
     slugs = await getAllPublishedSlugs();
-  } catch {
-    // MongoDB not available, skip blog URLs
+  } catch (err) {
+    console.error("[sitemap] Failed to load blog slugs from MongoDB:", err);
   }
 
   const blogPostUrls: MetadataRoute.Sitemap = slugs.map((slug) => ({
