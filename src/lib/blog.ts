@@ -3,16 +3,40 @@ import { getDb } from "./mongodb";
 import { BlogPost, BlogPostInput } from "@/types/blog";
 import readingTime from "reading-time";
 
-function postsCollection() {
-  return getDb().then((db) => db.collection<BlogPost>("posts"));
+let indexesEnsured: Promise<void> | null = null;
+
+async function ensureIndexesOnce(
+  col: Awaited<ReturnType<typeof rawPostsCollection>>,
+): Promise<void> {
+  if (!indexesEnsured) {
+    indexesEnsured = (async () => {
+      try {
+        await Promise.all([
+          col.createIndex({ slug: 1 }, { unique: true }),
+          col.createIndex({ status: 1, publishedAt: -1 }),
+          col.createIndex({ tags: 1 }),
+          col.createIndex({ "author.githubUsername": 1 }),
+        ]);
+      } catch (err) {
+        console.warn("[blog] ensureIndexes failed:", err);
+        // Indexes are advisory — queries still work without them. Don't
+        // rethrow; do reset the cached promise so a future call retries.
+        indexesEnsured = null;
+      }
+    })();
+  }
+  return indexesEnsured;
 }
 
-export async function ensureIndexes() {
-  const col = await postsCollection();
-  await col.createIndex({ slug: 1 }, { unique: true });
-  await col.createIndex({ status: 1, publishedAt: -1 });
-  await col.createIndex({ tags: 1 });
-  await col.createIndex({ "author.githubUsername": 1 });
+async function rawPostsCollection() {
+  const db = await getDb();
+  return db.collection<BlogPost>("posts");
+}
+
+async function postsCollection() {
+  const col = await rawPostsCollection();
+  await ensureIndexesOnce(col);
+  return col;
 }
 
 function slugify(text: string): string {
