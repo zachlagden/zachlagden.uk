@@ -14,38 +14,56 @@ The site renders correctly and stays up. A visitor on `/`, `/blog`, or `/blog/[s
 
 <!-- Shipped and confirmed valuable. -->
 
+#### Pre-existing capabilities (carried forward)
+
 - ✓ Static portfolio: hero, about, experience, education, skills, certifications, contact — content-as-props from `public/content.json` — existing
 - ✓ Cinematic intro animation with font-readiness gate — existing (recent commits 35c2ba7…38b2634)
 - ✓ Live presence ticker (Spotify + VS Code via `api.lagden.dev`) — existing
 - ✓ Custom cursor, scroll progress, keyboard nav, reduced-motion support — existing
 - ✓ Coolify Docker deployment with `output: "standalone"` — existing
-- ✓ Blog list, individual posts, RSS feed scaffolding — existing (needs hardening)
-- ✓ GitHub-OAuth-gated admin UI for creating/editing posts — existing (needs hardening)
+- ✓ Blog list, individual posts, RSS feed scaffolding — existing (now hardened)
+- ✓ GitHub-OAuth-gated admin UI for creating/editing posts — existing (now hardened)
+
+#### Phase 0 — pre-init fixes
+
 - ✓ Sentry instrumentation removed — Phase 0 (commit 248cc36)
 - ✓ BlogEditor render-loop bug — Phase 0 (commit 96203a3)
 - ✓ MongoDB-down guards on `/blog`, `/blog/feed.xml`, `/sitemap.xml`, `/` — Phase 0 (commit a0e1dfa)
+
+#### Phase 1 — Runtime Stability
+
+- ✓ STAB-01 + STAB-02: error boundaries (`app/error.tsx`, `app/global-error.tsx`) — Phase 1 (commit 909d7f2)
+- ✓ STAB-03 + STAB-04: intro animation race fixes (font-ready timeout, rAF cancel guard) — Phase 1 (commit 6edb503)
+- ✓ STAB-05: `intro-locked` lifecycle centralised to home route only — Phase 1 (commit b1dfac3)
+
+#### Phase 2 — Security & Documentation
+
+- ✓ SEC-01: explicit allow-list schema for `rehype-sanitize` — Phase 2 (commit 16060dd)
+- ✓ SEC-02 + SEC-03: response security headers + `poweredByHeader: false` — Phase 2 (commit fea6904)
+- ✓ SEC-04: auth adapter logs init failures instead of silent fallback — Phase 2 (commit 58daa80)
+- ✓ SEC-05: SVG dropped from upload allow-list, magic-number sniffing — Phase 2 (commit 89597f5)
+- ✓ DOC-01: README rewritten to match current architecture — Phase 2 (commit 5900a69)
+
+#### Phase 3 — Performance Hardening
+
+- ✓ PERF-01: `sectionRefs` memoised so `IntersectionObserver` is stable — Phase 3 (commit b5fdb0f)
+- ✓ PERF-02: presence polling backoff + visibility gating — Phase 3 (commit 4931ff6)
+- ✓ PERF-03: `CustomCursor` event delegation — Phase 3 (commit e8fedc3)
+- ✓ PERF-04: `BlogSearch` skips initial empty-query fetch — Phase 3 (commit 5ea16d3)
+
+#### Phase 4 — Cleanup & Tooling
+
+- ✓ CLEAN-01..03: dead code removed (`AnimatedText.tsx`, parts of `contentLoader.ts`, `pnpm-workspace.yaml`); deps cleaned — Phase 4 (commit 44de169)
+- ✓ CLEAN-04: `useAutoSave` quota-safe + restore-on-mount in `BlogEditor` — Phase 4 (commit fefc60c)
+- ✓ CLEAN-05: `ensureIndexes()` invoked on first DB use — Phase 4 (commit 7ba4c33)
+- ✓ CLEAN-06: ESLint enforces `react-hooks/exhaustive-deps` and `no-floating-promises` — Phase 4 (commit cc8561e)
+- ✓ CLEAN-07 + CLEAN-08: real sitemap `lastModified` dates + `rehype-slug` for markdown headings — Phase 4 (commit ae144e2)
 
 ### Active
 
 <!-- Current scope. Building toward these. -->
 
-- [ ] Error boundaries restored — `app/error.tsx` and `app/global-error.tsx` (CONCERNS #4)
-- [ ] README rewritten to match current architecture (CONCERNS #5)
-- [ ] Markdown rendering hardened against XSS (CONCERNS #3)
-- [ ] Security headers + CSP added to `next.config.ts` (CONCERNS #15)
-- [ ] Auth adapter failure surfaced loudly instead of silent JWT-only fallback (CONCERNS #17)
-- [ ] SVG uploads disabled or sanitised; magic-number sniffing for uploads (CONCERNS #18)
-- [ ] Intro animation race conditions fixed (font-ready timeout, rAF cancel guard, intro-locked dedup) (CONCERNS #7, #14)
-- [ ] `useSectionObserver` no longer rebuilds on every render (CONCERNS #9)
-- [ ] `PresenceStatus` polling backs off and pauses when tab hidden (CONCERNS #8)
-- [ ] `CustomCursor` uses event delegation, not snapshot listeners (CONCERNS #10)
-- [ ] `BlogSearch` skips initial empty-query fetch (CONCERNS #11)
-- [ ] Dead code removed: `AnimatedText.tsx`, `contentLoader.ts`, `pnpm-workspace.yaml` (CONCERNS #12, #13, #24)
-- [ ] `useAutoSave` quota-safe; restore-on-mount wired up (CONCERNS #21)
-- [ ] `ensureIndexes()` invoked on first DB use (CONCERNS #22)
-- [ ] ESLint config enforces `react-hooks/exhaustive-deps` and `no-floating-promises` (CONCERNS #25)
-- [ ] Sitemap `lastModified` derived from real change dates, not `new Date()` (CONCERNS #31)
-- [ ] Markdown heading IDs via `rehype-slug`; TOC consumes the same IDs (CONCERNS #30)
+(Stabilisation milestone complete — see Validated above. Next milestone TBD.)
 
 ### Out of Scope
 
@@ -84,11 +102,11 @@ The site renders correctly and stays up. A visitor on `/`, `/blog`, or `/blog/[s
 
 | Decision | Rationale | Outcome |
 |----------|-----------|---------|
-| Stabilise before adding features | 31 concerns including 6 HIGH-severity bugs in production code path | — Pending |
+| Stabilise before adding features | 31 concerns including 6 HIGH-severity bugs in production code path | ✓ Good — all 23 v1 reqs shipped in 20 atomic source commits |
 | Skip Sentry restoration | User explicitly removed Sentry; observability is out-of-scope for this milestone | ✓ Good |
-| Defer test suite | Significant scope; would slow stabilisation; revisit after milestone | — Pending |
-| Coarse phase granularity | Stabilisation work is naturally categorical (stability / security / cleanup); fewer larger phases reduce overhead | — Pending |
-| Skip per-phase research | Brownfield with a complete codebase map; no domain to discover | — Pending |
+| Defer test suite | Significant scope; would slow stabilisation; revisit after milestone | ✓ Good — `tsc --noEmit` + `pnpm lint` floor held; CLEAN-06 added type-aware lint to catch future regressions |
+| Coarse phase granularity | Stabilisation work is naturally categorical (stability / security / cleanup); fewer larger phases reduce overhead | ✓ Good — 4 phases, no rework, no dependencies missed |
+| Skip per-phase research | Brownfield with a complete codebase map; no domain to discover | ✓ Good — codebase map covered every concern fix |
 
 ## Evolution
 
@@ -108,4 +126,4 @@ This document evolves at phase transitions and milestone boundaries.
 4. Update Context with current state
 
 ---
-*Last updated: 2026-05-06 after initialization*
+*Last updated: 2026-05-06 after stabilisation milestone close (all 23 v1 reqs complete)*

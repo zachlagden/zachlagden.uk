@@ -9,41 +9,41 @@ Stabilisation milestone. Each requirement maps to one CONCERNS.md entry in `.pla
 
 ### Stability
 
-- [ ] **STAB-01**: Root error boundary at `src/app/error.tsx` recovers from runtime errors with a "Try again" + "Back to Home" affordance and logs the error via `console.error` (CONCERNS #4)
-- [ ] **STAB-02**: Global error boundary at `src/app/global-error.tsx` (with its own `<html><body>` wrapper) recovers from root-layout errors (CONCERNS #4)
-- [ ] **STAB-03**: Intro animation has a 5-second fallback when `document.fonts.ready` stalls; the body never stays `intro-locked` indefinitely (CONCERNS #7)
-- [ ] **STAB-04**: Intro `requestAnimationFrame` callback respects the cancelled flag and never calls `setState` after unmount (CONCERNS #7)
-- [ ] **STAB-05**: `intro-locked` class is removed from a single canonical location instead of being duplicated across `Header`, `ClearIntro`, three layouts, and `signin/page.tsx` (CONCERNS #14)
+- [x] **STAB-01**: Root error boundary at `src/app/error.tsx` recovers from runtime errors with a "Try again" + "Back to Home" affordance and logs the error via `console.error` (CONCERNS #4)
+- [x] **STAB-02**: Global error boundary at `src/app/global-error.tsx` (with its own `<html><body>` wrapper) recovers from root-layout errors (CONCERNS #4)
+- [x] **STAB-03**: Intro animation has a 5-second fallback when `document.fonts.ready` stalls; the body never stays `intro-locked` indefinitely (CONCERNS #7)
+- [x] **STAB-04**: Intro `requestAnimationFrame` callback respects the cancelled flag and never calls `setState` after unmount (CONCERNS #7)
+- [x] **STAB-05**: `intro-locked` class is removed from a single canonical location instead of being duplicated across `Header`, `ClearIntro`, three layouts, and `signin/page.tsx` (CONCERNS #14)
 
 ### Security
 
-- [ ] **SEC-01**: `MarkdownRenderer` invokes `rehypeSanitize` with an explicit allow-list schema, not the default schema (CONCERNS #3)
-- [ ] **SEC-02**: `next.config.ts` returns security headers — at minimum `Strict-Transport-Security`, `X-Content-Type-Options: nosniff`, `Referrer-Policy: strict-origin-when-cross-origin`, `Permissions-Policy`, and a CSP that allows GA + same-origin (CONCERNS #15)
-- [ ] **SEC-03**: `next.config.ts` sets `poweredByHeader: false` (CONCERNS #15)
-- [ ] **SEC-04**: `getAdapter()` in `src/lib/auth.ts` logs the underlying error with `console.error` instead of silently returning `undefined` (CONCERNS #17)
-- [ ] **SEC-05**: SVG removed from upload allow-list in `src/app/api/blog/upload/route.ts`, and uploaded file MIME is validated by magic-number sniff, not client-claimed `file.type` (CONCERNS #18)
+- [x] **SEC-01**: `MarkdownRenderer` invokes `rehypeSanitize` with an explicit allow-list schema, not the default schema (CONCERNS #3)
+- [x] **SEC-02**: `next.config.ts` returns security headers — at minimum `Strict-Transport-Security`, `X-Content-Type-Options: nosniff`, `Referrer-Policy: strict-origin-when-cross-origin`, `Permissions-Policy`, and a CSP that allows GA + same-origin (CONCERNS #15)
+- [x] **SEC-03**: `next.config.ts` sets `poweredByHeader: false` (CONCERNS #15)
+- [x] **SEC-04**: `getAdapter()` in `src/lib/auth.ts` logs the underlying error with `console.error` instead of silently returning `undefined` (CONCERNS #17)
+- [x] **SEC-05**: SVG removed from upload allow-list in `src/app/api/blog/upload/route.ts`, and uploaded file MIME is validated by magic-number sniff, not client-claimed `file.type` (CONCERNS #18)
 
 ### Documentation
 
-- [ ] **DOC-01**: `README.md` documents required env vars (`MONGODB_URI`, `AUTH_SECRET`, `AUTH_GITHUB_ID`, `AUTH_GITHUB_SECRET`, `ADMIN_GITHUB_USERNAME`), optional vars (`NEXT_PUBLIC_GA_ID`), MongoDB dependency, GitHub OAuth setup, Coolify deployment, and the blog/admin features (CONCERNS #5)
+- [x] **DOC-01**: `README.md` documents required env vars (`MONGODB_URI`, `AUTH_SECRET`, `AUTH_GITHUB_ID`, `AUTH_GITHUB_SECRET`, `ADMIN_GITHUB_USERNAME`), optional vars (`NEXT_PUBLIC_GA_ID`), MongoDB dependency, GitHub OAuth setup, Coolify deployment, and the blog/admin features (CONCERNS #5)
 
 ### Performance
 
-- [ ] **PERF-01**: `useSectionObserver` no longer rebuilds its `IntersectionObserver` on every render of `HomeClient` — `sectionRefs` is stable (CONCERNS #9)
-- [ ] **PERF-02**: `PresenceStatus` polls at 30s base, pauses when `document.hidden`, and applies exponential backoff on consecutive errors (CONCERNS #8)
-- [ ] **PERF-03**: `CustomCursor` uses event delegation on `document.body` so dynamically-added interactive elements are covered (CONCERNS #10)
-- [ ] **PERF-04**: `BlogSearch` skips its initial empty-query fetch (CONCERNS #11)
+- [x] **PERF-01**: `useSectionObserver` no longer rebuilds its `IntersectionObserver` on every render of `HomeClient` — `sectionRefs` is stable (CONCERNS #9)
+- [x] **PERF-02**: `PresenceStatus` polls at 30s base, pauses when `document.hidden`, and applies exponential backoff on consecutive errors (CONCERNS #8)
+- [x] **PERF-03**: `CustomCursor` uses event delegation on `document.body` so dynamically-added interactive elements are covered (CONCERNS #10)
+- [x] **PERF-04**: `BlogSearch` skips its initial empty-query fetch (CONCERNS #11)
 
 ### Cleanup
 
-- [ ] **CLEAN-01**: `src/components/ui/AnimatedText.tsx` deleted; `split-type` removed from `package.json` if no remaining importer (CONCERNS #12)
-- [ ] **CLEAN-02**: `src/utils/contentLoader.ts` deleted (CONCERNS #13)
-- [ ] **CLEAN-03**: `pnpm-workspace.yaml` deleted (CONCERNS #24)
-- [ ] **CLEAN-04**: `useAutoSave` wraps `localStorage.setItem` in try/catch and surfaces quota errors; restore-on-mount wired into `BlogEditor` (CONCERNS #21)
-- [ ] **CLEAN-05**: `ensureIndexes()` invoked on first DB use (e.g. lazy guard inside `getDb`) so blog queries get the documented indexes (CONCERNS #22)
-- [ ] **CLEAN-06**: `eslint.config.mjs` enforces `react-hooks/exhaustive-deps: "error"` and `@typescript-eslint/no-floating-promises: "error"` with all violations fixed (CONCERNS #25)
-- [ ] **CLEAN-07**: Sitemap `lastModified` uses real change dates (build timestamp for static pages, `post.updatedAt` for blog) instead of `new Date()` (CONCERNS #31)
-- [ ] **CLEAN-08**: Markdown heading IDs generated via `rehype-slug`; `TableOfContents` consumes the same IDs (CONCERNS #30)
+- [x] **CLEAN-01**: `src/components/ui/AnimatedText.tsx` deleted; `split-type` removed from `package.json` if no remaining importer (CONCERNS #12)
+- [x] **CLEAN-02**: `src/utils/contentLoader.ts` trimmed to only the imported `formatDate`/`formatDateRange` exports (the original CONCERNS claim that those were unused was wrong) (CONCERNS #13)
+- [x] **CLEAN-03**: `pnpm-workspace.yaml` deleted; `onlyBuiltDependencies` relocated to `package.json` `pnpm` key (CONCERNS #24)
+- [x] **CLEAN-04**: `useAutoSave` wraps `localStorage.setItem` in try/catch and surfaces quota errors; restore-on-mount wired into `BlogEditor` (CONCERNS #21)
+- [x] **CLEAN-05**: `ensureIndexes()` invoked on first DB use via lazy guard in `postsCollection()` so blog queries get the documented indexes (CONCERNS #22)
+- [x] **CLEAN-06**: `eslint.config.mjs` enforces `react-hooks/exhaustive-deps: "error"` and `@typescript-eslint/no-floating-promises: "error"` with all violations fixed (CONCERNS #25)
+- [x] **CLEAN-07**: Sitemap `lastModified` uses real change dates — `BUILD_DATE` constant for static pages, `post.updatedAt` for blog (CONCERNS #31)
+- [x] **CLEAN-08**: Markdown heading IDs generated via `rehype-slug`; `TableOfContents` consumes the same `github-slugger` algorithm (CONCERNS #30)
 
 ## v2 Requirements
 
@@ -83,37 +83,38 @@ Explicitly excluded from the stabilisation milestone.
 
 Populated by the roadmapper.
 
-| Requirement | Phase | Status |
-|-------------|-------|--------|
-| STAB-01 | Phase 1 | Pending |
-| STAB-02 | Phase 1 | Pending |
-| STAB-03 | Phase 1 | Pending |
-| STAB-04 | Phase 1 | Pending |
-| STAB-05 | Phase 1 | Pending |
-| SEC-01 | Phase 2 | Pending |
-| SEC-02 | Phase 2 | Pending |
-| SEC-03 | Phase 2 | Pending |
-| SEC-04 | Phase 2 | Pending |
-| SEC-05 | Phase 2 | Pending |
-| DOC-01 | Phase 2 | Pending |
-| PERF-01 | Phase 3 | Pending |
-| PERF-02 | Phase 3 | Pending |
-| PERF-03 | Phase 3 | Pending |
-| PERF-04 | Phase 3 | Pending |
-| CLEAN-01 | Phase 4 | Pending |
-| CLEAN-02 | Phase 4 | Pending |
-| CLEAN-03 | Phase 4 | Pending |
-| CLEAN-04 | Phase 4 | Pending |
-| CLEAN-05 | Phase 4 | Pending |
-| CLEAN-06 | Phase 4 | Pending |
-| CLEAN-07 | Phase 4 | Pending |
-| CLEAN-08 | Phase 4 | Pending |
+| Requirement | Phase | Status | Commit |
+|-------------|-------|--------|--------|
+| STAB-01 | Phase 1 | Complete | 909d7f2 |
+| STAB-02 | Phase 1 | Complete | 909d7f2 |
+| STAB-03 | Phase 1 | Complete | 6edb503 |
+| STAB-04 | Phase 1 | Complete | 6edb503 |
+| STAB-05 | Phase 1 | Complete | b1dfac3 |
+| SEC-01 | Phase 2 | Complete | 16060dd |
+| SEC-02 | Phase 2 | Complete | fea6904 |
+| SEC-03 | Phase 2 | Complete | fea6904 |
+| SEC-04 | Phase 2 | Complete | 58daa80 |
+| SEC-05 | Phase 2 | Complete | 89597f5 |
+| DOC-01 | Phase 2 | Complete | 5900a69 |
+| PERF-01 | Phase 3 | Complete | b5fdb0f |
+| PERF-02 | Phase 3 | Complete | 4931ff6 |
+| PERF-03 | Phase 3 | Complete | e8fedc3 |
+| PERF-04 | Phase 3 | Complete | 5ea16d3 |
+| CLEAN-01 | Phase 4 | Complete | 44de169 |
+| CLEAN-02 | Phase 4 | Complete | 44de169 |
+| CLEAN-03 | Phase 4 | Complete | 44de169 |
+| CLEAN-04 | Phase 4 | Complete | fefc60c |
+| CLEAN-05 | Phase 4 | Complete | 7ba4c33 |
+| CLEAN-06 | Phase 4 | Complete | cc8561e |
+| CLEAN-07 | Phase 4 | Complete | ae144e2 |
+| CLEAN-08 | Phase 4 | Complete | ae144e2 |
 
 **Coverage:**
 - v1 requirements: 23 total
 - Mapped to phases: 23 ✓
-- Unmapped: 0
+- Complete: 23 ✓
+- Pending: 0
 
 ---
 *Requirements defined: 2026-05-06*
-*Last updated: 2026-05-06 after roadmap creation (traceability populated)*
+*Last updated: 2026-05-06 after milestone close (all v1 requirements complete)*
