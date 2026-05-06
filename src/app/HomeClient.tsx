@@ -4,6 +4,7 @@ import React, {
   useState,
   useRef,
   useEffect,
+  useMemo,
   useCallback,
   useSyncExternalStore,
   Suspense,
@@ -186,9 +187,10 @@ export default function HomeClient({
     };
   }, [isClient]);
 
-  // Observer for sections
-  useSectionObserver({
-    sectionRefs: {
+  // Observer for sections — sectionRefs must be stable across renders
+  // so the IntersectionObserver isn't rebuilt on every state change.
+  const sectionRefs = useMemo(
+    () => ({
       about: aboutRef,
       experience: experienceRef,
       education: educationRef,
@@ -196,9 +198,10 @@ export default function HomeClient({
       certifications: certificationsRef,
       blog: blogRef,
       contact: contactRef,
-    },
-    setActiveSection,
-  });
+    }),
+    [],
+  );
+  useSectionObserver({ sectionRefs, setActiveSection });
 
   // Handle scroll for scroll-to-top button
   useEffect(() => {
