@@ -3,6 +3,9 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 
+const INTERACTIVE_SELECTOR =
+  'a, button, [role="button"], input, textarea, select, [tabindex]:not([tabindex="-1"])';
+
 const CustomCursor: React.FC = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [cursorVariant, setCursorVariant] = useState("default");
@@ -46,45 +49,37 @@ const CustomCursor: React.FC = () => {
     // Skip all cursor effects if user prefers reduced motion or on touch devices
     if (prefersReducedMotion || isTouchDevice) return;
 
-    // Only show cursor after it's moved to prevent initial flash at [0,0]
     const onMouseEnter = () => setIsVisible(true);
     const onMouseLeave = () => setIsVisible(false);
 
     const updateMousePosition = (e: MouseEvent) => {
       setMousePosition({ x: e.clientX, y: e.clientY });
-      if (!isVisible) setIsVisible(true);
+      setIsVisible(true);
     };
 
-    // Add listeners for cursor position and visibility
+    // Event delegation on body — handles dynamically-added interactive
+    // elements (blog pagination, mobile menu, modals) without re-binding.
+    const handleMouseOver = (e: MouseEvent) => {
+      const target = e.target as Element | null;
+      if (target?.closest(INTERACTIVE_SELECTOR)) {
+        setCursorVariant("interactive");
+      } else {
+        setCursorVariant("default");
+      }
+    };
+
     window.addEventListener("mousemove", updateMousePosition);
     document.body.addEventListener("mouseenter", onMouseEnter);
     document.body.addEventListener("mouseleave", onMouseLeave);
-
-    // Track interactive elements to change cursor style
-    const handleMouseEnterInteractive = () => setCursorVariant("interactive");
-    const handleMouseLeaveInteractive = () => setCursorVariant("default");
-
-    // Elements that should trigger the interactive cursor
-    const interactiveElements = document.querySelectorAll(
-      'a, button, [role="button"], input, textarea, select, [tabindex]:not([tabindex="-1"])',
-    );
-
-    interactiveElements.forEach((el) => {
-      el.addEventListener("mouseenter", handleMouseEnterInteractive);
-      el.addEventListener("mouseleave", handleMouseLeaveInteractive);
-    });
+    document.body.addEventListener("mouseover", handleMouseOver);
 
     return () => {
       window.removeEventListener("mousemove", updateMousePosition);
       document.body.removeEventListener("mouseenter", onMouseEnter);
       document.body.removeEventListener("mouseleave", onMouseLeave);
-
-      interactiveElements.forEach((el) => {
-        el.removeEventListener("mouseenter", handleMouseEnterInteractive);
-        el.removeEventListener("mouseleave", handleMouseLeaveInteractive);
-      });
+      document.body.removeEventListener("mouseover", handleMouseOver);
     };
-  }, [isVisible, prefersReducedMotion, isTouchDevice]);
+  }, [prefersReducedMotion, isTouchDevice]);
 
   // Cursor variant animations
   const variants = {
