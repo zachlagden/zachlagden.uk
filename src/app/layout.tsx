@@ -131,12 +131,9 @@ export default async function RootLayout({
         <link rel="prefetch" href="/Zach_Lagden_CV.pdf" as="document" />
       </head>
       <body
-        className={`${inter.className} bg-neutral-50 min-h-screen intro-locked`}
+        className={`${inter.className} bg-neutral-50 min-h-screen`}
       >
         <SessionProvider>
-          <div id="initial-loader" aria-hidden="true">
-            <div className="loader-dot" />
-          </div>
           <SignInButton />
           {children}
         </SessionProvider>

@@ -1,6 +1,5 @@
 import { redirect } from "next/navigation";
 import { auth } from "@/lib/auth";
-import ClearIntro from "@/components/ui/ClearIntro";
 
 export default async function AdminLayout({
   children,
@@ -13,10 +12,5 @@ export default async function AdminLayout({
     redirect("/");
   }
 
-  return (
-    <>
-      <ClearIntro />
-      {children}
-    </>
-  );
+  return <>{children}</>;
 }
