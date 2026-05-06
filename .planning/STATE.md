@@ -12,7 +12,7 @@ See: .planning/PROJECT.md (updated 2026-05-06)
 Phase: 1 of 4 (Runtime Stability)
 Plan: 0 of TBD in current phase
 Status: Ready to plan
-Last activity: 2026-05-06 — Completed quick task 260506-dyv: STAB-01 + STAB-02 error boundaries
+Last activity: 2026-05-06 — Completed quick task 260506-e2t: STAB-03 + STAB-04 intro race fixes
 
 Progress: [░░░░░░░░░░] 0%
 
@@ -60,6 +60,7 @@ None yet.
 | # | Description | Date | Commit | Directory |
 |---|-------------|------|--------|-----------|
 | 260506-dyv | STAB-01 + STAB-02: add error boundaries (app/error.tsx, app/global-error.tsx) | 2026-05-06 | 909d7f2 | [260506-dyv-stab-01-stab-02-add-error-boundaries-app](./quick/260506-dyv-stab-01-stab-02-add-error-boundaries-app/) |
+| 260506-e2t | STAB-03 + STAB-04: intro animation race fixes (font-ready timeout, rAF cancel guard) | 2026-05-06 | 6edb503 | [260506-e2t-stab-03-stab-04-intro-animation-race-fix](./quick/260506-e2t-stab-03-stab-04-intro-animation-race-fix/) |
 
 ## Deferred Items
 
