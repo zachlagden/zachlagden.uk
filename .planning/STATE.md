@@ -12,7 +12,7 @@ See: .planning/PROJECT.md (updated 2026-05-06)
 Phase: 1 of 4 (Runtime Stability)
 Plan: 0 of TBD in current phase
 Status: Ready to plan
-Last activity: 2026-05-06 — Completed quick task 260506-eig: DOC-01 README rewrite. Phase 2 (Security & Documentation) now complete (6/6).
+Last activity: 2026-05-06 — Completed quick task 260506-ekf: PERF-01 sectionRefs memo
 
 Progress: [░░░░░░░░░░] 0%
 
@@ -67,6 +67,7 @@ None yet.
 | 260506-efn | SEC-01: explicit allow-list schema for rehype-sanitize | 2026-05-06 | 16060dd | [260506-efn-sec-01-explicit-rehype-sanitize-schema-i](./quick/260506-efn-sec-01-explicit-rehype-sanitize-schema-i/) |
 | 260506-eh4 | SEC-05: drop SVG, magic-number sniff blog uploads | 2026-05-06 | 89597f5 | [260506-eh4-sec-05-drop-svg-magic-number-sniff-for-b](./quick/260506-eh4-sec-05-drop-svg-magic-number-sniff-for-b/) |
 | 260506-eig | DOC-01: rewrite README to match current architecture | 2026-05-06 | 5900a69 | [260506-eig-doc-01-rewrite-readme-to-match-current-a](./quick/260506-eig-doc-01-rewrite-readme-to-match-current-a/) |
+| 260506-ekf | PERF-01: stabilise sectionRefs prop to useSectionObserver | 2026-05-06 | b5fdb0f | [260506-ekf-perf-01-stabilise-sectionrefs-prop-to-us](./quick/260506-ekf-perf-01-stabilise-sectionrefs-prop-to-us/) |
 
 ## Deferred Items
 
