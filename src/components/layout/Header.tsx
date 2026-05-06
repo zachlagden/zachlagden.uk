@@ -104,47 +104,64 @@ const Header: React.FC<HeaderProps> = ({
   // Font readiness gate — wait for fonts then measure, fade out loader, start letters.
   // If the page loads with a scroll offset (e.g. user reloaded while scrolled down),
   // skip the entire intro sequence to avoid a broken animation.
+  // Races document.fonts.ready against a 5s fallback so a stalled font load cannot
+  // deadlock the intro.
   useEffect(() => {
     if (introPhase !== "loading") return;
 
-    // Skip intro when page is already scrolled (e.g. browser restored scroll position)
+    let cancelled = false;
+    let rafHandle: number | null = null;
+    let fallbackTimeoutHandle: ReturnType<typeof setTimeout> | null = null;
+    let fadeTimeoutHandle: ReturnType<typeof setTimeout> | null = null;
+
     if (wasScrolledOnLoad) {
       const loader = document.getElementById("initial-loader");
       if (loader) loader.style.display = "none";
       document.body.classList.remove("intro-locked");
-      // Use requestAnimationFrame to defer the state update out of the synchronous effect body
-      requestAnimationFrame(() => {
+      rafHandle = requestAnimationFrame(() => {
+        if (cancelled) return;
         setIntroPhase("done");
         onIntroComplete();
       });
-      return;
+      return () => {
+        cancelled = true;
+        if (rafHandle !== null) cancelAnimationFrame(rafHandle);
+      };
     }
 
-    let cancelled = false;
+    let didRun = false;
 
-    document.fonts.ready.then(() => {
-      if (cancelled) return;
+    const runContinuation = () => {
+      if (didRun || cancelled) return;
+      didRun = true;
 
-      // Measure after fonts are loaded so glyph widths are accurate
       measureIntroFontSize();
 
       const loader = document.getElementById("initial-loader");
       if (loader) {
         loader.classList.add("loader-fade-out");
-        // Wait for the CSS fade-out transition (300ms)
-        setTimeout(() => {
-          if (!cancelled) {
-            loader.style.display = "none";
-            setIntroPhase("letters");
-          }
+        fadeTimeoutHandle = setTimeout(() => {
+          if (cancelled) return;
+          loader.style.display = "none";
+          setIntroPhase("letters");
         }, 300);
       } else {
         setIntroPhase("letters");
       }
-    });
+    };
+
+    if (typeof document.fonts !== "undefined") {
+      fallbackTimeoutHandle = setTimeout(runContinuation, 5000);
+      document.fonts.ready.then(runContinuation).catch(runContinuation);
+    } else {
+      fallbackTimeoutHandle = setTimeout(runContinuation, 5000);
+    }
 
     return () => {
       cancelled = true;
+      if (rafHandle !== null) cancelAnimationFrame(rafHandle);
+      if (fallbackTimeoutHandle !== null) clearTimeout(fallbackTimeoutHandle);
+      if (fadeTimeoutHandle !== null) clearTimeout(fadeTimeoutHandle);
     };
   }, [introPhase, wasScrolledOnLoad, measureIntroFontSize, onIntroComplete]);
 
