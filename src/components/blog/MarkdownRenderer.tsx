@@ -3,10 +3,29 @@
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import rehypeRaw from "rehype-raw";
-import rehypeSanitize from "rehype-sanitize";
+import rehypeSanitize, {
+  defaultSchema,
+  type Options as SanitizeSchema,
+} from "rehype-sanitize";
 import rehypeHighlight from "rehype-highlight";
 import Image from "next/image";
 import type { Components } from "react-markdown";
+
+const sanitizeSchema: SanitizeSchema = {
+  ...defaultSchema,
+  attributes: {
+    ...defaultSchema.attributes,
+    code: [
+      ["className", /^language-/, /^hljs$/, /^hljs language-/],
+    ],
+    span: [["className", /^hljs(-.+)?$/]],
+  },
+  protocols: {
+    ...defaultSchema.protocols,
+    href: ["http", "https", "mailto"],
+    src: ["http", "https"],
+  },
+};
 
 interface MarkdownRendererProps {
   content: string;
@@ -169,7 +188,11 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
     <div className="markdown-content">
       <ReactMarkdown
         remarkPlugins={[remarkGfm]}
-        rehypePlugins={[rehypeRaw, rehypeSanitize, rehypeHighlight]}
+        rehypePlugins={[
+          rehypeRaw,
+          [rehypeSanitize, sanitizeSchema],
+          rehypeHighlight,
+        ]}
         components={components}
       >
         {content}
