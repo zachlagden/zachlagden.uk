@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import { useRouter } from "next/navigation";
 import {
   Bold,
@@ -56,11 +56,39 @@ export default function BlogEditor({ post }: BlogEditorProps) {
     status: post?.status || "draft",
   });
 
-  const { clear: clearAutoSave } = useAutoSave(
-    post?._id || "new-post",
-    state,
-    5000,
+  const {
+    load: loadAutoSave,
+    clear: clearAutoSave,
+    error: autoSaveError,
+  } = useAutoSave(post?._id || "new-post", state, 5000);
+
+  const [draftToRestore, setDraftToRestore] = useState<EditorState | null>(
+    null,
   );
+  const checkedRestoreRef = useRef(false);
+
+  useEffect(() => {
+    if (checkedRestoreRef.current) return;
+    checkedRestoreRef.current = true;
+    const saved = loadAutoSave();
+    if (!saved) return;
+    if (JSON.stringify(saved) === JSON.stringify(state)) return;
+    setDraftToRestore(saved);
+    // Disable run on every state change — we only check once on mount.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const restoreDraft = useCallback(() => {
+    if (draftToRestore) {
+      setState(draftToRestore);
+      setDraftToRestore(null);
+    }
+  }, [draftToRestore]);
+
+  const dismissDraft = useCallback(() => {
+    clearAutoSave();
+    setDraftToRestore(null);
+  }, [clearAutoSave]);
 
   const insertMarkdown = useCallback((prefix: string, suffix: string = "") => {
     const textarea = document.querySelector(
@@ -160,6 +188,42 @@ export default function BlogEditor({ post }: BlogEditorProps) {
 
   return (
     <div className="space-y-6">
+      {draftToRestore && (
+        <div
+          className="flex items-center justify-between gap-4 px-4 py-3 bg-amber-50 border border-amber-200 rounded-lg text-sm"
+          role="alert"
+        >
+          <span className="text-amber-900">
+            Unsaved draft found from a previous session.
+          </span>
+          <div className="flex gap-2">
+            <button
+              type="button"
+              onClick={restoreDraft}
+              className="px-3 py-1 text-xs font-medium bg-amber-900 text-white rounded hover:bg-amber-800 transition-colors"
+            >
+              Restore
+            </button>
+            <button
+              type="button"
+              onClick={dismissDraft}
+              className="px-3 py-1 text-xs font-medium border border-amber-300 rounded hover:bg-amber-100 transition-colors"
+            >
+              Discard
+            </button>
+          </div>
+        </div>
+      )}
+
+      {autoSaveError && (
+        <div
+          className="px-4 py-2 bg-red-50 border border-red-200 rounded-lg text-xs text-red-900"
+          role="alert"
+        >
+          {autoSaveError}
+        </div>
+      )}
+
       {/* Title */}
       <input
         type="text"
