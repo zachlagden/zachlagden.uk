@@ -12,7 +12,7 @@ See: .planning/PROJECT.md (updated 2026-05-06)
 Phase: 1 of 4 (Runtime Stability)
 Plan: 0 of TBD in current phase
 Status: Ready to plan
-Last activity: 2026-05-06 — Completed quick task 260506-enh: PERF-03 cursor delegation
+Last activity: 2026-05-06 — Completed quick task 260506-et0: PERF-04 BlogSearch initial fetch. Phase 3 (Performance) now complete (4/4).
 
 Progress: [░░░░░░░░░░] 0%
 
@@ -70,6 +70,7 @@ None yet.
 | 260506-ekf | PERF-01: stabilise sectionRefs prop to useSectionObserver | 2026-05-06 | b5fdb0f | [260506-ekf-perf-01-stabilise-sectionrefs-prop-to-us](./quick/260506-ekf-perf-01-stabilise-sectionrefs-prop-to-us/) |
 | 260506-elm | PERF-02: PresenceStatus polling backoff + visibility gating | 2026-05-06 | 4931ff6 | [260506-elm-perf-02-presencestatus-polling-backoff-v](./quick/260506-elm-perf-02-presencestatus-polling-backoff-v/) |
 | 260506-enh | PERF-03: CustomCursor event delegation | 2026-05-06 | e8fedc3 | [260506-enh-perf-03-customcursor-event-delegation](./quick/260506-enh-perf-03-customcursor-event-delegation/) |
+| 260506-et0 | PERF-04: BlogSearch skip initial empty-query fetch | 2026-05-06 | 5ea16d3 | [260506-et0-perf-04-blogsearch-skip-initial-empty-qu](./quick/260506-et0-perf-04-blogsearch-skip-initial-empty-qu/) |
 
 ## Deferred Items
 
