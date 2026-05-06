@@ -193,3 +193,19 @@ export async function getAllPublishedSlugs(): Promise<string[]> {
     .toArray();
   return posts.map((p) => p.slug);
 }
+
+export async function getAllPublishedSlugsWithDates(): Promise<
+  Array<{ slug: string; updatedAt: Date }>
+> {
+  const col = await postsCollection();
+  const posts = await col
+    .find(
+      { status: "published" },
+      { projection: { slug: 1, updatedAt: 1 } },
+    )
+    .toArray();
+  return posts.map((p) => ({
+    slug: p.slug,
+    updatedAt: p.updatedAt instanceof Date ? p.updatedAt : new Date(p.updatedAt),
+  }));
+}

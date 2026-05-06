@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo } from "react";
+import GithubSlugger from "github-slugger";
 
 interface TocItem {
   id: string;
@@ -12,16 +13,31 @@ interface TableOfContentsProps {
   content: string;
 }
 
+// Strip basic markdown emphasis from heading text so the rendered TOC
+// label matches what readers see. Slug derivation uses the cleaned text
+// too — github-slugger normalizes punctuation but not bold/italic markers.
+function stripInlineMarkdown(text: string): string {
+  return text
+    .replace(/\*\*(.+?)\*\*/g, "$1")
+    .replace(/\*(.+?)\*/g, "$1")
+    .replace(/`(.+?)`/g, "$1")
+    .replace(/_(.+?)_/g, "$1")
+    .replace(/\[(.+?)\]\([^)]*\)/g, "$1")
+    .trim();
+}
+
 export default function TableOfContents({ content }: TableOfContentsProps) {
   const headings = useMemo(() => {
-    const regex = /^(#{1,3})\s+(.+)$/gm;
+    // Match the same rehype-slug + github-slugger algorithm used by
+    // MarkdownRenderer so #anchors stay in sync.
+    const slugger = new GithubSlugger();
     const items: TocItem[] = [];
-    let match;
 
-    while ((match = regex.exec(content)) !== null) {
+    for (const match of content.matchAll(/^(#{1,3})\s+(.+)$/gm)) {
+      const text = stripInlineMarkdown(match[2]);
       items.push({
-        id: match[2].toLowerCase().replace(/\s+/g, "-"),
-        text: match[2],
+        id: slugger.slug(text),
+        text,
         level: match[1].length,
       });
     }
@@ -40,8 +56,8 @@ export default function TableOfContents({ content }: TableOfContentsProps) {
         On this page
       </h4>
       <ul className="space-y-1.5">
-        {headings.map((heading) => (
-          <li key={heading.id}>
+        {headings.map((heading, idx) => (
+          <li key={`${heading.id}-${idx}`}>
             <a
               href={`#${heading.id}`}
               className={`block text-xs text-neutral-500 hover:text-neutral-900 transition-colors ${

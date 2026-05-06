@@ -7,6 +7,7 @@ import rehypeSanitize, {
   defaultSchema,
   type Options as SanitizeSchema,
 } from "rehype-sanitize";
+import rehypeSlug from "rehype-slug";
 import rehypeHighlight from "rehype-highlight";
 import Image from "next/image";
 import type { Components } from "react-markdown";
@@ -33,51 +34,30 @@ interface MarkdownRendererProps {
 
 export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
   const components: Components = {
-    h1: ({ children, ...props }) => {
-      const id =
-        typeof children === "string"
-          ? children.toLowerCase().replace(/\s+/g, "-")
-          : undefined;
-      return (
-        <h1
-          id={id}
-          className="text-3xl font-heading font-bold tracking-tight mt-10 mb-4"
-          {...props}
-        >
-          {children}
-        </h1>
-      );
-    },
-    h2: ({ children, ...props }) => {
-      const id =
-        typeof children === "string"
-          ? children.toLowerCase().replace(/\s+/g, "-")
-          : undefined;
-      return (
-        <h2
-          id={id}
-          className="text-2xl font-heading font-bold tracking-tight mt-8 mb-3"
-          {...props}
-        >
-          {children}
-        </h2>
-      );
-    },
-    h3: ({ children, ...props }) => {
-      const id =
-        typeof children === "string"
-          ? children.toLowerCase().replace(/\s+/g, "-")
-          : undefined;
-      return (
-        <h3
-          id={id}
-          className="text-xl font-heading font-semibold mt-6 mb-2"
-          {...props}
-        >
-          {children}
-        </h3>
-      );
-    },
+    h1: ({ children, ...props }) => (
+      <h1
+        className="text-3xl font-heading font-bold tracking-tight mt-10 mb-4"
+        {...props}
+      >
+        {children}
+      </h1>
+    ),
+    h2: ({ children, ...props }) => (
+      <h2
+        className="text-2xl font-heading font-bold tracking-tight mt-8 mb-3"
+        {...props}
+      >
+        {children}
+      </h2>
+    ),
+    h3: ({ children, ...props }) => (
+      <h3
+        className="text-xl font-heading font-semibold mt-6 mb-2"
+        {...props}
+      >
+        {children}
+      </h3>
+    ),
     p: ({ children, ...props }) => (
       <p className="text-neutral-700 leading-relaxed mb-4" {...props}>
         {children}
@@ -190,6 +170,7 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
         remarkPlugins={[remarkGfm]}
         rehypePlugins={[
           rehypeRaw,
+          rehypeSlug,
           [rehypeSanitize, sanitizeSchema],
           rehypeHighlight,
         ]}
