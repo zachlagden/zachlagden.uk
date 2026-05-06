@@ -12,7 +12,7 @@ See: .planning/PROJECT.md (updated 2026-05-06)
 Phase: 1 of 4 (Runtime Stability)
 Plan: 0 of TBD in current phase
 Status: Ready to plan
-Last activity: 2026-05-06 — Roadmap created, 23 v1 requirements mapped across 4 phases
+Last activity: 2026-05-06 — Completed quick task 260506-dyv: STAB-01 + STAB-02 error boundaries
 
 Progress: [░░░░░░░░░░] 0%
 
@@ -54,6 +54,12 @@ None yet.
 ### Blockers/Concerns
 
 None yet.
+
+### Quick Tasks Completed
+
+| # | Description | Date | Commit | Directory |
+|---|-------------|------|--------|-----------|
+| 260506-dyv | STAB-01 + STAB-02: add error boundaries (app/error.tsx, app/global-error.tsx) | 2026-05-06 | 909d7f2 | [260506-dyv-stab-01-stab-02-add-error-boundaries-app](./quick/260506-dyv-stab-01-stab-02-add-error-boundaries-app/) |
 
 ## Deferred Items
 
