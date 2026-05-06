@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Search } from "lucide-react";
 
 interface BlogSearchProps {
@@ -13,8 +13,15 @@ export default function BlogSearch({
   defaultValue = "",
 }: BlogSearchProps) {
   const [value, setValue] = useState(defaultValue);
+  const isFirstRunRef = useRef(true);
 
   useEffect(() => {
+    // Skip the initial fire — the parent already has SSR data for the
+    // default query. Only debounce-trigger onSearch on actual user input.
+    if (isFirstRunRef.current) {
+      isFirstRunRef.current = false;
+      return;
+    }
     const timer = setTimeout(() => onSearch(value), 300);
     return () => clearTimeout(timer);
   }, [value, onSearch]);
