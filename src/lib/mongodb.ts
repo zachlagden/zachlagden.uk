@@ -8,6 +8,18 @@ declare global {
   var _mongoClientPromise: Promise<MongoClient> | undefined;
 }
 
+// Attach a no-op side handler so a rejected connect promise doesn't
+// surface as a Node-level unhandledRejection event. Callers that
+// `await` the same promise still receive the rejection, but the
+// rejection is considered "handled" globally because this side branch
+// consumes it. Without this, NextAuth's MongoDBAdapter — which calls
+// MongoDBAdapter(promise) at module load and stores the result without
+// attaching a catch — crashes the process when Mongo is unreachable.
+function markHandled<T>(p: Promise<T>): Promise<T> {
+  p.catch(() => {});
+  return p;
+}
+
 function getClientPromise(): Promise<MongoClient> {
   if (clientPromise) return clientPromise;
 
@@ -19,12 +31,12 @@ function getClientPromise(): Promise<MongoClient> {
   if (process.env.NODE_ENV === "development") {
     if (!global._mongoClientPromise) {
       const client = new MongoClient(uri, options);
-      global._mongoClientPromise = client.connect();
+      global._mongoClientPromise = markHandled(client.connect());
     }
     clientPromise = global._mongoClientPromise;
   } else {
     const client = new MongoClient(uri, options);
-    clientPromise = client.connect();
+    clientPromise = markHandled(client.connect());
   }
 
   return clientPromise;
