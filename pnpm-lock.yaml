@@ -18,7 +18,7 @@ importers:
         specifier: ^16.2.6
         version: 16.2.6(next@16.2.6(@babel/core@7.29.0)(@opentelemetry/api@1.9.0)(react-dom@19.2.6(react@19.2.6))(react@19.2.6))(react@19.2.6)
       framer-motion:
-        specifier: ~12.23.26
+        specifier: ~12.23.28
         version: 12.23.28(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
       github-slugger:
         specifier: ^2.0.0
