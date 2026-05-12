@@ -2,16 +2,16 @@
 gsd_state_version: 1.0
 milestone: v2.0
 milestone_name: Polish, Integrations & Freelance
-status: verifying
+status: ready_to_plan
 stopped_at: Completed 05-04-PLAN.md
 last_updated: "2026-05-12T15:54:15.888Z"
 last_activity: 2026-05-12
 progress:
   total_phases: 8
-  completed_phases: 1
+  completed_phases: 2
   total_plans: 5
   completed_plans: 5
-  percent: 100
+  percent: 25
 ---
 
 # Project State
@@ -25,9 +25,9 @@ See: .planning/PROJECT.md (updated 2026-05-12)
 
 ## Current Position
 
-Phase: 05 (dependency-hardening-env-config) — EXECUTING
-Plan: 5 of 5
-Status: Phase complete — ready for verification
+Phase: 6
+Plan: Not started
+Status: Ready to plan
 Last activity: 2026-05-12
 
 **Execution order (serial, hard):** Phase 5 → 6 → 7 → 8. No parallelisation — three later phases share `public/content.json` schema; serial keeps `tsc --noEmit` honest.
@@ -36,7 +36,7 @@ Last activity: 2026-05-12
 
 **Velocity:**
 
-- Total plans completed: 0
+- Total plans completed: 5
 - Average duration: —
 - Total execution time: 0.0 hours
 
@@ -49,6 +49,7 @@ Last activity: 2026-05-12
 | 6 | 0 | — | — |
 | 7 | 0 | — | — |
 | 8 | 0 | — | — |
+| 05 | 5 | - | - |
 
 **Recent Trend:**
 
