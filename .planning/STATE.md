@@ -12,7 +12,7 @@ See: .planning/PROJECT.md (updated 2026-05-06)
 Phase: 4 of 4 (Cleanup & Tooling) — COMPLETE
 Plan: All quick tasks executed via /gsd-quick path (no formal plan/execute cycles needed for individually-scoped fixes)
 Status: Stabilisation milestone COMPLETE — 23/23 v1 requirements shipped
-Last activity: 2026-05-06 — Shipped 5 of 6 v2 polish items. Only POLISH-04 (Framer Motion audit) remains, deferred as bigger than polish
+Last activity: 2026-05-12 — Completed quick task 260512-d2o: Pin pnpm to 10.33.0 via packageManager to unblock prod Docker build
 
 Progress: [██████████] 100%
 
@@ -78,6 +78,7 @@ None yet.
 | 260506-f2v | CLEAN-07 + CLEAN-08: rehype-slug headings and real sitemap dates | 2026-05-06 | ae144e2 | [260506-f2v-clean-07-clean-08-rehype-slug-headings-a](./quick/260506-f2v-clean-07-clean-08-rehype-slug-headings-a/) |
 | 260506-frq | POLISH-01..03 + POLISH-06: deferred polish batch | 2026-05-06 | 21807e1 | [260506-frq-polish-01-03-06-deferred-polish-batch](./quick/260506-frq-polish-01-03-06-deferred-polish-batch/) |
 | 260506-fu2 | POLISH-05: image compression (~290 KB saved) | 2026-05-06 | 297aedf | [260506-fu2-polish-05-image-compression](./quick/260506-fu2-polish-05-image-compression/) |
+| 260512-d2o | Pin pnpm to 10.33.0 via packageManager to unblock prod Docker build | 2026-05-12 | 41657a0 | [260512-d2o-pin-pnpm-to-10-33-0-via-packagemanager-f](./quick/260512-d2o-pin-pnpm-to-10-33-0-via-packagemanager-f/) |
 
 ## Deferred Items
 
@@ -89,6 +90,6 @@ Items acknowledged and carried forward from previous milestone close:
 
 ## Session Continuity
 
-Last session: 2026-05-06
-Stopped at: Stabilisation milestone complete. All 23 v1 requirements shipped, PROJECT.md and REQUIREMENTS.md transitioned to Validated/Complete. Branch is 38+ commits ahead of `origin/main`; awaiting decision on push and next milestone scope.
+Last session: 2026-05-12
+Stopped at: Resumed after stabilisation milestone close. Pushed 55 commits to `origin/main` (`b094d87..f9712d7`). GitHub Dependabot reports 34 vulnerabilities on default branch (16 high, 18 moderate) — input for next milestone scoping. Proceeding to `/gsd-new-milestone` to scope v2.
 Resume file: None
