@@ -73,6 +73,10 @@ export default function BlogEditor({ post }: BlogEditorProps) {
     const saved = loadAutoSave();
     if (!saved) return;
     if (JSON.stringify(saved) === JSON.stringify(state)) return;
+    // The mount-once guard above plus the empty deps array make this safe;
+    // the setState here is intentional (one-shot draft restoration), so we
+    // suppress react-hooks/set-state-in-effect (new in eslint-config-next 16.2+).
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setDraftToRestore(saved);
     // Disable run on every state change — we only check once on mount.
     // eslint-disable-next-line react-hooks/exhaustive-deps
