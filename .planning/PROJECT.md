@@ -63,7 +63,25 @@ The site renders correctly and stays up. A visitor on `/`, `/blog`, or `/blog/[s
 
 <!-- Current scope. Building toward these. -->
 
-(Stabilisation milestone complete — see Validated above. Next milestone TBD.)
+(See "Current Milestone" below — full requirements live in REQUIREMENTS.md after roadmap is generated.)
+
+## Current Milestone: v2.0 Polish, Integrations & Freelance
+
+**Goal:** Ship the post-stabilisation evolution — clean up the dependency surface, refresh stale content, add live data integrations, and launch a freelance offering — without diluting the personal-site identity.
+
+**Target features:**
+
+- **Phase 5 — Dependency hardening + env config:** Resolve all 44 Dependabot alerts (high + mod + low); audit Coolify envs against `.env.example`; add missing `AUTH_GITHUB_ID`/`AUTH_GITHUB_SECRET`; capture env-vars runbook
+- **Phase 6 — Content refresh:** Full audit of `public/content.json` (about, experience, skills, education, certs, hero, metadata); add `personal.birthday` + server-computed age; refresh tagline + skills
+- **Phase 7 — Integrations + /stats page:** GitHub commit heatmap (public + private via PAT), Tokscale.ai stats (API research → scrape fallback), pinned repos w/ live stars, `/now` page, RSS subscriber count; placement = homepage teasers + dedicated `/stats` page
+- **Phase 8 — Freelance offering:** Homepage "available for work" callout (toggle via content.json flag); `/freelance` page with visible pricing tiers, service categories, "what I don't do" list, Cal.com CTA + GA event tracking, "Areas I cover" list (Berkshire towns); `Service` schema + `/freelance.md` machine-readable file; robots.txt AI-bot audit; tone reference = Linear/Vercel/Plain
+
+**Key context:**
+
+- Phase numbering continues from v1 (5–8). Old phase directories were never created in v1 (all v1 work was `/gsd-quick` tasks); no archive needed.
+- Deferred-from-v1 items (TEST-01/02, INFRA-01, POLISH-04) remain deferred to v3 — not in scope for v2.
+- Cut from Phase 8 explicitly: FAQ section, `LocalBusiness` schema, testimonials, mocked case studies, programmatic town pages.
+- Verification floor stays the same as v1: `tsc --noEmit` + `pnpm lint` per batch. No test framework introduced.
 
 ### Out of Scope
 
@@ -126,4 +144,4 @@ This document evolves at phase transitions and milestone boundaries.
 4. Update Context with current state
 
 ---
-*Last updated: 2026-05-06 after stabilisation milestone close (all 23 v1 reqs complete)*
+*Last updated: 2026-05-12 — v2.0 milestone opened (Polish, Integrations & Freelance)*

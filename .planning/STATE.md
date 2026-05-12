@@ -1,24 +1,38 @@
+---
+gsd_state_version: 1.0
+milestone: v2.0
+milestone_name: Polish, Integrations & Freelance
+status: planning
+last_updated: "2026-05-12T09:20:16.239Z"
+last_activity: 2026-05-12
+progress:
+  total_phases: 0
+  completed_phases: 0
+  total_plans: 0
+  completed_plans: 0
+  percent: 0
+---
+
 # Project State
 
 ## Project Reference
 
-See: .planning/PROJECT.md (updated 2026-05-06)
+See: .planning/PROJECT.md (updated 2026-05-12)
 
 **Core value:** The site renders correctly and stays up — no blank pages, no 500s, regardless of MongoDB availability or transient runtime errors.
-**Current focus:** Stabilisation milestone complete — awaiting next milestone scope
+**Current focus:** v2.0 Polish, Integrations & Freelance — dependency hardening, content refresh, live data integrations, freelance offering
 
 ## Current Position
 
-Phase: 4 of 4 (Cleanup & Tooling) — COMPLETE
-Plan: All quick tasks executed via /gsd-quick path (no formal plan/execute cycles needed for individually-scoped fixes)
-Status: Stabilisation milestone COMPLETE — 23/23 v1 requirements shipped
-Last activity: 2026-05-12 — Completed quick task 260512-d2o: Pin pnpm to 10.33.0 via packageManager to unblock prod Docker build
-
-Progress: [██████████] 100%
+Phase: Not started (defining requirements)
+Plan: —
+Status: Defining requirements
+Last activity: 2026-05-12 — Milestone v2.0 started
 
 ## Performance Metrics
 
 **Velocity:**
+
 - Total plans completed: 0
 - Average duration: —
 - Total execution time: 0.0 hours
@@ -30,6 +44,7 @@ Progress: [██████████] 100%
 | - | - | - | - |
 
 **Recent Trend:**
+
 - Last 5 plans: —
 - Trend: —
 
