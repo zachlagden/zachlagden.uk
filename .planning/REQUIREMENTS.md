@@ -1,11 +1,12 @@
 # Requirements: zachlagden.uk
 
-**Defined:** 2026-05-06
+**v1 defined:** 2026-05-06
+**v2 defined:** 2026-05-12
 **Core Value:** The site renders correctly and stays up — no blank pages, no 500s, regardless of MongoDB availability or transient runtime errors.
 
 ## v1 Requirements
 
-Stabilisation milestone. Each requirement maps to one CONCERNS.md entry in `.planning/codebase/CONCERNS.md`.
+Stabilisation milestone. Each requirement maps to one CONCERNS.md entry in `.planning/codebase/CONCERNS.md`. All shipped 2026-05-06.
 
 ### Stability
 
@@ -37,7 +38,7 @@ Stabilisation milestone. Each requirement maps to one CONCERNS.md entry in `.pla
 ### Cleanup
 
 - [x] **CLEAN-01**: `src/components/ui/AnimatedText.tsx` deleted; `split-type` removed from `package.json` if no remaining importer (CONCERNS #12)
-- [x] **CLEAN-02**: `src/utils/contentLoader.ts` trimmed to only the imported `formatDate`/`formatDateRange` exports (the original CONCERNS claim that those were unused was wrong) (CONCERNS #13)
+- [x] **CLEAN-02**: `src/utils/contentLoader.ts` trimmed to only the imported `formatDate`/`formatDateRange` exports (CONCERNS #13)
 - [x] **CLEAN-03**: `pnpm-workspace.yaml` deleted; `onlyBuiltDependencies` relocated to `package.json` `pnpm` key (CONCERNS #24)
 - [x] **CLEAN-04**: `useAutoSave` wraps `localStorage.setItem` in try/catch and surfaces quota errors; restore-on-mount wired into `BlogEditor` (CONCERNS #21)
 - [x] **CLEAN-05**: `ensureIndexes()` invoked on first DB use via lazy guard in `postsCollection()` so blog queries get the documented indexes (CONCERNS #22)
@@ -47,7 +48,76 @@ Stabilisation milestone. Each requirement maps to one CONCERNS.md entry in `.pla
 
 ## v2 Requirements
 
-Acknowledged but deferred to a later milestone.
+Polish, Integrations & Freelance milestone. Each requirement is atomic, testable, and assigned to one phase. Verification floor for v2 is `tsc --noEmit && pnpm lint && pnpm build` per batch (`pnpm build` added beyond v1 — catches Turbopack/Coolify regressions).
+
+### Dependency Hardening
+
+- [ ] **DEP-01**: All 44 Dependabot alerts resolved (19 high + 19 moderate + 6 low); `pnpm audit` shows 0 high/critical and 0 moderate after the milestone closes
+- [ ] **DEP-02**: `knip` installed as a devDep; baseline run captured in `.planning/runbooks/KNIP-BASELINE.md` showing pre-v2 unused-code state for regression comparison
+- [ ] **DEP-03**: `.github/dependabot.yml` configured to ignore `next-auth` (beta-to-beta) and to limit `framer-motion` to patch-only bumps so future automated PRs do not regress STAB-03/04 or auth flow
+- [ ] **DEP-04**: `pnpm dedupe` run after each batch; lockfile churn audited for unintended transitive duplicates
+- [ ] **DEP-05**: Per-batch verification floor enforced: `tsc --noEmit && pnpm lint && pnpm build` must pass before each Dependabot batch is merged; failures roll back the batch
+
+### Environment & Runbooks
+
+- [ ] **ENV-01**: Coolify env vars audited against `.env.example`; documented in `.planning/runbooks/ENV-VARS.md` with present / missing / obsolete columns
+- [ ] **ENV-02**: Missing `AUTH_GITHUB_ID` and `AUTH_GITHUB_SECRET` populated in Coolify; admin GitHub OAuth signin at `/admin/blog` verified working in prod
+- [ ] **ENV-03**: New `GITHUB_PAT` provisioned (fine-grained, "No repository access" + "Profile: Read-only", 1-year max expiry) and added to Coolify env vars for Phase 7
+- [ ] **ENV-04**: `.planning/runbooks/CLOUDFLARE.md` captures Cloudflare full-proxy configuration — page-rules / cache-rules / cache-purge procedure — so Next `Cache-Control` is honored end-to-end
+- [ ] **ENV-05**: `.planning/runbooks/AUTH-SMOKE-TEST.md` documents the manual sign-in test that must pass after any `next-auth` bump
+
+### Content Refresh
+
+- [ ] **CONT-01**: `personal.birthday: "YYYY-MM-DD"` field added to `public/content.json` and `src/types/content.ts` (server-only type variant)
+- [ ] **CONT-02**: `src/utils/age.ts` exports `computeAge(birthday: string, now?: Date): number` using `Intl.DateTimeFormat` with `timeZone: "Europe/London"`; pure function, no library deps
+- [ ] **CONT-03**: `src/utils/serverContentLoader.ts` computes age from birthday, injects into `Personal`, and strips `birthday` before returning ContentData — single chokepoint
+- [ ] **CONT-04**: `Personal` interface type-split — server-only variant includes `birthday`, client-facing variant omits it; type system enforces the boundary
+- [ ] **CONT-05**: All hardcoded age literals (e.g. "18-year-old") in content.json and component copy replaced with the computed `age` field
+- [ ] **CONT-06**: `export const revalidate = 86400` on `/` so age refreshes daily without manual redeploy; `pnpm build` output verifies `/` is ISR not pure Static
+- [ ] **CONT-07**: Build-time assertion: `grep -r "birthday" .next/static/` returns empty after every build; CI-style guard added to `package.json` scripts or runbook
+- [ ] **CONT-08**: About-section tagline, skills, experience, and metadata updated (user-supplied at execution); British English consistency pass across all copy changes
+- [ ] **CONT-09**: Certifications section confirmed untouched (already accurate per user)
+- [ ] **CONT-10**: Content-audit decisions log captured in `.planning/runbooks/CONTENT-AUDIT-2026-05.md` so future-Zach knows why each field changed
+
+### Integrations & /stats + /now pages
+
+- [ ] **INT-01**: `src/lib/github.ts` server-only module added using `@octokit/graphql@^9.0.3`; single GraphQL query covers `contributionsCollection` (public + private), `pinnedItems`, and live star/fork counts
+- [ ] **INT-02**: `unstable_cache` wrapper around `getGitHubStats()` with 1h revalidate; rate-limit-aware (5000/hr authenticated)
+- [ ] **INT-03**: `src/components/stats/GitHubHeatmap.tsx` renders 53×7 SVG with GitHub's 5-bucket green palette (light + dark variants), year selector, day-cell tooltip with date and count; honors `prefers-reduced-motion`
+- [ ] **INT-04**: `src/components/stats/PinnedRepos.tsx` renders auto-balanced grid (graceful at 0 / 1 / 3 / 6 cards via `grid-cols-[repeat(auto-fill,minmax(280px,1fr))]`); each card shows name, description, primary language with linguist color, star count, fork count
+- [ ] **INT-05**: `src/components/stats/TokscaleEmbed.tsx` embeds `https://tokscale.ai/api/embed/zachlagden/svg` via `<object>` with a fallback graphic if the embed returns 404 or fails
+- [ ] **INT-06**: `src/app/stats/page.tsx` (RSC) composes heatmap, pinned repos, Tokscale, and existing presence ticker; uses `Promise.allSettled` so a single integration failure does not kill the page
+- [ ] **INT-07**: `src/app/stats/error.tsx` segment error boundary catches any unhandled failures within the /stats subtree
+- [ ] **INT-08**: `src/app/now/page.tsx` (RSC, static) reads `content.now` from content.json; renders staleness banner when `lastUpdated` > 90 days; emits `<meta name="robots" content="noindex">` when > 180 days
+- [ ] **INT-09**: `content.now: { lastUpdated, focus, learning, sideProjects, location }` field added to content.json and `src/types/content.ts`
+- [ ] **INT-10**: Homepage `StatsTeaser` component — small summary tile (commits this year, top language, current streak) linking to /stats; lives outside the section/keyboard-nav system
+- [ ] **INT-11**: `src/app/sitemap.ts` updated to include `/stats` and `/now`
+- [ ] **INT-12**: `/stats` and `/now` linked from site footer (NOT primary header nav)
+
+### Freelance Offering
+
+- [ ] **FREE-01**: `src/app/freelance/page.tsx` (RSC, mostly static) — entry route for freelance offering
+- [ ] **FREE-02**: Hero with 5–10 word direct H1 (Linear/Plain/Vercel reference tone — plain, no buzzwords) + primary Cal.com CTA button
+- [ ] **FREE-03**: Pricing component with 3+1 visual layout — Starter £750 / Standard £1,800 / Pro from £3,500 in a price-anchored row, AI Integration from £1,500 as a separate add-on row below; no "Most popular" highlight in v2
+- [ ] **FREE-04**: "What I do" services section listing brochure sites, booking systems, WordPress fixes/rebuilds, AI integrations, and custom builds
+- [ ] **FREE-05**: "What I don't do" list — 4–6 lowercase imperative bullets positioned between pricing and "How it works"; aligned with brief (no logo work, no SEO-as-standalone, no hosting contracts, no sub-£750)
+- [ ] **FREE-06**: "How it works" 4-step explainer — Book call → Quote → Build → Launch
+- [ ] **FREE-07**: "Areas I cover" list — Ascot / Sunninghill / Sunningdale / Bracknell / Windsor / Egham / Virginia Water / Camberley + "UK-wide via remote"; bounded to ≤15-mile radius to avoid over-claim
+- [ ] **FREE-08**: Past-work section omitted (per user decision); replace with single line "Past work available on request"
+- [ ] **FREE-09**: Final Cal.com CTA repeat at page bottom
+- [ ] **FREE-10**: All Cal.com link clicks wired to `sendGAEvent('freelance_cta_click', { placement })` via `@next/third-parties`; payload is click-only and PII-free
+- [ ] **FREE-11**: Cal.com URL stored in `content.personal.freelance.calLink` (single read site, never hardcoded in components); supplied at execution time
+- [ ] **FREE-12**: `personal.freelance.available: boolean` toggle in content.json; homepage `AvailabilityCallout` reads it — when false the callout hides entirely
+- [ ] **FREE-13**: `personal.freelance.availability.asOf: string` dated field; build-time `console.warn` if older than 30 days so it never silently goes stale
+- [ ] **FREE-14**: `src/app/freelance.md/route.ts` dynamic handler returns `text/markdown` derived from content.json — machine-readable mirror of /freelance for AI agents evaluating vendors programmatically
+- [ ] **FREE-15**: `Service` JSON-LD via `schema-dts@^2.0.0` (type-only); composed in `@graph` with stable `@id` cross-ref to the existing `Person` schema; `areaServed` lists the same towns as FREE-07; verified clean against Google Rich Results Test
+- [ ] **FREE-16**: `src/app/robots.ts` extended with explicit Allow rules for AI bots — `GPTBot`, `ClaudeBot`, `Claude-Web`, `PerplexityBot`, `CCBot`, `anthropic-ai`, `Google-Extended`, `Applebot-Extended`; Disallow `/admin` and `/api` for `*`
+- [ ] **FREE-17**: Header navigation updated to include `/freelance` link; `src/app/sitemap.ts` updated to include `/freelance`
+- [ ] **FREE-18**: `.planning/runbooks/PRICING-RATIONALE.md` captures peer comparison (≥3 Berkshire-area senior dev rates) and market-positioning logic so future-Zach can adjust tiers with context
+
+## Future Requirements
+
+Deferred to v3 or later.
 
 ### Testing
 
@@ -56,35 +126,42 @@ Acknowledged but deferred to a later milestone.
 
 ### Infrastructure
 
-- **INFRA-01**: Migrate `public/uploads/` to Cloudflare R2 (or another S3-compatible store) so uploads survive redeploys without volume config
+- **INFRA-01**: Migrate `public/uploads/` to Cloudflare R2 (or another S3-compatible store) so uploads survive redeploys without volume config — less urgent now that Coolify persistent volume is configured
 
 ### Polish
 
-- ✓ **POLISH-01**: `BlogPagination` windowed pagination with `…` truncation — shipped (commit 21807e1)
-- ✓ **POLISH-02**: `BlogPostCard` `sizes` tuned for 3-column lg grid — shipped (commit 21807e1)
-- ✓ **POLISH-03**: `not-found.tsx` hides "Go Back" unless same-origin referrer — shipped (commit 21807e1)
-- **POLISH-04**: Framer Motion usage audited; trivial fades replaced by CSS keyframes from `globals.css` (CONCERNS #20) — *deferred: ~30 files of state-dependent animation; bigger than polish, defer to a dedicated refactor*
-- ✓ **POLISH-05**: OG/Twitter/icon PNGs re-compressed via sharp palette quantization — shipped (commit 297aedf, ~290 KB saved)
-- ✓ **POLISH-06**: TypeScript `target` ES2017 → ES2022 — shipped (commit 21807e1)
+- **POLISH-04**: Framer Motion usage audited; trivial fades replaced by CSS keyframes from `globals.css` (CONCERNS #20) — ~30 files of state-dependent animation; bigger than polish
 
 ## Out of Scope
 
-Explicitly excluded from the stabilisation milestone.
+Explicitly excluded from v2 (decisions documented inline to prevent re-adding):
 
-| Feature | Reason |
-|---------|--------|
-| Reintroducing Sentry | User explicitly removed it; observability is a separate decision |
-| Migrating to Vercel | Project deploys via Coolify per global instructions |
+| Item | Reason |
+|---|---|
+| Reintroducing Sentry / observability | Explicitly deferred; was out of scope in v1 too, no new pressure to revisit |
+| Migrating to Vercel | Deploys via Coolify per global instructions |
 | Switching component library | Locked on Radix + shadcn + Tailwind |
-| GraphQL API for the blog | REST-only per global instructions |
-| Multi-author blog | Admin allow-list is single-user (`ADMIN_GITHUB_USERNAME`); markdown sanitiser tightening assumes trusted-author model |
+| GraphQL API | REST-only per global instructions |
+| Multi-author blog | Admin allow-list remains single-user |
+| `LocalBusiness` schema markup | Nudges site identity toward agency; user explicitly cut |
+| FAQ section on /freelance | Pricing + "what I don't do" filter does the same job; cut |
+| Testimonials section on /freelance | Deferred until 2–3 real quotes exist (v3+) |
+| Mocked SMB case-study demos | Sophisticated buyers smell mockups; cut |
+| Programmatic per-town pages (`/freelance/ascot`, etc.) | Doorway-page anti-pattern; one strong page + areas list does the same SEO work |
+| Cal.com inline embed widget | Adds page weight + consent burden; outbound link is the brief's call |
+| RSS subscriber count on /stats | No honest measurement source; fabrication would damage brand |
+| Wakatime / coding time stats | Out of scope for v2; revisit only if you start using Wakatime |
+| Last.fm / Letterboxd / "currently reading" tiles | Out of scope; not picked during brainstorm |
+| Mastodon / Bluesky last-post tile | Out of scope; not picked during brainstorm |
+| /now page being a separate markdown file | Recommended path is content.json field for consistency with content-as-props |
+| Pricing tier highlight ("Most popular" on Standard) in v2 | No conversion data yet; revisit in v3 once GA events accumulate |
 
 ## Traceability
 
-Populated by the roadmapper.
+Populated by the roadmapper after v2 roadmap approval.
 
 | Requirement | Phase | Status | Commit |
-|-------------|-------|--------|--------|
+|---|---|---|---|
 | STAB-01 | Phase 1 | Complete | 909d7f2 |
 | STAB-02 | Phase 1 | Complete | 909d7f2 |
 | STAB-03 | Phase 1 | Complete | 6edb503 |
@@ -109,12 +186,19 @@ Populated by the roadmapper.
 | CLEAN-07 | Phase 4 | Complete | ae144e2 |
 | CLEAN-08 | Phase 4 | Complete | ae144e2 |
 
-**Coverage:**
+**v1 coverage:**
+
 - v1 requirements: 23 total
 - Mapped to phases: 23 ✓
 - Complete: 23 ✓
 - Pending: 0
 
+**v2 coverage:**
+
+- v2 requirements: 40 total
+- Awaiting roadmap mapping
+
 ---
-*Requirements defined: 2026-05-06*
-*Last updated: 2026-05-06 after milestone close (all v1 requirements complete)*
+
+*v1 requirements defined: 2026-05-06; complete 2026-05-06.*
+*v2 requirements defined: 2026-05-12 — milestone v2.0 Polish, Integrations & Freelance.*
