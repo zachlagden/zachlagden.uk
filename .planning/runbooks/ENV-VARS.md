@@ -25,12 +25,26 @@
 | AUTH_SECRET | present | both | Required; consumed implicitly by next-auth (no direct `process.env.AUTH_SECRET` grep — Auth.js v5 reads it internally) |
 | AUTH_GITHUB_ID | present | both | **Provisioned in Plan 05-03 Task 3** (per D-07). Consumed implicitly by `src/lib/auth.ts` GitHub provider. Existing OAuth App Client ID supplied by user. |
 | AUTH_GITHUB_SECRET | present | both | **Provisioned in Plan 05-03 Task 3** (per D-07). Consumed implicitly by `src/lib/auth.ts` GitHub provider. Regenerate annually. |
+| AUTH_TRUST_HOST | present | both | **Discovered during 05-04 smoke test (2026-05-12).** Required by next-auth `5.0.0-beta.30` behind a reverse proxy (Cloudflare DNS + Traefik). Without it, `/api/auth/session` and `/admin/blog` return 500 with `UntrustedHost: Host must be trusted. URL was: https://zachlagden.uk/api/auth/session`. Set to `true`. Consumed implicitly by next-auth runtime. Added to `.env.example` 2026-05-12. |
+| AUTH_URL | present | both | **Discovered during 05-04 smoke test (2026-05-12).** Required by next-auth `5.0.0-beta.30` to construct the OAuth `redirect_uri` from the canonical public URL rather than the internal request URL. Without it, sign-in reaches GitHub but `redirect_uri=https://0.0.0.0:3000/api/auth/callback/github` (internal container address) which GitHub rejects with "The redirect_uri is not associated with this application." Set to `https://zachlagden.uk` in prod; `http://localhost:3000` in dev (matches `.env.example` default). Added to `.env.example` 2026-05-12. |
 | ADMIN_GITHUB_USERNAME | present | both | Required; consumed by `src/lib/auth.ts` isAdmin check |
 | GITHUB_PAT | present | both | **Provisioned in Plan 05-03 Task 3** (per D-06). Phase 7 hand-off ready. See "GITHUB_PAT details" below. |
 | NIXPACKS_NODE_VERSION | present | Coolify | Coolify build-pack managed; pins Node version for nixpacks builder. Not user-facing. |
 | NODE_ENV | present | Coolify | Coolify auto-sets at runtime; not user-facing; not in `.env.example`. |
 | BUILD_DATE | obsolete | (neither) | Read by `src/app/sitemap.ts` as an optional fallback for `lastModified` static pages. Not set in Coolify, not in `.env.example`. Code already handles `undefined` gracefully (falls back to `new Date()`). Document but do not provision. |
 | NEXT_PUBLIC_GA_ID | obsolete | (removed in Plan 05-03) | **Not consumed by code.** GA ID is read from `public/content.json metadata.googleAnalyticsId` (see `src/app/layout.tsx` `<GoogleAnalytics gaId={metadata.googleAnalyticsId} />`). Previously listed in `.env.example` as confusion; removed in this plan. |
+
+**Total in Coolify (unique keys):** 9 (was 7 after Plan 05-03; +2 added during Plan 05-04 smoke test: AUTH_TRUST_HOST, AUTH_URL).
+
+### Discovered during 05-04 smoke test
+
+The 05-03 audit reconciled `.env.example` ↔ Coolify ↔ explicit `process.env.*` greps. It did NOT surface two implicit-required env vars consumed by `next-auth` v5 internally with no `process.env.AUTH_TRUST_HOST` / `process.env.AUTH_URL` substring anywhere in `src/`. The 05-04 production smoke test surfaced both:
+
+1. **AUTH_TRUST_HOST=true** — when running next-auth behind a reverse proxy (Cloudflare DNS-only still presents to Coolify via Traefik), next-auth v5 refuses to handle requests whose Host header it cannot verify, returning `UntrustedHost`. Setting `AUTH_TRUST_HOST=true` opts into trusting the Host header. Documented at https://authjs.dev/getting-started/deployment#auth_trust_host. **Future audits should grep next-auth source for `trustHost` references rather than relying on `grep process.env` from project code.**
+
+2. **AUTH_URL=https://zachlagden.uk** — when next-auth constructs the OAuth `redirect_uri` for an outbound flow, it uses the canonical site URL (preferred) or falls back to the inbound request URL (which inside a container is `http://0.0.0.0:3000`). Setting `AUTH_URL` explicitly fixes the canonical URL. Documented at https://authjs.dev/getting-started/deployment#auth_url.
+
+**Audit method improvement:** next time the audit happens, supplement the `grep process.env` sweep with a lookup of next-auth runtime config docs. Implicit env vars (next-auth, Next.js, Vercel runtime) do not appear in source greps but are still hard requirements.
 
 ## Intentionally removed
 
@@ -109,6 +123,16 @@ This runbook commits keys + status + source ONLY. **No value column.** No first-
 - `POST /api/v1/applications/{uuid}/envs` with body `{ "key", "value", "is_preview": false }` creates **both** the runtime entry (`is_preview=false`) and a paired preview entry (`is_preview=true`) automatically. No second POST needed.
 - `is_build_time` is rejected on input (`422 "This field is not allowed."`); omit it from the payload.
 - Each entry has its own UUID; `DELETE /api/v1/applications/{uuid}/envs/{env-uuid}` removes one (runtime or preview) at a time — to fully retire a key you need to find and delete BOTH UUIDs.
+
+### Coolify env-var endpoint quirks (discovered during Plan 05-04 smoke test)
+
+- **`is_preview=true` POST returns 409 if the default-scope entry already exists.** Body: `{"message": "Environment variable already exists. Use PATCH request to update it."}`. The single-POST-creates-both behaviour above only applies when neither entry exists. To explicitly create a preview-scope entry when the default already exists, use PATCH (or DELETE the default first). For this app, preview scope is not exercised (no PR previews configured), so the default-scope entry is sufficient.
+
+## Related runbooks
+
+- **`.planning/runbooks/AUTH-SMOKE-TEST.md`** — manual sign-in test that exercises every auth-related env var end-to-end. Runs after any next-auth bump or Coolify auth-env change.
+- **`.planning/runbooks/CLOUDFLARE.md`** — DNS, proxy, and cache procedures. When CF is flipped to full-proxy, `AUTH_TRUST_HOST` and `AUTH_URL` stay relevant (CF adds another reverse-proxy hop on top of the existing Traefik hop).
+- **`.planning/runbooks/COOLIFY-DEPLOY-KEY.md`** — what to do when Coolify redeploys fail with `git ls-remote ... Permission denied (publickey)`. Documents the deploy-key public-key value and the GitHub UI fix.
 
 ---
 
