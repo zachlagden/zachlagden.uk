@@ -88,7 +88,12 @@ Decimal phases appear between their surrounding integers in numeric order.
   3. `.planning/runbooks/ENV-VARS.md` lists every env var with a present/missing/obsolete column reconciled against `.env.example` and Coolify; `GITHUB_PAT` (fine-grained, "No repository access" + "Profile: Read-only", ≤1y expiry) appears under "present" for the Phase 7 hand-off
   4. `.github/dependabot.yml` ignores `next-auth` (beta-to-beta) and limits `framer-motion` to patch-only bumps so future automated PRs cannot regress the intro state machine or OAuth contract; per-batch verification floor (`tsc --noEmit && pnpm lint && pnpm build`) is enforced before each batch merges, with failures rolled back
   5. `knip` is installed as a devDep and a baseline run is captured in `.planning/runbooks/KNIP-BASELINE.md` for v3 regression comparison; `.planning/runbooks/CLOUDFLARE.md` documents the full-proxy / cache-rules / cache-purge procedure so Next `Cache-Control` is honoured end-to-end
-**Plans**: TBD
+**Plans**: 5 plans
+- [ ] 05-01-PLAN.md — Harden .github/dependabot.yml (ignore next-auth all updates, framer-motion non-patch, pnpm major) — DEP-03
+- [ ] 05-02-PLAN.md — Install knip devDep + capture verbatim v2-open baseline at .planning/runbooks/KNIP-BASELINE.md — DEP-02
+- [ ] 05-03-PLAN.md — Coolify env audit + populate AUTH_GITHUB_ID/AUTH_GITHUB_SECRET + provision fine-grained GITHUB_PAT + write ENV-VARS.md three-column table — ENV-01, ENV-02, ENV-03
+- [ ] 05-04-PLAN.md — Author AUTH-SMOKE-TEST.md (six-step text-only) + CLOUDFLARE.md (DNS-only AS-IS + parameterised proxied block); execute smoke test against prod — ENV-04, ENV-05
+- [ ] 05-05-PLAN.md — Execute four Dependabot batches A→B→C→D (dev / Next+React+Mongo / framer-motion alone / transitive cleanup) with verification floor + pnpm dedupe + pnpm audit per batch; Batch C gated by three-state home-route smoke test — DEP-01, DEP-04, DEP-05
 
 ### Phase 6: Content Refresh + Auto-age
 **Goal**: The site's static content stops drifting — age computes from a single server-side `personal.birthday` field, hardcoded ages are gone, copy is current and consistent British English, and the build provably never ships the DOB to the client
@@ -142,7 +147,7 @@ v2 phases execute in numeric order: 5 → 6 → 7 → 8 (serial, hard — no par
 | 2. Security & Documentation | n/a (quick batch) | Complete | 2026-05-06 |
 | 3. Performance Hardening | n/a (quick batch) | Complete | 2026-05-06 |
 | 4. Cleanup & Tooling | n/a (quick batch) | Complete | 2026-05-06 |
-| 5. Dependency Hardening + Env Config | 0/TBD | Not started | - |
+| 5. Dependency Hardening + Env Config | 0/5 | Not started | - |
 | 6. Content Refresh + Auto-age | 0/TBD | Not started | - |
 | 7. Integrations + /stats + /now | 0/TBD | Not started | - |
 | 8. Freelance Offering | 0/TBD | Not started | - |

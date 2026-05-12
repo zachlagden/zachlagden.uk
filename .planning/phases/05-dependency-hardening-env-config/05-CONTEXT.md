@@ -42,7 +42,7 @@ Resolve all 44 open Dependabot alerts (19 high + 19 moderate + 6 low) on `main`,
 
 ### `GITHUB_PAT` Provisioning (ENV-02, ENV-03)
 
-- **D-06:** Provision `GITHUB_PAT` in **Phase 5, immediately** (not lazy-loaded in Phase 7). Token type: **fine-grained personal access token**. Repository access: **No repository access**. Account permissions: **Profile: Read-only**. Expiry: **1 year max** (forces rotation cadence). Add to Coolify env via API. Record in ENV-VARS.md "present" column. Phase 7 hand-off requires this exact configuration — confirmed against PITFALLS Pitfall 4.
+- **D-06:** Provision `GITHUB_PAT` in **Phase 5, immediately** (not lazy-loaded in Phase 7). Token type: **fine-grained personal access token**. Repository access: **No repository access**. Account permissions: **Profile: Read-only**. Expiry: **1 year max** (forces rotation cadence). Add to Coolify env via API. Record in ENV-VARS.md "present" column. Phase 7 hand-off requires this exact configuration — confirmed against PITFALLS.md Pitfall 7 (lines 189–217).
 - **D-07:** Populate the missing `AUTH_GITHUB_ID` and `AUTH_GITHUB_SECRET` in Coolify (per ENV-02 — currently absent, blocking admin OAuth in production). Verify by completing AUTH-SMOKE-TEST.md end-to-end against the prod URL.
 
 ### `knip` Baseline (DEP-02)
@@ -97,7 +97,7 @@ The following are locked at the milestone level (PROJECT.md + research/SUMMARY.m
 
 ### Research grounding (locked)
 - `.planning/research/SUMMARY.md` §"Locked Cross-Cutting Decisions" + §"Phase 5 — Dep hardening + env config" + §"Build Order" — ALL locked
-- `.planning/research/PITFALLS.md` Pitfall 1 (Framer Motion intro state machine), Pitfall 2 (`next-auth` beta-to-beta OAuth contract), Pitfall 4 (PAT over-scoping)
+- `.planning/research/PITFALLS.md` Pitfall 1 (Framer Motion intro state machine), Pitfall 2 (`next-auth` beta-to-beta OAuth contract), Pitfall 7 (PAT over-scoping, lines 189–217)
 - `.planning/research/STACK.md` §"Phase 5" — anti-deps list and per-batch protocol
 - `.planning/research/FEATURES.md` §"Phase 5" — table-stakes vs differentiators vs anti-features for this phase
 
@@ -152,7 +152,7 @@ The following are locked at the milestone level (PROJECT.md + research/SUMMARY.m
 ## Specific Ideas
 
 - **`AUTH_GITHUB_ID` / `AUTH_GITHUB_SECRET` are confirmed missing from Coolify** (per ENV-02 + STATE.md). Sign-in via GitHub at `/admin/blog` is currently broken in production. Phase 5 plan must surface this as the first env-fix action so the rest of the smoke-test gating is verifiable.
-- **`GITHUB_PAT` exact scopes** (from research/PITFALLS Pitfall 4 + STATE.md user input):
+- **`GITHUB_PAT` exact scopes** (from research/PITFALLS.md Pitfall 7 (lines 189–217) + STATE.md user input):
   - Token type: fine-grained personal access token
   - Repository access: **No repository access**
   - Account permissions: **Profile: Read-only**
