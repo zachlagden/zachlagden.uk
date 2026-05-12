@@ -89,7 +89,7 @@ Decimal phases appear between their surrounding integers in numeric order.
   4. `.github/dependabot.yml` ignores `next-auth` (beta-to-beta) and limits `framer-motion` to patch-only bumps so future automated PRs cannot regress the intro state machine or OAuth contract; per-batch verification floor (`tsc --noEmit && pnpm lint && pnpm build`) is enforced before each batch merges, with failures rolled back
   5. `knip` is installed as a devDep and a baseline run is captured in `.planning/runbooks/KNIP-BASELINE.md` for v3 regression comparison; `.planning/runbooks/CLOUDFLARE.md` documents the full-proxy / cache-rules / cache-purge procedure so Next `Cache-Control` is honoured end-to-end
 **Plans**: 5 plans
-- [ ] 05-01-PLAN.md — Harden .github/dependabot.yml (ignore next-auth all updates, framer-motion non-patch, pnpm major) — DEP-03
+- [x] 05-01-PLAN.md — Harden .github/dependabot.yml (ignore next-auth all updates, framer-motion non-patch, pnpm major) — DEP-03
 - [ ] 05-02-PLAN.md — Install knip devDep + capture verbatim v2-open baseline at .planning/runbooks/KNIP-BASELINE.md — DEP-02
 - [ ] 05-03-PLAN.md — Coolify env audit + populate AUTH_GITHUB_ID/AUTH_GITHUB_SECRET + provision fine-grained GITHUB_PAT + write ENV-VARS.md three-column table — ENV-01, ENV-02, ENV-03
 - [ ] 05-04-PLAN.md — Author AUTH-SMOKE-TEST.md (six-step text-only) + CLOUDFLARE.md (DNS-only AS-IS + parameterised proxied block); execute smoke test against prod — ENV-04, ENV-05

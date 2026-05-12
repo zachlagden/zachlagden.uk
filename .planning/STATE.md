@@ -4,14 +4,14 @@ milestone: v2.0
 milestone_name: Polish, Integrations & Freelance
 status: executing
 stopped_at: Phase 5 context gathered
-last_updated: "2026-05-12T10:48:43.900Z"
-last_activity: 2026-05-12 -- Phase 5 planning complete
+last_updated: "2026-05-12T10:59:54.206Z"
+last_activity: 2026-05-12
 progress:
   total_phases: 8
   completed_phases: 0
   total_plans: 5
-  completed_plans: 0
-  percent: 0
+  completed_plans: 1
+  percent: 20
 ---
 
 # Project State
@@ -21,14 +21,14 @@ progress:
 See: .planning/PROJECT.md (updated 2026-05-12)
 
 **Core value:** The site renders correctly and stays up — no blank pages, no 500s, regardless of MongoDB availability or transient runtime errors.
-**Current focus:** v2.0 Polish, Integrations & Freelance — Phase 5 (Dependency Hardening + Env Config) is next.
+**Current focus:** Phase 05 — dependency-hardening-env-config
 
 ## Current Position
 
-Phase: **Phase 5 — Dependency Hardening + Env Config** (not started)
-Plan: —
+Phase: 05 (dependency-hardening-env-config) — EXECUTING
+Plan: 2 of 5
 Status: Ready to execute
-Last activity: 2026-05-12 -- Phase 5 planning complete
+Last activity: 2026-05-12
 
 **Execution order (serial, hard):** Phase 5 → 6 → 7 → 8. No parallelisation — three later phases share `public/content.json` schema; serial keeps `tsc --noEmit` honest.
 
@@ -56,6 +56,7 @@ Last activity: 2026-05-12 -- Phase 5 planning complete
 - Trend: —
 
 *Updated after each plan completion*
+| Phase 05 P1 | 3min | 2 tasks | 1 files |
 
 ## Accumulated Context
 
@@ -70,6 +71,9 @@ Recent decisions affecting current work:
 - v2.0 init: Locked cross-cutting decisions (do NOT re-evaluate during planning): native `Date` for age, `@octokit/graphql` over full octokit, `schema-dts` type-only, `knip` over `depcheck`, Tokscale via public SVG embed, RSS subscriber count cut.
 - v2.0 init: Out-of-scope items locked: FAQ, `LocalBusiness` schema, testimonials, mocked case studies, programmatic town pages, Sentry restoration, Vercel migration, test suite.
 - v2.0 init: Deferred-from-v1 items (TEST-01/02, INFRA-01, POLISH-04) remain deferred to v3.
+- [Phase 05]: Phase 5 Plan 1: omitted update-types for next-auth ignore (cleanest expression of 'ignore ALL update types' per Dependabot docs)
+- [Phase 05]: Phase 5 Plan 1: added exclude-patterns to BOTH next-ecosystem AND security-updates Dependabot groups (belt-and-suspenders against group-rule precedence ambiguity per T-05-05)
+- [Phase 05]: Phase 5 Plan 1: framer-motion ~12.23.26 package.json range pin OWED to Plan 05 Batch C (rail 2 of 2; this plan only added Dependabot rail 1)
 
 ### Pending Todos
 
@@ -124,6 +128,6 @@ Items acknowledged and carried forward from previous milestone close:
 
 ## Session Continuity
 
-Last session: 2026-05-12T09:57:32.997Z
+Last session: 2026-05-12T10:57:57.099Z
 Stopped at: Phase 5 context gathered
-Resume file: .planning/phases/05-dependency-hardening-env-config/05-CONTEXT.md
+Resume file: None
