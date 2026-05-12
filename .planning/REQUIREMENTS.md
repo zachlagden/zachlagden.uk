@@ -185,6 +185,56 @@ Populated by the roadmapper after v2 roadmap approval.
 | CLEAN-06 | Phase 4 | Complete | cc8561e |
 | CLEAN-07 | Phase 4 | Complete | ae144e2 |
 | CLEAN-08 | Phase 4 | Complete | ae144e2 |
+| DEP-01 | Phase 5 | Not Started | — |
+| DEP-02 | Phase 5 | Not Started | — |
+| DEP-03 | Phase 5 | Not Started | — |
+| DEP-04 | Phase 5 | Not Started | — |
+| DEP-05 | Phase 5 | Not Started | — |
+| ENV-01 | Phase 5 | Not Started | — |
+| ENV-02 | Phase 5 | Not Started | — |
+| ENV-03 | Phase 5 | Not Started | — |
+| ENV-04 | Phase 5 | Not Started | — |
+| ENV-05 | Phase 5 | Not Started | — |
+| CONT-01 | Phase 6 | Not Started | — |
+| CONT-02 | Phase 6 | Not Started | — |
+| CONT-03 | Phase 6 | Not Started | — |
+| CONT-04 | Phase 6 | Not Started | — |
+| CONT-05 | Phase 6 | Not Started | — |
+| CONT-06 | Phase 6 | Not Started | — |
+| CONT-07 | Phase 6 | Not Started | — |
+| CONT-08 | Phase 6 | Not Started | — |
+| CONT-09 | Phase 6 | Not Started | — |
+| CONT-10 | Phase 6 | Not Started | — |
+| INT-01 | Phase 7 | Not Started | — |
+| INT-02 | Phase 7 | Not Started | — |
+| INT-03 | Phase 7 | Not Started | — |
+| INT-04 | Phase 7 | Not Started | — |
+| INT-05 | Phase 7 | Not Started | — |
+| INT-06 | Phase 7 | Not Started | — |
+| INT-07 | Phase 7 | Not Started | — |
+| INT-08 | Phase 7 | Not Started | — |
+| INT-09 | Phase 7 | Not Started | — |
+| INT-10 | Phase 7 | Not Started | — |
+| INT-11 | Phase 7 | Not Started | — |
+| INT-12 | Phase 7 | Not Started | — |
+| FREE-01 | Phase 8 | Not Started | — |
+| FREE-02 | Phase 8 | Not Started | — |
+| FREE-03 | Phase 8 | Not Started | — |
+| FREE-04 | Phase 8 | Not Started | — |
+| FREE-05 | Phase 8 | Not Started | — |
+| FREE-06 | Phase 8 | Not Started | — |
+| FREE-07 | Phase 8 | Not Started | — |
+| FREE-08 | Phase 8 | Not Started | — |
+| FREE-09 | Phase 8 | Not Started | — |
+| FREE-10 | Phase 8 | Not Started | — |
+| FREE-11 | Phase 8 | Not Started | — |
+| FREE-12 | Phase 8 | Not Started | — |
+| FREE-13 | Phase 8 | Not Started | — |
+| FREE-14 | Phase 8 | Not Started | — |
+| FREE-15 | Phase 8 | Not Started | — |
+| FREE-16 | Phase 8 | Not Started | — |
+| FREE-17 | Phase 8 | Not Started | — |
+| FREE-18 | Phase 8 | Not Started | — |
 
 **v1 coverage:**
 
@@ -196,9 +246,12 @@ Populated by the roadmapper after v2 roadmap approval.
 **v2 coverage:**
 
 - v2 requirements: 40 total
-- Awaiting roadmap mapping
+- Mapped to phases: 40 ✓ (Phase 5: 10, Phase 6: 10, Phase 7: 12, Phase 8: 18)
+- Complete: 0
+- Pending: 40
 
 ---
 
 *v1 requirements defined: 2026-05-06; complete 2026-05-06.*
 *v2 requirements defined: 2026-05-12 — milestone v2.0 Polish, Integrations & Freelance.*
+*v2 roadmap mapped: 2026-05-12.*

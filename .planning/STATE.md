@@ -3,10 +3,10 @@ gsd_state_version: 1.0
 milestone: v2.0
 milestone_name: Polish, Integrations & Freelance
 status: planning
-last_updated: "2026-05-12T09:20:16.239Z"
+last_updated: "2026-05-12T11:00:00.000Z"
 last_activity: 2026-05-12
 progress:
-  total_phases: 0
+  total_phases: 4
   completed_phases: 0
   total_plans: 0
   completed_plans: 0
@@ -20,14 +20,16 @@ progress:
 See: .planning/PROJECT.md (updated 2026-05-12)
 
 **Core value:** The site renders correctly and stays up — no blank pages, no 500s, regardless of MongoDB availability or transient runtime errors.
-**Current focus:** v2.0 Polish, Integrations & Freelance — dependency hardening, content refresh, live data integrations, freelance offering
+**Current focus:** v2.0 Polish, Integrations & Freelance — Phase 5 (Dependency Hardening + Env Config) is next.
 
 ## Current Position
 
-Phase: Not started (defining requirements)
+Phase: **Phase 5 — Dependency Hardening + Env Config** (not started)
 Plan: —
-Status: Defining requirements
-Last activity: 2026-05-12 — Milestone v2.0 started
+Status: Roadmap approved; awaiting `/gsd-plan-phase 5`
+Last activity: 2026-05-12 — v2.0 roadmap created and 40 v2 requirements mapped (Phase 5: 10, Phase 6: 10, Phase 7: 12, Phase 8: 18)
+
+**Execution order (serial, hard):** Phase 5 → 6 → 7 → 8. No parallelisation — three later phases share `public/content.json` schema; serial keeps `tsc --noEmit` honest.
 
 ## Performance Metrics
 
@@ -41,7 +43,11 @@ Last activity: 2026-05-12 — Milestone v2.0 started
 
 | Phase | Plans | Total | Avg/Plan |
 |-------|-------|-------|----------|
-| - | - | - | - |
+| 1–4 (v1) | n/a (quick batch) | — | — |
+| 5 | 0 | — | — |
+| 6 | 0 | — | — |
+| 7 | 0 | — | — |
+| 8 | 0 | — | — |
 
 **Recent Trend:**
 
@@ -57,10 +63,12 @@ Last activity: 2026-05-12 — Milestone v2.0 started
 Decisions are logged in PROJECT.md Key Decisions table.
 Recent decisions affecting current work:
 
-- Pre-Phase 1: Three HIGH-severity items (BlogEditor render loop #1, MongoDB-down guards #2, Sentry removal #6) fixed inline before init; recorded in PROJECT.md Validated, not in REQUIREMENTS.md
-- Phase 0 (init): Coarse granularity chosen — stabilisation work is naturally categorical, fewer larger phases reduce overhead
-- Phase 0 (init): Test suite deferred to v2; stabilisation proceeds with `tsc --noEmit` + `pnpm lint` as the verification floor
-- Phase 0 (init): Sentry restoration explicitly out of scope; observability decision deferred
+- v2.0 init: Phase numbering continues from v1 (5–8); no reset. v1 work was done as `/gsd-quick` tasks, so no phase directories exist to archive.
+- v2.0 init: Verification floor extended to `tsc --noEmit && pnpm lint && pnpm build` per batch (added `pnpm build` beyond v1 — Docker/Coolify regression catch).
+- v2.0 init: Phase execution is HARD-serial 5 → 6 → 7 → 8. Three later phases extend the same `public/content.json` + `src/types/content.ts`; parallel execution would cause schema drift (Pitfall 23).
+- v2.0 init: Locked cross-cutting decisions (do NOT re-evaluate during planning): native `Date` for age, `@octokit/graphql` over full octokit, `schema-dts` type-only, `knip` over `depcheck`, Tokscale via public SVG embed, RSS subscriber count cut.
+- v2.0 init: Out-of-scope items locked: FAQ, `LocalBusiness` schema, testimonials, mocked case studies, programmatic town pages, Sentry restoration, Vercel migration, test suite.
+- v2.0 init: Deferred-from-v1 items (TEST-01/02, INFRA-01, POLISH-04) remain deferred to v3.
 
 ### Pending Todos
 
@@ -68,7 +76,14 @@ None yet.
 
 ### Blockers/Concerns
 
-None yet.
+User-input items to gather during Phase 7 / Phase 8 planning (research/SUMMARY.md "Open Questions"):
+
+- Cloudflare proxy mode (DNS-only vs full proxy) — affects ENV-04 runbook contents
+- GitHub PAT type confirmation (fine-grained recommended) — needed for ENV-03 → INT-01
+- Cal.com booking URL — needed for FREE-11
+- Pricing tier final numbers confirmation — needed for FREE-03
+- Past-work client clearance for citation — needed for FREE-08
+- Pricing layout 3+1 sign-off — needed for FREE-03
 
 ### Quick Tasks Completed
 
@@ -101,10 +116,13 @@ Items acknowledged and carried forward from previous milestone close:
 
 | Category | Item | Status | Deferred At |
 |----------|------|--------|-------------|
-| *(none — first milestone)* | | | |
+| Testing | TEST-01 (Vitest + integration tests for auth/blog libs) | Deferred to v3 | v1 close (2026-05-06) |
+| Testing | TEST-02 (Smoke tests for intro state machine + observer hooks) | Deferred to v3 | v1 close (2026-05-06) |
+| Infrastructure | INFRA-01 (Migrate `public/uploads/` to Cloudflare R2) | Deferred to v3 | v1 close (2026-05-06) |
+| Polish | POLISH-04 (Audit Framer Motion, replace trivial fades with CSS) | Deferred to v3 | v1 close (2026-05-06) |
 
 ## Session Continuity
 
 Last session: 2026-05-12
-Stopped at: Resumed after stabilisation milestone close. Pushed 55 commits to `origin/main` (`b094d87..f9712d7`). GitHub Dependabot reports 34 vulnerabilities on default branch (16 high, 18 moderate) — input for next milestone scoping. Proceeding to `/gsd-new-milestone` to scope v2.
-Resume file: None
+Stopped at: v2.0 roadmap created. 40 v2 requirements mapped across 4 serial phases (5: dep + env / 6: content + age / 7: integrations + /stats + /now / 8: freelance). Traceability table updated; Phase 5 ready to plan.
+Resume file: None — proceed with `/gsd-plan-phase 5`
