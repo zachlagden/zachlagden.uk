@@ -59,6 +59,15 @@ The site renders correctly and stays up. A visitor on `/`, `/blog`, or `/blog/[s
 - ✓ CLEAN-06: ESLint enforces `react-hooks/exhaustive-deps` and `no-floating-promises` — Phase 4 (commit cc8561e)
 - ✓ CLEAN-07 + CLEAN-08: real sitemap `lastModified` dates + `rehype-slug` for markdown headings — Phase 4 (commit ae144e2)
 
+#### Phase 5 — Dependency Hardening + Env Config
+
+- ✓ DEP-01: 44 Dependabot alerts resolved via Batches A→B→C→D + late `flatted` override; `pnpm audit` clean — Phase 5 (commit fda5eda / override 02fd752)
+- ✓ DEP-02: `knip` v6.13.0 devDep + verbatim v2-open baseline at `.planning/runbooks/KNIP-BASELINE.md` — Phase 5 (commit 4e6910f)
+- ✓ DEP-03: `.github/dependabot.yml` ignores `next-auth` (all), `framer-motion` (non-patch), `pnpm` (major) — Phase 5 (commit bfe3ad3)
+- ✓ DEP-04 + DEP-05: per-batch verification floor + rollback rule honoured across all four batches — Phase 5 (commit fda5eda)
+- ✓ ENV-01..03: Coolify env audit in `.planning/runbooks/ENV-VARS.md`; `AUTH_GITHUB_ID`/`AUTH_GITHUB_SECRET` + `GITHUB_PAT` (classic, `read:user`) provisioned for Phase 7 — Phase 5 (commit 7008400)
+- ✓ ENV-04 + ENV-05: `AUTH-SMOKE-TEST.md` PASSED end-to-end against prod after 3 unblock cycles (revoked GitHub deploy key re-added; `AUTH_TRUST_HOST=true` + `AUTH_URL=https://zachlagden.uk` added as missed implicit env vars); `CLOUDFLARE.md` documents DNS-only AS-IS + parameterised proxied block; bonus `COOLIFY-DEPLOY-KEY.md` runbook captures deploy-key recovery procedure — Phase 5 (commit a48b90e)
+
 ### Active
 
 <!-- Current scope. Building toward these. -->
@@ -103,7 +112,7 @@ The site renders correctly and stays up. A visitor on `/`, `/blog`, or `/blog/[s
 
 **Recent activity:** Major dependency bumps (Next 15.3 → 16.1, React 19.1 → 19.2). Cinematic intro animation added across 5 recent commits. Sentry instrumentation removed. All committed in commit 248cc36 as a snapshot.
 
-**Required env vars** (currently undocumented in README): `MONGODB_URI`, `AUTH_SECRET`, `AUTH_GITHUB_ID`, `AUTH_GITHUB_SECRET`, `ADMIN_GITHUB_USERNAME`. Optional: `NEXT_PUBLIC_GA_ID`.
+**Required env vars** (full audit at `.planning/runbooks/ENV-VARS.md`): `MONGODB_URI`, `AUTH_SECRET`, `AUTH_GITHUB_ID`, `AUTH_GITHUB_SECRET`, `ADMIN_GITHUB_USERNAME`, `AUTH_TRUST_HOST=true`, `AUTH_URL` (canonical site URL). Phase-7 reserved: `GITHUB_PAT`. Removed obsolete: `NEXT_PUBLIC_GA_ID` (GA ID is read from `public/content.json`), `NEXT_PUBLIC_DISCORD_USER_ID` (presence widget deletion deferred to Phase 6).
 
 **Deployment:** Coolify on the DigiGrow server. Docker `output: "standalone"`. Persistent volume needed for `public/uploads/`.
 
@@ -125,6 +134,8 @@ The site renders correctly and stays up. A visitor on `/`, `/blog`, or `/blog/[s
 | Defer test suite | Significant scope; would slow stabilisation; revisit after milestone | ✓ Good — `tsc --noEmit` + `pnpm lint` floor held; CLEAN-06 added type-aware lint to catch future regressions |
 | Coarse phase granularity | Stabilisation work is naturally categorical (stability / security / cleanup); fewer larger phases reduce overhead | ✓ Good — 4 phases, no rework, no dependencies missed |
 | Skip per-phase research | Brownfield with a complete codebase map; no domain to discover | ✓ Good — codebase map covered every concern fix |
+| Accept classic PAT instead of fine-grained for Phase 7 | User supplied `ghp_…` (classic, `read:user`) rather than fine-grained `github_pat_…`; rotation calendar item planned for 2027-04-12 | Documented variance — works for Phase 7's contributions GraphQL query; `.planning/todos/pending/rotate-github-pat.md` tracks fine-grained migration |
+| Remove presence widget entirely vs. fix env var | `NEXT_PUBLIC_DISCORD_USER_ID` was missing from Coolify (silently broken); user chose removal over fix; widget deletion scope deferred to Phase 6 | `.planning/todos/pending/remove-presence-widget.md` captures deletion list (PresenceStatus.tsx, presenceService.ts, presence.ts type, layout preconnect, README mention) |
 
 ## Evolution
 
@@ -144,4 +155,4 @@ This document evolves at phase transitions and milestone boundaries.
 4. Update Context with current state
 
 ---
-*Last updated: 2026-05-12 — v2.0 milestone opened (Polish, Integrations & Freelance)*
+*Last updated: 2026-05-12 — Phase 5 (Dependency Hardening + Env Config) complete; phase 6 (Content Refresh + Auto-age) next*
