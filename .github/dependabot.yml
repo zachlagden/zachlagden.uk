@@ -31,6 +31,10 @@ updates:
           - "@next/*"
           - "react*"
           - "@types/react*"
+        # next-auth must never bundle with the Next/React batch — it has its
+        # own ignore rule below and a manual CVE-only bump protocol (D-04).
+        exclude-patterns:
+          - "next-auth"
       dev-dependencies:
         patterns:
           - "@types/*"
@@ -50,11 +54,31 @@ updates:
           - "patch"
           - "minor"
           - "major"
+        # Even security advisories for these deps must be handled standalone
+        # so the manual smoke-test discipline (D-01 / D-04) is preserved.
+        exclude-patterns:
+          - "next-auth"
+          - "framer-motion"
+          - "pnpm"
     # Ignore specific dependencies that need manual updates
     ignore:
       - dependency-name: "node"
         # Ignore major version updates for Node.js
         update-types: ["version-update:semver-major"]
+      # Pitfall 2 — beta-to-beta OAuth contract change. Manual CVE-only bump,
+      # gated by AUTH-SMOKE-TEST.md.
+      - dependency-name: "next-auth"
+      # Pitfall 1 — intro state machine FSM. Patch-only; package.json range
+      # pinned to ~12.23.26 in Plan 05 Batch C.
+      - dependency-name: "framer-motion"
+        update-types:
+          - "version-update:semver-major"
+          - "version-update:semver-minor"
+      # Defends packageManager: pnpm@10.33.0 pin (commit 41657a0) from
+      # Coolify Corepack mismatch.
+      - dependency-name: "pnpm"
+        update-types:
+          - "version-update:semver-major"
     # Auto-merge configuration for minor and patch updates
     rebase-strategy: "auto"
 
