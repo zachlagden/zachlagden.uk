@@ -4,14 +4,14 @@ milestone: v2.0
 milestone_name: Polish, Integrations & Freelance
 status: executing
 stopped_at: Phase 5 context gathered
-last_updated: "2026-05-12T10:59:54.206Z"
+last_updated: "2026-05-12T11:07:44.943Z"
 last_activity: 2026-05-12
 progress:
   total_phases: 8
   completed_phases: 0
   total_plans: 5
-  completed_plans: 1
-  percent: 20
+  completed_plans: 2
+  percent: 40
 ---
 
 # Project State
@@ -26,7 +26,7 @@ See: .planning/PROJECT.md (updated 2026-05-12)
 ## Current Position
 
 Phase: 05 (dependency-hardening-env-config) — EXECUTING
-Plan: 2 of 5
+Plan: 3 of 5
 Status: Ready to execute
 Last activity: 2026-05-12
 
@@ -57,6 +57,7 @@ Last activity: 2026-05-12
 
 *Updated after each plan completion*
 | Phase 05 P1 | 3min | 2 tasks | 1 files |
+| Phase 05 P2 | 4min | 3 tasks | 3 files |
 
 ## Accumulated Context
 
@@ -74,6 +75,9 @@ Recent decisions affecting current work:
 - [Phase 05]: Phase 5 Plan 1: omitted update-types for next-auth ignore (cleanest expression of 'ignore ALL update types' per Dependabot docs)
 - [Phase 05]: Phase 5 Plan 1: added exclude-patterns to BOTH next-ecosystem AND security-updates Dependabot groups (belt-and-suspenders against group-rule precedence ambiguity per T-05-05)
 - [Phase 05]: Phase 5 Plan 1: framer-motion ~12.23.26 package.json range pin OWED to Plan 05 Batch C (rail 2 of 2; this plan only added Dependabot rail 1)
+- [Phase ?]: [Phase 05]: Phase 5 Plan 2: kept pnpm dlx download progress lines verbatim in KNIP-BASELINE.md (D-08 signal preservation > aesthetics)
+- [Phase ?]: [Phase 05]: Phase 5 Plan 2: knip 6.13.0 baseline = 3 unused files + 1 unused devDep + 18 unused exports + 16 unused exported types; acting on findings deferred to v3 per D-08
+- [Phase ?]: [Phase 05]: Phase 5 Plan 2: no Node engine fallback to knip@^5 needed (Node v22.22.2 satisfies knip 6.x requirement)
 
 ### Pending Todos
 
@@ -128,6 +132,6 @@ Items acknowledged and carried forward from previous milestone close:
 
 ## Session Continuity
 
-Last session: 2026-05-12T10:57:57.099Z
+Last session: 2026-05-12T11:07:36.940Z
 Stopped at: Phase 5 context gathered
 Resume file: None

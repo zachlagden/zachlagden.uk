@@ -53,7 +53,7 @@ Polish, Integrations & Freelance milestone. Each requirement is atomic, testable
 ### Dependency Hardening
 
 - [ ] **DEP-01**: All 44 Dependabot alerts resolved (19 high + 19 moderate + 6 low); `pnpm audit` shows 0 high/critical and 0 moderate after the milestone closes
-- [ ] **DEP-02**: `knip` installed as a devDep; baseline run captured in `.planning/runbooks/KNIP-BASELINE.md` showing pre-v2 unused-code state for regression comparison
+- [x] **DEP-02**: `knip` installed as a devDep; baseline run captured in `.planning/runbooks/KNIP-BASELINE.md` showing pre-v2 unused-code state for regression comparison
 - [x] **DEP-03**: `.github/dependabot.yml` configured to ignore `next-auth` (beta-to-beta) and to limit `framer-motion` to patch-only bumps so future automated PRs do not regress STAB-03/04 or auth flow
 - [ ] **DEP-04**: `pnpm dedupe` run after each batch; lockfile churn audited for unintended transitive duplicates
 - [ ] **DEP-05**: Per-batch verification floor enforced: `tsc --noEmit && pnpm lint && pnpm build` must pass before each Dependabot batch is merged; failures roll back the batch
