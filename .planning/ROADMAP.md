@@ -93,7 +93,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 - [x] 05-02-PLAN.md — Install knip devDep + capture verbatim v2-open baseline at .planning/runbooks/KNIP-BASELINE.md — DEP-02
 - [x] 05-03-PLAN.md — Coolify env audit + populate AUTH_GITHUB_ID/AUTH_GITHUB_SECRET + provision fine-grained GITHUB_PAT + write ENV-VARS.md three-column table — ENV-01, ENV-02, ENV-03
 - [x] 05-04-PLAN.md — Author AUTH-SMOKE-TEST.md (six-step text-only) + CLOUDFLARE.md (DNS-only AS-IS + parameterised proxied block); execute smoke test against prod — ENV-04, ENV-05
-- [ ] 05-05-PLAN.md — Execute four Dependabot batches A→B→C→D (dev / Next+React+Mongo / framer-motion alone / transitive cleanup) with verification floor + pnpm dedupe + pnpm audit per batch; Batch C gated by three-state home-route smoke test — DEP-01, DEP-04, DEP-05
+- [x] 05-05-PLAN.md — Execute four Dependabot batches A→B→C→D (dev / Next+React+Mongo / framer-motion alone / transitive cleanup) with verification floor + pnpm dedupe + pnpm audit per batch; Batch C gated by three-state home-route smoke test — DEP-01, DEP-04, DEP-05
 
 ### Phase 6: Content Refresh + Auto-age
 **Goal**: The site's static content stops drifting — age computes from a single server-side `personal.birthday` field, hardcoded ages are gone, copy is current and consistent British English, and the build provably never ships the DOB to the client

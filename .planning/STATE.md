@@ -2,16 +2,16 @@
 gsd_state_version: 1.0
 milestone: v2.0
 milestone_name: Polish, Integrations & Freelance
-status: executing
+status: verifying
 stopped_at: Completed 05-04-PLAN.md
-last_updated: "2026-05-12T15:26:50.035Z"
+last_updated: "2026-05-12T15:54:15.888Z"
 last_activity: 2026-05-12
 progress:
   total_phases: 8
-  completed_phases: 0
+  completed_phases: 1
   total_plans: 5
-  completed_plans: 4
-  percent: 80
+  completed_plans: 5
+  percent: 100
 ---
 
 # Project State
@@ -27,7 +27,7 @@ See: .planning/PROJECT.md (updated 2026-05-12)
 
 Phase: 05 (dependency-hardening-env-config) — EXECUTING
 Plan: 5 of 5
-Status: Ready to execute
+Status: Phase complete — ready for verification
 Last activity: 2026-05-12
 
 **Execution order (serial, hard):** Phase 5 → 6 → 7 → 8. No parallelisation — three later phases share `public/content.json` schema; serial keeps `tsc --noEmit` honest.
@@ -60,6 +60,7 @@ Last activity: 2026-05-12
 | Phase 05 P2 | 4min | 3 tasks | 3 files |
 | Phase 05 P3 | 6min | 4 tasks | 4 files |
 | Phase 05 P04 | 90min | 4 tasks | 5 files |
+| Phase 05 P05 | 105min | 9 tasks | 2 files |
 
 ## Accumulated Context
 
@@ -86,6 +87,10 @@ Recent decisions affecting current work:
 - [Phase ?]: Phase 5 Plan 4: bundled smoke-test discoveries (AUTH_TRUST_HOST, AUTH_URL, deploy-key recovery) into single atomic commit instead of plan literal 'exactly two files' criterion
 - [Phase ?]: Phase 5 Plan 4: created COOLIFY-DEPLOY-KEY.md as standalone runbook (different blast radius and audience from CLOUDFLARE.md)
 - [Phase ?]: Phase 5 Plan 4: audit-method gap identified — grep process.env.* misses framework-internal env vars (next-auth v5 AUTH_TRUST_HOST + AUTH_URL); future audits need framework-runtime-config doc lookup pass
+- [Phase ?]: Phase 5 Plan 5: Batch D scope collapsed — only postcss override needed (8 of 10 candidates were no-op; lucide-react 0→1 deferred due to brand-icon removal)
+- [Phase ?]: Phase 5 Plan 5: postcss <8.5.10 closed via pnpm.overrides surgical pin ('postcss@<8.5.10': '>=8.5.10') — keeps Tailwind v4's direct postcss path untouched
+- [Phase ?]: Phase 5 Plan 5: lucide-react 1.x bump deferred — v1 removes brand icons (Github, Linkedin, Instagram used in 4 files); icon-substitution work needs its own plan
+- [Phase ?]: Phase 5 Plan 5: all four batches (A=dev, B=Next/React/Mongo, C=framer-motion 12.23.28, D=postcss override) closed pnpm audit from 20 advisories → 0 across all severities
 
 ### Pending Todos
 
@@ -140,6 +145,6 @@ Items acknowledged and carried forward from previous milestone close:
 
 ## Session Continuity
 
-Last session: 2026-05-12T15:26:50.021Z
+Last session: 2026-05-12T15:53:52.101Z
 Stopped at: Completed 05-04-PLAN.md
 Resume file: None
