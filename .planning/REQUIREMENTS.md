@@ -60,9 +60,9 @@ Polish, Integrations & Freelance milestone. Each requirement is atomic, testable
 
 ### Environment & Runbooks
 
-- [ ] **ENV-01**: Coolify env vars audited against `.env.example`; documented in `.planning/runbooks/ENV-VARS.md` with present / missing / obsolete columns
-- [ ] **ENV-02**: Missing `AUTH_GITHUB_ID` and `AUTH_GITHUB_SECRET` populated in Coolify; admin GitHub OAuth signin at `/admin/blog` verified working in prod
-- [ ] **ENV-03**: New `GITHUB_PAT` provisioned (fine-grained, "No repository access" + "Profile: Read-only", 1-year max expiry) and added to Coolify env vars for Phase 7
+- [x] **ENV-01**: Coolify env vars audited against `.env.example`; documented in `.planning/runbooks/ENV-VARS.md` with present / missing / obsolete columns
+- [x] **ENV-02**: Missing `AUTH_GITHUB_ID` and `AUTH_GITHUB_SECRET` populated in Coolify; admin GitHub OAuth signin at `/admin/blog` verified working in prod
+- [x] **ENV-03**: New `GITHUB_PAT` provisioned (fine-grained, "No repository access" + "Profile: Read-only", 1-year max expiry) and added to Coolify env vars for Phase 7
 - [ ] **ENV-04**: `.planning/runbooks/CLOUDFLARE.md` captures Cloudflare full-proxy configuration — page-rules / cache-rules / cache-purge procedure — so Next `Cache-Control` is honored end-to-end
 - [ ] **ENV-05**: `.planning/runbooks/AUTH-SMOKE-TEST.md` documents the manual sign-in test that must pass after any `next-auth` bump
 
@@ -186,13 +186,13 @@ Populated by the roadmapper after v2 roadmap approval.
 | CLEAN-07 | Phase 4 | Complete | ae144e2 |
 | CLEAN-08 | Phase 4 | Complete | ae144e2 |
 | DEP-01 | Phase 5 | Not Started | — |
-| DEP-02 | Phase 5 | Not Started | — |
-| DEP-03 | Phase 5 | Not Started | — |
+| DEP-02 | Phase 5 | Complete | 4e6910f |
+| DEP-03 | Phase 5 | Complete | bfe3ad3 |
 | DEP-04 | Phase 5 | Not Started | — |
 | DEP-05 | Phase 5 | Not Started | — |
-| ENV-01 | Phase 5 | Not Started | — |
-| ENV-02 | Phase 5 | Not Started | — |
-| ENV-03 | Phase 5 | Not Started | — |
+| ENV-01 | Phase 5 | Complete | 7008400 |
+| ENV-02 | Phase 5 | Complete | 7008400 |
+| ENV-03 | Phase 5 | Complete | 7008400 |
 | ENV-04 | Phase 5 | Not Started | — |
 | ENV-05 | Phase 5 | Not Started | — |
 | CONT-01 | Phase 6 | Not Started | — |

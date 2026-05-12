@@ -3,15 +3,15 @@ gsd_state_version: 1.0
 milestone: v2.0
 milestone_name: Polish, Integrations & Freelance
 status: executing
-stopped_at: Phase 5 context gathered
-last_updated: "2026-05-12T11:07:44.943Z"
+stopped_at: Completed 05-03-PLAN.md
+last_updated: "2026-05-12T14:25:52.339Z"
 last_activity: 2026-05-12
 progress:
   total_phases: 8
   completed_phases: 0
   total_plans: 5
-  completed_plans: 2
-  percent: 40
+  completed_plans: 3
+  percent: 60
 ---
 
 # Project State
@@ -26,7 +26,7 @@ See: .planning/PROJECT.md (updated 2026-05-12)
 ## Current Position
 
 Phase: 05 (dependency-hardening-env-config) — EXECUTING
-Plan: 3 of 5
+Plan: 4 of 5
 Status: Ready to execute
 Last activity: 2026-05-12
 
@@ -58,6 +58,7 @@ Last activity: 2026-05-12
 *Updated after each plan completion*
 | Phase 05 P1 | 3min | 2 tasks | 1 files |
 | Phase 05 P2 | 4min | 3 tasks | 3 files |
+| Phase 05 P3 | 6min | 4 tasks | 4 files |
 
 ## Accumulated Context
 
@@ -78,6 +79,9 @@ Recent decisions affecting current work:
 - [Phase ?]: [Phase 05]: Phase 5 Plan 2: kept pnpm dlx download progress lines verbatim in KNIP-BASELINE.md (D-08 signal preservation > aesthetics)
 - [Phase ?]: [Phase 05]: Phase 5 Plan 2: knip 6.13.0 baseline = 3 unused files + 1 unused devDep + 18 unused exports + 16 unused exported types; acting on findings deferred to v3 per D-08
 - [Phase ?]: [Phase 05]: Phase 5 Plan 2: no Node engine fallback to knip@^5 needed (Node v22.22.2 satisfies knip 6.x requirement)
+- [Phase ?]: Phase 05 Plan 3: Coolify single-POST pattern (is_preview=false auto-creates paired preview entry) matches existing AUTH_SECRET/MONGODB_URI shape
+- [Phase ?]: Phase 05 Plan 3: classic PAT with read:user scope accepted over D-06 fine-grained spec (functionally equivalent for Phase 7; rotate-github-pat.md tracks v3 hardening)
+- [Phase ?]: Phase 05 Plan 3: removed NEXT_PUBLIC_DISCORD_USER_ID + NEXT_PUBLIC_GA_ID from .env.example (presence widget deletion deferred to remove-presence-widget.md; GA ID sourced from content.json)
 
 ### Pending Todos
 
@@ -132,6 +136,6 @@ Items acknowledged and carried forward from previous milestone close:
 
 ## Session Continuity
 
-Last session: 2026-05-12T11:07:36.940Z
-Stopped at: Phase 5 context gathered
+Last session: 2026-05-12T14:25:45.254Z
+Stopped at: Completed 05-03-PLAN.md
 Resume file: None
