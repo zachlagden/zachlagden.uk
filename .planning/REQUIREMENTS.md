@@ -185,11 +185,11 @@ Populated by the roadmapper after v2 roadmap approval.
 | CLEAN-06 | Phase 4 | Complete | cc8561e |
 | CLEAN-07 | Phase 4 | Complete | ae144e2 |
 | CLEAN-08 | Phase 4 | Complete | ae144e2 |
-| DEP-01 | Phase 5 | Not Started | — |
+| DEP-01 | Phase 5 | Complete | fda5eda |
 | DEP-02 | Phase 5 | Complete | 4e6910f |
 | DEP-03 | Phase 5 | Complete | bfe3ad3 |
-| DEP-04 | Phase 5 | Not Started | — |
-| DEP-05 | Phase 5 | Not Started | — |
+| DEP-04 | Phase 5 | Complete | fda5eda |
+| DEP-05 | Phase 5 | Complete | fda5eda |
 | ENV-01 | Phase 5 | Complete | 7008400 |
 | ENV-02 | Phase 5 | Complete | 7008400 |
 | ENV-03 | Phase 5 | Complete | 7008400 |
