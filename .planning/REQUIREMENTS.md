@@ -63,8 +63,8 @@ Polish, Integrations & Freelance milestone. Each requirement is atomic, testable
 - [x] **ENV-01**: Coolify env vars audited against `.env.example`; documented in `.planning/runbooks/ENV-VARS.md` with present / missing / obsolete columns
 - [x] **ENV-02**: Missing `AUTH_GITHUB_ID` and `AUTH_GITHUB_SECRET` populated in Coolify; admin GitHub OAuth signin at `/admin/blog` verified working in prod
 - [x] **ENV-03**: New `GITHUB_PAT` provisioned (fine-grained, "No repository access" + "Profile: Read-only", 1-year max expiry) and added to Coolify env vars for Phase 7
-- [ ] **ENV-04**: `.planning/runbooks/CLOUDFLARE.md` captures Cloudflare full-proxy configuration — page-rules / cache-rules / cache-purge procedure — so Next `Cache-Control` is honored end-to-end
-- [ ] **ENV-05**: `.planning/runbooks/AUTH-SMOKE-TEST.md` documents the manual sign-in test that must pass after any `next-auth` bump
+- [x] **ENV-04**: `.planning/runbooks/CLOUDFLARE.md` captures Cloudflare full-proxy configuration — page-rules / cache-rules / cache-purge procedure — so Next `Cache-Control` is honored end-to-end
+- [x] **ENV-05**: `.planning/runbooks/AUTH-SMOKE-TEST.md` documents the manual sign-in test that must pass after any `next-auth` bump
 
 ### Content Refresh
 
@@ -193,8 +193,8 @@ Populated by the roadmapper after v2 roadmap approval.
 | ENV-01 | Phase 5 | Complete | 7008400 |
 | ENV-02 | Phase 5 | Complete | 7008400 |
 | ENV-03 | Phase 5 | Complete | 7008400 |
-| ENV-04 | Phase 5 | Not Started | — |
-| ENV-05 | Phase 5 | Not Started | — |
+| ENV-04 | Phase 5 | Complete | a48b90e |
+| ENV-05 | Phase 5 | Complete | a48b90e |
 | CONT-01 | Phase 6 | Not Started | — |
 | CONT-02 | Phase 6 | Not Started | — |
 | CONT-03 | Phase 6 | Not Started | — |
@@ -247,8 +247,8 @@ Populated by the roadmapper after v2 roadmap approval.
 
 - v2 requirements: 40 total
 - Mapped to phases: 40 ✓ (Phase 5: 10, Phase 6: 10, Phase 7: 12, Phase 8: 18)
-- Complete: 0
-- Pending: 40
+- Complete: 7 (DEP-02, DEP-03, ENV-01, ENV-02, ENV-03, ENV-04, ENV-05)
+- Pending: 33
 
 ---
 

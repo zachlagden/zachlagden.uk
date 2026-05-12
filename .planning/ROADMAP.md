@@ -92,7 +92,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 - [x] 05-01-PLAN.md — Harden .github/dependabot.yml (ignore next-auth all updates, framer-motion non-patch, pnpm major) — DEP-03
 - [x] 05-02-PLAN.md — Install knip devDep + capture verbatim v2-open baseline at .planning/runbooks/KNIP-BASELINE.md — DEP-02
 - [x] 05-03-PLAN.md — Coolify env audit + populate AUTH_GITHUB_ID/AUTH_GITHUB_SECRET + provision fine-grained GITHUB_PAT + write ENV-VARS.md three-column table — ENV-01, ENV-02, ENV-03
-- [ ] 05-04-PLAN.md — Author AUTH-SMOKE-TEST.md (six-step text-only) + CLOUDFLARE.md (DNS-only AS-IS + parameterised proxied block); execute smoke test against prod — ENV-04, ENV-05
+- [x] 05-04-PLAN.md — Author AUTH-SMOKE-TEST.md (six-step text-only) + CLOUDFLARE.md (DNS-only AS-IS + parameterised proxied block); execute smoke test against prod — ENV-04, ENV-05
 - [ ] 05-05-PLAN.md — Execute four Dependabot batches A→B→C→D (dev / Next+React+Mongo / framer-motion alone / transitive cleanup) with verification floor + pnpm dedupe + pnpm audit per batch; Batch C gated by three-state home-route smoke test — DEP-01, DEP-04, DEP-05
 
 ### Phase 6: Content Refresh + Auto-age
@@ -147,7 +147,7 @@ v2 phases execute in numeric order: 5 → 6 → 7 → 8 (serial, hard — no par
 | 2. Security & Documentation | n/a (quick batch) | Complete | 2026-05-06 |
 | 3. Performance Hardening | n/a (quick batch) | Complete | 2026-05-06 |
 | 4. Cleanup & Tooling | n/a (quick batch) | Complete | 2026-05-06 |
-| 5. Dependency Hardening + Env Config | 3/5 | In Progress|  |
+| 5. Dependency Hardening + Env Config | 4/5 | In Progress|  |
 | 6. Content Refresh + Auto-age | 0/TBD | Not started | - |
 | 7. Integrations + /stats + /now | 0/TBD | Not started | - |
 | 8. Freelance Offering | 0/TBD | Not started | - |
