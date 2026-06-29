@@ -38,8 +38,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
     async session({ session, token }) {
       if (token) {
         session.user.githubUsername = token.githubUsername as
-          | string
-          | undefined;
+          string | undefined;
         session.user.isAdmin = token.isAdmin as boolean | undefined;
       }
       return session;
