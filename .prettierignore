@@ -1,0 +1,12 @@
+# Dependencies
+/node_modules
+
+# Production build output
+/.next/
+/out/
+
+# Generated lockfile
+pnpm-lock.yaml
+
+# GSD planning artifacts (generated)
+/.planning/
