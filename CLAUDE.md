@@ -118,6 +118,7 @@ A personal portfolio + blog site for Zach Lagden. Started as a static Next.js CV
 - **API style**: REST only, no GraphQL.
 - **Observability**: None currently (Sentry removed). Reintroducing observability is out of scope for this milestone.
 - **No tests**: Zero test framework in place; stabilisation work proceeds without test coverage but each fix verified by `tsc --noEmit` and `pnpm lint`.
+
 <!-- GSD:project-end -->
 
 <!-- GSD:stack-start source:codebase/STACK.md -->
@@ -204,6 +205,7 @@ A personal portfolio + blog site for Zach Lagden. Started as a static Next.js CV
 - Persistent volume for `/app/public/uploads`
 - MongoDB instance reachable via `MONGODB_URI`
 - GitHub Actions: `.github/workflows/lint.yml` (ESLint) and `.github/workflows/prettier.yml` (`prettier --check`) — both run on push/PR to `main` with pnpm cache
+
 <!-- GSD:stack-end -->
 
 <!-- GSD:conventions-start source:CONVENTIONS.md -->
