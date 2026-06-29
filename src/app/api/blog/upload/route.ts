@@ -2,12 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { auth } from "@/lib/auth";
 import { saveUploadedFile, UnsupportedImageTypeError } from "@/lib/upload";
 
-const allowedTypes = [
-  "image/jpeg",
-  "image/png",
-  "image/gif",
-  "image/webp",
-];
+const allowedTypes = ["image/jpeg", "image/png", "image/gif", "image/webp"];
 
 const MAX_SIZE = 5 * 1024 * 1024; // 5MB
 

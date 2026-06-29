@@ -101,6 +101,7 @@ When modifying this codebase:
 8. **Progressive Enhancement**: Preserve accessibility features and progressive enhancement approach
 
 <!-- GSD:project-start source:PROJECT.md -->
+
 ## Project
 
 **zachlagden.uk**
@@ -120,20 +121,26 @@ A personal portfolio + blog site for Zach Lagden. Started as a static Next.js CV
 <!-- GSD:project-end -->
 
 <!-- GSD:stack-start source:codebase/STACK.md -->
+
 ## Technology Stack
 
 ## Languages
+
 - TypeScript 5.9.3 (resolved; `^5.8.3` in `package.json`) — all application code under `src/`
 - TSX (React JSX with TypeScript) — all components under `src/components/`
 - CSS via Tailwind 4 — `src/app/globals.css`
 - JSON — content/data layer at `public/content.json`
+
 ## Runtime
+
 - Node.js 20 (Alpine) — pinned by `Dockerfile` (`FROM node:20-alpine`) and CI (`.github/workflows/lint.yml`, `prettier.yml` use `node-version: "20"`)
 - No `.nvmrc` or `.node-version` file present in repo root
 - pnpm — enforced via `corepack enable pnpm` in `Dockerfile`
 - Lockfile: `pnpm-lock.yaml` (lockfileVersion 9.0) — present
 - Workspace config: `pnpm-workspace.yaml` declares `onlyBuiltDependencies` for `@tailwindcss/oxide`, `sharp`, `unrs-resolver`
+
 ## Frameworks
+
 - Next.js 16.1.6 (`next`) — App Router, `output: "standalone"` (`next.config.ts`)
 - React 19.2.4 (`react`, `react-dom`) — strictly resolved
 - `@next/third-parties` 16.1.6 — provides `<GoogleAnalytics>` component used in `src/app/layout.tsx`
@@ -143,7 +150,9 @@ A personal portfolio + blog site for Zach Lagden. Started as a static Next.js CV
 - Tailwind CSS 4.1.18 — PostCSS plugin model (`postcss.config.mjs` registers `@tailwindcss/postcss`)
 - ESLint 9.39.2 (resolved; `^9.29.0` declared) — flat config at `eslint.config.mjs` extending `eslint-config-next/core-web-vitals` and `eslint-config-next/typescript`
 - Prettier 3.8.1 (resolved; `^3.5.3` declared) — runtime dependency (note: it's listed under `dependencies`, not `devDependencies`); no `.prettierrc` config file (defaults only)
+
 ## Key Dependencies
+
 - `next` 16.1.6 — App Router framework
 - `react` ^19.2.4 / `react-dom` ^19.2.4
 - `framer-motion` 12.34.0 (`^12.23.26` declared) — animations across every section/UI component
@@ -168,7 +177,9 @@ A personal portfolio + blog site for Zach Lagden. Started as a static Next.js CV
 - `@sentry/nextjs` — fully removed from `package.json`; runtime config files also deleted. Project has no observability layer.
 - Lenis (smooth scrolling) — removed in commit `c449439` ("refactor: remove Lenis smooth scrolling in favor of native CSS"); zero refs in current src.
 - Playwright, seed scripts, MongoDB content collections — referenced in commit `2db2476` redesign that never landed cleanly; none present now.
+
 ## Configuration
+
 - `.env.example` declares required vars: `MONGODB_URI`, `AUTH_SECRET`, `AUTH_GITHUB_ID`, `AUTH_GITHUB_SECRET`, `ADMIN_GITHUB_USERNAME`
 - `.env.example` declares optional vars: `NEXT_PUBLIC_GA_ID` (note: not actually consumed — Google Analytics ID is read from `public/content.json` `metadata.googleAnalyticsId`, not env), `NEXT_PUBLIC_DISCORD_USER_ID`
 - `.env` file present in working tree (gitignored; do not read)
@@ -181,7 +192,9 @@ A personal portfolio + blog site for Zach Lagden. Started as a static Next.js CV
 - `public/content.json` — primary content source (CV data, social links, GA ID, Formspree ID, site URL)
 - `public/site.webmanifest` — PWA manifest
 - `public/uploads/` — runtime-mounted volume for uploaded blog images
+
 ## Platform Requirements
+
 - Node.js 20.x
 - pnpm (latest, via Corepack)
 - Local MongoDB (or Atlas connection string in `MONGODB_URI`) for blog/auth features
@@ -194,9 +207,11 @@ A personal portfolio + blog site for Zach Lagden. Started as a static Next.js CV
 <!-- GSD:stack-end -->
 
 <!-- GSD:conventions-start source:CONVENTIONS.md -->
+
 ## Conventions
 
 ## Tooling Configuration
+
 - Composes Next.js Core Web Vitals + TypeScript rule sets
 - No project-specific overrides
 - Run with `pnpm lint` (which calls `eslint .`, not `next lint`)
@@ -208,7 +223,9 @@ A personal portfolio + blog site for Zach Lagden. Started as a static Next.js CV
 - `allowJs: true` (JS files allowed but none currently in `src/`)
 - Path alias `@/*` → `./src/*` (used everywhere)
 - No `noUncheckedIndexedAccess`, no `exactOptionalPropertyTypes`
+
 ## Naming Patterns
+
 - React components: PascalCase `.tsx` — `Header.tsx`, `BlogPostCard.tsx`, `AnimatedText.tsx`
 - Hooks: camelCase `.ts` with `use` prefix — `useKeyboardNavigation.ts`, `useSectionObserver.ts`, `useAutoSave.ts`, `useParallax.ts`
 - Utilities: camelCase `.ts` — `contentLoader.ts`, `scrollUtils.ts`, `animationUtils.ts`, `presenceService.ts`, `viewTransition.ts`
@@ -226,7 +243,9 @@ A personal portfolio + blog site for Zach Lagden. Started as a static Next.js CV
 - Union literal types use `type` — `type IntroPhase = "loading" | "letters" | "fall" | "reveal" | "done";` (`src/components/layout/Header.tsx:18`)
 - Lowercase kebab-case Tailwind utilities exclusively
 - Custom utility classes: kebab-case — `font-heading`, `font-mono-accent`, `intro-locked`, `loader-fade-out`, `markdown-content`, `section-content` (defined in `src/app/globals.css`)
+
 ## Code Style
+
 - 2-space indent (Prettier default)
 - Double quotes for strings — enforced by Prettier default
 - Semicolons required — Prettier default
@@ -238,11 +257,15 @@ A personal portfolio + blog site for Zach Lagden. Started as a static Next.js CV
 - Type-only imports: bare `import type` used sparingly — only in `src/app/layout.tsx`, `src/app/sitemap.ts`, `src/app/robots.ts`, `src/next.config.ts`. Most files import types alongside values without `import type`.
 - `const` is the default everywhere; `let` only used when reassignment is genuinely needed (e.g., `let blogPosts` in `src/app/page.tsx:9`, `let nextIndex` in `src/hooks/useKeyboardNavigation.ts:44`)
 - No `var` anywhere except the global declaration in `src/lib/mongodb.ts:8` (`var _mongoClientPromise: Promise<MongoClient> | undefined;` — required for `globalThis` typing)
+
 ## Import Organization
+
 - Always prefer `@/...` for `src/`-rooted imports — `import Section from "@/components/ui/Section"`
 - Relative imports (`../`) only used for sibling/parent components within the same domain — `src/components/sections/AboutSection.tsx:6` uses `import Section from "../ui/Section";`
 - **Inconsistency:** `src/components/sections/AboutSection.tsx` uses relative `../ui/Section` while `src/components/ui/Section.tsx` uses `@/utils/animationUtils` — two different conventions appear in the same import graph
+
 ## TypeScript Usage
+
 - All component props are typed via `interface FooProps { ... }`
 - `forwardRef` always typed: `React.forwardRef<HTMLElement, AboutSectionProps>` (`src/components/sections/AboutSection.tsx:16`)
 - Refs typed explicitly: `useRef<HTMLElement>(null) as React.RefObject<HTMLElement>` — the cast is repeated all over `src/app/HomeClient.tsx:134-149` (refs assertion is a code smell — see CONCERNS.md)
@@ -254,11 +277,15 @@ A personal portfolio + blog site for Zach Lagden. Started as a static Next.js CV
 - Domain types live in `src/types/` — `content.ts`, `blog.ts`, `presence.ts`
 - Ambient module augmentation in `src/types/next-auth.d.ts`
 - `src/types/blog.ts` co-locates the `serializePost(post: BlogPost): BlogPostSerialized` helper with the types — minor convention break (mixes pure types with runtime code)
+
 ## Error Handling
+
 - API routes do **not** wrap handlers in `try/catch` — uncaught errors yield default 500s without structured error responses
 - No central error logger — every error goes through `console.error` / `console.warn`. Sentry is the user's stated default but **not installed** (no `@sentry/*` packages in `package.json`)
 - Mix of `throw error` (rethrow) vs silent swallow with no consistent rule
+
 ## Accessibility Patterns
+
 - `aria-label` on every interactive icon-only control — `src/components/ui/SocialIcon.tsx:37`, `src/components/auth/SignInButton.tsx:39`, `src/components/layout/MobileMenu.tsx:55`
 - `aria-hidden="true"` on decorative icons — `<Github className="w-5 h-5" aria-hidden="true" />` (`src/app/HomeClient.tsx:330`)
 - `aria-expanded`, `aria-controls` on disclosure buttons — `src/components/layout/MobileMenu.tsx:56-57`
@@ -277,7 +304,9 @@ A personal portfolio + blog site for Zach Lagden. Started as a static Next.js CV
 - Drives binary skip behavior in `Header.tsx:60-66` — full intro animation entirely skipped if reduced motion is preferred
 - CustomCursor returns `null` when reduced motion is preferred (`src/components/ui/CustomCursor.tsx:111`)
 - CSS reinforces the same — `@media (prefers-reduced-motion: no-preference)` gates all keyframes/transitions in `src/app/globals.css:43`, `:77`, `:86`
+
 ## Component Prop Patterns
+
 - Components receive their slice of `ContentData` as `content` — never import or fetch JSON themselves
 - Pattern is consistent across all `src/components/sections/*` and `src/components/layout/*`
 - Type comes from `src/types/content.ts` — sections take a domain type (`About`, `Experience[]`, `Skills`, etc.) not the full `ContentData`
@@ -286,7 +315,9 @@ A personal portfolio + blog site for Zach Lagden. Started as a static Next.js CV
 - `displayName` is set on every `forwardRef` — required by ESLint `react/display-name`
 - Children typed as `React.ReactNode`
 - Discriminated unions rare — most variant props are simple string literals like `size?: "sm" | "md"`
+
 ## Animation Conventions
+
 - `viewport.once: true` everywhere — animations fire only once on first scroll into view
 - `viewport.margin` typically `-50px` to `-100px` to delay trigger
 - String easings: `"easeOut"`, `"easeInOut"` (most common)
@@ -300,73 +331,94 @@ A personal portfolio + blog site for Zach Lagden. Started as a static Next.js CV
 - Each phase transitions via `setTimeout` in dedicated `useEffect`s
 - Body class `intro-locked` is set globally and removed when intro completes — page scroll is locked during intro
 - `document.fonts.ready` is awaited before measuring text width to avoid layout shift
+
 ## Logging
+
 - No logging framework — `console.error`, `console.warn` directly
 - Used in 7 files (`grep` count): `src/components/ui/PresenceStatus.tsx:68`, `src/components/ui/CopyButton.tsx:29`, `src/components/ui/AnimatedText.tsx` (3x), `src/utils/contentLoader.ts:20`, `src/utils/viewTransition.ts:55`
 - No `console.log` in production code (good)
 - No `console.debug` or structured logging
 - Sentry is **not configured** despite being the global standard — `package.json` has no `@sentry/*` deps and the previously-tracked `instrumentation-client.ts`, `sentry.edge.config.ts`, `sentry.server.config.ts` are deleted (per `git status`)
+
 ## Comments
+
 - Sparse — most files have zero comments
 - When present, JSDoc-style block comments document utility purpose:
 - Inline comments explain non-obvious logic — e.g., `src/components/ui/Section.tsx:98`:
 - Section-marker comments delimit groups within large files: `// State`, `// Refs for sections`, `// Components`, `// Hooks and Utils` (`src/app/HomeClient.tsx`)
 - No TODO/FIXME/HACK/XXX comments present in `src/`
+
 ## Function Design
+
 - Most utility functions are short (5-30 lines)
 - Hooks bundle related state + effects together — `useSyncExternalStore` is the standard pattern for SSR-safe client-only detection
 - React components frequently exceed the 300-line "small focused components" guidance from `~/.claude/instructions/tech-stack.md`:
 - `useCallback` used aggressively — every callback passed to a hook or child component is memoized
 - Side-effects in `useEffect` always cleanup — `clearTimeout`, `removeEventListener`, `observer.disconnect()`, `controller.abort()` patterns are consistent
+
 ## Module Design
+
 - One default export per file (component or page)
 - Named exports for utilities (`scrollToSection`, `formatDate`, `loadContent`)
 - No barrel files (`index.ts` re-exports) anywhere
 - `src/types/blog.ts` mixes types and runtime code (`serializePost` function) — anti-pattern in a `types/` directory
 - API route files only export the HTTP method handlers (`GET`, `POST`, `PUT`, `DELETE`) — consistent with Next.js convention
+
 ## Server vs Client Boundary
+
 - `"use client"` directive is the first line of every interactive component file (count: most components)
 - Server-only modules: `src/utils/serverContentLoader.ts` (uses `fs/promises`), `src/lib/blog.ts`, `src/lib/auth.ts`, `src/lib/mongodb.ts`, `src/lib/upload.ts`
 - Pattern: server `page.tsx` fetches data → passes to a `*Client.tsx` component (`src/app/page.tsx` → `HomeClient.tsx`, `src/app/blog/page.tsx` → `BlogListClient.tsx`)
 - `dynamic()` with `ssr: false` only used for components that touch DOM-only APIs (`src/app/HomeClient.tsx:34` — `CustomCursor`)
+
 ## Inconsistencies Summary
+
 <!-- GSD:conventions-end -->
 
 <!-- GSD:architecture-start source:ARCHITECTURE.md -->
+
 ## Architecture
 
 ## System Overview
+
 ```text
+
 ```
+
 ## Component Responsibilities
-| Component | Responsibility | File |
-|-----------|----------------|------|
-| Root layout | HTML shell, fonts, GA, intro loader, NextAuth `SessionProvider`, global `SignInButton` | `src/app/layout.tsx` |
-| Home server page | RSC: load `content.json` + latest blog posts, render `HomeClient` | `src/app/page.tsx` |
-| Home client | Wires every CV section, intro state, refs, observers, keyboard nav, structured data | `src/app/HomeClient.tsx` |
-| Header (intro) | Multi-phase name reveal animation (`loading → letters → fall → reveal → done`) | `src/components/layout/Header.tsx` |
-| Section observer | Tracks active section via `IntersectionObserver` | `src/hooks/useSectionObserver.ts` |
-| Keyboard nav | Arrow-up/down + 1-9 jump shortcuts | `src/hooks/useKeyboardNavigation.ts` |
-| Section wrapper | Shared section chrome: title, scatter background, parallax, view-transition tags | `src/components/ui/Section.tsx` |
-| Server content loader | `fs.readFile` of `public/content.json` (server-side only) | `src/utils/serverContentLoader.ts` |
-| Client content loader | `fetch('/content.json')` with in-memory cache — **currently unused** | `src/utils/contentLoader.ts` |
-| Blog data layer | Mongo CRUD for `posts` collection, slug/index/reading-time logic | `src/lib/blog.ts` |
-| Mongo client | Lazy singleton `MongoClient` with dev-mode global cache | `src/lib/mongodb.ts` |
-| Auth | NextAuth v5 (beta) with GitHub provider + Mongo adapter, JWT session strategy | `src/lib/auth.ts` |
-| Auth helpers | `getSession`, `isAdmin`, `requireAdmin` for route handlers | `src/lib/auth-helpers.ts` |
-| Upload | Writes uploaded images to `public/uploads/` with random filenames | `src/lib/upload.ts` |
-| Presence service | Polls `api.lagden.dev/v1/watcher/<discordId>` for live Discord/Spotify status | `src/utils/presenceService.ts` |
-| View transitions util | Wraps `document.startViewTransition` with feature detection | `src/utils/viewTransition.ts` |
-| Scroll utils | `scrollToSection` / `scrollToTop` honoring `prefers-reduced-motion` | `src/utils/scrollUtils.ts` |
-| Animation constants | Reusable Framer Motion variants | `src/utils/animationUtils.ts` |
-| `ClearIntro` | Removes intro loader / unlocks body for non-home routes | `src/components/ui/ClearIntro.tsx` |
+
+| Component             | Responsibility                                                                         | File                                 |
+| --------------------- | -------------------------------------------------------------------------------------- | ------------------------------------ |
+| Root layout           | HTML shell, fonts, GA, intro loader, NextAuth `SessionProvider`, global `SignInButton` | `src/app/layout.tsx`                 |
+| Home server page      | RSC: load `content.json` + latest blog posts, render `HomeClient`                      | `src/app/page.tsx`                   |
+| Home client           | Wires every CV section, intro state, refs, observers, keyboard nav, structured data    | `src/app/HomeClient.tsx`             |
+| Header (intro)        | Multi-phase name reveal animation (`loading → letters → fall → reveal → done`)         | `src/components/layout/Header.tsx`   |
+| Section observer      | Tracks active section via `IntersectionObserver`                                       | `src/hooks/useSectionObserver.ts`    |
+| Keyboard nav          | Arrow-up/down + 1-9 jump shortcuts                                                     | `src/hooks/useKeyboardNavigation.ts` |
+| Section wrapper       | Shared section chrome: title, scatter background, parallax, view-transition tags       | `src/components/ui/Section.tsx`      |
+| Server content loader | `fs.readFile` of `public/content.json` (server-side only)                              | `src/utils/serverContentLoader.ts`   |
+| Client content loader | `fetch('/content.json')` with in-memory cache — **currently unused**                   | `src/utils/contentLoader.ts`         |
+| Blog data layer       | Mongo CRUD for `posts` collection, slug/index/reading-time logic                       | `src/lib/blog.ts`                    |
+| Mongo client          | Lazy singleton `MongoClient` with dev-mode global cache                                | `src/lib/mongodb.ts`                 |
+| Auth                  | NextAuth v5 (beta) with GitHub provider + Mongo adapter, JWT session strategy          | `src/lib/auth.ts`                    |
+| Auth helpers          | `getSession`, `isAdmin`, `requireAdmin` for route handlers                             | `src/lib/auth-helpers.ts`            |
+| Upload                | Writes uploaded images to `public/uploads/` with random filenames                      | `src/lib/upload.ts`                  |
+| Presence service      | Polls `api.lagden.dev/v1/watcher/<discordId>` for live Discord/Spotify status          | `src/utils/presenceService.ts`       |
+| View transitions util | Wraps `document.startViewTransition` with feature detection                            | `src/utils/viewTransition.ts`        |
+| Scroll utils          | `scrollToSection` / `scrollToTop` honoring `prefers-reduced-motion`                    | `src/utils/scrollUtils.ts`           |
+| Animation constants   | Reusable Framer Motion variants                                                        | `src/utils/animationUtils.ts`        |
+| `ClearIntro`          | Removes intro loader / unlocks body for non-home routes                                | `src/components/ui/ClearIntro.tsx`   |
+
 ## Pattern Overview
+
 - Server components do data fetching only (`loadContentServer`, `getLatestPosts`, `getPostBySlug`, `auth()`); they hand serialized props to a single `*Client` component that owns interactivity.
 - Static CV/portfolio content is sourced from a JSON file in `public/`, not a CMS or database.
 - Dynamic content (blog, sessions, uploads) lives in MongoDB; the `lib/` layer is the only module that touches the driver.
 - Animation is concentrated: the home `Header` runs a bespoke multi-phase intro state machine; all other sections share the `Section` wrapper for entry animation, parallax, and section numbering.
 - Accessibility is wired through `useKeyboardNavigation`, skip-to-content link, ARIA roles, and `prefers-reduced-motion` checks at every animated component (`useSyncExternalStore` is used to avoid hydration mismatches when reading the media query).
+
 ## Layers
+
 - Purpose: Routing, RSC data loading, metadata, SEO routes.
 - Location: `src/app/`
 - Contains: Server `page.tsx` / `layout.tsx`, route handlers (`route.ts`), client islands suffixed `*Client.tsx`, generated SEO files (`sitemap.ts`, `robots.ts`, `not-found.tsx`).
@@ -398,18 +450,28 @@ A personal portfolio + blog site for Zach Lagden. Started as a static Next.js CV
 - Contains: `content.ts` (CV schema mirroring `public/content.json`), `blog.ts` (DB + serialized + input + `serializePost` helper), `presence.ts` (presence API response shapes), `next-auth.d.ts` (session/JWT augmentation).
 - Depends on: `mongodb` (`ObjectId`), `next-auth`.
 - Used by: Every other layer.
+
 ## Data Flow
+
 ### Primary Request Path — Home (`/`)
+
 ### Blog list (`/blog`)
+
 ### Blog post (`/blog/[slug]`)
+
 ### Admin write path
+
 ### Auth flow
+
 ### Presence (Discord/Spotify) flow
+
 - Local `useState` per component; no Redux/Zustand/Context for app state.
 - The only React Context in use is `SessionProvider` from `next-auth/react` (`src/components/auth/SessionProvider.tsx`).
 - `useAutoSave` persists editor drafts in `localStorage` (`src/hooks/useAutoSave.ts`).
 - Cross-section state (active section, mobile menu, intro completion) is owned by `HomeClient` and threaded down via props.
+
 ## Key Abstractions
+
 - Purpose: Strongly-typed mirror of `public/content.json`.
 - Examples: `src/types/content.ts:1-126`.
 - Pattern: Every CV section component receives a slice of `ContentData` (`content.about`, `content.experience`, …) as a prop — the **content-as-props pattern** documented in `CLAUDE.md`. No section reads `content.json` directly.
@@ -430,7 +492,9 @@ A personal portfolio + blog site for Zach Lagden. Started as a static Next.js CV
 - `Section` writes `viewTransitionName: section-header-${id}` / `section-content-${id}` inline styles when supported (`src/components/ui/Section.tsx:184-208`).
 - Global CSS in `src/app/globals.css:25-40` declares `view-transition-name` for `section`, `h2`, and `.section-content` inside an `@supports` guard.
 - `scrollToSectionWithTransition` exists but is not wired in — `HomeClient` uses the plainer `scrollToSection` from `scrollUtils.ts`.
+
 ## Entry Points
+
 - Location: `src/app/layout.tsx`
 - Triggers: Every route.
 - Responsibilities: Font variables (`Inter`, `Syne`, `JetBrains_Mono`), `<head>` preconnect/prefetch, `metadataBase` and OpenGraph/Twitter metadata derived from `content.json`, mounts `SessionProvider`, fixed `SignInButton`, Google Analytics via `@next/third-parties/google`, and the CSS `intro-locked` body class.
@@ -440,49 +504,67 @@ A personal portfolio + blog site for Zach Lagden. Started as a static Next.js CV
 - Location: `src/app/HomeClient.tsx`
 - Triggers: First hydration on `/`.
 - Responsibilities: Section refs, intro state ownership, dynamic imports of every section, JSON-LD `Person` schema, sticky nav, mobile menu, scroll-to-top button, custom cursor (`ssr: false`), keyboard nav.
+
 ## Architectural Constraints
+
 - **Threading:** Single Node.js event loop (Next.js standalone output, `node .next/standalone/server.js`). Mongo client is reused via a module-level `clientPromise` and a `globalThis._mongoClientPromise` singleton in dev (`src/lib/mongodb.ts:7-31`).
 - **Global state:**
 - **Server/client boundary:** `src/lib/*` and `src/utils/serverContentLoader.ts` MUST stay server-only (use Node `fs`, `mongodb`, secrets). `src/utils/contentLoader.ts` and `src/utils/presenceService.ts` MUST stay client-only (browser `fetch`, `process.env.NEXT_PUBLIC_*`).
 - **Standalone build:** `next.config.ts` sets `output: 'standalone'`; production runs from `.next/standalone/server.js`. `public/uploads/` is written at runtime, which is **incompatible with a read-only / multi-replica deployment** — see `CONCERNS.md`.
 - **Image domains:** Only `avatars.githubusercontent.com` is whitelisted in `next.config.ts:5-12`. Featured-image URLs uploaded via `/api/blog/upload` resolve to `/uploads/...` (same-origin) so they sidestep `next/image` remote validation, but external images in posts will not render through `next/image`.
 - **Environment:** `MONGODB_URI`, `ADMIN_GITHUB_USERNAME`, `AUTH_SECRET` (NextAuth), `AUTH_GITHUB_ID`/`AUTH_GITHUB_SECRET`, and `NEXT_PUBLIC_DISCORD_USER_ID` are required for full functionality. The blog/auth code degrades gracefully when Mongo is missing (try/catch around `getLatestPosts` in `app/page.tsx`, `getAllPublishedSlugs` in `sitemap.ts`, and silent `getAdapter()` fallback).
+
 ## Anti-Patterns
+
 ### Orphaned client content loader
+
 ### Empty `providers/` directory
+
 ### Three places mutate `#initial-loader` / `intro-locked`
+
 ### Silent failure in `getAdapter()`
+
 ## Error Handling
+
 - Server pages wrap Mongo calls in `try/catch` and substitute empty arrays (`src/app/page.tsx:10-15`, `src/app/sitemap.ts:9-14`).
 - API route handlers return `NextResponse.json({ error: '...' }, { status: 4xx })` on auth/validation failure — see `requireAdmin` in `src/lib/auth-helpers.ts:13-19` and inline checks in `src/app/api/blog/posts/route.ts:24-27`.
 - `viewTransition.ts:50-58` falls back to a regular DOM update if `startViewTransition` throws.
 - `getAdapter()` swallows Mongo errors silently (see anti-pattern above).
 - Note: `src/app/global-error.tsx` was deleted in the working tree (`git status`) — there is currently no app-level error boundary.
+
 ## Cross-Cutting Concerns
+
 <!-- GSD:architecture-end -->
 
 <!-- GSD:skills-start source:skills/ -->
+
 ## Project Skills
 
 No project skills found. Add skills to any of: `.claude/skills/`, `.agents/skills/`, `.cursor/skills/`, `.github/skills/`, or `.codex/skills/` with a `SKILL.md` index file.
+
 <!-- GSD:skills-end -->
 
 <!-- GSD:workflow-start source:GSD defaults -->
+
 ## GSD Workflow Enforcement
 
 Before using Edit, Write, or other file-changing tools, start work through a GSD command so planning artifacts and execution context stay in sync.
 
 Use these entry points:
+
 - `/gsd-quick` for small fixes, doc updates, and ad-hoc tasks
 - `/gsd-debug` for investigation and bug fixing
 - `/gsd-execute-phase` for planned phase work
 
 Do not make direct repo edits outside a GSD workflow unless the user explicitly asks to bypass it.
+
 <!-- GSD:workflow-end -->
 
 <!-- GSD:profile-start -->
+
 ## Developer Profile
 
 > Profile not yet configured. Run `/gsd-profile-user` to generate your developer profile.
 > This section is managed by `generate-claude-profile` -- do not edit manually.
+
 <!-- GSD:profile-end -->
