@@ -39,18 +39,18 @@ Personal portfolio + blog for Zach Lagden. A Next.js 16 App Router site combinin
 
 The site **will not run** without these. Copy `.env.example` to `.env`, then fill in:
 
-| Variable | Purpose |
-|----------|---------|
-| `MONGODB_URI` | MongoDB connection string. Used by the blog and the Auth.js MongoDB adapter. |
-| `AUTH_SECRET` | Random 32-byte secret for Auth.js. Generate with `openssl rand -base64 32`. |
-| `AUTH_GITHUB_ID` | GitHub OAuth App Client ID. |
-| `AUTH_GITHUB_SECRET` | GitHub OAuth App Client Secret. |
+| Variable                | Purpose                                                                                                                                |
+| ----------------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
+| `MONGODB_URI`           | MongoDB connection string. Used by the blog and the Auth.js MongoDB adapter.                                                           |
+| `AUTH_SECRET`           | Random 32-byte secret for Auth.js. Generate with `openssl rand -base64 32`.                                                            |
+| `AUTH_GITHUB_ID`        | GitHub OAuth App Client ID.                                                                                                            |
+| `AUTH_GITHUB_SECRET`    | GitHub OAuth App Client Secret.                                                                                                        |
 | `ADMIN_GITHUB_USERNAME` | Comma-separated GitHub usernames allowed admin access. Anyone signing in with another username gets `isAdmin: false` on their session. |
 
 Optional:
 
-| Variable | Purpose |
-|----------|---------|
+| Variable                      | Purpose                                                                                           |
+| ----------------------------- | ------------------------------------------------------------------------------------------------- |
 | `NEXT_PUBLIC_DISCORD_USER_ID` | Discord user ID for the presence widget (Spotify + VS Code via `api.lagden.dev/v1/watcher/{id}`). |
 
 > The Google Analytics ID is **not** an env var — it's read from `public/content.json` at `metadata.googleAnalyticsId`.
@@ -73,6 +73,7 @@ pnpm dev
 The dev server runs on `http://localhost:3000`. Without `MONGODB_URI`, blog and admin routes will log errors and degrade gracefully — the home portfolio page still renders.
 
 If `MONGODB_URI` is set but unreachable:
+
 - `/blog` and `/blog/feed.xml` are `force-dynamic` and return empty content
 - `/sitemap.xml` skips blog URLs
 - `/` (home) falls back to an empty "Latest posts" section
@@ -115,21 +116,25 @@ The `Vercel` deploy button has been removed from this README; the project depend
 ## Architecture notes
 
 **Content sources:**
+
 - Static CV content: `public/content.json` (loaded server-side via `src/utils/serverContentLoader.ts`)
 - Blog posts: MongoDB via `src/lib/blog.ts` (uses `src/lib/mongodb.ts`)
 
 **Auth model:**
+
 - GitHub OAuth → Auth.js v5 (`src/lib/auth.ts`)
 - JWT sessions (default `strategy: "jwt"`)
 - `isAdmin` set in the JWT callback by checking `ADMIN_GITHUB_USERNAME` allow-list — there is no DB-side admin flag
 - Without `MONGODB_URI`, the adapter falls back to JWT-only and logs a warning
 
 **Intro animation:**
+
 - Owned by `src/app/(home)`-equivalent route — only the home route renders the loader and applies `intro-locked` to body via `HomeIntroBootstrap`
 - `Header.tsx` runs the state machine: `loading → letters → fall → reveal → done`
 - 5-second fallback if `document.fonts.ready` stalls
 
 **Error handling:**
+
 - `src/app/error.tsx` — route-level error boundary
 - `src/app/global-error.tsx` — root-layout error boundary (replaces `<html>` and `<body>`)
 - Both log to `console.error`; there is **no** Sentry or other observability layer

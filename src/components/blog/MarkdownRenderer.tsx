@@ -16,9 +16,7 @@ const sanitizeSchema: SanitizeSchema = {
   ...defaultSchema,
   attributes: {
     ...defaultSchema.attributes,
-    code: [
-      ["className", /^language-/, /^hljs$/, /^hljs language-/],
-    ],
+    code: [["className", /^language-/, /^hljs$/, /^hljs language-/]],
     span: [["className", /^hljs(-.+)?$/]],
   },
   protocols: {
@@ -51,10 +49,7 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
       </h2>
     ),
     h3: ({ children, ...props }) => (
-      <h3
-        className="text-xl font-heading font-semibold mt-6 mb-2"
-        {...props}
-      >
+      <h3 className="text-xl font-heading font-semibold mt-6 mb-2" {...props}>
         {children}
       </h3>
     ),

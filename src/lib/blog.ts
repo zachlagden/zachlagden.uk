@@ -199,13 +199,11 @@ export async function getAllPublishedSlugsWithDates(): Promise<
 > {
   const col = await postsCollection();
   const posts = await col
-    .find(
-      { status: "published" },
-      { projection: { slug: 1, updatedAt: 1 } },
-    )
+    .find({ status: "published" }, { projection: { slug: 1, updatedAt: 1 } })
     .toArray();
   return posts.map((p) => ({
     slug: p.slug,
-    updatedAt: p.updatedAt instanceof Date ? p.updatedAt : new Date(p.updatedAt),
+    updatedAt:
+      p.updatedAt instanceof Date ? p.updatedAt : new Date(p.updatedAt),
   }));
 }

@@ -62,9 +62,7 @@ function sniffImageType(buffer: Buffer): SniffedImage | null {
 
 export class UnsupportedImageTypeError extends Error {
   constructor() {
-    super(
-      "Uploaded file is not a supported image (jpeg, png, gif, webp).",
-    );
+    super("Uploaded file is not a supported image (jpeg, png, gif, webp).");
     this.name = "UnsupportedImageTypeError";
   }
 }

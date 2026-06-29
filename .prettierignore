@@ -1,0 +1,5 @@
+# Generated lockfile — managed by pnpm, not Prettier
+pnpm-lock.yaml
+
+# Internal planning/GSD artifacts — not shipped source
+.planning/
